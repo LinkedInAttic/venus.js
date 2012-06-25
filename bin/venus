@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+new (require("../Venus"))(process.argv);
