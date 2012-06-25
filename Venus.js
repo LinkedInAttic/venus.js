@@ -5,7 +5,8 @@ var colors    = require('colors'),
     master    = require('./lib/master'),
     executor  = require('./lib/executor'),
     i18n      = require('./lib/i18n'),
-    cli       = require('./lib/cli');
+    cli       = require('./lib/cli'),
+    hostname  = require('os').hostname();
 
 /**
  * Application object
@@ -43,6 +44,7 @@ function Venus(args) {
    */
   function startExecutor(config) {
     console.log( i18n('Starting in executor mode').red );
+    config.masterUrl = 'http://'+hostname+':2012';
     executor.start(config);
   }
 }
