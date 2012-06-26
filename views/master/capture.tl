@@ -6,12 +6,12 @@
   <script type="text/javascript" src="js/slave.js"></script>
   <script type="text/javascript">
     new Slave({
-      masterUrl: 'http://<%= hostname %>:<%= port %>'
+      masterUrl: 'http://{hostname}:{port}'
     });
   </script>
   <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-  <%= i18n('Capture page, running at %s:%s', hostname, port) %>
+  {i18n_message}
 </body>
 </html>

@@ -5,8 +5,9 @@
   <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-  <%= i18n('Master Server is running on %s:%s', hostname, port) %>
-
-  <a href="/capture">Capture this browser</a>
+  {i18n_master_running}
+  <p>
+  <a href="/capture">{i18n_capture}</a>
+  </p>
 </body>
 </html>
