@@ -24,10 +24,10 @@ function Venus(args) {
     var config = cli.parseCommandLineArgs(args);
     config.homeFolder = __dirname;
 
-    if(config.master || !config.test) {
-      startMaster(config);
-    } else {
+    if(config.test) {
       startExecutor(config);
+    } else {
+      startMaster(config);
     }
   }
 
@@ -44,7 +44,7 @@ function Venus(args) {
    */
   function startExecutor(config) {
     console.log( i18n('Starting in executor mode').red );
-    config.masterUrl = 'http://'+hostname+':2012';
+    config.masterUrl = config.master || master.defaultUrl;
     executor.start(config);
   }
 }
