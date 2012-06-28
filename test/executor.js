@@ -1,8 +1,7 @@
 /**
  * @author LinkedIn
  */
-var sinonChai = require('./lib/sinon-chai');
-var should    = require('chai').should();
+var should    = require('./lib/sinon-chai').should();
 var sinon     = require('sinon');
 var executor  = require('../lib/executor');
 var io        = require('socket.io');
@@ -11,7 +10,7 @@ var hostname  = require('os').hostname();
 describe('lib/executor', function() {
   it('should connect to socket-io server on instantiation', function(done) {
     var fakeMasterServer = io.listen(3333);
-    fakeMasterServer.disable('log');
+    fakeMasterServer.set('log level', 0);
 
     fakeMasterServer.on('connection', function(socket) {
       done();

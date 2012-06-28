@@ -1,0 +1,36 @@
+/**
+ * @author LinkedIn
+ */
+var should    = require('./lib/sinon-chai').should();
+var sinon     = require('sinon');
+var Venus     = require('../Venus');
+
+describe('Venus main', function() {
+  it('should call initialize project directory when correct command line arg is present', function() {
+    var argv = ['node', 'venus', 'init'],
+        app  = new Venus();
+
+    sinon.spy(app, 'initProjectDirectory');
+    app.run(argv);
+    app.initProjectDirectory.should.have.been.calledOnce;
+  });
+
+  it('should start master when no command line args are present', function() {
+    var argv = ['node', 'venus'],
+        app  = new Venus();
+
+    sinon.spy(app, 'startMaster');
+    app.run(argv);
+    app.startMaster.should.have.been.calledOnce;
+  });
+
+  it('should start executor when --test flag is present', function() {
+    var argv = ['node', 'venus', '--test'],
+        app  = new Venus();
+
+    sinon.spy(app, 'startExecutor');
+    app.run(argv);
+    app.startExecutor.should.have.been.calledOnce;
+    app.shutdown();
+  });
+});
