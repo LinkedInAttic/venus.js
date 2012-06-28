@@ -1,7 +1,7 @@
 /**
  * @author LinkedIn
  */
-var should        = require('./lib/sinon-chai').should();
+var should        = require('./lib/sinon-chai').chai.should();
     commentParser = require('../lib/config');
     fs            = require('fs');
     hostname      = require('os').hostname();

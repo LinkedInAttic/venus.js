@@ -1,9 +1,9 @@
 /**
  * @author LinkedIn
  */
-var sinonChai = require('./lib/sinon-chai');
-var master  = require('../lib/master');
-var hostname  = require('os').hostname();
+var should    = require('./lib/sinon-chai').chai.should(),
+    master    = require('../lib/master'),
+    hostname  = require('os').hostname();
 
 describe('lib/master', function() {
 

@@ -1,9 +1,9 @@
 /**
  * @author LinkedIn
  */
-var should    = require('./lib/sinon-chai').should();
-var sinon     = require('sinon');
-var Venus     = require('../Venus');
+var should    = require('./lib/sinon-chai').chai.should(),
+    sinon     = require('sinon'),
+    Venus     = require('../Venus');
 
 describe('Venus main', function() {
   it('should call initialize project directory when correct command line arg is present', function() {

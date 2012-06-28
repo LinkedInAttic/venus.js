@@ -1,11 +1,11 @@
 /**
  * @author LinkedIn
  */
-var should    = require('./lib/sinon-chai').should();
-var sinon     = require('sinon');
-var executor  = require('../lib/executor');
-var io        = require('socket.io');
-var hostname  = require('os').hostname();
+var should    = require('./lib/sinon-chai').chai.should(),
+    sinon     = require('sinon'),
+    executor  = require('../lib/executor'),
+    io        = require('socket.io'),
+    hostname  = require('os').hostname();
 
 describe('lib/executor', function() {
   it('should connect to socket-io server on instantiation', function(done) {

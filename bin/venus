@@ -1,2 +1,5 @@
 #!/usr/bin/env node
-new (require("../Venus"))(process.argv);
+var Venus = require('../Venus'),
+    app   = new Venus();
+
+app.run(process.argv);
