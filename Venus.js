@@ -32,17 +32,26 @@ Venus.prototype.shutdown = function() {
  * Initialize application
  * @param {Array} args the command line arguments
  */
-Venus.prototype.init = function(args) {
-  //var command = 
-  var config = this.config = cli.parseCommandLineArgs(args);
+Venus.prototype.init = function (args) {
+  var command = args[2],
+      config  = cli.parseCommandLineArgs(args);
+
+  this.config = config;
   config.homeFolder = __dirname;
 
-  if(config.argv.remain.indexOf('init') !== -1) {
-    this.initProjectDirectory();
-  } else if(config.test) {
-    this.startExecutor(config);
-  } else {
-    this.startOverlord(config);
+  switch(command) {
+    case 'init':
+      this.initProjectDirectory();
+      break;
+    case 'listen':
+      this.startOverlord(config);
+      break;
+    case 'exec':
+      this.startExecutor(config);
+      break;
+    default:
+      this.printUsage(config);
+      break;
   }
 };
 

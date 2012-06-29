@@ -6,31 +6,30 @@ var should    = require('./lib/sinon-chai').chai.should(),
     Venus     = require('../Venus');
 
 describe('Venus main', function() {
-  it('should call initialize project directory when correct command line arg is present', function() {
+  it('should call initialize project directory when init command is passed', function() {
     var argv = ['node', 'venus', 'init'],
         app  = new Venus();
 
-    sinon.spy(app, 'initProjectDirectory');
+    app.initProjectDirectory = sinon.spy();
     app.run(argv);
     app.initProjectDirectory.should.have.been.calledOnce;
   });
 
-  it('should start overlord when no command line args are present', function() {
-    var argv = ['node', 'venus'],
+  it('should start overlord when listen command is passed', function() {
+    var argv = ['node', 'venus', 'listen'],
         app  = new Venus();
 
-    sinon.spy(app, 'startOverlord');
+    app.startOverlord = sinon.spy();
     app.run(argv);
     app.startOverlord.should.have.been.calledOnce;
   });
 
-  it('should start executor when --test flag is present', function() {
-    var argv = ['node', 'venus', '--test'],
+  it('should start executor when exec command is passed', function() {
+    var argv = ['node', 'venus', 'exec'],
         app  = new Venus();
 
-    sinon.spy(app, 'startExecutor');
+    app.startExecutor = sinon.spy();
     app.run(argv);
     app.startExecutor.should.have.been.calledOnce;
-    app.shutdown();
   });
 });
