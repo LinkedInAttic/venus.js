@@ -15,13 +15,13 @@ describe('Venus main', function() {
     app.initProjectDirectory.should.have.been.calledOnce;
   });
 
-  it('should start master when no command line args are present', function() {
+  it('should start overlord when no command line args are present', function() {
     var argv = ['node', 'venus'],
         app  = new Venus();
 
-    sinon.spy(app, 'startMaster');
+    sinon.spy(app, 'startOverlord');
     app.run(argv);
-    app.startMaster.should.have.been.calledOnce;
+    app.startOverlord.should.have.been.calledOnce;
   });
 
   it('should start executor when --test flag is present', function() {

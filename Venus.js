@@ -2,7 +2,7 @@
  * @author LinkedIn
  */
 var colors    = require('colors'),
-    master    = require('./lib/master'),
+    overlord   = require('./lib/overlord'),
     executor  = require('./lib/executor'),
     i18n      = require('./lib/i18n'),
     cli       = require('./lib/cli'),
@@ -33,6 +33,7 @@ Venus.prototype.shutdown = function() {
  * @param {Array} args the command line arguments
  */
 Venus.prototype.init = function(args) {
+  //var command = 
   var config = this.config = cli.parseCommandLineArgs(args);
   config.homeFolder = __dirname;
 
@@ -41,16 +42,16 @@ Venus.prototype.init = function(args) {
   } else if(config.test) {
     this.startExecutor(config);
   } else {
-    this.startMaster(config);
+    this.startOverlord(config);
   }
 };
 
 /**
- * Start in Master mode - server which allows browsers to be captured
+ * Start in overlord mode - server which allows browsers to be captured
  */
-Venus.prototype.startMaster = function(config) {
-  console.log( i18n('Starting in master mode').yellow );
-  this.server = master.start(config);
+Venus.prototype.startOverlord = function(config) {
+  console.log( i18n('Starting Overlord').yellow );
+  this.server = overlord.start(config);
 };
 
 /**
@@ -58,7 +59,7 @@ Venus.prototype.startMaster = function(config) {
  */
 Venus.prototype.startExecutor = function(config) {
   console.log( i18n('Starting in executor mode').red );
-  config.masterUrl = config.master || master.defaultUrl;
+  config.overlordUrl = config.overlord || overlord.defaultUrl;
   this.server = executor.start(config);
 };
 

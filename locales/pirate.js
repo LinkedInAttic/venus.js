@@ -5,5 +5,6 @@
 	"Capture page, running at %s:%s": "Capture page, running at %s:%s",
 	"Capture page running on %s:%s": "Capture page running on %s:%s",
 	"Master running on %s:%s": "Master running on %s:%s",
-	"Capture this browser": "Capture this browser"
+	"Capture this browser": "Capture this browser",
+	"Starting Overlord": "The Overlord...has awakened"
 }
