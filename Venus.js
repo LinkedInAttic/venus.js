@@ -2,10 +2,12 @@
  * @author LinkedIn
  */
 var colors    = require('colors'),
-    overlord   = require('./lib/overlord'),
+    overlord  = require('./lib/overlord'),
     executor  = require('./lib/executor'),
     i18n      = require('./lib/i18n'),
+    locale    = require('./lib/locale'),
     cli       = require('./lib/cli'),
+    _         = require('underscore'),
     hostname  = require('os').hostname();
 
 /**
@@ -18,6 +20,7 @@ function Venus() {}
  * @params {Array} args the command line arguments
  */
 Venus.prototype.run = function(args) {
+  this.commandLineArguments = args;
   this.init(args);
 };
 
@@ -36,9 +39,14 @@ Venus.prototype.init = function (args) {
   var command = args[2],
       config  = cli.parseCommandLineArgs(args);
 
-  this.config = config;
   config.homeFolder = __dirname;
 
+  // Set locale
+  if(config.locale) {
+    locale(config.locale);
+  }
+
+  // Execute provided command
   switch(command) {
     case 'init':
       this.initProjectDirectory();
@@ -82,8 +90,17 @@ Venus.prototype.initProjectDirectory = function() {
 /**
  * Print usage
  */
-Venus.prototype.printUsage = function() {
-  console.log('usage: ...');
+Venus.prototype.printUsage = function(config) {
+  var bin = _.last(this.commandLineArguments[1].split('/'));
+  console.log( i18n('usage: %s %s %s', bin, '[COMMAND]', '[FLAGS]') );
+  console.log( '\n\t', 'init'.yellow );
+  console.log( '\t\t', i18n('Create new .venus project directory') );
+
+  console.log( '\n\t', 'listen'.yellow);
+  console.log( '\t\t', i18n('Starts the overlord') );
+
+  console.log( '\n\t', 'exec'.yellow);
+  console.log( '\t\t', i18n('Executes a test') );
 };
 
 module.exports = Venus;
