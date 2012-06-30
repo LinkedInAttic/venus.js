@@ -79,4 +79,11 @@ Venus.prototype.initProjectDirectory = function() {
 
 };
 
+/**
+ * Print usage
+ */
+Venus.prototype.printUsage = function() {
+  console.log('usage: ...');
+};
+
 module.exports = Venus;
