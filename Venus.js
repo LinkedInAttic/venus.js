@@ -8,6 +8,7 @@ var colors    = require('colors'),
     locale    = require('./lib/locale'),
     cli       = require('./lib/cli'),
     _         = require('underscore'),
+    logger    = require('./lib/logger'),
     hostname  = require('os').hostname();
 
 /**
@@ -67,7 +68,7 @@ Venus.prototype.init = function (args) {
  * Start in overlord mode - server which allows browsers to be captured
  */
 Venus.prototype.startOverlord = function(config) {
-  console.log( i18n('Starting Overlord').yellow );
+  logger.info( i18n('Starting Overlord') );
   this.server = overlord.start(config);
 };
 
@@ -75,7 +76,7 @@ Venus.prototype.startOverlord = function(config) {
  * Start in Executor mode - run tests
  */
 Venus.prototype.startExecutor = function(config) {
-  console.log( i18n('Starting in executor mode').red );
+  logger.info( i18n('Starting in executor mode') );
   config.overlordUrl = config.overlord || overlord.defaultUrl;
   this.server = executor.start(config);
 };
