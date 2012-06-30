@@ -9,6 +9,7 @@ var colors    = require('colors'),
     cli       = require('./lib/cli'),
     _         = require('underscore'),
     logger    = require('./lib/logger'),
+    config    = require('./lib/config'),
     hostname  = require('os').hostname();
 
 /**
@@ -38,13 +39,15 @@ Venus.prototype.shutdown = function() {
  */
 Venus.prototype.init = function (args) {
   var command = args[2],
-      config  = cli.parseCommandLineArgs(args);
+      flags   = cli.parseCommandLineArgs(args);
 
-  config.homeFolder = __dirname;
+  flags.homeFolder = __dirname;
+
+  //config.findConfigDirectory(__dirname);
 
   // Set locale
-  if(config.locale) {
-    locale(config.locale);
+  if(flags.locale) {
+    locale(flags.locale);
   }
 
   // Execute provided command
@@ -53,13 +56,13 @@ Venus.prototype.init = function (args) {
       this.initProjectDirectory();
       break;
     case 'listen':
-      this.startOverlord(config);
+      this.startOverlord(flags);
       break;
     case 'exec':
-      this.startExecutor(config);
+      this.startExecutor(flags);
       break;
     default:
-      this.printUsage(config);
+      this.printUsage(flags);
       break;
   }
 };
