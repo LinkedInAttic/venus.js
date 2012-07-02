@@ -9,14 +9,14 @@ var should    = require('./lib/sinon-chai').chai.should(),
 
 describe('lib/executor', function() {
   it('should connect to socket-io server on instantiation', function(done) {
-    var fakeMasterServer = io.listen(3333);
-    fakeMasterServer.set('log level', 0);
+    var fakeOverlordServer = io.listen(3333);
+    fakeOverlordServer.set('log level', 0);
 
-    fakeMasterServer.on('connection', function(socket) {
+    fakeOverlordServer.on('connection', function(socket) {
       done();
     });
 
-    new executor.Executor({ masterUrl: 'http://localhost:3333' });
+    new executor.Executor({ overlordUrl: 'http://localhost:3333' });
   });
 
   it('should not be modifiable', function() {
@@ -25,7 +25,7 @@ describe('lib/executor', function() {
   });
 
   //it('should have the correct default url', function() {
-    //var defaultMasterUrl = ['http://', hostname, ':', '2012'].join();
-    //executor.defaultUrl.should.be(defaultMasterUrl);
+    //var defaultOverlordUrl = ['http://', hostname, ':', '2012'].join();
+    //executor.defaultUrl.should.be(defaultOverlordUrl);
   //});
 });

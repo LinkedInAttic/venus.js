@@ -2,7 +2,7 @@
  * @author LinkedIn
  */
 var should = require('chai').should(),
-    cli    = require('../lib/cli'),
+    cli    = require('../../lib/util/cli'),
     bin    = 'venus';
 
 describe('lib/cli', function() {

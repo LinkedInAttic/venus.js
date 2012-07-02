@@ -2,10 +2,15 @@
  * @author LinkedIn
  */
 var colors    = require('colors'),
-    master    = require('./lib/master'),
+    json5     = require('json5/lib/require'),
+    _         = require('underscore'),
+    Config    = require('./lib/Config'),
+    overlord  = require('./lib/overlord'),
     executor  = require('./lib/executor'),
-    i18n      = require('./lib/i18n'),
-    cli       = require('./lib/cli'),
+    i18n      = require('./lib/util/i18n'),
+    locale    = require('./lib/util/locale'),
+    cli       = require('./lib/util/cli'),
+    logger    = require('./lib/util/logger'),
     hostname  = require('os').hostname();
 
 /**
@@ -18,6 +23,9 @@ function Venus() {}
  * @params {Array} args the command line arguments
  */
 Venus.prototype.run = function(args) {
+  //var data = require('./.venus/config');
+  //console.log( data.libraries.mocha );
+  this.commandLineArguments = args;
   this.init(args);
 };
 
@@ -28,37 +36,55 @@ Venus.prototype.shutdown = function() {
   //this.server.shutdown();
 }
 
+
 /**
  * Initialize application
  * @param {Array} args the command line arguments
  */
-Venus.prototype.init = function(args) {
-  var config = this.config = cli.parseCommandLineArgs(args);
-  config.homeFolder = __dirname;
+Venus.prototype.init = function (args) {
+  var command = args[2],
+      flags   = cli.parseCommandLineArgs(args);
 
-  if(config.argv.remain.indexOf('init') !== -1) {
-    this.initProjectDirectory();
-  } else if(config.test) {
-    this.startExecutor(config);
-  } else {
-    this.startMaster(config);
+  flags.homeFolder = __dirname;
+
+  //config.findConfigDirectory(__dirname);
+
+  // Set locale
+  if(flags.locale) {
+    locale(flags.locale);
+  }
+
+  // Execute provided command
+  switch(command) {
+    case 'init':
+      this.initProjectDirectory();
+      break;
+    case 'listen':
+      this.startOverlord(flags);
+      break;
+    case 'exec':
+      this.startExecutor(flags);
+      break;
+    default:
+      this.printUsage(flags);
+      break;
   }
 };
 
 /**
- * Start in Master mode - server which allows browsers to be captured
+ * Start in overlord mode - server which allows browsers to be captured
  */
-Venus.prototype.startMaster = function(config) {
-  console.log( i18n('Starting in master mode').yellow );
-  this.server = master.start(config);
+Venus.prototype.startOverlord = function(config) {
+  logger.info( i18n('Starting Overlord') );
+  this.server = overlord.start(config);
 };
 
 /**
  * Start in Executor mode - run tests
  */
 Venus.prototype.startExecutor = function(config) {
-  console.log( i18n('Starting in executor mode').red );
-  config.masterUrl = config.master || master.defaultUrl;
+  logger.info( i18n('Starting in executor mode') );
+  config.overlordUrl = config.overlord || overlord.defaultUrl;
   this.server = executor.start(config);
 };
 
@@ -67,6 +93,22 @@ Venus.prototype.startExecutor = function(config) {
  */
 Venus.prototype.initProjectDirectory = function() {
 
+};
+
+/**
+ * Print usage
+ */
+Venus.prototype.printUsage = function(config) {
+  var bin = _.last(this.commandLineArguments[1].split('/'));
+  console.log( i18n('usage: %s %s %s', bin, '[COMMAND]', '[FLAGS]') );
+  console.log( '\n\t', 'init'.yellow );
+  console.log( '\t\t', i18n('Create new .venus project directory') );
+
+  console.log( '\n\t', 'listen'.yellow);
+  console.log( '\t\t', i18n('Starts the overlord') );
+
+  console.log( '\n\t', 'exec'.yellow);
+  console.log( '\t\t', i18n('Executes a test') );
 };
 
 module.exports = Venus;
