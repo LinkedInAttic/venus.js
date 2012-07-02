@@ -2,14 +2,14 @@
  * @author LinkedIn
  */
 var colors    = require('colors'),
+    _         = require('underscore'),
+    Config    = require('./lib/Config'),
     overlord  = require('./lib/overlord'),
     executor  = require('./lib/executor'),
-    i18n      = require('./lib/i18n'),
-    locale    = require('./lib/locale'),
-    cli       = require('./lib/cli'),
-    _         = require('underscore'),
-    logger    = require('./lib/logger'),
-    Config    = require('./lib/Config'),
+    i18n      = require('./lib/util/i18n'),
+    locale    = require('./lib/util/locale'),
+    cli       = require('./lib/util/cli'),
+    logger    = require('./lib/util/logger'),
     hostname  = require('os').hostname();
 
 /**
