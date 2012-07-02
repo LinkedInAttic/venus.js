@@ -2,6 +2,7 @@
  * @author LinkedIn
  */
 var colors    = require('colors'),
+    json5     = require('json5/lib/require'),
     _         = require('underscore'),
     Config    = require('./lib/Config'),
     overlord  = require('./lib/overlord'),
@@ -22,6 +23,8 @@ function Venus() {}
  * @params {Array} args the command line arguments
  */
 Venus.prototype.run = function(args) {
+  //var data = require('./.venus/config');
+  //console.log( data.libraries.mocha );
   this.commandLineArguments = args;
   this.init(args);
 };
