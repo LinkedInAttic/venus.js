@@ -1,14 +1,13 @@
 /**
  * @author LinkedIn
  */
-var should        = require('./lib/sinon-chai').chai.should();
-    config        = require('../lib/config');
+var should        = require('../lib/sinon-chai').chai.should(),
+    parser        = require('../../lib/util/commentsParser'),
     fs            = require('fs');
-    hostname      = require('os').hostname();
 
-describe('lib/config', function() {
+describe('lib/util/commentsParser', function() {
 
-  describe('parseComments', function() {
+  describe('parseStr', function() {
     //  /**
     //   * @venus-framework mocha
     //   * @venus-include /var/www/html
@@ -44,34 +43,27 @@ describe('lib/config', function() {
       ].join('');
 
     it('should parse 1 configData object from 1 comment group', function() {
-        var configData   = config.parseComments(commentsA);
+        var configData   = parser.parseStr(commentsA);
         should.exist(configData);
     });
 
     it('should parse 1 configData object from 2 comment groups', function() {
-        var configData = config.parseComments(commentsB);
+        var configData = parser.parseStr(commentsB);
         should.exist(configData);
     });
 
     it('should parse unique configData options correctly', function() {
-        var configData = config.parseComments(commentsA);
+        var configData = parser.parseStr(commentsA);
 
         should.exist(configData['venus-framework']);
         configData['venus-framework'].should.equal('mocha');
     });
 
     it('should parse duplicated configData options correctly, spanning multiple blocks', function() {
-        var configData = config.parseComments(commentsB);
+        var configData = parser.parseStr(commentsB);
 
         should.exist(configData['venus-include']);
         configData['venus-include'].should.eql(['/var/www/html', '/var/www/bar']);
     });
   });
-
-  describe('findConfigDirectory', function() {
-    it('should work', function() {
-      config.findConfigDirectory(process.cwd());
-    });
-  });
-
 });

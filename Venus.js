@@ -9,7 +9,7 @@ var colors    = require('colors'),
     cli       = require('./lib/cli'),
     _         = require('underscore'),
     logger    = require('./lib/logger'),
-    config    = require('./lib/config'),
+    Config    = require('./lib/Config'),
     hostname  = require('os').hostname();
 
 /**
@@ -32,6 +32,7 @@ Venus.prototype.run = function(args) {
 Venus.prototype.shutdown = function() {
   //this.server.shutdown();
 }
+
 
 /**
  * Initialize application
