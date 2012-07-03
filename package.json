@@ -3,7 +3,7 @@
   "main"              : "venus.js",
   "description"       : "JavaScript test runner & controller",
   "author"            : "LinkedIn",
-  "contributors"      : "Seth McLaughlin, Roel Ramirez, Ryan Blunden, Ali Razfar"
+  "contributors"      : "Seth McLaughlin, Roel Ramirez, Ryan Blunden, Ali Razfar",
   "version"           : "0.0.1",
   "keywords"          : [ "javascript unit testing js test mocha jasmine qunit jstestdriver" ],
   "engines"           : {
