@@ -17,5 +17,8 @@
 	"Starting Overlord": "Starting Overlord",
 	"Starting in executor mode": "Starting in executor mode",
 	"Could not locate a venus config": "Could not locate a venus config",
-	"Unable to parse config file %s, invalid JSON5": "Unable to parse config file %s, invalid JSON5"
+	"Unable to parse config file %s, invalid JSON5": "Unable to parse config file %s, invalid JSON5",
+	"Overlord running on %s:%s": "Overlord running on %s:%s",
+	"Capture this browser": "Capture this browser",
+	"Capture page running on %s:%s": "Capture page running on %s:%s"
 }
