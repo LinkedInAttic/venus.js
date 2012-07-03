@@ -30,6 +30,7 @@
     "dustjs-linkedin" : ">=0.6.0",
     "consolidate"     : ">=0.3.0",
     "winston"         : ">=0.6.1",
-    "json5"           : ">=0.1.0"
+    "json5"           : ">=0.1.0",
+    "portscanner"     : ">=0.0.1"
   }
 }
