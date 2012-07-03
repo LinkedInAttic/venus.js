@@ -9,9 +9,6 @@
   "engines"           : {
     "node"            : ">=0.6.0"
   },
-  "scripts"           : {
-    "test"            : "mocha --recursive test"
-  },
   "bin"               : {
     "venus"          : "./bin/venus"
   },
