@@ -15,5 +15,7 @@
 	"Looking in %s (venus bin) for venus config": "Looking in %s (venus bin) for venus config",
 	"Found config directory %s": "Found config directory %s",
 	"Starting Overlord": "Starting Overlord",
-	"Starting in executor mode": "Starting in executor mode"
+	"Starting in executor mode": "Starting in executor mode",
+	"Could not locate a venus config": "Could not locate a venus config",
+	"Unable to parse config file %s, invalid JSON5": "Unable to parse config file %s, invalid JSON5"
 }

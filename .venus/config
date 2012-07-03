@@ -1,0 +1,7 @@
+// Configuration file for Venus
+{
+  libraries: {
+    mocha: 'lib/mocha.js',
+    jasmine: '/foo/jasmine.js'
+  }
+}
