@@ -10,7 +10,12 @@ var should     = require('./lib/sinon-chai').chai.should(),
 
 describe('lib/executor', function() {
   it('should connect to socket-io server on init', function(done) {
-    var fakeOverlordServer = io.listen(3333);
+    var fakeOverlordServer = io.listen(3333),
+        config = {
+          overlordUrl: 'http://localhost:3333',
+          homeFolder: pathHelper(__dirname).up().path,
+          test: 'test/data/sample_tests/foo'
+        };
 
     fakeOverlordServer.set('log level', 0);
 
@@ -18,7 +23,7 @@ describe('lib/executor', function() {
       done();
     });
 
-    executor.start({ overlordUrl: 'http://localhost:3333' , homeFolder: pathHelper(__dirname).up().path });
+    executor.start(config);
   });
 
   it('should not be modifiable', function() {
@@ -26,8 +31,45 @@ describe('lib/executor', function() {
     should.not.exist(executor.foo);
   });
 
-  //it('should have the correct default url', function() {
-    //var defaultOverlordUrl = ['http://', hostname, ':', '2012'].join();
-    //executor.defaultUrl.should.be(defaultOverlordUrl);
-  //});
+  it('should parse testcases from test string correctly', function() {
+    var exec = new executor.Executor(),
+        tests = 'test/data/sample_tests/foo,test/data/sample_tests/bar',
+        result;
+
+    result = exec.parseTests(tests);
+    should.exist(result);
+    Object.keys(result).length.should.eql(3);
+  });
+
+  it('should handle parsing testcases from undefined test string', function() {
+    var exec = new executor.Executor(),
+        tests,
+        result;
+
+    result = exec.parseTests(tests);
+    should.exist(result);
+    Object.keys(result).length.should.eql(0);
+  });
+
+  it('should handle tests being specified with a .js file extension', function() {
+    var exec   = new executor.Executor(),
+        tests  = 'test/data/sample_tests/foo.js',
+        result = exec.parseTests(tests);
+
+    Object.keys(result).length.should.eql(1);
+  });
+
+  it('should parse comments in test cases', function() {
+    var exec   = new executor.Executor(),
+        tests  = 'test/data/sample_tests/foo',
+        result = exec.parseTests(tests),
+        first;
+
+    first = Object.keys(result)[0];
+
+    should.exist(result);
+    should.exist(result[first]);
+    result[first].config.framework.should.eql('mocha');
+    result[first].config.include.should.have.length(2);
+  });
 });
