@@ -2,7 +2,7 @@
  * @author LinkedIn
  */
 var should = require('chai').should(),
-    cli    = require('../../lib/util/cli'),
+    cli    = require('../../../lib/util/cli'),
     bin    = 'venus';
 
 describe('lib/cli', function() {
@@ -17,5 +17,6 @@ describe('lib/cli', function() {
     it('should parse the --port value', function() {
       parsed.port.should.equal(2020);
     });
+
   });
 });

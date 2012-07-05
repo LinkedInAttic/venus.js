@@ -32,6 +32,7 @@
     "winston"           : ">=0.6.1",
     "json5"             : ">=0.1.0",
     "portscanner"       : ">=0.0.1",
-    "underscore.string" : ">=0.0.1"
+    "underscore.string" : ">=0.0.1",
+    "phantom-sync"      : ">=0.1.1"
   }
 }

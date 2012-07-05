@@ -1,0 +1,6 @@
+{
+  libraries: {
+    mocha: 'mocha.js',
+    jasmine: 'jasmine.js'
+  }
+}

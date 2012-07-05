@@ -1,11 +1,16 @@
 /**
  * @author LinkedIn
  */
-var should    = require('./lib/sinon-chai').chai.should(),
+var should    = require('../lib/sinon-chai').chai.should(),
     sinon     = require('sinon'),
-    Venus     = require('../Venus');
+    Venus     = require('../../Venus');
 
 describe('Venus main', function() {
+  it('should instantiate', function() {
+
+
+  });
+
   it('should call initialize project directory when init command is passed', function() {
     var argv = ['node', 'venus', 'init'],
         app  = new Venus();

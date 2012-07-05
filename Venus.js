@@ -4,7 +4,7 @@
 var colors    = require('colors'),
     json5     = require('json5/lib/require'),
     _         = require('underscore'),
-    Config    = require('./lib/Config'),
+    Config    = require('./lib/config'),
     overlord  = require('./lib/overlord'),
     executor  = require('./lib/executor'),
     i18n      = require('./lib/util/i18n'),
@@ -84,7 +84,11 @@ Venus.prototype.startOverlord = function(config) {
  */
 Venus.prototype.startExecutor = function(config) {
   logger.info( i18n('Starting in executor mode') );
-  config.overlordUrl = config.overlord || overlord.defaultUrl;
+
+  if(config.overlord === 1) {
+    config.overlord = overlord.defaultUrl;
+  }
+
   this.server = executor.start(config);
 };
 

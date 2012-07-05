@@ -1,8 +1,8 @@
 /**
  * @author LinkedIn
  */
-var should        = require('../lib/sinon-chai').chai.should(),
-    pathHelper    = require('../../lib/util/pathHelper');
+var should        = require('../../lib/sinon-chai').chai.should(),
+    pathHelper    = require('../../../lib/util/pathHelper');
 
 describe('lib/util/pathHelper', function() {
 

@@ -1,8 +1,8 @@
 /**
  * @author LinkedIn
  */
-var should    = require('./lib/sinon-chai').chai.should(),
-    overlord  = require('../lib/overlord'),
+var should    = require('../lib/sinon-chai').chai.should(),
+    overlord  = require('../../lib/overlord'),
     hostname  = require('os').hostname();
 
 describe('lib/overlord', function() {

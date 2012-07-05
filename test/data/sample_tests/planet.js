@@ -1,6 +1,6 @@
 /**
  *  @venus-framework mocha
- *  @venus-template test
+ *  @venus-template default
  *  @venus-include /var/www/html/foo.js
  *  @venus-include /var/www/html/bar.js
  */

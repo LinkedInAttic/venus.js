@@ -1,8 +1,8 @@
 /**
  * @author LinkedIn
  */
-var should        = require('../lib/sinon-chai').chai.should(),
-    parser        = require('../../lib/util/commentsParser'),
+var should        = require('../../lib/sinon-chai').chai.should(),
+    parser        = require('../../../lib/util/commentsParser'),
     fs            = require('fs');
 
 describe('lib/util/commentsParser', function() {
