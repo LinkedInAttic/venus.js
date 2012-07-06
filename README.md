@@ -16,9 +16,9 @@ several JS files:
 
 You may also include some DOM elements for your test to interact with, or for the testing library to display results.
 
-For example, if you are using mocha, your test fixture might look something like this:
+For example, your test fixture might look something like this:
 
-  <!DOCTYPE html>
+  `<!DOCTYPE html>
   <html>
   <head>
     <title>Test for Foo</title>
@@ -33,7 +33,7 @@ For example, if you are using mocha, your test fixture might look something like
   <body>
     <div id="results"></div>
   </body>
-  </html>
+  </html>`
 
 Then to run the test, you simply load this page in any web browser. This works, but it presents some problems:
 
