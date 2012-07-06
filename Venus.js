@@ -45,6 +45,13 @@ Venus.prototype.init = function (args) {
 
   flags.homeFolder = __dirname;
 
+  console.log(flags);
+  // Check if debug logging should be enabled
+  if(flags.debug) {
+    console.log('debug');
+    logger.transports.console.level = logger.levels.debug;
+  }
+
   // Set locale
   if(flags.locale) {
     locale(flags.locale);
