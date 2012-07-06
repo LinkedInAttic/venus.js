@@ -23,5 +23,13 @@
 	"Could not locate %s in search path": "Could not locate %s in search path",
 	"Starting Overlord": "Starting Overlord",
 	"Error copying include file %s. Exception: %s": "Error copying include file %s. Exception: %s",
-	"got results for test %s : %s": "got results for test %s : %s"
+	"got results for test %s : %s": "got results for test %s : %s",
+	"Specify port to run on": "Specify port to run on",
+	"When running as executor, specify whether to connect to overlord": "When running as executor, specify whether to connect to overlord",
+	"Specify locale to use": "Specify locale to use",
+	"Use phantomJS client to run browser tests": "Use phantomJS client to run browser tests",
+	"Comma separated string of tests to run": "Comma separated string of tests to run",
+	"Run in debug mode": "Run in debug mode",
+	"Run in verbose mode": "Run in verbose mode",
+	"skipping invalid test file %s": "skipping invalid test file %s"
 }
