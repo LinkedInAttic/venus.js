@@ -18,7 +18,8 @@ You may also include some DOM elements for your test to interact with, or for th
 
 For example, your test fixture might look something like this:
 
-  `<!DOCTYPE html>
+```html
+  <!DOCTYPE html>
   <html>
   <head>
     <title>Test for Foo</title>
@@ -33,14 +34,15 @@ For example, your test fixture might look something like this:
   <body>
     <div id="results"></div>
   </body>
-  </html>`
+  </html>
+```
+then to run the test, you simply load this page in any web browser. This works, but it presents some problems:
 
-Then to run the test, you simply load this page in any web browser. This works, but it presents some problems:
+  1. Generating this test fixture page is often a manual process
+  2. Running the test is a manual process of launching a browser
+  3. There is often no easy way to integrate running tests from an IDE, since there is no command line output from running the test
 
-  * Generating this test fixture page is often a manual process
-  * Running the test is a manual process of launching a browser
-  * There is often no easy way to integrate running tests from an IDE, since there is no command line output from running the test
-
+##Venus to the rescue
 Venus strives to solve these problems without re-inventing the wheel. Rather than create an entirely new testing library, we set out to create
 a tool to make it easier for you to work with an existing library. Here are the main benefits of Venus:
 
@@ -50,15 +52,15 @@ a tool to make it easier for you to work with an existing library. Here are the 
   * Run your tests from the command line in multiple browsers (running locally or remotely) at the same time
   * Integration with Continuous Integration tools (Hudson + Selenium Grid)
 
-##Annotations
+###Annotations
 
-##Configuration
+###Configuration
 
-##Run tests from the command line
+###Run tests from the command line
 
-##Remote browsers
+###Remote browsers
 
-##Continuous Integration support
+###Continuous Integration support
 
 ##Get started
 
