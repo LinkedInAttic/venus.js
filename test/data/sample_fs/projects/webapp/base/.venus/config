@@ -1,6 +1,18 @@
+// Configuration file for Venus
 {
   libraries: {
-    mocha: 'mocha.js',
-    jasmine: 'jasmine.js'
-  }
+    mocha: {
+      library: 'libraries/mocha.js',
+      adaptor: 'adaptors/mocha-venus.js'
+    },
+
+    jasmine: {
+      library: 'libraries/jasmine.js',
+      adaptor: 'adaptors/jasmine-venus.js'
+    }
+
+  },
+
+  includes: ['foo.js', 'bar.js', 'biz.js']
+
 }

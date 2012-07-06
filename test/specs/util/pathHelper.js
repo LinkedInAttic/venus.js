@@ -13,4 +13,18 @@ describe('lib/util/pathHelper', function() {
       path.path.should.eql('/test/var/foo');
     });
   });
+
+  describe('file', function() {
+
+    it('should return filename', function() {
+      var path = pathHelper('/test/var/foo');
+      path.file.should.eql('foo');
+    });
+
+    it('should return directory name', function() {
+      var path = pathHelper('/test/var/foo/');
+      path.file.should.eql('foo/');
+    });
+
+  });
 });

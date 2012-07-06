@@ -1,7 +1,14 @@
 // Configuration file for Venus
 {
   libraries: {
-    mocha: 'lib/mocha.js',
-    jasmine: '/foo/jasmine.js'
+    mocha: {
+      library: 'libraries/mocha.js',
+      adaptor: 'adaptors/mocha-venus.js'
+    }
+  },
+
+  // Default settings
+  default: {
+    library: 'mocha'
   }
 }
