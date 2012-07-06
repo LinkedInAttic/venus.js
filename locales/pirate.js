@@ -21,5 +21,7 @@
 	"Checking if %s exists (home)": "Checking if %s exists (home)",
 	"Checking if %s exists (bin)": "Checking if %s exists (bin)",
 	"Could not locate %s in search path": "Could not locate %s in search path",
-	"Starting Overlord": "Starting Overlord"
+	"Starting Overlord": "Starting Overlord",
+	"Error copying include file %s. Exception: %s": "Error copying include file %s. Exception: %s",
+	"got results for test %s : %s": "got results for test %s : %s"
 }

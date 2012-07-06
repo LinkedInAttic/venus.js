@@ -37,13 +37,13 @@ describe('lib/config', function() {
 
   describe('buildLookupChain', function() {
     it('should return config objects', function() {
-      var conf = new config.Config(),
+      var conf = new config.Config(testHelper.fakeCwd()),
           chain;
 
-      conf.cwd = testHelper.fakeCwd();
       chain = conf.buildLookupChain().configs;
       chain.length.should.be.above(0);
-      chain[0].libraries.mocha.should.eql('mocha.js');
+      console.log(chain[0].data.libraries.mocha.library);
+      chain[0].data.libraries.mocha.library.should.eql('libraries/mocha.js');
     });
   });
 
@@ -51,7 +51,7 @@ describe('lib/config', function() {
     var conf = new config.Config(testHelper.fakeCwd());
 
     it('should get the closest value for a property', function() {
-      conf.get('libraries.jasmine').should.eql('jasmine.js');
+      conf.get('libraries.jasmine.library').value.should.eql('libraries/jasmine.js');
     });
   });
 
@@ -68,4 +68,22 @@ describe('lib/config', function() {
       conf.loadTemplate('test').should.eql('ship ahoy!\n');
     });
   });
+
+  describe('resolve', function() {
+    it('should work with a property that is a string', function() {
+      var conf = new config.Config(testHelper.fakeCwd()),
+          includes = conf.resolve('libraries.mocha.library');
+
+      console.log(includes);
+    });
+
+    it('should work with a property that is an array', function() {
+      var conf = new config.Config(testHelper.fakeCwd()),
+          includes = conf.resolve('includes');
+
+      console.log(includes);
+    });
+  });
+
+
 });

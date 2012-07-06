@@ -27,8 +27,21 @@ describe('lib/testcase', function() {
           conf = testHelper.testConfig(),
           test = new testcase.TestCase(conf);
 
-      test.init(testpath, 1);
+      test.init(testpath, 1, 'http://foo');
       test.fixtureTemplate.should.eql('ship ahoy!\n');
+    });
+  });
+
+  describe('prepareDependencies', function() {
+    it('should load deps', function(done) {
+      var testpath = testHelper.sampleTestPath(1),
+          conf = testHelper.testConfig(),
+          test = new testcase.TestCase(conf);
+
+      test.id = 1;
+      test.prepareDependencies(test.parseTestFile(testpath).metaData);
+
+      setTimeout(done, 1000);
     });
   });
 
