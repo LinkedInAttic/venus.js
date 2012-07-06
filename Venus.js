@@ -23,8 +23,6 @@ function Venus() {}
  * @params {Array} args the command line arguments
  */
 Venus.prototype.run = function(args) {
-  //var data = require('./.venus/config');
-  //console.log( data.libraries.mocha );
   this.commandLineArguments = args;
   this.init(args);
 };
@@ -33,7 +31,7 @@ Venus.prototype.run = function(args) {
  * Stop the app
  */
 Venus.prototype.shutdown = function() {
-  //this.server.shutdown();
+  throw new Error('Not implemented');
 }
 
 
@@ -46,8 +44,6 @@ Venus.prototype.init = function (args) {
       flags   = cli.parseCommandLineArgs(args);
 
   flags.homeFolder = __dirname;
-
-  //config.findConfigDirectory(__dirname);
 
   // Set locale
   if(flags.locale) {
