@@ -45,11 +45,9 @@ Venus.prototype.init = function (args) {
 
   flags.homeFolder = __dirname;
 
-  console.log(flags);
   // Check if debug logging should be enabled
   if(flags.debug) {
-    console.log('debug');
-    logger.transports.console.level = logger.levels.debug;
+    logger.transports.console.level = 'debug';
   }
 
   // Set locale
@@ -78,7 +76,7 @@ Venus.prototype.init = function (args) {
  * Start in overlord mode - server which allows browsers to be captured
  */
 Venus.prototype.startOverlord = function(config) {
-  logger.info( i18n('Starting Overlord') );
+  logger.verbose( i18n('Starting Overlord') );
   this.server = overlord.start(config);
 };
 
@@ -86,7 +84,7 @@ Venus.prototype.startOverlord = function(config) {
  * Start in Executor mode - run tests
  */
 Venus.prototype.startExecutor = function(config) {
-  logger.info( i18n('Starting in executor mode') );
+  logger.verbose( i18n('Starting in executor mode') );
 
   if(config.overlord === 1) {
     config.overlord = overlord.defaultUrl;

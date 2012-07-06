@@ -34,7 +34,6 @@ describe('lib/executor', function() {
     var exec = new executor.Executor(),
         tests = 'test/data/sample_tests/foo,test/data/sample_tests/bar',
         result;
-
     result = exec.parseTests(tests);
     should.exist(result);
     Object.keys(result).length.should.eql(3);
