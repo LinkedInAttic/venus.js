@@ -9,8 +9,8 @@ var colors    = require('colors'),
     executor  = require('./lib/executor'),
     i18n      = require('./lib/util/i18n'),
     locale    = require('./lib/util/locale'),
-    cli       = require('./lib/util/cli'),
     logger    = require('./lib/util/logger'),
+    program   = require('commander'),
     hostname  = require('os').hostname();
 
 /**
@@ -34,86 +34,97 @@ Venus.prototype.shutdown = function() {
   throw new Error('Not implemented');
 }
 
-
 /**
  * Initialize application
  * @param {Array} args the command line arguments
  */
 Venus.prototype.init = function (args) {
-  var command = args[2],
-      flags   = cli.parseCommandLineArgs(args);
 
-  flags.homeFolder = __dirname;
+  // options
+  program
+    .version('0.0.1')
 
+  // init command
+  // TODO: Re-enable once init project code is implemented
+  //program
+    //.command('init')
+    //.description( i18n('initialize new venus project directory') )
+    //.option('-l, --locale [locale]', i18n('Specify locale to use'))
+    //.option('-v, --verbose', i18n('Run in verbose mode'))
+    //.option('-d, --debug', i18n('Run in debug mode'))
+    //.action( _.bind(this.initProjectDirectory, this, program) );
+
+  // exec command
+  program
+    .command('exec')
+    .description( i18n('Run tests') )
+    .option('-t, --test [tests]', i18n('Comma separated string of tests to run'))
+    .option('-p, --port [port]', i18n('port to run on'), function(value) { return parseInt(value, 10); })
+    .option('-o, --overlord [url]', i18n('connect to an overlord server'))
+    .option('-n, --phantom', i18n('Use phantomJS client to run browser tests'))
+    .option('-l, --locale [locale]', i18n('Specify locale to use'))
+    .option('-v, --verbose', i18n('Run in verbose mode'))
+    .option('-d, --debug', i18n('Run in debug mode'))
+    .action( _.bind(this.startExecutor, this, program) );
+
+  // listen command
+  // TODO: Re-enable once overlord code is implemented
+  //program
+    //.command('listen')
+    //.description( i18n('Start the Overlord') )
+    //.option('-p, --port [port]', i18n('port to run on'), function(value) { return parseInt(value, 10); })
+    //.option('-l, --locale [locale]', i18n('Specify locale to use'))
+    //.option('-v, --verbose', i18n('Run in verbose mode'))
+    //.option('-d, --debug', i18n('Run in debug mode'))
+    //.action( _.bind(this.startOverlord, this, program) );
+
+  program.homeFolder = __dirname;
+  program.parse(args);
+};
+
+/**
+ * Apply common command line flags
+ */
+Venus.prototype.applyCommandLineFlags = function(program) {
   // Check if debug logging should be enabled
-  if(flags.debug) {
+  if(program.debug) {
     logger.transports.console.level = 'debug';
   }
 
   // Set locale
-  if(flags.locale) {
-    locale(flags.locale);
+  if(program.locale) {
+    locale(program.locale);
   }
-
-  // Execute provided command
-  switch(command) {
-    case 'init':
-      this.initProjectDirectory();
-      break;
-    case 'listen':
-      this.startOverlord(flags);
-      break;
-    case 'exec':
-      this.startExecutor(flags);
-      break;
-    default:
-      this.printUsage(flags);
-      break;
-  }
-};
+}
 
 /**
  * Start in overlord mode - server which allows browsers to be captured
  */
-Venus.prototype.startOverlord = function(config) {
+Venus.prototype.startOverlord = function(program) {
+  this.applyCommandLineFlags(program);
   logger.verbose( i18n('Starting Overlord') );
-  this.server = overlord.start(config);
+  this.server = overlord.start(program);
 };
 
 /**
  * Start in Executor mode - run tests
  */
-Venus.prototype.startExecutor = function(config) {
+Venus.prototype.startExecutor = function(program) {
   logger.verbose( i18n('Starting in executor mode') );
 
-  if(config.overlord === 1) {
-    config.overlord = overlord.defaultUrl;
+  if(program.overlord === 1) {
+    program.overlord = overlord.defaultUrl;
   }
 
-  this.server = executor.start(config);
+  this.server = executor.start(program);
 };
 
 /**
  * Initialize new project directory
  */
 Venus.prototype.initProjectDirectory = function() {
-
-};
-
-/**
- * Print usage
- */
-Venus.prototype.printUsage = function(config) {
-  var bin = _.last(this.commandLineArguments[1].split('/'));
-  console.log( i18n('usage: %s %s %s', bin, '[COMMAND]', '[FLAGS]') );
-  console.log( '\n\t', 'init'.yellow );
-  console.log( '\t\t', i18n('Create new .venus project directory') );
-
-  console.log( '\n\t', 'listen'.yellow);
-  console.log( '\t\t', i18n('Starts the overlord') );
-
-  console.log( '\n\t', 'exec'.yellow);
-  console.log( '\t\t', i18n('Executes a test') );
+ // TODO
 };
 
 module.exports = Venus;
+Object.seal(module.exports);
