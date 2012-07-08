@@ -31,5 +31,12 @@
 	"Comma separated string of tests to run": "Comma separated string of tests to run",
 	"Run in debug mode": "Run in debug mode",
 	"Run in verbose mode": "Run in verbose mode",
-	"skipping invalid test file %s": "skipping invalid test file %s"
+	"skipping invalid test file %s": "skipping invalid test file %s",
+	"Start the Overlord": "Start the Overlord",
+	"initialize new venus project directory": "initialize new venus project directory",
+	"Run tests": "Run tests",
+	"help": "help",
+	"print usage information": "print usage information",
+	"port to run on": "port to run on",
+	"connect to an overlord server": "connect to an overlord server"
 }
