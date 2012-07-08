@@ -2,8 +2,11 @@
 {
   libraries: {
     mocha: {
-      library: 'libraries/mocha.js',
-      adaptor: 'adaptors/mocha-venus.js'
+      includes: [
+        'libraries/mocha.js',
+        'libraries/chai.js',
+        'adaptors/mocha-venus.js'
+      ]
     }
   },
 

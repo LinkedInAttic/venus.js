@@ -7,8 +7,8 @@
 
 var javascript = true;
 
-describe('first test', function() {
+describe('second test', function() {
   it('should work', function() {
-    '1'.should.eql('1');
+    '2'.should.eql('1');
   });
 });
