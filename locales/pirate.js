@@ -39,5 +39,6 @@
 	"print usage information": "print usage information",
 	"port to run on": "port to run on",
 	"connect to an overlord server": "connect to an overlord server",
-	"Error copying test file %s. Exception: %s": "Error copying test file %s. Exception: %s"
+	"Error copying test file %s. Exception: %s": "Error copying test file %s. Exception: %s",
+	"Test %s results\t%s\t%s": "Test %s results\t%s\t%s"
 }
