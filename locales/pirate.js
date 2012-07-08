@@ -1,6 +1,6 @@
 {
 	"Starting in executor mode": "Starting in executor mode",
-	"No tests specified to run - exiting": "No tests specified to run - exiting",
+	"No tests specified to run - exiting": "Ye' need to supply some tests mate!",
 	"Connecting to Overloard - %s": "Connecting to Overloard - %s",
 	"Looking for %s in %s": "Looking for %s in %s",
 	"Looking in %s (home directory) for venus config": "Looking in %s (home directory) for venus config",
@@ -38,5 +38,6 @@
 	"help": "help",
 	"print usage information": "print usage information",
 	"port to run on": "port to run on",
-	"connect to an overlord server": "connect to an overlord server"
+	"connect to an overlord server": "connect to an overlord server",
+	"Error copying test file %s. Exception: %s": "Error copying test file %s. Exception: %s"
 }

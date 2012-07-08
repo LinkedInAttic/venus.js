@@ -52,7 +52,7 @@ Venus.prototype.init = function (args) {
     //.option('-l, --locale [locale]', i18n('Specify locale to use'))
     //.option('-v, --verbose', i18n('Run in verbose mode'))
     //.option('-d, --debug', i18n('Run in debug mode'))
-    //.action( _.bind(this.initProjectDirectory, this, program) );
+    //.action( _.bind(this.initProjectDirectory, this) );
 
   // exec command
   program
@@ -65,7 +65,7 @@ Venus.prototype.init = function (args) {
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
-    .action( _.bind(this.startExecutor, this, program) );
+    .action( _.bind(this.startExecutor, this) );
 
   // listen command
   // TODO: Re-enable once overlord code is implemented
@@ -76,9 +76,8 @@ Venus.prototype.init = function (args) {
     //.option('-l, --locale [locale]', i18n('Specify locale to use'))
     //.option('-v, --verbose', i18n('Run in verbose mode'))
     //.option('-d, --debug', i18n('Run in debug mode'))
-    //.action( _.bind(this.startOverlord, this, program) );
+    //.action( _.bind(this.startOverlord, this) );
 
-  program.homeFolder = __dirname;
   program.parse(args);
 };
 
@@ -103,6 +102,7 @@ Venus.prototype.applyCommandLineFlags = function(program) {
 Venus.prototype.startOverlord = function(program) {
   this.applyCommandLineFlags(program);
   logger.verbose( i18n('Starting Overlord') );
+  program.homeFolder = __dirname;
   this.server = overlord.start(program);
 };
 
@@ -111,6 +111,9 @@ Venus.prototype.startOverlord = function(program) {
  */
 Venus.prototype.startExecutor = function(program) {
   logger.verbose( i18n('Starting in executor mode') );
+
+  this.applyCommandLineFlags(program);
+  program.homeFolder = __dirname;
 
   if(program.overlord === 1) {
     program.overlord = overlord.defaultUrl;
@@ -124,6 +127,7 @@ Venus.prototype.startExecutor = function(program) {
  */
 Venus.prototype.initProjectDirectory = function() {
  // TODO
+
 };
 
 module.exports = Venus;

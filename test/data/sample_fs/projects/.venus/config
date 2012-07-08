@@ -1,5 +1,7 @@
 {
   libraries: {
-    jasmine: 'jasmine1.js'
+    jasmine: {
+      includes: ['jasmine1.js']
+    }
   }
 }

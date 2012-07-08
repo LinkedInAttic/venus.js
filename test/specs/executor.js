@@ -67,8 +67,8 @@ describe('lib/executor', function() {
 
     should.exist(result);
     should.exist(result[first]);
-    result[first].metaData['venus-library'].should.eql('mocha');
-    result[first].metaData['venus-include'].should.have.length(2);
+    result[first].annotations['venus-library'].should.eql('mocha');
+    result[first].annotations['venus-include'].should.have.length(2);
   });
 
   it('should only connect to overlord if correct flag is set', function() {
