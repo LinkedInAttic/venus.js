@@ -1,7 +1,7 @@
 /**
  *  @venus-library mocha
  *  @venus-template test
- *  @venus-include /home/smclaugh/.bash_aliases
+ *  @venus-include empty_file.js
  */
 
 var javascript = true;

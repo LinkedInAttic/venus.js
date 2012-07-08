@@ -2,17 +2,11 @@
 {
   libraries: {
     mocha: {
-      library: 'libraries/mocha.js',
-      adaptor: 'adaptors/mocha-venus.js'
+      includes: ['libraries/mocha.js', 'adaptors/mocha-venus.js']
     },
 
     jasmine: {
-      library: 'libraries/jasmine.js',
-      adaptor: 'adaptors/jasmine-venus.js'
+      includes: ['libraries/jasmine.js', 'adaptors/jasmine-venus.js']
     }
-
-  },
-
-  includes: ['foo.js', 'bar.js', 'biz.js']
-
+  }
 }

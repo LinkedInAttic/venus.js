@@ -42,8 +42,7 @@ describe('lib/config', function() {
 
       chain = conf.buildLookupChain().configs;
       chain.length.should.be.above(0);
-      console.log(chain[0].data.libraries.mocha.library);
-      chain[0].data.libraries.mocha.library.should.eql('libraries/mocha.js');
+      chain[0].data.libraries.mocha.includes[0].should.eql('libraries/mocha.js');
     });
   });
 
@@ -51,7 +50,7 @@ describe('lib/config', function() {
     var conf = new config.Config(testHelper.fakeCwd());
 
     it('should get the closest value for a property', function() {
-      conf.get('libraries.jasmine.library').value.should.eql('libraries/jasmine.js');
+      conf.get('libraries.jasmine.library.includes').value[0].should.eql('libraries/jasmine.js');
     });
   });
 
@@ -74,14 +73,12 @@ describe('lib/config', function() {
       var conf = new config.Config(testHelper.fakeCwd()),
           includes = conf.resolve('libraries.mocha.library');
 
-      console.log(includes);
     });
 
     it('should work with a property that is an array', function() {
       var conf = new config.Config(testHelper.fakeCwd()),
           includes = conf.resolve('includes');
 
-      console.log(includes);
     });
   });
 

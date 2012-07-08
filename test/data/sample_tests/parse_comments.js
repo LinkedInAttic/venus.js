@@ -1,6 +1,6 @@
 /**
  *  @venus-library mocha
- *  @venus-include ~/.bash_profile
- *  @venus-include ~/.bash_aliases
+ *  @venus-include foo.js
+ *  @venus-include empty_file.js
  */
 
