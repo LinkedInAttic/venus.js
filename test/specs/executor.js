@@ -59,7 +59,7 @@ describe('lib/executor', function() {
 
   it('should parse comments in test cases', function() {
     var exec   = new executor.Executor(),
-        tests  = 'test/data/sample_tests/foo',
+        tests  = 'test/data/sample_tests/parse_comments',
         result = exec.parseTests(tests),
         first;
 
@@ -67,7 +67,7 @@ describe('lib/executor', function() {
 
     should.exist(result);
     should.exist(result[first]);
-    result[first].metaData['venus-framework'].should.eql('mocha');
+    result[first].metaData['venus-library'].should.eql('mocha');
     result[first].metaData['venus-include'].should.have.length(2);
   });
 

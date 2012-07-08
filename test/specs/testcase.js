@@ -21,23 +21,13 @@ describe('lib/testcase', function() {
     });
   });
 
-  describe('init', function() {
-    it('should initialize properly', function() {
-      var testpath = testHelper.sampleTestPath(1),
-          conf = testHelper.testConfig(),
-          test = new testcase.TestCase(conf);
-
-      test.init(testpath, 1, 'http://foo');
-      test.fixtureTemplate.should.eql('ship ahoy!\n');
-    });
-  });
-
   describe('prepareDependencies', function() {
     it('should load deps', function(done) {
-      var testpath = testHelper.sampleTestPath(1),
-          conf = testHelper.testConfig(),
-          test = new testcase.TestCase(conf);
+      var testpath = testHelper.sampleTests('prepare_deps.js'),
+          conf     = testHelper.testConfig(),
+          test     = new testcase.TestCase(conf);
 
+      test.testPath = testpath;
       test.id = 1;
       test.prepareDependencies(test.parseTestFile(testpath).metaData);
 

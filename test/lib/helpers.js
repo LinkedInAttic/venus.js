@@ -15,3 +15,7 @@ module.exports.testConfig = function() {
 module.exports.sampleTestPath = function() {
   return pathm.resolve(__dirname + '/../data/sample_tests/foo.js');
 }
+
+module.exports.sampleTests = function(path) {
+  return pathm.resolve(__dirname + '/../data/sample_tests/' + path);
+}
