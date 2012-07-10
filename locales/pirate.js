@@ -40,5 +40,7 @@
 	"port to run on": "port to run on",
 	"connect to an overlord server": "connect to an overlord server",
 	"Error copying test file %s. Exception: %s": "Error copying test file %s. Exception: %s",
-	"Test %s results\t%s\t%s": "Test %s results\t%s\t%s"
+	"Test %s results\t%s\t%s": "Test %s results\t%s\t%s",
+	"please add phantomjs-venus to your PATH by adding the following line to your ~/.profile or ~/.bash_profile or ~/.bashrc or ~/.zshenv (remember to source):\n": "please add phantomjs-venus to your PATH by adding the following line to your ~/.profile or ~/.bash_profile or ~/.bashrc or ~/.zshenv (remember to source):\n",
+	"export PATH=/Users/arazfar/Dropbox/LinkedIn/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n": "export PATH=/Users/arazfar/Dropbox/LinkedIn/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n"
 }
