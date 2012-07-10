@@ -3,6 +3,7 @@ var sys  = require('util'),
     i18n      = require('../lib/util/i18n'),
     logger    = require('../lib/util/logger');
 
+// get the path to the phantomjs directory and tell the user to add it to their PATH variable
 exec('cd phantomjs/phantomjs-1.6.0/bin && echo $PWD', function (error, stdout, stderr) {
 	var pwd = stdout.replace(/(\r\n|\n|\r)/gm,"");
 	logger.info(i18n('please add phantomjs-venus to your PATH by adding the following line to your ~/.profile or ~/.bash_profile or ~/.bashrc or ~/.zshenv (remember to source):\n'));
