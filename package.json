@@ -38,7 +38,6 @@
     "async"             : ">=0.1.22"
   },
   "scripts": {
-    "preinstall" : "node setup/preInstall.js",
-    "postinstall" : "node setup/postInstall.js"
+    "preinstall" : "node setup/preInstall.js"
   }
 }

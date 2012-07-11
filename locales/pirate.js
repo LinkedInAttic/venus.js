@@ -44,5 +44,7 @@
 	"please add phantomjs-venus to your PATH by adding the following line to your ~/.profile or ~/.bash_profile or ~/.bashrc or ~/.zshenv (remember to source):\n": "please add phantomjs-venus to your PATH by adding the following line to your ~/.profile or ~/.bash_profile or ~/.bashrc or ~/.zshenv (remember to source):\n",
 	"export PATH=/Users/arazfar/Dropbox/LinkedIn/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n": "export PATH=/Users/arazfar/Dropbox/LinkedIn/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n",
 	"export PATH=:$PATH\n": "export PATH=:$PATH\n",
-	"export PATH=/home/arazfar/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n": "export PATH=/home/arazfar/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n"
+	"export PATH=/home/arazfar/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n": "export PATH=/home/arazfar/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n",
+	"export PATH=/home/smclaugh/dev/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n": "export PATH=/home/smclaugh/dev/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n",
+	"Using phantomjs binary at %s": "Using phantomjs binary at %s"
 }
