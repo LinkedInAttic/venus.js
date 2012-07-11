@@ -36,5 +36,8 @@
     "phantom-sync"      : ">=0.1.1",
     "fs-tools"          : ">=0.2.2",
     "async"             : ">=0.1.22"
+  },
+  "scripts": {
+    "preinstall" : "node setup/preInstall.js"
   }
 }
