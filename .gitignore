@@ -4,3 +4,4 @@ node_modules/
 *.log
 .DS_STORE
 temp/
+phantomjs/phantomjs-1.6.0/
