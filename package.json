@@ -1,11 +1,14 @@
 {
   "name"              : "Venus",
-  "main"              : "venus.js",
+  "main"              : "Venus.js",
   "description"       : "JavaScript test runner & controller",
-  "author"            : "LinkedIn",
-  "contributors"      : "Seth McLaughlin, Roel Ramirez, Ryan Blunden, Ali Razfar",
-  "version"           : "0.0.1",
-  "keywords"          : [ "javascript unit testing js test mocha jasmine qunit jstestdriver" ],
+  "version"           : "0.0.1alpha",
+  "keywords"          : [ "testing" ],
+  "homepage"          : "https://github.com/sethmcl/venus",
+  "bugs"              : {
+    "url": "https://github.com/sethmcl/venus/issues",
+    "email": "smclaughlin@linkedin.com"
+  },
   "engines"           : {
     "node"            : ">=0.8.0"
   },
@@ -13,7 +16,7 @@
     "venus"          : "./bin/venus"
   },
   "licenses"          : [{
-    "type"            : "Apache"
+    "type"            : "Apache 2.0"
   }],
   "dependencies"      : {
     "express"           : ">=3.0.0beta4",
@@ -22,11 +25,7 @@
     "colors"            : ">=0.6.0",
     "underscore"        : ">=1.3.3",
     "i18n"              : ">=0.3.5",
-    "mocha"             : ">=1.2.0",
     "commander"         : ">=1.0.0",
-    "chai"              : ">=1.0.4",
-    "sinon-chai"        : ">=2.1.2",
-    "sinon"             : ">=1.3.4",
     "dustjs-linkedin"   : ">=0.6.0",
     "consolidate"       : ">=0.3.0",
     "winston"           : ">=0.6.1",
@@ -36,6 +35,14 @@
     "fs-tools"          : ">=0.2.2",
     "async"             : ">=0.1.22"
   },
+  "devDependencies": {
+    "chai"              : ">=1.0.4",
+    "mocha"             : ">=1.2.0",
+    "sinon-chai"        : ">=2.1.2",
+    "sinon"             : ">=1.3.4"
+  },
+  "os": ["!win32"],
+  "preferGlobal": true,
   "scripts": {
     "preinstall" : "node setup/preInstall.js"
   }
