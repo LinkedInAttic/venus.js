@@ -46,5 +46,8 @@
 	"export PATH=:$PATH\n": "export PATH=:$PATH\n",
 	"export PATH=/home/arazfar/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n": "export PATH=/home/arazfar/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n",
 	"export PATH=/home/smclaugh/dev/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n": "export PATH=/home/smclaugh/dev/venus/phantomjs/phantomjs-1.6.0/bin:$PATH\n",
-	"Using phantomjs binary at %s": "Using phantomjs binary at %s"
+	"Using phantomjs binary at %s": "Using phantomjs binary at %s",
+	"==============================": "==============================",
+	"Results for %s": "Results for %s",
+	"[Results for %s]": "[Results for %s]"
 }
