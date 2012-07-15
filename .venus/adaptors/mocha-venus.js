@@ -10,7 +10,6 @@ function Adaptor() {
  * Start the tests!
  */
 Adaptor.prototype.start = function() {
-  chai.should();
   var results = this.results = {
     "test": []
   };
