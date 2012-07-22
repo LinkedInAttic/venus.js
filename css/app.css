@@ -88,23 +88,44 @@ body {
 	color: #E7236E;
 }
 
+.header2 {
+	font-size: 28px;
+	line-height: 45px;
+	letter-spacing: 4px;
+	padding-top: 10px;
+}
+
+.test {
+  text-align: left;
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: #D3D4D4;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+  lineHeight: 1em;
+  padding-left: 30px;
+}
+
 #time {
   font-size: 72px;
   color: #D3D4D4;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
-	lineHeight: 1em;
+  lineHeight: 1em;
 	padding-top: 10px;
 	padding-bottom: 20px;
 }
 
 p {
+  text-align: left;
   font-size: 14px;
-  margin: 0px 0px 0px 15px;
+  margin: 0px 0px 0px 0px;
   color: #D3D4D4;
+  letter-spacing: 2px;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
 	lineHeight: 1em;
+  padding-left: 30px;
 }
 
 
