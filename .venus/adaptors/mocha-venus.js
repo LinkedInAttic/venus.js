@@ -31,6 +31,7 @@ Adaptor.prototype.start = function() {
   }
 
   mocha.run()
+   .globals(['__flash_getWindowLocation', '__flash_getTopLocation'])
    .on('HTML_JSON end', function(test){
       window.venus.done(test);
    });
