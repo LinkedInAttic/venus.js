@@ -20,9 +20,19 @@
   <link rel="stylesheet" type="text/css" href="/css/bootstrap_btn.min.css">
 </head>
 <body>
-  <div id="mocha"></div>
   <div class="header">venus ♀</div>
-  Running gogogo test {testId}...
+  <div class="dashboard">
+    <div class="header2">first test</div>
+    <div class="test">should work</div>
+    <p>
+      time: results.<br />
+      speed: fast<br />
+      passes: 1<br />
+      failures: 0<br />
+      percent: 100%
+    <p>
+    <!--Running test: {testId}-->
+  </div>
 
   <script src="{testcaseFile}"></script>
   <script type="text/javascript">
