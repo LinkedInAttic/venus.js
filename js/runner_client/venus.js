@@ -1,11 +1,32 @@
-(function(window) {
-  window.venus = new Venus();
+(function(window, config) {
+
 
   function Venus() {}
 
   Venus.prototype.done = function(results) {
-  	console.log(results);
-    $.post(window.venus.postUrl, JSON.stringify(results));
-    console.log('posted results to', window.venus.postUrl);
+    results.testId = config.testId;
+    this.socket.emit('test results', results);
   };
-}(window));
+
+  Venus.prototype.init = function() {
+    var host = config.hostname,
+        port = config.port,
+        protocol = window.location.protocol,
+        socket,
+        print;
+
+    socket = io.connect(protocol + '//' + host + ':' + port);
+    print  = console.log;
+
+    console.log = function() {
+      print.apply(this, arguments);
+      socket.emit('console.log', Array.prototype.slice.call(arguments, 0));
+    };
+
+    this.socket = socket;
+  };
+
+
+  window.venus = new Venus();
+  window.venus.init();
+}(window, window.venusConfig));
