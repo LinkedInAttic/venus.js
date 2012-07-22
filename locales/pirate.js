@@ -49,5 +49,6 @@
 	"Using phantomjs binary at %s": "Using phantomjs binary at %s",
 	"==============================": "==============================",
 	"Results for %s": "Results for %s",
-	"[Results for %s]": "[Results for %s]"
+	"[Results for %s]": "[Results for %s]",
+	"browser:": "browser:"
 }
