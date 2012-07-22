@@ -2,7 +2,6 @@
  * Initialize a new Mocha adaptor
  */
 function Adaptor() {
-
   mocha.setup('bdd');
 }
 
@@ -15,31 +14,24 @@ Adaptor.prototype.start = function() {
   };
 
   function processResult(test) {
+    var name, status;
 
-         var name, status;
+    name = test.title;
 
-         name = test.title;
+    if(test.state === 'passed') {
+      status = 'success';
+    } else {
+      status = 'failed';
+    }
 
-         if(test.state === 'passed') {
-           status = 'success';
-         } else {
-           status = 'failed';
-         }
-
-         results.test.push({
-            name: name,
-            status: status });
+    results.test.push({
+      name: name,
+      status: status 
+    });
   }
 
   mocha.run()
-       .on('pass', function(test){
-         processResult(test);
-       })
-       .on('fail', function(test){
-         processResult(test);
-       })
-       .on('end', function(test){
-          console.log(results)
-          window.venus.done(results);
-       });
+   .on('HTML_JSON end', function(test){
+      window.venus.done(test);
+   });
 }

@@ -1608,18 +1608,7 @@ var Date = global.Date
  * Expose `Doc`.
  */
 
-exports = module.exports = HTML;
-
-/**
- * Stats template.
- */
-
-var statsTemplate = '<ul id="stats">'
-  + '<li class="progress"><canvas width="40" height="40"></canvas></li>'
-  + '<li class="passes">passes: <em>0</em></li>'
-  + '<li class="failures">failures: <em>0</em></li>'
-  + '<li class="duration">duration: <em>0</em>s</li>'
-  + '</ul>';
+exports = module.exports = HTML_JSON;
 
 /**
  * Initialize a new `Doc` reporter.
@@ -1627,114 +1616,93 @@ var statsTemplate = '<ul id="stats">'
  * @param {Runner} runner
  * @api public
  */
-
-function HTML(runner) {
+function HTML_JSON(runner) {
   Base.call(this, runner);
 
   var self = this
     , stats = this.stats
     , total = runner.total
-    , root = document.getElementById('mocha')
-    , stat = fragment(statsTemplate)
-    , items = stat.getElementsByTagName('li')
-    , passes = items[1].getElementsByTagName('em')[0]
-    , failures = items[2].getElementsByTagName('em')[0]
-    , duration = items[3].getElementsByTagName('em')[0]
-    , canvas = stat.getElementsByTagName('canvas')[0]
-    , report = fragment('<ul id="report"></ul>')
-    , stack = [report]
-    , progress
-    , ctx
+    , results = {};
 
-  if (canvas.getContext) {
-    ctx = canvas.getContext('2d');
-    progress = new Progress;
-  }
-
-  if (!root) return error('#mocha div missing, add it to your document');
-
-  root.appendChild(stat);
-  root.appendChild(report);
-
-  if (progress) progress.size(40);
+  results.suites = [];
+  var index = 0;
 
   runner.on('suite', function(suite){
     if (suite.root) return;
 
-    // suite
     var url = location.protocol + '//' + location.host + location.pathname + '?grep=^' + utils.escapeRegexp(suite.fullTitle());
-    var el = fragment('<li class="suite"><h1><a href="%s">%s</a></h1></li>', url, suite.title);
-
-    // container
-    stack[0].appendChild(el);
-    stack.unshift(document.createElement('ul'));
-    el.appendChild(stack[0]);
+    
+    //console.log('url: ' + url);
+    //console.log('suite.title: ' + suite.title);
+    results.suites.push({
+      'title' : suite.title,
+      'url' : url
+    });
+    results.suites[index].test = [];
   });
 
   runner.on('suite end', function(suite){
     if (suite.root) return;
-    stack.shift();
+    index = index + 1;
+
+    //console.log('suite end!');
   });
 
   runner.on('fail', function(test, err){
     if ('hook' == test.type || err.uncaught) runner.emit('test end', test);
   });
 
-  runner.on('test end', function(test){
-    // TODO: add to stats
-    var percent = stats.tests / total * 100 | 0;
-    if (progress) progress.update(percent).draw(ctx);
+  runner.on('end', function() {
+    runner.emit('HTML_JSON end', results);
+  });
 
-    // update stats
+  runner.on('test end', function(test){
+    //console.log(test);
+
+    var percent = stats.tests / total * 100 | 0;
+    //console.log('   ' + 'percent: ' + percent);
+
+    //console.log('   ' + 'stats.passes: ' + stats.passes);
+    //console.log('   ' + 'stats.failures: ' + stats.failures);
+
     var ms = new Date - stats.start;
-    text(passes, stats.passes);
-    text(failures, stats.failures);
-    text(duration, (ms / 1000).toFixed(2));
+    //console.log('   ' + 'milliseconds: ' + (ms / 1000).toFixed(2));
+
+    results.failures = stats.failures;
+    results.passes = stats.passes;
+    results.milliseconds = (ms / 1000).toFixed(2);
+    results.suites[index]['percent'] = percent;
 
     // test
     if ('passed' == test.state) {
-      var el = fragment('<li class="test pass %e"><h2>%e<span class="duration">%ems</span></h2></li>', test.speed, test.title, test.duration);
+      //console.log('   ' + 'test.speed: ' + test.speed);
+      //console.log('   ' + 'test.title: ' + test.title);
+      //console.log('   ' + 'test.duration: ' + test.duration);
+
+      results.suites[index].test.push({
+        'status' : 'passed',
+        'title' : test.title,
+        'speed' : test.speed
+      });
     } else if (test.pending) {
-      var el = fragment('<li class="test pass pending"><h2>%e</h2></li>', test.title);
+      //console.log('   ' + 'test.title: ' + test.title);
+
+      results.suites[index].test.push({
+        'status' : 'pending',
+        'title' : test.title
+      });
     } else {
-      var el = fragment('<li class="test fail"><h2>%e</h2></li>', test.title);
       var str = test.err.stack || test.err.toString();
 
-      // FF / Opera do not add the message
-      if (!~str.indexOf(test.err.message)) {
-        str = test.err.message + '\n' + str;
-      }
+      //console.log('   ' + 'test.title ' + test.title);
+      //console.log('   ' + 'str' + str);
 
-      // <=IE7 stringifies to [Object Error]. Since it can be overloaded, we
-      // check for the result of the stringifying.
-      if ('[object Error]' == str) str = test.err.message;
-
-      // Safari doesn't give you a stack. Let's at least provide a source line.
-      if (!test.err.stack && test.err.sourceURL && test.err.line !== undefined) {
-        str += "\n(" + test.err.sourceURL + ":" + test.err.line + ")";
-      }
-
-      el.appendChild(fragment('<pre class="error">%e</pre>', str));
+      results.suites[index].test.push({
+        'status' : 'failed',
+        'title' : test.title,
+        'str' : str
+      });
     }
-
-    // toggle code
-    var h2 = el.getElementsByTagName('h2')[0];
-
-    on(h2, 'click', function(){
-      pre.style.display = 'none' == pre.style.display
-        ? 'block'
-        : 'none';
-    });
-
-    // code
-    // TODO: defer
-    if (!test.pending) {
-      var pre = fragment('<pre><code>%e</code></pre>', utils.clean(test.fn.toString()));
-      el.appendChild(pre);
-      pre.style.display = 'none';
-    }
-
-    stack[0].appendChild(el);
   });
 }
 
@@ -1743,50 +1711,7 @@ function HTML(runner) {
  */
 
 function error(msg) {
-  document.body.appendChild(fragment('<div id="error">%s</div>', msg));
-}
-
-/**
- * Return a DOM fragment from `html`.
- */
-
-function fragment(html) {
-  var args = arguments
-    , div = document.createElement('div')
-    , i = 1;
-
-  div.innerHTML = html.replace(/%([se])/g, function(_, type){
-    switch (type) {
-      case 's': return String(args[i++]);
-      case 'e': return escape(args[i++]);
-    }
-  });
-
-  return div.firstChild;
-}
-
-/**
- * Set `el` text to `str`.
- */
-
-function text(el, str) {
-  if (el.textContent) {
-    el.textContent = str;
-  } else {
-    el.innerText = str;
-  }
-}
-
-/**
- * Listen on `event` with callback `fn`.
- */
-
-function on(el, event, fn) {
-  if (el.addEventListener) {
-    el.addEventListener(event, fn, false);
-  } else {
-    el.attachEvent('on' + event, fn);
-  }
+  console.log(msg);
 }
 }); // module: reporters/html.js
 
@@ -1798,6 +1723,7 @@ exports.Doc = require('./doc');
 exports.TAP = require('./tap');
 exports.JSON = require('./json');
 exports.HTML = require('./html');
+exports.HTML_JSON = require('./html'); // this should be changed to ./html-json
 exports.List = require('./list');
 exports.Min = require('./min');
 exports.Spec = require('./spec');
@@ -1806,8 +1732,8 @@ exports.Landing = require('./landing');
 exports.JSONCov = require('./json-cov');
 exports.HTMLCov = require('./html-cov');
 exports.JSONStream = require('./json-stream');
-exports.XUnit = require('./xunit')
-exports.Teamcity = require('./teamcity')
+exports.XUnit = require('./xunit');
+exports.Teamcity = require('./teamcity');
 
 }); // module: reporters/index.js
 
@@ -4463,7 +4389,7 @@ window.mocha = require('mocha');
   mocha.run = function(fn){
     suite.emit('run');
     var runner = new mocha.Runner(suite);
-    var Reporter = options.reporter || mocha.reporters.HTML;
+    var Reporter = options.reporter || mocha.reporters.HTML_JSON;
     var reporter = new Reporter(runner);
     var query = parse(window.location.search || "");
     if (query.grep) runner.grep(new RegExp(query.grep));
