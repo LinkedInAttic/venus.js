@@ -3,16 +3,10 @@
 <head>
   <title> venus ♀ </title>
   <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript" src="/js/socketio/socket.io.min.js"></script>
-  <script type="text/javascript">
-    window.venusConfig = {
-      postUrl : '{postTestResultsUrl}',
-      hostname: '{hostname}',
-      port    : '{port}',
-      testId  : '{testId}'
-    };
-  </script>
   <script type="text/javascript" src="/js/runner_client/venus.js"></script>
+  <script type="text/javascript">
+    window.venus.postUrl = '{postTestResultsUrl}';
+  </script>
 
   {#scriptIncludes}
   <script type="text/javascript" src="{.}"></script>
