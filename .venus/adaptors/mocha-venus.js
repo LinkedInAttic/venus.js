@@ -3,36 +3,48 @@
  */
 function Adaptor() {
   mocha.setup('bdd');
-}
+};
 
 /**
  * Start the tests!
  */
 Adaptor.prototype.start = function() {
-  var results = this.results = {
-    "test": []
+
+  var results = {
+    tests: [],
+    done: {}
   };
-
-  function processResult(test) {
-    var name, status;
-
-    name = test.title;
-
-    if(test.state === 'passed') {
-      status = 'success';
-    } else {
-      status = 'failed';
-    }
-
-    results.test.push({
-      name: name,
-      status: status 
-    });
-  }
 
   mocha.run()
    .globals(['__flash_getWindowLocation', '__flash_getTopLocation'])
-   .on('HTML_JSON end', function(test){
-      window.venus.done(test);
+
+   // Mocha calback - HTML_JSON end
+   .on('HTML_JSON end', function(data) {
+
+      // Retrieve test
+      $(data.suites).each(function(index, suite) {
+
+        // TO DO: Handle tests with multiple describes
+        if (suite.hasOwnProperty('test')) {
+          var obj = suite.test[0];
+          var test = {
+            name: suite.title,
+            status: obj.status === 'passed' ? 'PASSED' : 'FAILED',
+            message: obj.title ? obj.title : '',
+            stackTrace: obj.str ? obj.str : ''
+          };
+          results.tests.push(test);
+        };
+      });
+
+      // Retrieve final test results
+      results.done =  {
+        passed: data.passes,
+        failed: data.failures,
+        runtime: data.milliseconds,
+        total: data.passes + data.failures
+      };
+
+      window.venus.done(results);
    });
-}
+};

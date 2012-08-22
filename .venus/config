@@ -7,6 +7,12 @@
         'libraries/expect.js',
         'adaptors/mocha-venus.js'
       ]
+    },
+    qunit: {
+      includes: [
+        'libraries/qunit.js',
+        'adaptors/qunit-venus.js'
+      ]
     }
   },
 
