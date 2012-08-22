@@ -5,6 +5,10 @@
       includes: ['libraries/mocha.js', 'adaptors/mocha-venus.js']
     },
 
+    qunit: {
+      includes: ['libraries/qunit.js', 'adaptors/qunit-venus.js']
+    },
+
     jasmine: {
       includes: ['libraries/jasmine.js', 'adaptors/jasmine-venus.js']
     }
