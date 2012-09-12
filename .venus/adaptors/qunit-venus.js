@@ -44,6 +44,6 @@ Adaptor.prototype.start = function() {
       results.done.total--;
     };*/
 
-    window.venus.done(results);
+    window.parent.venus.done(results);
   });
 };
