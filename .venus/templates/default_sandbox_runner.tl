@@ -23,7 +23,7 @@
       failures: 0<br />
       percent: 100%
     <p>
-    <iframe src="/test/runner/{testId}" height="500" width="500">
+    <iframe src="/test/sandbox/{testId}" height="270" width="440">
     <!--Running test: {testId}-->
   </div>
 </body>
