@@ -37,13 +37,6 @@ Adaptor.prototype.start = function() {
       total: data.total
     };
 
-    // TO DO: Chrome bug (shows global failure due to Chrome extensions)
-    /*if (results.tests.hasOwnProperty(DEFAULT_tests) && results.tests[DEFAULT_tests].hasOwnProperty('global failure')) {
-      delete results.tests[DEFAULT_tests]['global failure'];
-      results.done.failed--;
-      results.done.total--;
-    };*/
-
     window.parent.venus.done(results);
   });
 };
