@@ -67,3 +67,5 @@ a tool to make it easier for you to work with an existing library. Here are the 
 To get started, run "npm install" from the root directory to install dependencies. See http://npmjs.org/ for more information on installing npm.
 
 To start the app, run "bin/venus" from the root.
+
+See /test/data/sample_mocha.js for a sample test set.
