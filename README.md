@@ -68,4 +68,4 @@ To get started, run "npm install" from the root directory to install dependencie
 
 To start the app, run "bin/venus" from the root.
 
-See /test/data/sample_mocha.js for a sample test set.
+See /test/data/sample_mocha.js for a sample test set. Checkout the wiki for more info.
