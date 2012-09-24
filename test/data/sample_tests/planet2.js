@@ -9,6 +9,6 @@ var javascript = true;
 
 describe('second test', function() {
   it('should work', function() {
-    '2'.should.eql('1');
+    expect('2').to.be('1');
   });
 });
