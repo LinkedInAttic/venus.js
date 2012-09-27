@@ -1,11 +1,12 @@
 /**
  * @author LinkedIn
  */
-var should    = require('../lib/sinon-chai').chai.should(),
-    testHelper= require('../lib/helpers'),
-    testcase  = require('../../lib/testcase'),
-    config    = require('../../lib/config'),
-    hostname  = require('os').hostname();
+var should     = require('../lib/sinon-chai').chai.should(),
+    testHelper = require('../lib/helpers'),
+    testcase   = require('../../lib/testcase'),
+    annotation = testcase.annotation,
+    config     = require('../../lib/config'),
+    hostname   = require('os').hostname();
 
 describe('lib/testcase', function() {
 
@@ -18,6 +19,33 @@ describe('lib/testcase', function() {
             fixture = test.loadFixtureTemplate(testData);
 
         fixture.should.eql('ship ahoy!\n');
+    });
+  });
+
+  describe('Asserts loading of @venus-fixture values', function() {
+    it('should load file-based @venus-fixture', function() {
+      // Load the file content specified by @venus-fixture in
+      // test/data/sample_tests/foo_with_file_fixture.js
+      // 'ship ahoy!\n' should be returned.
+      var testpath = testHelper.sampleTests('foo_with_file_fixture.js'),
+          conf = testHelper.testConfig(),
+          test = new testcase.TestCase(conf),
+          annotations = test.resolveAnnotations(
+            test.parseTestFile(testpath).annotations),
+          fixture = annotations[annotation.VENUS_FIXTURE];
+      fixture.should.equal('ship ahoy!\n');
+    });
+    it('should load HTML @venus-fixture', function() {
+      // Load the string specified by @venus-fixture in
+      // test/data/sample_tests/foo_with_html_fixture.js
+      // An HTML snippet should be returned.
+      var testpath = testHelper.sampleTests('foo_with_html_fixture.js'),
+          conf = testHelper.testConfig(),
+          test = new testcase.TestCase(conf),
+          annotations = test.resolveAnnotations(
+            test.parseTestFile(testpath).annotations);
+      annotations[annotation.VENUS_FIXTURE].should.equal(
+        '<div class="content">Lorem ipsum dolor...</div>');
     });
   });
 
@@ -59,5 +87,4 @@ describe('lib/testcase', function() {
 
     });
   });
-
 });
