@@ -4,7 +4,8 @@
 var should        = require('../../lib/sinon-chai').chai.should(),
     parser        = require('../../../lib/util/commentsParser'),
     testHelper    = require('../../lib/helpers'),
-    fs            = require('fs');
+    fs            = require('fs'),
+    annotation    = require('../../../lib/testcase').annotation;
 
 describe('lib/util/commentsParser', function() {
 
@@ -19,6 +20,8 @@ describe('lib/util/commentsParser', function() {
         ' * @venus-include /var/www/html \n',
         ' */'
       ].join('');
+
+
 
     //  /**
     //   * @venus-framework mocha
@@ -61,6 +64,15 @@ describe('lib/util/commentsParser', function() {
         '\n',
       ].join('');
 
+    //  /**
+    //   * @venus-fixture   <div class="sandbox"></div>
+    //   */
+    var commentsF = [
+      '/** \n',
+      ' * @venus-fixture <div class="sandbox"></div>\n',
+      ' */ \n'
+    ].join('');
+
     it('should handle an empty file', function() {
       var annotations = parser.parseStr(commentsD);
       should.exist(annotations);
@@ -97,8 +109,8 @@ describe('lib/util/commentsParser', function() {
     it('should parse duplicated annotations options correctly, spanning multiple blocks', function() {
       var annotations = parser.parseStr(commentsB);
 
-      should.exist(annotations['venus-include']);
-      annotations['venus-include'].should.eql(['/var/www/html', '/var/www/bar']);
+      should.exist(annotations[annotation.VENUS_INCLUDE]);
+      annotations[annotation.VENUS_INCLUDE].should.eql(['/var/www/html', '/var/www/bar']);
     });
 
     it('should parse file paths correctly', function() {
@@ -106,11 +118,17 @@ describe('lib/util/commentsParser', function() {
           annotations = parser.parseStr(comments);
 
       should.exist(annotations);
-      should.exist(annotations['venus-include']);
-      annotations['venus-include'].should.eql('~/var/foo_test.js');
+      should.exist(annotations[annotation.VENUS_INCLUDE]);
+      annotations[annotation.VENUS_INCLUDE].should.eql('~/var/foo_test.js');
 
     });
 
+    it('should parse annotation values with spaces correctly', function() {
+      var annotations = parser.parseStr(commentsF);
+      should.exist(annotations);
+      should.exist(annotations[annotation.VENUS_FIXTURE]);
+      annotations[annotation.VENUS_FIXTURE].should.equal('<div class="sandbox"></div>');
+    });
   });
 
   /**
