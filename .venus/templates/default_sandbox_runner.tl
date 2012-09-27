@@ -4,9 +4,11 @@
   <title> venus ♀ </title>
   <!-- -->
   <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="/js/socketio/socket.io.js"></script>
   <script type="text/javascript" src="/js/runner_client/venus.js"></script>
   <script type="text/javascript">
     window.venus.postUrl = '{postTestResultsUrl}';
+    window.venus.testId = '{testId}';
   </script>
   <link rel="stylesheet" type="text/css" href="/css/app.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap_btn.min.css">

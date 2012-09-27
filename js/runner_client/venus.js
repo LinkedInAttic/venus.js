@@ -1,11 +1,20 @@
 (function(window) {
   window.venus = new Venus();
+  
+  // var nativeLog = console.log;
 
   function Venus() {}
 
+ var socket = io.connect('http://'+window.location.hostname,{port:2013});
+ 
   Venus.prototype.done = function(results) {
-  	console.log(results);
-    $.post(window.venus.postUrl, JSON.stringify(results));
-    console.log('posted results to', window.venus.postUrl);
+    results.testId = window.venus.testId;
+    socket.emit("done", results);
   };
+
+  // console.log = function(){
+  //   socket.emit('console.log', arguments);
+  //   nativeLog.apply(console,arguments);
+  // }
+
 }(window));
