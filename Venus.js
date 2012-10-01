@@ -56,7 +56,7 @@ Venus.prototype.init = function (args) {
 
   // exec command
   program
-    .command('exec')
+    .command('run')
     .description( i18n('Run tests') )
     .option('-t, --test [tests]', i18n('Comma separated string of tests to run'))
     .option('-p, --port [port]', i18n('port to run on'), function(value) { return parseInt(value, 10); })

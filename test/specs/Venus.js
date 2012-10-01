@@ -32,8 +32,8 @@ describe('Venus main', function() {
     //app.startOverlord.should.have.been.calledOnce;
   //});
 
-  it('should start executor when exec command is passed', function() {
-    var argv = ['node', 'venus', 'exec'],
+  it('should start executor when run command is passed', function() {
+    var argv = ['node', 'venus', 'run'],
         app  = new Venus();
 
     app.startExecutor = sinon.spy();
