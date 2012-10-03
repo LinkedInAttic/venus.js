@@ -10,7 +10,6 @@
   <script type="text/javascript">
     window.venus.postUrl = '{postTestResultsUrl}';
     window.venus.testId = '{testId}';
-    console.log("Testing 1..2..3..!");
   </script>
   <link rel="stylesheet" type="text/css" href="/css/app.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap_btn.min.css">
