@@ -9,7 +9,7 @@
  
   Venus.prototype.done = function(results) {
     results.testId = window.venus.testId;
-    socket.emit("done", results);
+    socket.emit('done', results);
   };
 
   // console.log = function(){
