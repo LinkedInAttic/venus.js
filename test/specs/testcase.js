@@ -50,6 +50,7 @@ describe('lib/testcase', function() {
   });
 
   describe('prepareIncludes', function() {
+    /*
     it('should load deps', function(done) {
       var testpath = testHelper.sampleTests('prepare_deps.js'),
           conf     = testHelper.testConfig(),
@@ -65,6 +66,7 @@ describe('lib/testcase', function() {
 
       setTimeout(done, 1000);
     });
+    */
 
     it('should work with relative paths', function() {
       var testpath = testHelper.sampleTests('relative_paths.js'),
