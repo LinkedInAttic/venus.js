@@ -1,7 +1,6 @@
 language: node_js
 before_install:
-  - git submodule init
-  - git submodule update
+  - git submodule update --init --recursive
   - npm install
 node_js:
   - 0.6
