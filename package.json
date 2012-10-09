@@ -35,7 +35,8 @@
     "underscore.string" : "2.2.0rc",
     "fs-tools"          : "0.2.2",
     "async"             : "0.1.22",
-    "dnode"             : "1.0.0"
+    "dnode"             : "1.0.0",
+    "phantom-linkedin"  : "0.3.5"
   },
   "devDependencies": {
     "chai"              : "1.0.4",
@@ -46,6 +47,7 @@
   "os": ["!win32"],
   "preferGlobal": true,
   "scripts": {
-    "preinstall" : "node setup/preInstall.js"
+    "preinstall" : "node setup/preInstall.js",
+    "test": "mocha test/specs/test_suite.js"
   }
 }
