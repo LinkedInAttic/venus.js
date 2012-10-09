@@ -1,3 +1,0 @@
-[submodule "phantomjs-node"]
-	path = phantomjs-node
-	url = git://github.com/ryanone/phantomjs-node.git
