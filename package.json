@@ -19,6 +19,7 @@
     "type"            : "Apache 2.0"
   }],
   "dependencies"      : {
+    "phantom-linkedin"  : "0.3.5",
     "express"           : "3.0.0beta4",
     "socket.io"         : "0.8.7",
     "socket.io-client"  : "0.9.6",
