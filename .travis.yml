@@ -1,5 +1,6 @@
 language: node_js
 before_install:
+  - nvm use 0.8
   - git submodule update --init --recursive
   - npm install
 node_js:
