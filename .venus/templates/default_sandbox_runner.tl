@@ -2,8 +2,10 @@
 <html>
 <head>
   <title> venus ♀ </title>
-  <!-- -->
   <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+  <!--[if lte IE 7]>
+  <script type="text/javascript" src="/js/json2.js"></script>
+  <![endif]-->
   <script type="text/javascript" src="/js/runner_client/venus.js"></script>
   <script type="text/javascript">
     window.venus.postUrl = '{postTestResultsUrl}';
