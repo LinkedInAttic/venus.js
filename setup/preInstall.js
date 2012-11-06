@@ -1,44 +1,12 @@
 var sys  = require('util'),
     exec = require('child_process').exec;
 
-// check for operating system and set unzipCommand
-if (process.platform === 'darwin') {
-  unpack('unzip phantomjs-1.6.0-macosx-static.zip');
-} else if (process.platform === 'linux') {
-  unpack('tar -xvf phantomjs-1.6.0-linux-x86_64-dynamic.tar.tar.bz2 && mv phantomjs-1.6.0-linux-x86_64-dynamic phantomjs-1.6.0');
-}
+// Check to make sure PhantomJS 1.6.0 is installed (see http://phantomjs.org/)
+exec('phantomjs --version', function(error, stdout, stderr) {
+  if(stdout.trim() == '1.6.0') {
+    sys.puts('PhantomJS 1.6.0 is installed -- good to go.');
+  } else {
+    sys.puts('Could not find PhantomJS 1.6.0 -- please install before continuing.');
+  }
+});
 
-submoduleCommand();
-phantomjsNPMinstall();
-
-// remove the old phantomjs directory
-// and unpack the proper file
-function unpack(unzipCommand) {
-  var command = [
-    'cd phantomjs',
-    'rm -rf phantomjs-1.6.0',
-    unzipCommand,
-    'cd phantomjs-1.6.0/bin',
-    'mv phantomjs phantomjs-venus'
-  ].join(' && ');
-
-  exec(command);
-}
-
-function submoduleCommand() {
-  var command = [
-    'git submodule init',
-    'git submodule update'
-  ].join(' && ');
-
-  exec(command);
-}
-
-function phantomjsNPMinstall() {
-  var command = [
-    'cd phantomjs-node',
-    'npm install'
-  ].join(' && ');
-
-  exec(command);
-}
