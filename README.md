@@ -1,5 +1,9 @@
-Venus 
------
+##Dependencies
+
+[Node.js v0.8.8](http://nodejs.org/dist/v0.8.8/)
+[PhantomJS v1.6](http://code.google.com/p/phantomjs/downloads/list?can=1&q=1.6.0&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount)
+
+## Overview
 
 Venus is a testing tool for JavaScript (JS), which simplifies running unit tests. When you are developing a browser-based project in JS,
 you'll want to create unit tests and run them frequently. Typically, you'll write a unit test using some library, such as Mocha or Jasmine.
