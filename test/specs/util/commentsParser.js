@@ -43,6 +43,8 @@ describe('lib/util/commentsParser', function() {
         '\n',
         '/** \n',
         ' * @venus-include /var/www/bar \n',
+        ' * @venus-include-group my_group \n',
+        ' * @venus-include-group another_group \n',
         ' */ \n'
       ].join('');
 
@@ -111,6 +113,13 @@ describe('lib/util/commentsParser', function() {
 
       should.exist(annotations[annotation.VENUS_INCLUDE]);
       annotations[annotation.VENUS_INCLUDE].should.eql(['/var/www/html', '/var/www/bar']);
+    });
+
+    it('should parse include groups correctly', function() {
+      var annotations = parser.parseStr(commentsB);
+
+      should.exist(annotations[annotation.VENUS_INCLUDE_GROUP]);
+      annotations[annotation.VENUS_INCLUDE_GROUP].should.eql(['my_group', 'another_group']);
     });
 
     it('should parse file paths correctly', function() {

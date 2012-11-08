@@ -12,5 +12,15 @@
     jasmine: {
       includes: ['libraries/jasmine.js', 'adaptors/jasmine-venus.js']
     }
+  },
+
+  includes: {
+    default: [
+      'include/file1.js',
+      'include/file2.js'
+    ],
+    my_group: [
+      'include/file3.js'
+    ]
   }
 }

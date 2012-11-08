@@ -73,6 +73,7 @@ describe('lib/executor', function() {
     should.exist(result[first]);
     result[first].annotations['venus-library'].should.eql('mocha');
     result[first].annotations['venus-include'].should.have.length(2);
+    result[first].annotations['venus-include-group'].should.have.length(1);
   });
 
   // TODO(ryanone, setchmcl): Re-enable this test after Overlord functionality

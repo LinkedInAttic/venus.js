@@ -84,9 +84,48 @@ describe('lib/testcase', function() {
 
       should.exist(files);
       files.should.be.an.instanceOf(Array);
-      files[2].url.should.eql('/temp/test/1/includes/test.js');
-      files[2].fs.should.contain('/test/data/test.js');
+      files[4].url.should.eql('/temp/test/1/includes/test.js');
+      files[4].fs.should.contain('/test/data/test.js');
 
+    });
+
+    it('should load universal includes', function() {
+      var testpath = testHelper.sampleTests('relative_paths.js'),
+          conf     = testHelper.testConfig(),
+          test     = new testcase.TestCase(conf),
+          files;
+
+      test.path = testpath;
+      test.directory = testHelper.sampleTests();
+      test.id = 1;
+      files = test.prepareIncludes(
+        test.resolveAnnotations(
+          test.parseTestFile(testpath).annotations
+      ));
+
+      should.exist(files);
+      files.should.be.an.instanceOf(Array);
+      files[2].url.should.eql('/temp/test/1/lib/file1.js');
+      files[3].url.should.eql('/temp/test/1/lib/file2.js');
+    });
+
+    it('should load group includes', function() {
+      var testpath = testHelper.sampleTests('include_groups.js'),
+          conf     = testHelper.testConfig(),
+          test     = new testcase.TestCase(conf),
+          files;
+
+      test.path = testpath;
+      test.directory = testHelper.sampleTests();
+      test.id = 1;
+      files = test.prepareIncludes(
+        test.resolveAnnotations(
+          test.parseTestFile(testpath).annotations
+      ));
+
+      should.exist(files);
+      files.should.be.an.instanceOf(Array);
+      files[4].url.should.eql('/temp/test/1/lib/file3.js');
     });
   });
 });
