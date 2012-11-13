@@ -1,62 +1,105 @@
-/**
- * Initialize a new Mocha adaptor
+/** 
+ * Create a Mocha adaptor
+ * Inherits AdaptorTemplate class
+ * @class Adaptor
+ * @constructor
+ * @requires .venus/adapters/adaptor-template.js
  */
 function Adaptor() {
   mocha.setup('bdd');
 };
 
 /**
- * Start the tests!
+ * Inherit AdaptorTemplate class
  */
-Adaptor.prototype.start = function() {
+Adaptor.prototype = new AdaptorTemplate();
 
-  var results = {
-    tests: [],
-    done: {}
-  };
+/**
+ * @override
+ */ 
+Adaptor.prototype.start = function() {
+  var self = this;
 
   mocha.run()
-   .globals(['__flash_getWindowLocation', '__flash_getTopLocation'])
+    .globals(['__flash_getWindowLocation', '__flash_getTopLocation'])
 
-   // Mocha calback - test end
-   .on('test end', function(data) {
+  // Mocha calback - test end
+  .on('test end', function(data) {
+    self.addTestResult(data);
+  })
 
-      var test = null,
-          obj = null,
-          title = '',
-          testName = '';
+  // Mocha calback - HTML_JSON end
+  .on('HTML_JSON end', function(data) {
+    self.processFinalResults(data);
+    self.sendResults();
+  });
+};
 
-      // Retrieve name of test
-      var obj = data;
-      while (obj.hasOwnProperty('parent')) {
-        title = obj.parent.title;
-        if (title) {
-          !testName ? testName = title : testName = title.concat(' >> ' + testName);
-        }
-        obj = obj.parent;
-      };
+/**
+ * @override
+ */
+Adaptor.prototype.getTestMessage = function(data) {
+  return data.title ? data.title : '';
+};
 
-      // Normalize test results
-      var test = {
-        name: testName,
-        status: data.state === 'passed' ? 'PASSED' : 'FAILED',
-        message: data.title,
-        stackTrace: data.hasOwnProperty('err') ? data.err.stack : ''
-      };
-      results.tests.push(test);
-   })
+/**
+ * @override
+ */
+Adaptor.prototype.getTestName = function(data) {
+  var obj = null,
+      title = '',
+      testName = '';
 
-   // Mocha calback - HTML_JSON end
-   .on('HTML_JSON end', function(data) {
+  var obj = data;
+  while (obj.hasOwnProperty('parent')) {
+    title = obj.parent.title;
+    if (title) {
+      !testName ? testName = title : testName = title.concat(' >> ' + testName);
+    }
+    obj = obj.parent;
+  };
 
-      // Normalize test summary
-      results.done =  {
-        passed: data.passes,
-        failed: data.failures,
-        runtime: data.milliseconds,
-        total: data.passes + data.failures
-      };
+  return testName;
+};
 
-      window.parent.venus.done(results);
-   });
+/**
+ * @override
+ */
+AdaptorTemplate.prototype.getTestStatus = function(data) {
+  return data.state === 'passed' ? this.ENUM_STATE.PASSED : this.ENUM_STATE.FAILED;
+};
+
+/**
+ * @override
+ */
+AdaptorTemplate.prototype.getTestStackTrace = function(data) {
+  return data.hasOwnProperty('err') ? data.err.stack : '';
+};
+
+/**
+ * @override
+ */
+AdaptorTemplate.prototype.getTotal = function(data) {
+  return data.passes + data.failures;
+};
+
+/**
+ * @override
+ */
+AdaptorTemplate.prototype.getTotalFailed = function(data) {
+  return data.failures;
+};
+
+/**
+ * @override
+ */
+AdaptorTemplate.prototype.getTotalPassed = function(data) {
+  return data.passes;
+};
+
+/**
+ * @override
+ */
+AdaptorTemplate.prototype.getTotalRuntime = function(data) {
+  return data.milliseconds;
 };
