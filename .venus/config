@@ -5,12 +5,14 @@
       includes: [
         'libraries/mocha.js',
         'libraries/expect.js',
+        'adaptors/adaptor-template.js',
         'adaptors/mocha-venus.js'
       ]
     },
     qunit: {
       includes: [
         'libraries/qunit.js',
+        'adaptors/adaptor-template.js',
         'adaptors/qunit-venus.js'
       ]
     }
