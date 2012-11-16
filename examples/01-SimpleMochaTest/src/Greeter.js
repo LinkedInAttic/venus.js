@@ -8,7 +8,7 @@ Greeter.prototype.talk = function() {
       str  = args[0];
 
   args.slice(1).forEach( function(arg) {
-    str = str.replace(arg, ph);
+    str = str.replace(ph, arg);
   });
 
   return str;
