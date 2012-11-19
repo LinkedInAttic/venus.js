@@ -50,5 +50,6 @@
 	"==============================": "==============================",
 	"Results for %s": "Results for %s",
 	"[Results for %s]": "[Results for %s]",
-	"browser:": "browser:"
+	"browser:": "browser:",
+	"error copying test file %s. exception: %s": "error copying test file %s. exception: %s"
 }
