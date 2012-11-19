@@ -15,6 +15,13 @@
         'adaptors/adaptor-template.js',
         'adaptors/qunit-venus.js'
       ]
+    },
+    jasmine: {
+      includes: [
+        'libraries/jasmine.js',
+        'adaptors/adaptor-template.js',
+        'adaptors/jasmine-venus.js'
+      ]
     }
   },
 
