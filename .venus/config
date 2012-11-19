@@ -21,10 +21,10 @@
   // Default settings
   default: {
     library: 'mocha'
-  },
+  }
 
   // Serve static content
-  static: {
-    sample: '../test/data/sample_tests'
-  }
+  //static: {
+  //  sample: '../test/data'
+  //}
 }
