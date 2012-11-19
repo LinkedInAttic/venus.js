@@ -1,4 +1,4 @@
-/** 
+/**
  * The template for Venus adapters
  * Methods are defined in this class to help process and gather information about test results
  * All adapters need to inherit this class and override methods as needed
@@ -39,7 +39,7 @@ function AdaptorTemplate() {
 AdaptorTemplate.prototype.start = function() {};
 
 /**
- * Get message for test 
+ * Get message for test
  * NOTE: Override this method in adapter
  * @method getTestMessage
  * @param {Object} data Object containing results for test
@@ -130,7 +130,7 @@ AdaptorTemplate.prototype.getTotalRuntime = function(data) {
  * Process test result and add to list of test results
  * @method addTestResult
  * @param {Object} data Object containing results for test
- */ 
+ */
 AdaptorTemplate.prototype.addTestResult = function(data) {
   var test = {};
 
@@ -148,7 +148,7 @@ AdaptorTemplate.prototype.addTestResult = function(data) {
  * Process summary of test results
  * @method processFinalResults
  * @param {Object} data Object containing summary of test results
- */ 
+ */
 AdaptorTemplate.prototype.processFinalResults = function(data) {
 
   this.results.done = {
@@ -162,7 +162,7 @@ AdaptorTemplate.prototype.processFinalResults = function(data) {
 /**
  * Send test results to server
  * @method sendResults
- */ 
+ */
 AdaptorTemplate.prototype.sendResults = function() {
   window.parent.venus.done(this.results);
 };
