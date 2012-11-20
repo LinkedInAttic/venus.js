@@ -75,6 +75,16 @@ describe('lib/util/commentsParser', function() {
       ' */ \n'
     ].join('');
 
+    //  /**
+    //   * @venus-include ../www/test-file.js
+    //   */
+    var commentsG = [
+        '/**\n',
+        ' * @venus-include ../www/test-file.js \n',
+        ' */'
+      ].join('');
+
+
     it('should handle an empty file', function() {
       var annotations = parser.parseStr(commentsD);
       should.exist(annotations);
@@ -129,6 +139,16 @@ describe('lib/util/commentsParser', function() {
       should.exist(annotations);
       should.exist(annotations[annotation.VENUS_INCLUDE]);
       annotations[annotation.VENUS_INCLUDE].should.eql('~/var/foo_test.js');
+
+    });
+
+    it('should parse file paths with dashes correctly', function() {
+      var comments = buildCommentBlock('@venus-include ~/var/test-file.js'),
+          annotations = parser.parseStr(comments);
+
+      should.exist(annotations);
+      should.exist(annotations[annotation.VENUS_INCLUDE]);
+      annotations[annotation.VENUS_INCLUDE].should.eql('~/var/test-file.js');
 
     });
 
