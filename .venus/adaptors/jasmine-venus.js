@@ -78,7 +78,11 @@ AdaptorTemplate.prototype.getTestStatus = function(data) {
  * @override
  */
 AdaptorTemplate.prototype.getTestStackTrace = function(data) {
-  return data.results_.items_[0].trace.stack;
+  try {
+    return data.results_.items_[0].trace.stack;
+  } catch(e) {
+    return '';
+  }
 };
 
 /**
