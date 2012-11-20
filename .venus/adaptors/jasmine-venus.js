@@ -71,7 +71,7 @@ Adaptor.prototype.getTestName = function(data) {
  * @override
  */
 AdaptorTemplate.prototype.getTestStatus = function(data) {
-  return data.results().passedCount === 1 ? this.ENUM_STATE.PASSED : this.ENUM_STATE.FAILED;
+  return data.results().passedCount === data.results().totalCount ? this.ENUM_STATE.PASSED : this.ENUM_STATE.FAILED;
 };
 
 /**
