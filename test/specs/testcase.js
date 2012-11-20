@@ -89,6 +89,27 @@ describe('lib/testcase', function() {
 
     });
 
+    it('should work with paths containing dashes', function() {
+      var testpath = testHelper.sampleTests('paths_with_dashes.js'),
+          conf     = testHelper.testConfig(),
+          test     = new testcase.TestCase(conf),
+          files;
+
+      test.path = testpath;
+      test.directory = testHelper.sampleTests();
+      test.id = 1;
+      files = test.prepareIncludes(
+        test.resolveAnnotations(
+          test.parseTestFile(testpath).annotations
+      ));
+
+      should.exist(files);
+      files.should.be.an.instanceOf(Array);
+      files[4].url.should.eql('/temp/test/1/includes/test-file.js');
+      files[4].fs.should.contain('/test/data/test-file.js');
+
+    });
+
     it('should load universal includes', function() {
       var testpath = testHelper.sampleTests('relative_paths.js'),
           conf     = testHelper.testConfig(),
