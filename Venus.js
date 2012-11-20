@@ -11,7 +11,11 @@ var colors    = require('colors'),
     locale    = require('./lib/util/locale'),
     logger    = require('./lib/util/logger'),
     program   = require('commander'),
-    hostname  = require('os').hostname();
+    hostname  = require('os').hostname(),
+    prompt    = require('cli-prompt'),
+    wrench    = require('wrench'),
+    fs        = require('fs'),
+    path      = require('path');
 
 /**
  * Application object
@@ -46,13 +50,13 @@ Venus.prototype.init = function (args) {
 
   // init command
   // TODO: Re-enable once init project code is implemented
-  //program
-    //.command('init')
-    //.description( i18n('initialize new venus project directory') )
-    //.option('-l, --locale [locale]', i18n('Specify locale to use'))
-    //.option('-v, --verbose', i18n('Run in verbose mode'))
-    //.option('-d, --debug', i18n('Run in debug mode'))
-    //.action( _.bind(this.initProjectDirectory, this) );
+  program
+    .command('init')
+    .description( i18n('initialize new venus project directory') )
+    .option('-l, --locale [locale]', i18n('Specify locale to use'))
+    .option('-v, --verbose', i18n('Run in verbose mode'))
+    .option('-d, --debug', i18n('Run in debug mode'))
+    .action( _.bind(this.initProjectDirectory, this) );
 
   // exec command
   program
@@ -125,8 +129,32 @@ Venus.prototype.startExecutor = function(program) {
 /**
  * Initialize new project directory
  */
-Venus.prototype.initProjectDirectory = function() {
- // TODO
+Venus.prototype.initProjectDirectory = function(program) {
+  var venusConfigFolderName = '.venus';
+
+  logger.verbose( i18n('Initializing new Venus project') );
+  this.applyCommandLineFlags(program);
+  program.homeFolder = __dirname;
+
+  if(fs.existsSync(venusConfigFolderName)) {
+    prompt( i18n('Warning'.red + ': ' + venusConfigFolderName + ' exists. Overwrite? (y/n) '), function(input) {
+      if(input.toUpperCase() === 'Y') {
+        createDir();
+      } else {
+        process.exit(1);
+      }
+    });
+  } else {
+    createDir();
+  }
+
+  function createDir() {
+    // copy global directory
+    wrench.copyDirSyncRecursive( path.resolve(__dirname, venusConfigFolderName), venusConfigFolderName );
+    console.log( i18n('New Venus project created in ' + process.cwd()) );
+    process.exit(1);
+  }
+
 
 };
 
