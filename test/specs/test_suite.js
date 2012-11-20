@@ -8,7 +8,7 @@ require('./testcase');
 require('./testrun');
 require('./Venus');
 
-require('./runners/phantom');
+require('./uac/phantom');
 
 require('./util/commentsParser');
 require('./util/pathHelper');
