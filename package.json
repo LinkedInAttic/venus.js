@@ -36,7 +36,8 @@
     "fs-tools"          : "0.2.2",
     "async"             : "0.1.22",
     "dnode"             : "1.0.0",
-    "phantom-linkedin"  : "0.3.5"
+    "cli-prompt"        : "0.1.0",
+    "wrench"            : "1.4.3"
   },
   "devDependencies": {
     "chai"              : "1.0.4",
