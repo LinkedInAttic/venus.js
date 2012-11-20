@@ -2,9 +2,9 @@
  * @author LinkedIn
  */
 var should     = require('../../lib/sinon-chai').chai.should(),
-    phantom    = require('../../../lib/runners/phantom');
+    phantom    = require('../../../lib/uac/phantom');
 
-describe('lib/runners/phantom', function() {
+describe('lib/uac/phantom', function() {
   //it('should load a webpage', function(done) {
     //var browser = phantom.create();
     //this.timeout(20000);
