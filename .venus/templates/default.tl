@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href="/css/bootstrap_btn.min.css">
 </head>
 <body>
-  <div class="header">venus ♀</div>
+<!--  <div class="header">venus ♀</div>
   <div class="dashboard">
     <div class="header2">first test</div>
     <div class="test">should work</div>
@@ -25,8 +25,11 @@
       failures: 0<br />
       percent: 100%
     <p>
-    <iframe src="/test/sandbox/{testId}" height="270" width="440">
+-->
+    <iframe src="/test/sandbox/{testId}" id="sandbox">
     <!--Running test: {testId}-->
+<!--
   </div>
+-->
 </body>
 </html>
