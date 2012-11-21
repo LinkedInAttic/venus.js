@@ -11,19 +11,37 @@ var should     = require('../lib/sinon-chai').chai.should(),
 describe('lib/testcase', function() {
 
   describe('loadHarnessTemplate', function() {
-    it('should load test fixture template', function() {
+    it('should load test harness template', function() {
         var testpath = testHelper.sampleTests('foo.js'),
             conf = testHelper.testConfig(),
             test = new testcase.TestCase(conf),
             testData = test.parseTestFile(testpath).annotations,
-            fixture = test.loadHarnessTemplate(testData);
+            harness = test.loadHarnessTemplate(testData);
 
-        fixture.should.eql('ship ahoy!\n');
+        harness.should.eql('ship ahoy!\n');
     });
   });
 
   describe('Asserts loading of @venus-fixture values', function() {
-    it('should load file-based @venus-fixture', function() {
+    it('should load file-based @venus-fixture contained in testcase directory', function() {
+      // Load the file content specified by @venus-fixture in
+      // test/data/sample_tests/foo_with_file_fixture_relative.js
+      // 'ship ahoy!\n' should be returned.
+      var testpath = testHelper.sampleTests('foo_with_file_fixture_relative.js'),
+          conf = testHelper.testConfig(),
+          test = new testcase.TestCase(conf),
+          testData = test.parseTestFile(testpath),
+          annotations,
+          fixture;
+
+      test.directory = testData.directory;
+      test.path = testData.path;
+      annotations  = test.resolveAnnotations(testData.annotations),
+      fixture = annotations[annotation.VENUS_FIXTURE];
+
+      fixture.should.equal('ship ahoy!\n');
+    });
+    it('should load file-based @venus-fixture contained in config directory', function() {
       // Load the file content specified by @venus-fixture in
       // test/data/sample_tests/foo_with_file_fixture.js
       // 'ship ahoy!\n' should be returned.
