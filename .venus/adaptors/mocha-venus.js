@@ -6,7 +6,7 @@
  * @requires .venus/adapters/adaptor-template.js
  */
 function Adaptor() {
-  mocha.setup('bdd');
+  mocha.setup({ ui: 'bdd', ignoreLeaks: true });
 };
 
 /**
