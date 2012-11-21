@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> venus ♀ </title>
+  <title>Venus Test Harness </title>
   <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
   <!--[if lte IE 7]>
   <script type="text/javascript" src="/js/json2.js"></script>
@@ -10,15 +10,6 @@
   <script type="text/javascript">
     window.venus.postUrl = '{postTestResultsUrl}';
   </script>
-
-  {#scriptIncludes}
-  <script type="text/javascript" src="{.}"></script>
-  {/scriptIncludes}
-
-  <script type="text/javascript">
-    window.adaptor = new Adaptor();
-  </script>
-
   <link rel="stylesheet" type="text/css" href="/css/app.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap_btn.min.css">
 </head>
@@ -34,12 +25,8 @@
       failures: 0<br />
       percent: 100%
     <p>
+    <iframe src="/test/sandbox/{testId}" height="270" width="440">
     <!--Running test: {testId}-->
   </div>
-
-  <script src="{testcaseFile}"></script>
-  <script type="text/javascript">
-    window.adaptor.start();
-  </script>
 </body>
 </html>
