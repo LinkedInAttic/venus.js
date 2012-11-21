@@ -1,5 +1,6 @@
 *.swp
 *.swo
+*.swn
 node_modules/
 *.log
 .DS_STORE
