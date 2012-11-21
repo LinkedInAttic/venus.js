@@ -10,13 +10,13 @@ var should     = require('../lib/sinon-chai').chai.should(),
 
 describe('lib/testcase', function() {
 
-  describe('loadFixtureTemplate', function() {
+  describe('loadHarnessTemplate', function() {
     it('should load test fixture template', function() {
         var testpath = testHelper.sampleTests('foo.js'),
             conf = testHelper.testConfig(),
             test = new testcase.TestCase(conf),
             testData = test.parseTestFile(testpath).annotations,
-            fixture = test.loadFixtureTemplate(testData);
+            fixture = test.loadHarnessTemplate(testData);
 
         fixture.should.eql('ship ahoy!\n');
     });

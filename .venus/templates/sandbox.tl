@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Venus Test Runner</title>
+  <title>Venus Test Harness (Sandbox)</title>
   {#scriptIncludes}
   <script type="text/javascript" src="{.}"></script>
   {/scriptIncludes}
