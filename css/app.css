@@ -1,14 +1,20 @@
 body {
-  background: #111314;
+  background: #fff;
   color: #D3D4D4;
   font-size: 36px;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
 	lineHeight: 1em;
 	margin: 20px auto 10px auto;
-	width: 600px;
+	width: 90%;
 	height: 100%;
 }
+
+#sandbox {
+  width: 100%;
+  border: 0;
+}
+
 
 .dashboard {
 	box-shadow: 2px 0 3px #0D0D0D, -2px 0 3px #0D0D0D, 0 3px 3px #0D0D0D, 0 -2px 3px #0D0D0D;
