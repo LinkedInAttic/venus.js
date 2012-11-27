@@ -55,5 +55,6 @@
 	"Initializing new Venus project": "Initializing new Venus project",
 	"\u001b[31mWarning\u001b[39m: .venus exists. Overwrite? (y/n) ": "\u001b[31mWarning\u001b[39m: .venus exists. Overwrite? (y/n) ",
 	"New Venus project created in function () { [native code] }": "New Venus project created in function () { [native code] }",
-	"New Venus project created in /home/smclaugh/dev/temp": "New Venus project created in /home/smclaugh/dev/temp"
+	"New Venus project created in /home/smclaugh/dev/temp": "New Venus project created in /home/smclaugh/dev/temp",
+	"New Venus project created in /home/smclaugh/workspace/tools_trunk/apps/autotestmanager/src/autotestmanager/static/test": "New Venus project created in /home/smclaugh/workspace/tools_trunk/apps/autotestmanager/src/autotestmanager/static/test"
 }
