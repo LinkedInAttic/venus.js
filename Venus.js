@@ -1,8 +1,7 @@
 // @author LinkedIn   
 
 // The Venus application code that is called by the Venus shell script (bin/venus)  
-
-// Load Node.js modules  
+  
 var colors    = require('colors'),
     json5     = require('json5/lib/require'),
     _         = require('underscore'),

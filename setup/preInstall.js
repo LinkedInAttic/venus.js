@@ -1,8 +1,7 @@
 // @author LinkedIn 
 
 // Pre install checks when running npm install for Venus  
-
-// Load Node.js modules  
+  
 var sys  = require('util'),
     exec = require('child_process').exec;
 
