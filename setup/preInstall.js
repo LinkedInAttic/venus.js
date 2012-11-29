@@ -1,7 +1,12 @@
+// @author LinkedIn 
+
+// Pre install checks when running npm install for Venus  
+
+// Load Node.js modules  
 var sys  = require('util'),
     exec = require('child_process').exec;
 
-// Check to make sure PhantomJS 1.6.0 is installed (see http://phantomjs.org/)
+// Check to make sure PhantomJS 1.6.0 is installed (see http://phantomjs.org/)  
 exec('phantomjs --version', function(error, stdout, stderr) {
   if(stdout.trim() == '1.6.0') {
     sys.puts('PhantomJS 1.6.0 is installed -- good to go.');
