@@ -1,8 +1,14 @@
+// @author LinkedIn 
+
+// An anonymous closure that will create the Venus JavaScript object. This object will be accessible to all adaptors via window.venus.   
 (function(window) {
+
+  // Instantiate Venus object  
   window.venus = new Venus();
 
   function Venus() {}
 
+  // Create XHR  
   var XHR = (function() {
     var ids = ["Msxml2.XMLHTTP", "Microsoft.XMLHTTP", "Msxml2.XMLHTTP.4.0"];
     if (typeof XMLHttpRequest !== "undefined") {
@@ -20,6 +26,7 @@
     }
   })();
 
+  // Once all unit tests are done, send the test results via POST request  
   Venus.prototype.done = function(results) {
     var xmlhttp = new XHR();
     var result = JSON.stringify(results);
