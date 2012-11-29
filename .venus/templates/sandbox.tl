@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Venus Test Harness (Sandbox)</title>
+  <script type="text/javascript" src="/js/runner_client/console.log.js"></script>
   {#scriptIncludes}
   <script type="text/javascript" src="{.}"></script>
   {/scriptIncludes}
