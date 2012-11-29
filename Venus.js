@@ -1,6 +1,8 @@
-/**
- * @author LinkedIn
- */
+// @author LinkedIn   
+
+// The Venus application code that is called by the Venus shell script (bin/venus)  
+
+// Load Node.js modules  
 var colors    = require('colors'),
     json5     = require('json5/lib/require'),
     _         = require('underscore'),
@@ -17,39 +19,28 @@ var colors    = require('colors'),
     fs        = require('fs'),
     path      = require('path');
 
-/**
- * Application object
- */
-function Venus() {}
+// The Venus application object  
+function Venus() {};
 
-/**
- * Start the App
- * @params {Array} args the command line arguments
- */
+// Start the application  
 Venus.prototype.run = function(args) {
   this.commandLineArguments = args;
   this.init(args);
 };
 
-/**
- * Stop the app
- */
+// Stop the application  
 Venus.prototype.shutdown = function() {
   throw new Error('Not implemented');
-}
+};
 
-/**
- * Initialize application
- * @param {Array} args the command line arguments
- */
+// Initialize the application  
 Venus.prototype.init = function (args) {
 
-  // options
+  // Define command line options  
   program
     .version('0.0.1')
 
-  // init command
-  // TODO: Re-enable once init project code is implemented
+  // init command  
   program
     .command('init')
     .description( i18n('initialize new venus project directory') )
@@ -58,7 +49,7 @@ Venus.prototype.init = function (args) {
     .option('-d, --debug', i18n('Run in debug mode'))
     .action( _.bind(this.initProjectDirectory, this) );
 
-  // exec command
+  // run command  
   program
     .command('run')
     .description( i18n('Run tests') )
@@ -71,23 +62,21 @@ Venus.prototype.init = function (args) {
     .option('-d, --debug', i18n('Run in debug mode'))
     .action( _.bind(this.startExecutor, this) );
 
-  // listen command
-  // TODO: Re-enable once overlord code is implemented
-  //program
-    //.command('listen')
-    //.description( i18n('Start the Overlord') )
-    //.option('-p, --port [port]', i18n('port to run on'), function(value) { return parseInt(value, 10); })
-    //.option('-l, --locale [locale]', i18n('Specify locale to use'))
-    //.option('-v, --verbose', i18n('Run in verbose mode'))
-    //.option('-d, --debug', i18n('Run in debug mode'))
-    //.action( _.bind(this.startOverlord, this) );
+  // listen command  
+  // TODO: Re-enable once overlord code is implemented  
+  //program  
+    //.command('listen')  
+    //.description( i18n('Start the Overlord') )  
+    //.option('-p, --port [port]', i18n('port to run on'), function(value) { return parseInt(value, 10); })  
+    //.option('-l, --locale [locale]', i18n('Specify locale to use'))  
+    //.option('-v, --verbose', i18n('Run in verbose mode'))  
+    //.option('-d, --debug', i18n('Run in debug mode'))  
+    //.action( _.bind(this.startOverlord, this) );  
 
   program.parse(args);
 };
 
-/**
- * Apply common command line flags
- */
+// Apply common command line flags  
 Venus.prototype.applyCommandLineFlags = function(program) {
   // Check if debug logging should be enabled
   if(program.debug) {
@@ -98,11 +87,9 @@ Venus.prototype.applyCommandLineFlags = function(program) {
   if(program.locale) {
     locale(program.locale);
   }
-}
+};
 
-/**
- * Start in overlord mode - server which allows browsers to be captured
- */
+// Start in overlord mode - server which allows browsers to be captured  
 Venus.prototype.startOverlord = function(program) {
   this.applyCommandLineFlags(program);
   logger.verbose( i18n('Starting Overlord') );
@@ -110,9 +97,7 @@ Venus.prototype.startOverlord = function(program) {
   this.server = overlord.start(program);
 };
 
-/**
- * Start in Executor mode - run tests
- */
+// Start in Executor mode - run tests  
 Venus.prototype.startExecutor = function(program) {
   logger.verbose( i18n('Starting in executor mode') );
 
@@ -126,9 +111,7 @@ Venus.prototype.startExecutor = function(program) {
   this.server = executor.start(program);
 };
 
-/**
- * Initialize new project directory
- */
+// Initialize new project directory  
 Venus.prototype.initProjectDirectory = function(program) {
   var venusConfigFolderName = '.venus';
 
@@ -149,13 +132,11 @@ Venus.prototype.initProjectDirectory = function(program) {
   }
 
   function createDir() {
-    // copy global directory
+    // copy global directory  
     wrench.copyDirSyncRecursive( path.resolve(__dirname, venusConfigFolderName), venusConfigFolderName );
     console.log( i18n('New Venus project created in ' + process.cwd()) );
     process.exit(1);
   }
-
-
 };
 
 module.exports = Venus;
