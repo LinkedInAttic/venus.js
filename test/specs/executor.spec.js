@@ -3,31 +3,9 @@
  */
 var should     = require('../lib/sinon-chai').chai.should(),
     sinon      = require('sinon'),
-    executor   = require('../../lib/executor'),
-    io         = require('socket.io'),
-    pathHelper = require('../../lib/util/pathHelper'),
-    hostname   = require('os').hostname();
+    executor   = require('../../lib/executor');
 
 describe('lib/executor', function() {
-  // TODO(ryanone, setchmcl): Re-enable this test after Overlord functionality
-  // is implemented.
-  /*
-  it('should connect to socket-io server on init', function(done) {
-    var fakeOverlordServer = io.listen(3333),
-        config = {
-          overlord   : 'http://smclaugh-ld:3333',
-          homeFolder : pathHelper(__dirname).up().path,
-          test       : 'test/data/sample_tests/foo',
-        };
-
-    fakeOverlordServer.set('log level', 0);
-    fakeOverlordServer.on('connection', function(socket) {
-      done();
-    });
-
-    executor.start(config);
-  });
-  */
 
   it('should not be modifiable', function() {
     executor.foo = 'bar';
@@ -76,19 +54,6 @@ describe('lib/executor', function() {
     result[first].annotations['venus-include-group'].should.have.length(1);
   });
 
-  // TODO(ryanone, setchmcl): Re-enable this test after Overlord functionality
-  // is implemented.
-  /*
-  it('should only connect to overlord if correct flag is set', function() {
-    var exec   = new executor.Executor(),
-        config = { overlord: 'http://localhost', test: 'test/data/sample_tests/foo' },
-        spy    = sinon.spy(exec, 'connectOverlord');
-
-    exec.init(config);
-    spy.callCount.should.eql(1);
-  });
-  */
-
   it('should create phantom clients if correct flag is set', function() {
     var exec   = new executor.Executor(),
         config = { phantom: true, test: 'test/data/sample_tests/foo' },
@@ -97,4 +62,5 @@ describe('lib/executor', function() {
     exec.init(config);
     spy.callCount.should.eql(1);
   });
+
 });
