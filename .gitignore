@@ -7,3 +7,4 @@ node_modules/
 temp/
 phantomjs/phantomjs-1.6.0/
 .idea
+docs/
