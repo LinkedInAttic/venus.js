@@ -1,87 +1,61 @@
-/** 
- * Create a QUnit adapter
- * Inherits AdaptorTemplate class
- * @class Adaptor
- * @constructor
- * @requires .venus/adapters/adaptor-template.js
- */
+// @author LinkedIn  
+
+// Create a QUnit adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)  
+
+// Instantiate adaptor  
 function Adaptor() {}
 
-/**
- * Inherit AdaptorTemplate class
- */
+// Inherit from adapter template    
 Adaptor.prototype = new AdaptorTemplate();
 
-/**
- * @override
- */ 
+// Override Methods
+// ----------------
+
+// Override methods defined in the adapter template       
+
 Adaptor.prototype.start = function() {
   var self = this;
 
-  // QUnit calback - log
+  // A single unit test is done    
   QUnit.log(function(data) {
     self.addTestResult(data);
   });
 
-  // QUnit calback - done
+  // All unit tests are done    
   QUnit.done(function(data) {
     self.processFinalResults(data);
     self.sendResults();
   });
 };
 
-/**
- * @override
- */
 Adaptor.prototype.getTestMessage = function(data) {
   return data.message ? data.message : '';
 };
 
-/**
- * @override
- */
 Adaptor.prototype.getTestName = function(data) {
   return data.name;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTestStatus = function(data) {
   return data.result === true ? this.ENUM_STATE.PASSED : this.ENUM_STATE.FAILED;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTestStackTrace = function(data) {
   return data.source ? data.source : ''
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTotal = function(data) {
   return data.total;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTotalFailed = function(data) {
   return data.failed;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTotalPassed = function(data) {
   return data.passed;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTotalRuntime = function(data) {
   return data.runtime;
 };
