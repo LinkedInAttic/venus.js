@@ -166,5 +166,27 @@ describe('lib/testcase', function() {
       files.should.be.an.instanceOf(Array);
       files[4].url.should.eql('/temp/test/1/lib/file3.js');
     });
+
+    it('should handle different paths with same filename', function() {
+      var testpath = testHelper.sampleTests('dupe_filenames.js'),
+          conf     = testHelper.testConfig(),
+          test     = new testcase.TestCase(conf),
+          files;
+
+      test.path = testpath;
+      test.directory = testHelper.sampleTests();
+      test.id = 1;
+      files = test.prepareIncludes(
+        test.resolveAnnotations(
+          test.parseTestFile(testpath).annotations
+      ));
+
+      should.exist(files);
+      files[4].url.should.eql('/temp/test/1/includes/fileA.js');
+      files[5].url.should.eql('/temp/test/1/includes/__fileA.js');
+      files[6].url.should.eql('/temp/test/1/includes/__prod__fileA.js');
+      //files.should.be.an.instanceOf(Array);
+      //files[4].url.should.eql('/temp/test/1/lib/file3.js');
+    });
   });
 });
