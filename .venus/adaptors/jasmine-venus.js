@@ -1,21 +1,18 @@
-/**
- * Create a Jasmine adaptor
- * Inherits AdaptorTemplate class
- * @class Adaptor
- * @constructor
- * @requires .venus/adapters/adaptor-template.js
- */
-function Adaptor() {
-};
+// @author LinkedIn    
 
-/**
- * Inherit AdaptorTemplate class
- */
+// Create a Jasmine adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)    
+
+// Instantiate adaptor    
+function Adaptor() {};
+
+// Inherit from adapter template  
 Adaptor.prototype = new AdaptorTemplate();
 
-/**
- * @override
- */
+// Override Methods
+// ----------------
+
+// Override methods defined in the adapter template   
+
 Adaptor.prototype.start = function() {
   var jasmineEnv = jasmine.getEnv();
       jasmineEnv.updateInterval = 1000,
@@ -25,15 +22,17 @@ Adaptor.prototype.start = function() {
     reportRunnerStarting: function(runner) {
     },
     reportRunnerResults: function(runner) {
+
+      // All unit tests are done  
       self.processFinalResults(runner);
       self.sendResults();
     },
     reportSuiteResults: function(suite) {
-      //console.log('reportSuiteResults:', suite);
     },
     reportSpecStarting: function(spec) {
     },
     reportSpecResults: function(spec) {
+      // A single unit test is done    
       self.addTestResult(spec);
     }
   });
@@ -41,21 +40,16 @@ Adaptor.prototype.start = function() {
   jasmineEnv.execute();
 };
 
-/**
- * @override
- */
 Adaptor.prototype.getTestMessage = function(data) {
   return data.description || '';
 };
 
-/**
- * @override
- */
 Adaptor.prototype.getTestName = function(data) {
   var obj = null,
       title = '',
       testName = '';
 
+  // Make sure to obtain the proper test name if it is nested within other tests  
   var obj = data;
   while (obj.hasOwnProperty('suite')) {
     title = obj.suite.description;
@@ -67,16 +61,11 @@ Adaptor.prototype.getTestName = function(data) {
   return testName;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTestStatus = function(data) {
   return data.results().passedCount === data.results().totalCount ? this.ENUM_STATE.PASSED : this.ENUM_STATE.FAILED;
 };
 
-/**
- * @override
- */
+
 AdaptorTemplate.prototype.getTestStackTrace = function(data) {
   try {
     return data.results_.items_[0].trace.stack;
@@ -85,30 +74,18 @@ AdaptorTemplate.prototype.getTestStackTrace = function(data) {
   }
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTotal = function(data) {
   return data.results().totalCount;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTotalFailed = function(data) {
   return data.results().failedCount;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTotalPassed = function(data) {
   return data.results().passedCount;
 };
 
-/**
- * @override
- */
 AdaptorTemplate.prototype.getTotalRuntime = function(data) {
   return 0;
 };
