@@ -102,7 +102,7 @@ describe('lib/testcase', function() {
 
       should.exist(files);
       files.should.be.an.instanceOf(Array);
-      files[4].url.should.eql('/temp/test/1/includes/test.js');
+      files[4].url.should.eql('/temp/test/1/includes/_.test.js');
       files[4].fs.should.contain('/test/data/test.js');
 
     });
@@ -123,7 +123,7 @@ describe('lib/testcase', function() {
 
       should.exist(files);
       files.should.be.an.instanceOf(Array);
-      files[4].url.should.eql('/temp/test/1/includes/test-file.js');
+      files[4].url.should.eql('/temp/test/1/includes/_.test-file.js');
       files[4].fs.should.contain('/test/data/test-file.js');
 
     });
@@ -183,8 +183,8 @@ describe('lib/testcase', function() {
 
       should.exist(files);
       files[4].url.should.eql('/temp/test/1/includes/fileA.js');
-      files[5].url.should.eql('/temp/test/1/includes/__fileA.js');
-      files[6].url.should.eql('/temp/test/1/includes/__prod__fileA.js');
+      files[5].url.should.eql('/temp/test/1/includes/_.fileA.js');
+      files[6].url.should.eql('/temp/test/1/includes/_.prod.fileA.js');
       //files.should.be.an.instanceOf(Array);
       //files[4].url.should.eql('/temp/test/1/lib/file3.js');
     });
