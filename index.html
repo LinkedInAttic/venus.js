@@ -28,12 +28,24 @@
         </ul>
       </header>
       <section>
-        <h3>Coming soon</h3>
+        <h3>Getting started is easy.</h3>
+        <p>Install nodejs version 0.8.0 or later.</p>
+        <p>Install <a href="http://code.google.com/p/phantomjs/downloads/list?can=1&q=1.6.0&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount">phantomjs version 1.6.0</a></p>
 
-        <p>Stay tuned.</p>
-
-<pre><code>$ venus run -t foo -n
+<pre><code>git clone https://github.com/venusjs/venus.git
 </code></pre>
+
+<pre><code>cd venus && npm install
+</code></pre>
+
+<p>Add <code>venus/bin</code> to your path</p>
+
+<p>That's it! To verify everything is working, try this...</p>
+
+
+<pre><code>venus run --test venus/examples/01-SimpleMochaTest/specs/Greeter.spec.js --phantom
+</code></pre>
+
 
       </section>
       <footer>
