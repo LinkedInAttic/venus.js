@@ -38,7 +38,8 @@
     "dnode"             : "1.0.0",
     "cli-prompt"        : "0.1.0",
     "wrench"            : "1.4.3",
-    "webdriverjs"       : "0.6.9"
+    "webdriverjs"       : "0.6.9",
+    "useragent-parser"  : "0.1.1"
   },
   "devDependencies": {
     "chai"              : "1.0.4",
