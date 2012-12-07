@@ -23,6 +23,7 @@ VenusClientLibrary.prototype.connect = function(){
  * @param {Object} results the test results
  */
 VenusClientLibrary.prototype.done = function( results ){
+  results.userAgent = window.navigator.userAgent;
   this.socket.emit( 'results', results );
 };
 

@@ -56,5 +56,18 @@
 	"\u001b[31mWarning\u001b[39m: .venus exists. Overwrite? (y/n) ": "\u001b[31mWarning\u001b[39m: .venus exists. Overwrite? (y/n) ",
 	"New Venus project created in function () { [native code] }": "New Venus project created in function () { [native code] }",
 	"New Venus project created in /home/smclaugh/dev/temp": "New Venus project created in /home/smclaugh/dev/temp",
-	"New Venus project created in /home/smclaugh/workspace/tools_trunk/apps/autotestmanager/src/autotestmanager/static/test": "New Venus project created in /home/smclaugh/workspace/tools_trunk/apps/autotestmanager/src/autotestmanager/static/test"
+	"New Venus project created in /home/smclaugh/workspace/tools_trunk/apps/autotestmanager/src/autotestmanager/static/test": "New Venus project created in /home/smclaugh/workspace/tools_trunk/apps/autotestmanager/src/autotestmanager/static/test",
+	"Use selenium client to run browser tests": "Use selenium client to run browser tests",
+	"Creating selenium runners": "Creating selenium runners",
+	"Web Driver is loading %s": "Web Driver is loading %s",
+	"Specify selenium server to use": "Specify selenium server to use",
+	"Specify browser to use with selenium": "Specify browser to use with selenium",
+	"Creating selenium uacs": "Creating selenium uacs",
+	"Server: localhost": "Server: localhost",
+	"Browser: firefox": "Browser: firefox",
+	"Server: smclaugh-mn:4444": "Server: smclaugh-mn:4444",
+	"Server: 172.16.170.36:4444": "Server: 172.16.170.36:4444",
+	"Server: 172.16.170.36": "Server: 172.16.170.36",
+	"Server: supergrid.corp": "Server: supergrid.corp",
+	"Browser: chrome": "Browser: chrome"
 }
