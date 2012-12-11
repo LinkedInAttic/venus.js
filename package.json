@@ -2,11 +2,11 @@
   "name"              : "venus",
   "main"              : "Venus.js",
   "description"       : "JavaScript test runner & controller",
-  "version"           : "0.0.1m3",
+  "version"           : "0.0.2",
   "keywords"          : [ "testing" ],
-  "homepage"          : "https://github.com/sethmcl/venus",
+  "homepage"          : "https://github.com/venusjs/venus",
   "bugs"              : {
-    "url": "https://github.com/sethmcl/venus/issues",
+    "url": "https://github.com/venusjs/venus/issues",
     "email": "smclaughlin@linkedin.com"
   },
   "engines"           : {
