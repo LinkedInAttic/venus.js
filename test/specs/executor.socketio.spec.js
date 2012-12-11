@@ -38,7 +38,7 @@ describe('lib/executor -- socket.io', function() {
 
     it('should handle valid data', function(done) {
       // valid result data
-      socket.emit('results', { tests: [], done: { failed: 0, passed: 0, runtime: 0 } }, function(response) {
+      socket.emit('results', { tests: [], done: { failed: 0, passed: 0, runtime: 0 }, userAgent: 'foo browser' }, function(response) {
         response.status.should.eql('ok');
         done();
       });
