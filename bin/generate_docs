@@ -1,0 +1,41 @@
+#!/bin/bash
+
+command -v docco >/dev/null 2>&1 || {
+  echo -e >&2 "\nDocco does not appear to be installed, attempting to globally install it for you now (npm install -g docco)"
+  npm install -g docco;
+
+  command -v docco >/dev/null 2>&1 || {
+    echo -e >&2 "\nUnable to install Docco without sudo. Trying with sudo"
+    sudo npm install -g docco;
+  }
+
+  command -v docco >/dev/null 2>&1 || {
+      echo -e >&2 "\nInstalling docco failed. Aborting"; exit 1;
+    }
+}
+
+command -v pygmentize >/dev/null 2>&1 || {
+  echo -e -e >&2 "\nThe Python syntax highlighting library "Pygments" does not appear to be installed, attempting to install it"
+  pip install pygments;
+
+  command -v pygmentize >/dev/null 2>&1 || {
+    echo -e >&2 "\nInstalling Pygments via pip without sudo didn't work. Trying with easy_install\n"
+    sudo easy_install pygments;
+  }
+
+  command -v pygmentize >/dev/null 2>&1 || {
+    echo -e >&2 "\nUnable to install Pygments. Aborting"; exit 1;
+  }
+}
+
+echo -e "Generating Venus docs...\n"
+
+docco   .venus/adaptors/*.js    -o   docs/venus/adaptors
+docco   js/runner_client/*.js   -o   docs/js/runner_client
+docco   lib/*.js                -o   docs/lib
+docco   lib/uac/*.js            -o   docs/lib/uac
+docco   lib/util/*.js           -o   docs/lib/util
+docco   setup/*.js              -o   docs/setup
+docco   Venus.js                -o   docs
+
+echo -e "\nDone!\n"
