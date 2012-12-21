@@ -2,7 +2,7 @@
   "name"              : "venus",
   "main"              : "Venus.js",
   "description"       : "JavaScript test runner & controller",
-  "version"           : "0.0.2",
+  "version"           : "0.0.2a",
   "keywords"          : [ "testing" ],
   "homepage"          : "https://github.com/venusjs/venus",
   "bugs"              : {
