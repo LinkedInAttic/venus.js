@@ -1,9 +1,0 @@
-#!/bin/bash
-
-docco   .venus/adaptors/*.js    -o   docs/venus/adaptors
-docco   js/runner_client/*.js   -o   docs/js/runner_client
-docco   lib/*.js                -o   docs/lib
-docco   lib/uac/*.js            -o   docs/lib/uac
-docco   lib/util/*.js           -o   docs/lib/util
-docco   setup/*.js              -o   docs/setup
-docco   Venus.js                -o   docs
