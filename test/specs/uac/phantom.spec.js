@@ -1,17 +1,20 @@
 /**
  * @author LinkedIn
  */
-var should     = require('../../lib/sinon-chai').chai.should(),
-    phantom    = require('../../../lib/uac/phantom');
+var should        = require('../../lib/sinon-chai').chai.should(),
+    PhantomRunner = require('../../../lib/uac/phantom'),
+    http          = require('http');
 
 describe('lib/uac/phantom', function() {
-  //it('should load a webpage', function(done) {
-    //var browser = phantom.create();
-    //this.timeout(20000);
-    //browser.runTest(function(data) {
-      //console.log(data);
-      //data.title.should.eql('Google');
-      //done();
-    //}, 'http://www.google.com');
-  //});
+  it('should load a webpage', function(done) {
+    var browser = new PhantomRunner.create(), server;
+
+    server = http.createServer( function( req, res ){
+      res.end('');
+      done();
+    });
+
+    server.listen( '4509' );
+    browser.runTest( 'http://localhost:4509' );
+  });
 });
