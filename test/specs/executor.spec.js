@@ -3,7 +3,9 @@
  */
 var should     = require('../lib/sinon-chai').chai.should(),
     sinon      = require('sinon'),
-    executor   = require('../../lib/executor');
+    executor   = require('../../lib/executor'),
+    testPath   = require('../lib/helpers').sampleTests,
+    path       = require('path');
 
 describe('lib/executor', function() {
 
@@ -14,8 +16,9 @@ describe('lib/executor', function() {
 
   it('should parse testcases from test string correctly', function() {
     var exec = new executor.Executor(),
-        tests = 'test/data/sample_tests/foo,test/data/sample_tests/bar',
+        tests = testPath( 'foo' ) + ',' + testPath( 'bar' ),
         result;
+
     result = exec.parseTests(tests);
     should.exist(result);
     Object.keys(result).length.should.eql(3);
@@ -33,7 +36,7 @@ describe('lib/executor', function() {
 
   it('should handle tests being specified with a .js file extension', function() {
     var exec   = new executor.Executor(),
-        tests  = 'test/data/sample_tests/foo.js',
+        tests  = testPath( 'foo.js' ),
         result = exec.parseTests(tests);
 
     Object.keys(result).length.should.eql(1);
@@ -41,7 +44,7 @@ describe('lib/executor', function() {
 
   it('should parse comments in test cases', function() {
     var exec   = new executor.Executor(),
-        tests  = 'test/data/sample_tests/parse_comments',
+        tests  = testPath( 'parse_comments' ),
         result = exec.parseTests(tests),
         first;
 
@@ -56,7 +59,7 @@ describe('lib/executor', function() {
 
   it('should create phantom clients if correct flag is set', function() {
     var exec   = new executor.Executor(),
-        config = { phantom: true, test: 'test/data/sample_tests/foo' },
+        config = { phantom: true, test: testPath( 'foo' ) },
         spy    = sinon.spy(exec, 'createPhantomRunners');
 
     exec.init(config);
