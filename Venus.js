@@ -23,6 +23,7 @@ function Venus() {};
 
 // Start the application  
 Venus.prototype.run = function(args) {
+  this.noCommand = true;
   this.commandLineArguments = args;
   this.init(args);
 };
@@ -37,7 +38,7 @@ Venus.prototype.init = function (args) {
 
   // Define command line options  
   program
-    .version('0.0.1')
+    .version( require( './package' ).version );
 
   // init command  
   program
@@ -76,6 +77,10 @@ Venus.prototype.init = function (args) {
     //.action( _.bind(this.startOverlord, this) );  
 
   program.parse(args);
+
+  if( this.noCommand ){
+    program.help();
+  }
 };
 
 // Apply common command line flags  
@@ -100,7 +105,8 @@ Venus.prototype.startOverlord = function(program) {
 };
 
 // Start in Executor mode - run tests  
-Venus.prototype.startExecutor = function(program) {
+Venus.prototype.startExecutor = function(program, defaultMode) {
+  this.noCommand = false;
   logger.verbose( i18n('Starting in executor mode') );
 
   this.applyCommandLineFlags(program);
@@ -115,6 +121,7 @@ Venus.prototype.startExecutor = function(program) {
 
 // Initialize new project directory  
 Venus.prototype.initProjectDirectory = function(program) {
+  this.noCommand = false;
   var venusConfigFolderName = '.venus';
 
   logger.verbose( i18n('Initializing new Venus project') );
