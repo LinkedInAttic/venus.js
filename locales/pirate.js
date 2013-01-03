@@ -65,5 +65,6 @@
 	"Server: supergrid.corp": "Server: supergrid.corp",
 	"Browser: chrome": "Browser: chrome",
 	"New Venus project created in /home/smclaugh/dev/sethmcl/Lu/test": "New Venus project created in /home/smclaugh/dev/sethmcl/Lu/test",
-	"Creating casperjs runners": "Creating casperjs runners"
+	"Creating casperjs runners": "Creating casperjs runners",
+	"New Venus project created in /home/smclaugh/dev/sethmcl/venus/test/specs": "New Venus project created in /home/smclaugh/dev/sethmcl/venus/test/specs"
 }

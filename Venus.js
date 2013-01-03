@@ -46,7 +46,7 @@ Venus.prototype.init = function (args) {
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
-    .action( _.bind(this.initProjectDirectory, this) );
+    .action( _.bind(this.command( this.initProjectDirectory ), this) );
 
   // run command  
   program
@@ -61,14 +61,22 @@ Venus.prototype.init = function (args) {
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
-    .action( _.bind(this.startExecutor, this) );
+    .action( _.bind( this.command( this.startExecutor ), this) );
 
   program.parse(args);
 
   if( this.noCommand ){
-    program.help();
+    program.outputHelp();
   }
 };
+
+// Mark function as a Venus command
+Venus.prototype.command = function( fn ){
+  return function(){
+    this.noCommand = false;
+    fn.apply( this, arguments );
+  }.bind( this );
+}
 
 // Apply common command line flags  
 Venus.prototype.applyCommandLineFlags = function(program) {
@@ -85,7 +93,6 @@ Venus.prototype.applyCommandLineFlags = function(program) {
 
 // Start in Executor mode - run tests  
 Venus.prototype.startExecutor = function(program, defaultMode) {
-  this.noCommand = false;
   logger.verbose( i18n('Starting in executor mode') );
 
   this.applyCommandLineFlags(program);
@@ -96,7 +103,6 @@ Venus.prototype.startExecutor = function(program, defaultMode) {
 
 // Initialize new project directory  
 Venus.prototype.initProjectDirectory = function(program) {
-  this.noCommand = false;
   var venusConfigFolderName = '.venus';
 
   logger.verbose( i18n('Initializing new Venus project') );
@@ -108,7 +114,7 @@ Venus.prototype.initProjectDirectory = function(program) {
       if(input.toUpperCase() === 'Y') {
         createDir();
       } else {
-        process.exit(1);
+        return;
       }
     });
   } else {
@@ -119,7 +125,7 @@ Venus.prototype.initProjectDirectory = function(program) {
     // copy global directory  
     wrench.copyDirSyncRecursive( path.resolve(__dirname, venusConfigFolderName), venusConfigFolderName );
     console.log( i18n('New Venus project created in ' + process.cwd()) );
-    process.exit(1);
+    return;
   }
 };
 
