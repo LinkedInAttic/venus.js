@@ -1,4 +1,5 @@
 // Configuration file for Venus
+// All paths can be relative (to the location of this config file) or absolute
 {
   libraries: {
     mocha: {
@@ -29,7 +30,12 @@
   // Default settings
   default: {
     library: 'mocha'
-  }
+  },
+
+  // Binaries
+  // binaries: {
+  //  phantomjs: '/path/to/phantomjs'
+  // }
 
   // Serve static content
   //static: {
