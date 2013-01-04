@@ -19,7 +19,7 @@
     "type"            : "Apache 2.0"
   }],
   "dependencies"      : {
-    "phantomjs-please"  : "0.0.1pre",
+    "phantomjs-please"  : "0.0.2",
     "express"           : "3.0.0beta4",
     "socket.io"         : "0.8.7",
     "socket.io-client"  : "0.9.6",
