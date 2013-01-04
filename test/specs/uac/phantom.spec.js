@@ -7,14 +7,15 @@ var should        = require('../../lib/sinon-chai').chai.should(),
 
 describe('lib/uac/phantom', function() {
   it('should load a webpage', function(done) {
-    var browser = new PhantomRunner.create(), server;
+    var browser = new PhantomRunner.create(), server, port;
 
     server = http.createServer( function( req, res ){
       res.end('');
       done();
     });
 
-    server.listen( '4509' );
-    browser.runTest( 'http://localhost:4509' );
+    server.listen();
+    port = server.address().port;
+    browser.runTest( 'http://localhost:' + port );
   });
 });
