@@ -54,7 +54,7 @@ Venus.prototype.init = function (args) {
     .description( i18n('Run tests') )
     .option('-t, --test [tests]', i18n('Comma separated string of tests to run'))
     .option('-p, --port [port]', i18n('port to run on'), function(value) { return parseInt(value, 10); })
-    .option('-n, --phantom', i18n('Use phantomJS client to run browser tests'))
+    .option('-n, --phantom [path to binary]', i18n('Use phantomJS client to run browser tests'))
     .option('-s, --selenium', i18n('Use selenium client to run browser tests'))
     .option('-r, --selenium-server [url]', i18n('Specify selenium server to use'))
     .option('-b, --selenium-browser [browser]', i18n('Specify browser to use with selenium'))
