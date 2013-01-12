@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="/css/app.css">
 </head>
 <body>
+  check your console for test results
   <iframe src="/test/sandbox/{testId}" id="sandbox">
   <!--Running test: {testId}-->
 </body>

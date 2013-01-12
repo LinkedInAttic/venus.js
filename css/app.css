@@ -1,6 +1,6 @@
 body {
   background: #fff;
-  color: #D3D4D4;
+  color: #777;
   font-size: 36px;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
@@ -15,6 +15,9 @@ body {
   border: 0;
 }
 
+.test-list li {
+  font-size: 18px;
+}
 
 .dashboard {
 	box-shadow: 2px 0 3px #0D0D0D, -2px 0 3px #0D0D0D, 0 3px 3px #0D0D0D, 0 -2px 3px #0D0D0D;
