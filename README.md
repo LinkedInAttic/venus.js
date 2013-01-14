@@ -67,4 +67,4 @@ In your test file, the following annotations are supported:
 
 ##Get started
 
-View the (Getting Started)[http://www.venusjs.org] to get started.
+View the [Getting Started](http://www.venusjs.org) to get started.
