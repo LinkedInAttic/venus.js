@@ -15,7 +15,7 @@
 </head>
 <body>
   check your console for test results
-  <iframe src="/test/sandbox/{testId}" id="sandbox">
+  <iframe src="{testSandboxUrl}" id="sandbox">
   <!--Running test: {testId}-->
 </body>
 </html>
