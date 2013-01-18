@@ -62,4 +62,10 @@ describe('lib/executor -- socket.io', function() {
       });
     });
   });
+
+  describe('handling config-based routes', function() {
+    it('should return content for a defined route', function(done) {
+      
+    });
+  });
 });

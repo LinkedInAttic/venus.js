@@ -3,5 +3,8 @@
     jasmine: {
       includes: ['jasmine1.js']
     }
+  },
+  routes: {
+    "path-to-lorem-ipsum.txt": "static/lorem_ipsum.txt"
   }
 }

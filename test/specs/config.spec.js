@@ -82,5 +82,21 @@ describe('lib/config', function() {
     });
   });
 
+  describe('routes', function() {
+    it('should return a string for an existing route', function() {
+      var conf = new config.Config(testHelper.fakeCwd()),
+          routes = conf.get('routes');
+      should.exist(routes);
+      should.exist(routes.value);
+      routes.value['path-to-lorem-ipsum.txt'].should.be.a('string');
+    });
 
+    it('should return undefined for a non-existent route', function() {
+      var conf = new config.Config(testHelper.fakeCwd()),
+          routes = conf.get('routes');
+      should.exist(routes);
+      should.exist(routes.value);
+      should.not.exist(routes.value['non-existent-value.txt']);
+    });
+  });
 });
