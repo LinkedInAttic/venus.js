@@ -17,14 +17,13 @@ describe('lib/executor -- HTTP requests', function() {
     conf = new config.Config(testHelper.fakeCwd());
     exec = new executor.Executor(conf);
     exec.app = express();
-    exec.init({
-      homeFolder: testHelper.fakeCwd(),
-      port: PORT,
-      test: './test/data/sample_tests/one.js'
-    },
-    function() {
-      done();
-    });
+    exec.init(
+      {
+        homeFolder: testHelper.fakeCwd(),
+        port: PORT,
+        test: './test/data/sample_tests/one.js'
+      },
+      done);
   });
 
   describe('static routes', function() {
