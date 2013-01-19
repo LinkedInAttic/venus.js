@@ -82,5 +82,29 @@ describe('lib/config', function() {
     });
   });
 
+  describe('routes', function() {
+    it('should return a string for an existing route', function() {
+      // The 'path-to-lorem-ipsum.txt' route defined in
+      // test/data/sample_fs/projects/.venus/config should match
+      // the absolute path to that file.
+      var conf = new config.Config(testHelper.fakeCwd()),
+          routes = conf.get('routes'),
+          resolvedRoute;
+      should.exist(routes);
+      should.exist(routes.value);
+      resolvedRoute = routes.value['path-to-lorem-ipsum.txt'];
+      resolvedRoute.should.be.a('string');
+      resolvedRoute.should.eql(
+        testHelper.fakeCwd() + '/.venus/includes/lorem_ipsum.txt');
+    });
 
+    it('should return undefined for a non-existent route', function() {
+      // Non-existent routes should have a undefined value.
+      var conf = new config.Config(testHelper.fakeCwd()),
+          routes = conf.get('routes');
+      should.exist(routes);
+      should.exist(routes.value);
+      should.not.exist(routes.value['non-existent-value.txt']);
+    });
+  });
 });
