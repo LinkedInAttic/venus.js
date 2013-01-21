@@ -3,6 +3,7 @@
 
 require('./config.spec');
 require('./executor.spec');
+require('./executor.http.spec');
 require('./executor.socketio.spec');
 require('./testcase.spec');
 require('./testrun.spec');
