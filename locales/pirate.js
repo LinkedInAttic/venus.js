@@ -67,5 +67,9 @@
 	"New Venus project created in /home/smclaugh/dev/sethmcl/Lu/test": "New Venus project created in /home/smclaugh/dev/sethmcl/Lu/test",
 	"Creating casperjs runners": "Creating casperjs runners",
 	"New Venus project created in /home/smclaugh/dev/sethmcl/venus/test/specs": "New Venus project created in /home/smclaugh/dev/sethmcl/venus/test/specs",
-	"Creating phantomjs UACs": "Creating phantomjs UACs"
+	"Creating phantomjs UACs": "Creating phantomjs UACs",
+	"Generate Code Coverage Report": "Generate Code Coverage Report",
+	"Code Coverage:": "Code Coverage:",
+	"Code Coverage": "Code Coverage",
+	"New Venus project created in /home/smclaugh/src/lix-ng/lix-app/app/lix-gui-war/src/main/webapp/resources/testing": "New Venus project created in /home/smclaugh/src/lix-ng/lix-app/app/lix-gui-war/src/main/webapp/resources/testing"
 }
