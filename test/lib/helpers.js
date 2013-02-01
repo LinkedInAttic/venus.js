@@ -19,3 +19,7 @@ module.exports.sampleTests = function(path) {
     return pathm.resolve(__dirname + '/../data/sample_tests/' + path);
   }
 }
+
+module.exports.codeCoverageData = function (name) {
+  return require(pathm.resolve(__dirname, '..', 'data', 'sample_code_coverage', name + '.json'));
+}
