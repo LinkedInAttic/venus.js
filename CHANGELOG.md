@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 (unreleased)
+
+- New demo mode: `venus demo`. This will run a sample test, with phantomjs and code coverage enabled.
+- New flag `--require-annotations'. If you use this flag, Venus will not parse a JS file as a test case unless it has at least one `@venus-*` annotation.
+
 ## 1.0.1
 
 ### New Features

@@ -42,6 +42,25 @@ describe('lib/executor', function() {
     Object.keys(result).length.should.eql(1);
   });
 
+  it('should enforce require annotations option if specified', function () {
+    var exec   = new executor.Executor(),
+        tests  = testPath('require_annotations'),
+        result;
+
+    exec.requireTestAnnotations = true;
+    result = exec.parseTests(tests);
+    Object.keys(result).length.should.eql(1);
+  });
+
+  it('should not enforce require annotations option if not specified', function () {
+    var exec   = new executor.Executor(),
+        tests  = testPath('require_annotations'),
+        result;
+
+    result = exec.parseTests(tests);
+    Object.keys(result).length.should.eql(2);
+  });
+
   it('should parse comments in test cases', function() {
     var exec   = new executor.Executor(),
         tests  = testPath( 'parse_comments' ),
