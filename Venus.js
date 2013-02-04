@@ -67,6 +67,7 @@ Venus.prototype.init = function (args) {
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
     .option('-c, --coverage', i18n('Generate Code Coverage Report'))
+    .option('--require-annotations', i18n('Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)'))
     .action(_.bind(this.command(this.startExecutor), this));
 
   program.parse(args);
