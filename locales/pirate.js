@@ -71,5 +71,7 @@
 	"Generate Code Coverage Report": "Generate Code Coverage Report",
 	"Code Coverage:": "Code Coverage:",
 	"Code Coverage": "Code Coverage",
-	"New Venus project created in /home/smclaugh/src/lix-ng/lix-app/app/lix-gui-war/src/main/webapp/resources/testing": "New Venus project created in /home/smclaugh/src/lix-ng/lix-app/app/lix-gui-war/src/main/webapp/resources/testing"
+	"New Venus project created in /home/smclaugh/src/lix-ng/lix-app/app/lix-gui-war/src/main/webapp/resources/testing": "New Venus project created in /home/smclaugh/src/lix-ng/lix-app/app/lix-gui-war/src/main/webapp/resources/testing",
+	"run an example venus test": "run an example venus test",
+	"Running demo": "Running demo"
 }
