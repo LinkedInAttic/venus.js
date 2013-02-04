@@ -73,5 +73,7 @@
 	"Code Coverage": "Code Coverage",
 	"New Venus project created in /home/smclaugh/src/lix-ng/lix-app/app/lix-gui-war/src/main/webapp/resources/testing": "New Venus project created in /home/smclaugh/src/lix-ng/lix-app/app/lix-gui-war/src/main/webapp/resources/testing",
 	"run an example venus test": "run an example venus test",
-	"Running demo": "Running demo"
+	"Running demo": "Running demo",
+	"Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)": "Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)",
+	"no annotations -- skipping test file %s": "no annotations -- skipping test file %s"
 }
