@@ -21,8 +21,8 @@ Greeter.prototype.talk = function () {
   return str;
 };
 
-Greeter.prototype.bye = function () {
-  if (true) {
+Greeter.prototype.bye = function (farewell) {
+  if (farewell) {
     return 'goodbye...';
   } else {
     return 'hi';

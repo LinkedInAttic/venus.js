@@ -44,7 +44,16 @@ Venus.prototype.init = function (args) {
     .option('-d, --debug', i18n('Run in debug mode'))
     .action(_.bind(this.command(this.initProjectDirectory), this));
 
-  // run comman
+  // demo mode command
+  program
+    .command('demo')
+    .description(i18n('run an example venus test'))
+    .option('-l, --locale [locale]', i18n('Specify locale to use'))
+    .option('-v, --verbose', i18n('Run in verbose mode'))
+    .option('-d, --debug', i18n('Run in debug mode'))
+    .action(_.bind(this.command(this.runDemo), this));
+
+  // run command
   program
     .command('run')
     .description(i18n('Run tests'))
@@ -96,6 +105,18 @@ Venus.prototype.startExecutor = function (program) {
   program.homeFolder = __dirname;
 
   this.server = executor.start(program);
+};
+
+// Start in Executor mode - run demo test
+Venus.prototype.runDemo = function (program) {
+  var testFile = path.resolve(__dirname, 'examples', '06-SimpleCoverageTest', 'specs', 'Greeter.spec.js');
+
+  logger.verbose(i18n('Running demo'));
+
+  program.test = testFile;
+  program.phantom = true;
+  program.coverage = true;
+  this.startExecutor(program);
 };
 
 // Initialize new project directory
