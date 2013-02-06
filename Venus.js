@@ -1,6 +1,9 @@
 // @author LinkedIn
 
-// The Venus application code that is called by the Venus shell script (bin/venus)
+/**
+ * The Venus application code that is called by the Venus shell script (bin/venus).
+ * @file
+ */
   
 var _         = require('underscore'),
     executor  = require('./lib/executor'),
@@ -13,22 +16,40 @@ var _         = require('underscore'),
     fs        = require('fs'),
     path      = require('path');
 
-// The Venus application object
+/**
+ * The Venus application object
+ * @constructor
+ */
 function Venus() {}
 
-// Start the application
+/**
+ * Starts the application
+ * @param {Object[]} args Command line arguments.  See {@link http://nodejs.org/api/process.html#process_process_argv}
+ *   for the order of arguments.
+ * @method Venus#run
+ */
 Venus.prototype.run = function (args) {
   this.noCommand = true;
   this.commandLineArguments = args;
   this.init(args);
 };
 
-// Stop the application
+
+/**
+ * Stops the application
+ * @method Venus#shutdown
+ */
 Venus.prototype.shutdown = function () {
   throw new Error('Not implemented');
 };
 
 // Initialize the application
+/**
+ * Initializes the application
+ * @param {Object[]} args Command line arguments.  See {@link http://nodejs.org/api/process.html#process_process_argv}
+ *   for the order of arguments.
+ * @method Venus#init
+ */
 Venus.prototype.init = function (args) {
 
   // Define command line options
@@ -77,7 +98,12 @@ Venus.prototype.init = function (args) {
   }
 };
 
-// Mark function as a Venus command
+/**
+ * Marks function as a Venus command, by setting its execution context to the
+ * Venus instance.
+ * @param {Function} fn The function to wrap
+ * @method Venus#command
+ */
 Venus.prototype.command = function (fn) {
   return function () {
     this.noCommand = false;
@@ -85,7 +111,13 @@ Venus.prototype.command = function (fn) {
   }.bind(this);
 };
 
-// Apply common command line flags
+/**
+ * Applies logging and L10N options based on options passed in.
+ * @param {Object} program Options to set
+ * @param {Boolean} [program.debug] Specify true to enable debug-level messages.
+ * @param {String} [program.locale] ISO2 code of the desired language to support.
+ * @method Venus#applyCommandLineFlags
+ */
 Venus.prototype.applyCommandLineFlags = function (program) {
   // Check if debug logging should be enabled
   if (program.debug) {
@@ -98,7 +130,13 @@ Venus.prototype.applyCommandLineFlags = function (program) {
   }
 };
 
-// Start in Executor mode - run tests
+/**
+ * Starts the Venus server (runs/serves tests), with specified options.
+ * @param {Object} program Options to set.
+ * @param {Boolean} [program.debug] Specify true to enable debug-level messages.
+ * @param {String} [program.locale] ISO2 code of the desired language to support.
+ * @method Venus#startExecutor
+ */
 Venus.prototype.startExecutor = function (program) {
   logger.verbose(i18n('Starting in executor mode'));
 
@@ -108,7 +146,13 @@ Venus.prototype.startExecutor = function (program) {
   this.server = executor.start(program);
 };
 
-// Start in Executor mode - run demo test
+/**
+ * Runs Venus in demo mode, with hard-coded tests.
+ * @param {Object} program Options to set.
+ * @param {Boolean} [program.debug] Specify true to enable debug-level messages.
+ * @param {String} [program.locale] ISO2 code of the desired language to support.
+ * @method Venus#runDemo
+ */
 Venus.prototype.runDemo = function (program) {
   var testFile = path.resolve(__dirname, 'examples', '06-SimpleCoverageTest', 'specs', 'Greeter.spec.js');
 
@@ -120,7 +164,13 @@ Venus.prototype.runDemo = function (program) {
   this.startExecutor(program);
 };
 
-// Initialize new project directory
+/**
+ * Initializes the directory from which to serve test cases and resources.
+ * @param {Object} program Options to set.
+ * @param {Boolean} [program.debug] Specify true to enable debug-level messages.
+ * @param {String} [program.locale] ISO2 code of the desired language to support.
+ * @method Venus#initProjectDirectory
+ */
 Venus.prototype.initProjectDirectory = function (program) {
   var venusConfigFolderName = '.venus';
 
