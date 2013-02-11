@@ -67,9 +67,8 @@ Venus.prototype.init = function (args) {
     .option('-xv, --sauce-labs-version [version]', i18n('Specify version to use with sauce labs'))
     .option('-xp, --sauce-labs-platform [platform]', i18n('Specify platform to use with sauce labs'))
     .option('-xr, --sauce-labs-server [url]', i18n('Specify server to use with sauce labs'))
-    // to be removed after testing
-    .option('-xu, --sauce-labs-username [url]', i18n('Specify username to use with sauce labs'))
-    .option('-xa, --sauce-labs-access-key [url]', i18n('Specify access key to use with sauce labs'))
+    .option('-xu, --sauce-labs-username [username]', i18n('Specify username to use with sauce labs'))
+    .option('-xa, --sauce-labs-access-key [accessKey]', i18n('Specify access key to use with sauce labs'))
 
     .action( _.bind( this.command( this.startExecutor ), this) );
 

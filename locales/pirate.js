@@ -67,5 +67,18 @@
 	"New Venus project created in /home/smclaugh/dev/sethmcl/Lu/test": "New Venus project created in /home/smclaugh/dev/sethmcl/Lu/test",
 	"Creating casperjs runners": "Creating casperjs runners",
 	"New Venus project created in /home/smclaugh/dev/sethmcl/venus/test/specs": "New Venus project created in /home/smclaugh/dev/sethmcl/venus/test/specs",
-	"Creating phantomjs UACs": "Creating phantomjs UACs"
+	"Creating phantomjs UACs": "Creating phantomjs UACs",
+	"Use sauce labs client to run browser tests": "Use sauce labs client to run browser tests",
+	"Specify browser to use with sauce labs": "Specify browser to use with sauce labs",
+	"Specify version to use with sauce labs": "Specify version to use with sauce labs",
+	"Specify platform to use with sauce labs": "Specify platform to use with sauce labs",
+	"Specify server to use with sauce labs": "Specify server to use with sauce labs",
+	"Specify username to use with sauce labs": "Specify username to use with sauce labs",
+	"Specify access key to use with sauce labs": "Specify access key to use with sauce labs",
+	"Creating sauce labs uacs": "Creating sauce labs uacs",
+	"Server: ondemand.saucelabs.com": "Server: ondemand.saucelabs.com",
+	"Browser: iphone": "Browser: iphone",
+	"Version: 5.0": "Version: 5.0",
+	"Platform: Mac 10.6": "Platform: Mac 10.6",
+	"Name: atran": "Name: atran"
 }
