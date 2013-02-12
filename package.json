@@ -2,7 +2,7 @@
   "name"              : "venus",
   "main"              : "Venus.js",
   "description"       : "JavaScript test runner & controller",
-  "version"           : "1.0.2",
+  "version"           : "1.0.21",
   "keywords"          : [ "testing" ],
   "homepage"          : "https://github.com/venusjs/venus",
   "bugs"              : {
@@ -19,7 +19,7 @@
     "type"            : "Apache 2.0"
   }],
   "dependencies"      : {
-    "phantomjs-please"  : "0.0.2",
+    "phantomjs-please"  : "0.0.21",
     "express"           : "3.0.0beta4",
     "socket.io"         : "0.8.7",
     "socket.io-client"  : "0.9.6",
