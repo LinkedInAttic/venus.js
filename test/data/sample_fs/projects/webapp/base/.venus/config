@@ -23,7 +23,12 @@
       'include/file3.js'
     ]
   },
+
   routes: {
     "path-to-lorem-ipsum.txt": "includes/lorem_ipsum.txt"
+  },
+
+  basePaths: {
+    'JS_ROOT': '../../../../foo/'
   }
 }

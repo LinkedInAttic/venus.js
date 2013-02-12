@@ -188,5 +188,28 @@ describe('lib/testcase', function() {
       //files.should.be.an.instanceOf(Array);
       //files[4].url.should.eql('/temp/test/1/lib/file3.js');
     });
+
+    it('should handle base paths', function () {
+      var testpath = testHelper.sampleTests('base_paths.js'),
+          conf     = testHelper.testConfig(),
+          test     = new testcase.TestCase(conf),
+          files,
+          resolvedPath,
+          match;
+
+      test.path = testpath;
+      test.directory = testHelper.sampleTests();
+      test.id = 1;
+      files = test.prepareIncludes(
+        test.resolveAnnotations(
+          test.parseTestFile(testpath).annotations
+      ));
+
+      resolvedPath = files[4].fs;
+      match = 'venus/test/data/sample_fs/foo/empty_file.js';
+
+      (resolvedPath.indexOf(match) + match.length).should.eql(resolvedPath.length);
+
+    });
   });
 });
