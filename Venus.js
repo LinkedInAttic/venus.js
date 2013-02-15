@@ -180,7 +180,7 @@ Venus.prototype.initProjectDirectory = function (program) {
 
   function createDir() {
     // copy global directory
-    wrench.copyDirSyncRecursive(path.resolve(__dirname, venusConfigFolderName), venusConfigFolderName);
+    wrench.copyDirSyncRecursive(path.resolve(__dirname, venusConfigFolderName, '.init-data'), venusConfigFolderName);
     console.log(i18n('New Venus project created in ' + process.cwd()));
     return;
   }
