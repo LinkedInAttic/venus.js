@@ -49,7 +49,12 @@ describe('lib/config', function () {
     var conf = new config.Config(testHelper.fakeCwd());
 
     it('should get the closest value for a property', function () {
-      conf.get('libraries.jasmine.library.includes').value[0].should.eql('libraries/jasmine.js');
+      conf.get('libraries.jasmine.includes').value[0].should.eql('libraries/jasmine.js');
+    });
+
+    it('should work with an invalid property path', function () {
+      var property = conf.get('test.bar');
+      should.not.exist(property.value);
     });
   });
 
