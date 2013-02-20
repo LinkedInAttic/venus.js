@@ -27,6 +27,8 @@
 
   foo: {},
 
+  bar: 'foo',
+
   routes: {
     "path-to-lorem-ipsum.txt": "includes/lorem_ipsum.txt"
   },
