@@ -10,16 +10,16 @@ module.exports.fakeCwd = function() {
 
 module.exports.testConfig = function() {
   return new config.Config(module.exports.fakeCwd());
-}
+};
 
 module.exports.sampleTests = function(path) {
-  if(!path) {
+  if (!path) {
     return pathm.resolve(__dirname + '/../data/sample_tests');
   } else {
     return pathm.resolve(__dirname + '/../data/sample_tests/' + path);
   }
-}
+};
 
 module.exports.codeCoverageData = function (name) {
   return require(pathm.resolve(__dirname, '..', 'data', 'sample_code_coverage', name + '.json'));
-}
+};

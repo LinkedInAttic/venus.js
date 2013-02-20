@@ -75,5 +75,8 @@
 	"run an example venus test": "run an example venus test",
 	"Running demo": "Running demo",
 	"Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)": "Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)",
-	"no annotations -- skipping test file %s": "no annotations -- skipping test file %s"
+	"no annotations -- skipping test file %s": "no annotations -- skipping test file %s",
+	"New Venus project created in /home/smclaugh/dev/sethmcl/temp": "New Venus project created in /home/smclaugh/dev/sethmcl/temp",
+	"Error copying %s to %s. Exception: %s": "Error copying %s to %s. Exception: %s",
+	"Error copying test file %s to %s. Exception: %s": "Error copying test file %s to %s. Exception: %s"
 }
