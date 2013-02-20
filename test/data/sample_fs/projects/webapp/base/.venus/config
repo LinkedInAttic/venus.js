@@ -21,8 +21,11 @@
     ],
     my_group: [
       'include/file3.js'
-    ]
+    ],
+    single: 'test.js'
   },
+
+  foo: {},
 
   routes: {
     "path-to-lorem-ipsum.txt": "includes/lorem_ipsum.txt"
