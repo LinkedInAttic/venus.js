@@ -80,5 +80,8 @@
 	"Browser: iphone": "Browser: iphone",
 	"Version: 5.0": "Version: 5.0",
 	"Platform: Mac 10.6": "Platform: Mac 10.6",
-	"Name: atran": "Name: atran"
+	"Name: atran": "Name: atran",
+	"Version: 18": "Version: 18",
+	"Name: undefined": "Name: undefined",
+	"View your test here: %s": "View your test here: %s"
 }
