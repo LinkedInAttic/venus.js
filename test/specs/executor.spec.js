@@ -89,4 +89,13 @@ describe('lib/executor', function() {
     exec.init(config);
   });
 
+  it('parseTestPaths should omit .venus folder', function() {
+    var exec      = new executor.Executor(),
+        testPaths = [testPath('.venus')],
+        result;
+
+    result = exec.parseTestPaths(testPaths);
+
+    Object.keys(result).length.should.eql(0);
+  });
 });
