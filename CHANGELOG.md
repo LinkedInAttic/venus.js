@@ -1,8 +1,9 @@
 # Changelog
 
-## 1.0.3 (unreleased)
+## 1.0.3
 
 - basePaths now supported as a config option in the .venus/config file.
+- Custom UACs can now be used with the new --uac flag
 
 ## 1.0.2
 
