@@ -76,13 +76,17 @@ describe('lib/executor', function() {
     result[first].annotations['venus-include-group'].should.have.length(1);
   });
 
-  it('should create phantom clients if correct flag is set', function() {
+  it('should emit "tests-loaded" event', function(done) {
     var exec   = new executor.Executor(),
-        config = { phantom: true, test: testPath( 'foo' ) },
-        spy    = sinon.spy(exec, 'createPhantomRunners');
+        config = { phantom: true, test: testPath( 'foo' ) };
+
+    exec.on('tests-loaded', function (tests, options) {
+      tests.should.be.an.instanceOf(Array);
+      options.phantom.should.be.true;
+      done();
+    });
 
     exec.init(config);
-    spy.callCount.should.eql(1);
   });
 
 });

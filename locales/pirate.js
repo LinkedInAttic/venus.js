@@ -78,5 +78,11 @@
 	"no annotations -- skipping test file %s": "no annotations -- skipping test file %s",
 	"New Venus project created in /home/smclaugh/dev/sethmcl/temp": "New Venus project created in /home/smclaugh/dev/sethmcl/temp",
 	"Error copying %s to %s. Exception: %s": "Error copying %s to %s. Exception: %s",
-	"Error copying test file %s to %s. Exception: %s": "Error copying test file %s to %s. Exception: %s"
+	"Error copying test file %s to %s. Exception: %s": "Error copying test file %s to %s. Exception: %s",
+	"Creating WebDriver UACs": "Creating WebDriver UACs",
+	"Specify a user agent controller to run tests": "Specify a user agent controller to run tests",
+	"Specify options to pass to UAC": "Specify options to pass to UAC",
+	"Use PhantomJS to run tests. Optionally specify path to PhantomJS binary.": "Use PhantomJS to run tests. Optionally specify path to PhantomJS binary.",
+	"Use WebDriver (Selenium) to run tests. Optionally specify config options.": "Use WebDriver (Selenium) to run tests. Optionally specify config options.",
+	"%s UAC does not implement onTestsLoaded hook.": "%s UAC does not implement onTestsLoaded hook."
 }
