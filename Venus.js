@@ -10,6 +10,8 @@ var _         = require('underscore'),
     i18n      = require('./lib/util/i18n'),
     locale    = require('./lib/util/locale'),
     logger    = require('./lib/util/logger'),
+    phantom   = require('./lib/uac/phantom'),
+    webdriver = require('./lib/uac/webdriver'),
     program   = require('commander'),
     prompt    = require('cli-prompt'),
     wrench    = require('wrench'),
@@ -26,9 +28,9 @@ function Venus() {}
  * Starts the application
  * @param {Object[]} args Command line arguments.  See {@link http://nodejs.org/api/process.html#process_process_argv}
  *   for the order of arguments.
- * @method Venus#run
+ * @method Venus#start
  */
-Venus.prototype.run = function (args) {
+Venus.prototype.start = function (args) {
   this.noCommand = true;
   this.commandLineArguments = args;
   this.init(args);
@@ -80,16 +82,22 @@ Venus.prototype.init = function (args) {
     .description(i18n('Run tests'))
     .option('-t, --test [tests]', i18n('Comma separated string of tests to run'))
     .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
-    .option('-n, --phantom [path to binary]', i18n('Use phantomJS client to run browser tests'))
-    .option('-s, --selenium', i18n('Use selenium client to run browser tests'))
-    .option('-r, --selenium-server [url]', i18n('Specify selenium server to use'))
-    .option('-b, --selenium-browser [browser]', i18n('Specify browser to use with selenium'))
+    .option('-n, --phantom [path]', i18n('Use PhantomJS to run tests. Optionally specify path to PhantomJS binary.'))
+    .option('-w, --webdriver [options]', i18n('Use WebDriver (Selenium) to run tests. Optionally specify config options.'))
+    .option('-u, --uac [uac]', i18n('Specify a user agent controller to run tests'))
+    .option('-o, --uac-options [comma separated list]', i18n('Specify options to pass to UAC'))
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
     .option('-c, --coverage', i18n('Generate Code Coverage Report'))
     .option('--require-annotations', i18n('Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)'))
-    .action(_.bind(this.command(this.startExecutor), this));
+
+    // backwards compatibility
+    .option('-s, --selenium', i18n('Use selenium client to run browser tests'))
+    .option('-r, --selenium-server [url]', i18n('Specify selenium server to use'))
+    .option('-b, --selenium-browser [browser]', i18n('Specify browser to use with selenium'))
+
+    .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
 
@@ -109,6 +117,22 @@ Venus.prototype.command = function (fn) {
     this.noCommand = false;
     fn.apply(this, arguments);
   }.bind(this);
+};
+
+/**
+ * Quit Venus
+ * @param {String} messageType type of log message to print
+ * @param {String} message exit message
+ * @method Venus#quit
+ */
+Venus.prototype.quit = function (messageType, message) {
+  try {
+    logger[messageType](message);
+  } catch (e) {
+    logger.error(message);
+  }
+
+  process.exit();
 };
 
 /**
@@ -135,15 +159,42 @@ Venus.prototype.applyCommandLineFlags = function (program) {
  * @param {Object} program Options to set.
  * @param {Boolean} [program.debug] Specify true to enable debug-level messages.
  * @param {String} [program.locale] ISO2 code of the desired language to support.
- * @method Venus#startExecutor
+ * @method Venus#run
  */
-Venus.prototype.startExecutor = function (program) {
+Venus.prototype.run = function (program) {
+  var uac;
   logger.verbose(i18n('Starting in executor mode'));
 
+  this.server = new executor.Executor();
   this.applyCommandLineFlags(program);
   program.homeFolder = __dirname;
 
-  this.server = executor.start(program);
+  if (program.webdriver || program.selenium) {
+    program.uac = 'webdriver';
+
+    if (program.webdriver) {
+      program['uac-options'] = program.webdriver;
+    } else {
+      program['uac-options'] = [program['selenium-server'], program['selenium-browser']].join(',');
+    }
+  }
+
+  if (program.phantom) {
+    program.uac = 'phantom';
+    program['uac-options'] = program.phantom;
+  }
+
+  if (program.uac) {
+    uac = require('./lib/uac/' + program.uac);
+
+    if (typeof uac.onTestsLoaded === 'function') {
+      this.server.on('tests-loaded', uac.onTestsLoaded);
+    } else {
+      this.quit('error', i18n('%s UAC does not implement onTestsLoaded hook.', program.uac));
+    }
+  }
+
+  this.server.init(program);
 };
 
 /**
@@ -161,7 +212,7 @@ Venus.prototype.runDemo = function (program) {
   program.test = testFile;
   program.phantom = true;
   program.coverage = true;
-  this.startExecutor(program);
+  this.run(program);
 };
 
 /**
