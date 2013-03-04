@@ -2,4 +2,4 @@
 var Venus = require('../Venus'),
     app   = new Venus();
 
-app.run(process.argv);
+app.start(process.argv);

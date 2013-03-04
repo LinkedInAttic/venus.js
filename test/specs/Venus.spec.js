@@ -12,13 +12,13 @@ describe('Venus main', function() {
     (venus instanceof Venus).should.be.true;
   });
 
-  it('should start executor when run command is passed', function() {
+  it('should call run when run command is passed', function() {
     var argv = ['node', 'venus', 'run'],
         app  = new Venus();
 
-    app.startExecutor = sinon.spy();
-    app.run(argv);
-    app.startExecutor.should.have.been.calledOnce;
+    app.run = sinon.spy();
+    app.start(argv);
+    app.run.should.have.been.calledOnce;
   });
 
   it('should initialize a new project when init command is passed', function() {
@@ -26,7 +26,7 @@ describe('Venus main', function() {
         app  = new Venus();
 
     app.initProjectDirectory = sinon.spy();
-    app.run(argv);
+    app.start(argv);
     app.initProjectDirectory.should.have.been.calledOnce;
   });
 });
