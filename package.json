@@ -1,8 +1,8 @@
 {
   "name"              : "venus",
   "main"              : "Venus.js",
-  "description"       : "JavaScript test runner & controller",
-  "version"           : "1.0.21",
+  "description"       : "Execution environment for JavaScript unit testing",
+  "version"           : "1.0.3",
   "keywords"          : [ "testing" ],
   "homepage"          : "https://github.com/venusjs/venus",
   "bugs"              : {
