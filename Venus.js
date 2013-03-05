@@ -174,8 +174,6 @@ Venus.prototype.run = function (program) {
 
     if (program.webdriver) {
       program['uac-options'] = program.webdriver;
-    } else {
-      program['uac-options'] = [program['selenium-server'], program['selenium-browser']].join(',');
     }
   }
 
