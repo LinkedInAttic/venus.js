@@ -97,21 +97,15 @@ Venus.prototype.init = function (args) {
     .description(i18n('Run tests'))
     .option('-t, --test [tests]', i18n('Comma separated string of tests to run'))
     .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
-    .option('-n, --phantom [path]', i18n('Use PhantomJS to run tests. Optionally specify path to PhantomJS binary.'))
-    .option('-w, --webdriver [options]', i18n('Use WebDriver (Selenium) to run tests. Optionally specify config options.'))
-    .option('-u, --uac [uac]', i18n('Specify a user agent controller to run tests'))
-    .option('-o, --uac-options [comma separated list]', i18n('Specify options to pass to UAC'))
+    .option('-n, --phantom [path to binary]', i18n('Use phantomJS client to run browser tests'))
+    .option('-s, --selenium', i18n('Use selenium client to run browser tests'))
+    .option('-r, --selenium-server [url]', i18n('Specify selenium server to use'))
+    .option('-b, --selenium-browser [browser]', i18n('Specify browser to use with selenium'))
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
     .option('-c, --coverage', i18n('Generate Code Coverage Report'))
     .option('--require-annotations', i18n('Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)'))
-
-    // backwards compatibility
-    .option('-s, --selenium', i18n('Use selenium client to run browser tests'))
-    .option('-r, --selenium-server [url]', i18n('Specify selenium server to use'))
-    .option('-b, --selenium-browser [browser]', i18n('Specify browser to use with selenium'))
-
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
@@ -132,22 +126,6 @@ Venus.prototype.command = function (fn) {
     this.noCommand = false;
     fn.apply(this, arguments);
   }.bind(this);
-};
-
-/**
- * Quit Venus
- * @param {String} messageType type of log message to print
- * @param {String} message exit message
- * @method Venus#quit
- */
-Venus.prototype.quit = function (messageType, message) {
-  try {
-    logger[messageType](message);
-  } catch (e) {
-    logger.error(message);
-  }
-
-  process.exit();
 };
 
 /**
@@ -177,35 +155,44 @@ Venus.prototype.applyCommandLineFlags = function (program) {
  * @method Venus#run
  */
 Venus.prototype.run = function (program) {
-  var uac;
+  // var uac;
   logger.verbose(i18n('Starting in executor mode'));
 
   this.server = new executor.Executor();
   this.applyCommandLineFlags(program);
   program.homeFolder = __dirname;
 
-  if (program.webdriver || program.selenium) {
-    program.uac = 'webdriver';
 
-    if (program.webdriver) {
-      program['uac-options'] = program.webdriver;
-    }
-  }
+  // if (program.webdriver || program.selenium) {
+    // program.uac = 'webdriver';
 
-  if (program.phantom) {
-    program.uac = 'phantom';
-    program['uac-options'] = program.phantom;
-  }
+    // if (program.webdriver) {
+      // program['uac-options'] = program.webdriver;
+    // }
+  // }
 
-  if (program.uac) {
-    uac = require('./lib/uac/' + program.uac);
+  // if (program.phantom) {
+    // program.uac = 'phantom';
+    // program['uac-options'] = program.phantom;
+  // }
 
-    if (typeof uac.onTestsLoaded === 'function') {
-      this.server.on('tests-loaded', uac.onTestsLoaded);
-    } else {
-      this.quit('error', i18n('%s UAC does not implement onTestsLoaded hook.', program.uac));
-    }
-  }
+  // if (program.uac === 'phantom') {
+    // program.phantom = true;
+    // if (program['uac-options']) {
+      // program.phantom = program['uac-options'];
+    // }
+  // }
+
+  // Fix for issue gh-154. Needs some more work.
+  // if (program.uac) {
+    // uac = require('./lib/uac/' + program.uac);
+
+    // if (typeof uac.onTestsLoaded === 'function') {
+      // this.server.on('tests-loaded', uac.onTestsLoaded);
+    // } else {
+      // this.quit('error', i18n('%s UAC does not implement onTestsLoaded hook.', program.uac));
+    // }
+  // }
 
   this.server.init(program);
 };

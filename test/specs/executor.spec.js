@@ -76,18 +76,18 @@ describe('lib/executor', function() {
     result[first].annotations['venus-include-group'].should.have.length(1);
   });
 
-  it('should emit "tests-loaded" event', function(done) {
-    var exec   = new executor.Executor(),
-        config = { phantom: true, test: testPath( 'foo' ) };
+  // it('should emit "tests-loaded" event', function(done) {
+    // var exec   = new executor.Executor(),
+        // config = { phantom: true, test: testPath( 'foo' ) };
 
-    exec.on('tests-loaded', function (tests, options) {
-      tests.should.be.an.instanceOf(Array);
-      options.phantom.should.be.true;
-      done();
-    });
+    // exec.on('tests-loaded', function (tests, options) {
+      // tests.should.be.an.instanceOf(Array);
+      // options.phantom.should.be.true;
+      // done();
+    // });
 
-    exec.init(config);
-  });
+    // exec.init(config);
+  // });
 
   it('parseTestPaths should omit .venus folder', function() {
     var exec      = new executor.Executor(),
