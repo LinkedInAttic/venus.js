@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.6
+
+-- Fixed issue with Venus not returning proper exit codes
+
+## 1.0.5
+
+Skipped release
+
+## 1.0.4
+
+-- Misc. bug fixes
+
 ## 1.0.3
 
 - basePaths now supported as a config option in the .venus/config file.
