@@ -1,7 +1,11 @@
+* Venus.js Mailing List: https://groups.google.com/forum/#!forum/venusjs
+* Project site: http://www.venusjs.org
+* master: [![View Summary](https://secure.travis-ci.org/linkedin/venus.js.png?branch=master)](http://travis-ci.org/#!/linkedin/venus.js/branch_summary)
+
 ##Dependencies
 
-[Node.js v0.8.8](http://nodejs.org/dist/v0.8.8/)
-[PhantomJS](http://www.phantomjs.org)
+* [Node.js v0.8.8](http://nodejs.org/dist/v0.8.8/)
+* [PhantomJS](http://www.phantomjs.org)
 
 ## Overview
 
@@ -67,4 +71,4 @@ In your test file, the following annotations are supported:
 
 ##Get started
 
-View the [Getting Started](http://www.venusjs.org) to get started.
+Visit the project page at http://www.venusjs.org for more information.

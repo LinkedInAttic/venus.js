@@ -206,9 +206,7 @@ describe('lib/testcase', function() {
       ));
 
       resolvedPath = files[4].fs;
-      console.log(resolvedPath);
-      match = 'venus/test/data/sample_fs/foo/empty_file.js';
-
+      match = '/test/data/sample_fs/foo/empty_file.js';
       (resolvedPath.indexOf(match) + match.length).should.eql(resolvedPath.length);
 
     });
