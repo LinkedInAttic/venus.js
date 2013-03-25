@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7
+
+-- Added example of testing Require.js modules
+
 ## 1.0.6
 
 -- Fixed issue with Venus not returning proper exit codes
