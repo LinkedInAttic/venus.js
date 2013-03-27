@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8 (unpublished)
+
+-- Venus now writes temporary files to user's home directory (~/.venus_temp) instead of to folder where venus is installed
+
 ## 1.0.7
 
 -- Added example of testing Require.js modules
