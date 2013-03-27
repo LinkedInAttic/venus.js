@@ -40,7 +40,8 @@
     "wrench"            : "1.4.3",
     "webdriverjs"       : "0.6.9",
     "useragent-parser"  : "0.1.1",
-    "istanbul"          : "0.1.27"
+    "istanbul"          : "0.1.27",
+    "mkdirp"            : "0.3.5"
   },
   "devDependencies": {
     "chai"              : "1.0.4",

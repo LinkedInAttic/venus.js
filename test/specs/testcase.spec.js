@@ -6,6 +6,7 @@ var should     = require('../lib/sinon-chai').chai.should(),
     testcase   = require('../../lib/testcase'),
     annotation = testcase.annotation,
     config     = require('../../lib/config'),
+    path       = require('path'),
     hostname   = require('os').hostname();
 
 describe('lib/testcase', function() {
@@ -209,6 +210,21 @@ describe('lib/testcase', function() {
       match = '/test/data/sample_fs/foo/empty_file.js';
       (resolvedPath.indexOf(match) + match.length).should.eql(resolvedPath.length);
 
+    });
+
+    it('should use the correct http root for test files', function () {
+      var conf     = testHelper.testConfig(),
+          test     = new testcase.TestCase(conf),
+          httpRoot = test.getHttpRoot(1),
+          home;
+
+      if (process.platform === 'win32') {
+        home = process.env['USERPROFILE'];
+      } else {
+        home = process.env['HOME'];
+      }
+
+      httpRoot.should.eql(path.resolve(home, '.venus_temp', 'test', '1'));
     });
   });
 });
