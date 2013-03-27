@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.8 (unpublished)
+## 1.0.8
 
 -- Venus now writes temporary files to user's home directory (~/.venus_temp) instead of to folder where venus is installed
 
