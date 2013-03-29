@@ -33,9 +33,9 @@
   },
 
   // Binaries
-  // binaries: {
-  //  phantomjs: '/path/to/phantomjs'
-  // }
+  binaries: {
+    phantomjs: '../bin/phantomjs'
+  }
 
   // Serve static content
   //static: {
