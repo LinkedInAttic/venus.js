@@ -4,122 +4,153 @@
 'use strict';
 var should        = require('../lib/sinon-chai').chai.should(),
     config        = require('../../lib/config'),
-    testHelper    = require('../lib/helpers');
+    sinon         = require('sinon'),
+    fsHelper      = require('../../lib/util/fsHelper'),
+    fs            = require('fs'),
+    path          = require('path');
 
-describe('lib/config', function () {
+describe('lib/config', function() {
+  describe('searchforfile', function() {
+    it('should find specified file', function() {
+      var fsHelperMock,
+          fsMock,
+          pathMock,
+          mock,
+          matches;
 
-  describe('searchforfile', function () {
-    it('should find specified file', function () {
-      var matches = config
-        .instance()
-        .searchForFile('.venus/', testHelper.fakeCwd());
+      fsHelperMock = sinon.mock(fsHelper);
+      fsMock = sinon.mock(fs);
+      pathMock = sinon.mock(path);
+      mock = sinon.mock(config);
+      fsHelperMock.expects('searchUpwardsForFile').once()
+          .returns('/upwards/path');
+      fsMock.expects('existsSync').twice().returns(true);
+      pathMock.expects('resolve').withExactArgs('~/.venus/').returns('somePath');
+      pathMock.expects('resolve').withExactArgs('/some/path/.venus/')
+          .returns('otherPath');
+      mock.expects('getBinDirectory').once().returns('/some/path');
 
-      matches.length.should.be.above(2);
+      matches = config.searchForFile('.venus/');
+
+      matches.should.eql(['/upwards/path', 'somePath', 'otherPath']);
+
+      mock.verify();
+      pathMock.verify();
+      fsMock.verify();
+      fsHelperMock.verify();
     });
   });
 
-  describe('getSearchPath', function () {
-    it('should find search paths', function () {
-      var conf = new config.Config();
-      conf.cwd = testHelper.fakeCwd();
-      conf.getSearchPath().length.should.be.above(2);
+  describe('searchPathForFile', function() {
+    it('should return the matches of the file in the searchPath', function() {
+      var mock,
+          pathMock,
+          fsMock;
+
+      mock = sinon.mock(config);
+      pathMock = sinon.mock(path);
+      fsMock = sinon.mock(fs);
+      mock.expects('searchForFile').once().withExactArgs('.venus/')
+          .returns(['/fakePath']);
+      pathMock.expects('resolve').once().withExactArgs('/fakePath/fakeFile').
+          returns('/resolved');
+      fsMock.expects('existsSync').returns(true);
+
+      config.searchPathForFile('fakeFile').should.eql(['/resolved']);
+
+      mock.verify();
+      pathMock.verify();
+      fsMock.verify();
     });
   });
 
-  describe('findConfigs', function () {
-    it('should find the configs in search path', function () {
-      var conf = new config.Config();
-      conf.cwd = testHelper.fakeCwd();
-      conf.findConfigs().length.should.be.above(2);
-    });
-  });
-
-  describe('buildLookupChain', function () {
-    it('should return config objects', function () {
-      var conf = new config.Config(testHelper.fakeCwd()),
-          chain;
-
-      chain = conf.buildLookupChain().configs;
-      chain.length.should.be.above(0);
-      chain[0].data.libraries.mocha.includes[0].should.eql('libraries/mocha.js');
-    });
-  });
-
-  describe('get', function () {
-    var conf = new config.Config(testHelper.fakeCwd());
-
-    it('should get the closest value for a property', function () {
-      conf.get('libraries.jasmine.includes').value[0].should.eql('libraries/jasmine.js');
-    });
-
-    it('should work with an invalid property path', function () {
-      var property = conf.get('test.bar');
-      should.not.exist(property.value);
-    });
-  });
-
-  describe('loadFile', function () {
+  describe('loadFile', function() {
     it('should load a file in a config directory', function () {
-      var conf = new config.Config(testHelper.fakeCwd());
-      conf.loadFile('templates/test.tl').should.eql('ship ahoy!\n');
+      var mock,
+          fsMock;
+
+      mock = sinon.mock(config);
+      fsMock = sinon.mock(fs);
+      mock.expects('searchPathForFile').once().withExactArgs('someFile')
+          .returns(['one', 'two']);
+      fsMock.expects('readFileSync').once().withExactArgs('one').returns('abc');
+
+      config.loadFile('someFile').should.eql('abc');
+
+      mock.verify();
+      fsMock.verify();
     });
   });
 
-  describe('loadTemplate', function () {
-    it('should load a template', function () {
-      var conf = new config.Config(testHelper.fakeCwd());
-      conf.loadTemplate('test').should.eql('ship ahoy!\n');
+  describe('loadTemplate', function() {
+    it('should call load file adding the template path and extension', function () {
+      var mock = sinon.mock(config);
+      mock.expects('loadFile').once().withExactArgs('templates/test.tl')
+          .returns('content');
+
+      config.loadTemplate('test').should.eql('content');
+
+      mock.verify();
     });
   });
 
-  describe('resolve', function () {
-    it('should work with a property that is a string', function () {
-      var conf = new config.Config(testHelper.fakeCwd()),
-          includes = conf.resolve('includes.single');
+  describe('parseConfigFile', function() {
+    it('parses config file and makes paths absolute', function() {
+      var fsMock,
+          configString,
+          result;
 
-      includes.should.be.a('string');
+      configString = '{' +
+        '"libraries":{' +
+          '"mine":{' +
+            '"includes":[' +
+              '"../someFile"' +
+            ']' +
+          '}' +
+        '},' +
+        '"default":{' +
+          '"library":"mine"' +
+        '},' +
+        '"basePaths":{' +
+          '"somePath":"../somePath"' +
+        '}' +
+      '}';
+      fsMock = sinon.mock(fs);
+      fsMock.expects('readFileSync').once().withExactArgs('/configFile')
+          .returns(configString);
 
-    });
+      result = {
+        'libraries': {
+          'mine': {
+            'includes': [
+              '/../someFile'
+            ]
+          }
+        },
+        'default': {
+          'library': 'mine'
+        },
+        'basePaths': {
+          'somePath': '/../somePath'
+        }
+      };
+      config.parseConfigFile('/configFile').should.eql(result);
 
-    it('should work with a property that is an array', function () {
-      var conf = new config.Config(testHelper.fakeCwd()),
-          includes = conf.resolve('includes.default');
-
-      includes.should.be.an.instanceof(Array);
-
-    });
-
-    it('should work with a property path that does not exist', function () {
-      var conf = new config.Config(testHelper.fakeCwd()),
-          value = conf.resolve('includes.parent_group1');
-
-      should.not.exist(value);
+      fsMock.verify();
     });
   });
 
-  describe('routes', function () {
-    it('should return a string for an existing route', function () {
-      // The 'path-to-lorem-ipsum.txt' route defined in
-      // test/data/sample_fs/projects/.venus/config should match
-      // the absolute path to that file.
-      var conf = new config.Config(testHelper.fakeCwd()),
-          routes = conf.get('routes'),
-          resolvedRoute;
-      should.exist(routes);
-      should.exist(routes.value);
-      resolvedRoute = routes.value['path-to-lorem-ipsum.txt'];
-      resolvedRoute.should.be.a('string');
-      resolvedRoute.should.eql(
-        testHelper.fakeCwd() + '/.venus/includes/lorem_ipsum.txt');
-    });
+  describe('getConfig', function() {
+    var mock = sinon.mock(config);
+    mock.expects('searchPathForFile').once().withExactArgs('config')
+        .returns(['somePath', 'otherPath']);
+    mock.expects('parseConfigFile').once().withExactArgs('somePath')
+        .returns({'a':'C','b':'B'});
+    mock.expects('parseConfigFile').once().withExactArgs('otherPath')
+        .returns({'a':'A','c':'D'});
 
-    it('should return undefined for a non-existent route', function () {
-      // Non-existent routes should have a undefined value.
-      var conf = new config.Config(testHelper.fakeCwd()),
-          routes = conf.get('routes');
-      should.exist(routes);
-      should.exist(routes.value);
-      should.not.exist(routes.value['non-existent-value.txt']);
-    });
+    config.getConfig().should.eql({'a':'C','c':'D','b':'B'});
+
+    mock.verify();
   });
 });
