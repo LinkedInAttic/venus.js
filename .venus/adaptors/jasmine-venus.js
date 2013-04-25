@@ -1,29 +1,30 @@
-// @author LinkedIn    
+// @author LinkedIn
 
 // Create a Jasmine adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)    
 
-// Instantiate adaptor    
+// Instantiate adaptor
 function Adaptor() {};
 
-// Inherit from adapter template  
+// Inherit from adapter template
 Adaptor.prototype = new AdaptorTemplate();
 
 // Override Methods
 // ----------------
 
-// Override methods defined in the adapter template   
+// Override methods defined in the adapter template
 
 Adaptor.prototype.start = function() {
   var jasmineEnv = jasmine.getEnv();
       jasmineEnv.updateInterval = 1000,
-      self = this;
+      self = this,
+      fixtureHelper = (typeof FixtureHelper === 'function') ? new FixtureHelper() : false;
 
   jasmineEnv.addReporter({
     reportRunnerStarting: function(runner) {
     },
     reportRunnerResults: function(runner) {
 
-      // All unit tests are done  
+      // All unit tests are done
       self.processFinalResults(runner);
       self.sendResults();
     },
@@ -32,7 +33,10 @@ Adaptor.prototype.start = function() {
     reportSpecStarting: function(spec) {
     },
     reportSpecResults: function(spec) {
-      // A single unit test is done    
+      if (fixtureHelper) {
+        fixtureHelper.restoreState();
+      }
+      // A single unit test is done
       self.addTestResult(spec);
     }
   });
@@ -49,7 +53,7 @@ Adaptor.prototype.getTestName = function(data) {
       title = '',
       testName = '';
 
-  // Make sure to obtain the proper test name if it is nested within other tests  
+  // Make sure to obtain the proper test name if it is nested within other tests
   var obj = data;
   while (obj.hasOwnProperty('suite')) {
     title = obj.suite.description;
