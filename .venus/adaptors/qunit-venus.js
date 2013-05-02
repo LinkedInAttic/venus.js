@@ -14,10 +14,14 @@ Adaptor.prototype = new AdaptorTemplate();
 // Override methods defined in the adapter template       
 
 Adaptor.prototype.start = function() {
-  var self = this;
+  var self = this,
+      fixtureHelper = (typeof FixtureHelper === 'function') ? new FixtureHelper() : false;
 
   // A single unit test is done    
   QUnit.log(function(data) {
+    if (fixtureHelper) {
+      fixtureHelper.restoreState();
+    }
     self.addTestResult(data);
   });
 
