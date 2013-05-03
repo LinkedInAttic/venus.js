@@ -1,16 +1,16 @@
 #!/bin/bash
 
-command -v docco >/dev/null 2>&1 || {
-  echo -e >&2 "\nDocco does not appear to be installed, attempting to globally install it for you now (npm install -g docco)"
-  npm install -g docco;
+command -v docker >/dev/null 2>&1 || {
+  echo -e >&2 "\nDocker does not appear to be installed, attempting to globally install it for you now (npm install -g docker)"
+  npm install -g docker;
 
-  command -v docco >/dev/null 2>&1 || {
-    echo -e >&2 "\nUnable to install Docco without sudo. Trying with sudo"
-    sudo npm install -g docco;
+  command -v docker >/dev/null 2>&1 || {
+    echo -e >&2 "\nUnable to install docker without sudo. Trying with sudo"
+    sudo npm install -g docker;
   }
 
-  command -v docco >/dev/null 2>&1 || {
-      echo -e >&2 "\nInstalling docco failed. Aborting"; exit 1;
+  command -v docker >/dev/null 2>&1 || {
+      echo -e >&2 "\nInstalling docker failed. Aborting"; exit 1;
     }
 }
 
@@ -30,12 +30,6 @@ command -v pygmentize >/dev/null 2>&1 || {
 
 echo -e "Generating Venus docs...\n"
 
-docco   .venus/adaptors/*.js    -o   docs/venus/adaptors
-docco   js/runner_client/*.js   -o   docs/js/runner_client
-docco   lib/*.js                -o   docs/lib
-docco   lib/uac/*.js            -o   docs/lib/uac
-docco   lib/util/*.js           -o   docs/lib/util
-docco   setup/*.js              -o   docs/setup
-docco   Venus.js                -o   docs
+cd .. & docker -o docs -x .venus/libraries,.git,css,docs,examples,locales,logs,node_modules,test,.git*,.jshint*,*.yml,*.json -n --extras fileSearch,goToLine
 
 echo -e "\nDone!\n"
