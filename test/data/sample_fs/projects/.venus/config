@@ -9,5 +9,10 @@
   },
   includes: {
     parent_group: [ 'JS_ROOT/foobar.js' ],
+  },
+  selenium: {
+    browser: 'netscape',
+    host: 'netscape.com',
+    version: 3
   }
 }

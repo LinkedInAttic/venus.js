@@ -4,7 +4,9 @@
 var should     = require('../lib/sinon-chai').chai.should(),
     sinon      = require('sinon'),
     executor   = require('../../lib/executor'),
+    testHelper = require('../lib/helpers'),
     testPath   = require('../lib/helpers').sampleTests,
+    config     = require('../../lib/config'),
     path       = require('path');
 
 describe('lib/executor', function() {
@@ -97,5 +99,91 @@ describe('lib/executor', function() {
     result = exec.parseTestPaths(testPaths);
 
     Object.keys(result).length.should.eql(0);
+  });
+
+  describe('selenium functionality - new API', function () {
+    var exec = new executor.Executor(),
+        test = testPath('parse_comments'),
+        options,
+        runner;
+
+    options = {
+      selenium: 'ioi.net',
+      browser: 'chrome',
+      version: '21',
+      test: test
+    };
+
+    exec.init(options);
+    runner = exec.runners[0];
+
+    it('should use chrome', function () {
+      runner.client.desiredCapabilities.browserName.should.eql('chrome');
+    });
+
+    it('should use version 21', function () {
+      runner.client.desiredCapabilities.version.should.eql('21');
+    });
+
+    it('should connect to ioi.net', function () {
+      runner.options.host.should.eql('ioi.net');
+    });
+
+  });
+
+  describe('selenium functionality - load from config', function () {
+    var conf = new config.Config(testHelper.fakeCwd()),
+        exec = new executor.Executor(conf),
+        test = testPath('parse_comments'),
+        options,
+        runner;
+
+    options = {
+      selenium: true,
+      test: test
+    };
+
+    exec.init(options);
+    runner = exec.runners[0];
+
+    it('should use netscape', function () {
+      runner.client.desiredCapabilities.browserName.should.eql('netscape');
+    });
+
+    it('should connect to netscape.com', function () {
+      runner.options.host.should.eql('netscape.com');
+    });
+
+    it('should use version 3', function () {
+      runner.client.desiredCapabilities.version.should.eql(3);
+    });
+
+  });
+
+
+  describe('selenium functionality - legacy API', function () {
+    var exec = new executor.Executor(),
+        test = testPath('parse_comments'),
+        options,
+        runner;
+
+    options = {
+      selenium: true,
+      seleniumServer: 'foo.biz',
+      seleniumBrowser: 'froogle',
+      test: test
+    };
+
+    exec.init(options);
+    runner = exec.runners[0];
+
+    it('should use froogle', function () {
+      runner.client.desiredCapabilities.browserName.should.eql('froogle');
+    });
+
+    it('should connect to foo.biz', function () {
+      runner.options.host.should.eql('foo.biz');
+    });
+
   });
 });
