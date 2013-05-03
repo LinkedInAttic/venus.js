@@ -84,5 +84,12 @@
 	"Specify options to pass to UAC": "Specify options to pass to UAC",
 	"Use PhantomJS to run tests. Optionally specify path to PhantomJS binary.": "Use PhantomJS to run tests. Optionally specify path to PhantomJS binary.",
 	"Use WebDriver (Selenium) to run tests. Optionally specify config options.": "Use WebDriver (Selenium) to run tests. Optionally specify config options.",
-	"%s UAC does not implement onTestsLoaded hook.": "%s UAC does not implement onTestsLoaded hook."
+	"%s UAC does not implement onTestsLoaded hook.": "%s UAC does not implement onTestsLoaded hook.",
+	"Server: foo.biz": "Server: foo.biz",
+	"Browser: froogle": "Browser: froogle",
+	"Server: ioi.net": "Server: ioi.net",
+	"Server: true": "Server: true",
+	"Browser: [object Object]": "Browser: [object Object]",
+	"Browser: netscape": "Browser: netscape",
+	"Browser: foobar": "Browser: foobar"
 }
