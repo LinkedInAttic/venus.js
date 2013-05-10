@@ -35,5 +35,7 @@
 
   basePaths: {
     '#!JS_ROOT': '../../../../foo/'
-  }
+  },
+
+  hostname: 'barfoo.com'
 }
