@@ -207,6 +207,7 @@ describe('lib/testcase', function() {
 
       resolvedPath = files[4].fs;
       match = '/test/data/sample_fs/foo/empty_file.js';
+      debugger;
       (resolvedPath.indexOf(match) + match.length).should.eql(resolvedPath.length);
 
     });

@@ -1,13 +1,19 @@
 /**
  * @author LinkedIn
  */
-var should     = require('../lib/sinon-chai').chai.should(),
-    sinon      = require('sinon'),
-    executor   = require('../../lib/executor'),
-    testPath   = require('../lib/helpers').sampleTests,
-    path       = require('path');
+var should       = require('../lib/sinon-chai').chai.should(),
+    sinon        = require('sinon'),
+    executor     = require('../../lib/executor'),
+    testHelpers  = require('../lib/helpers'),
+    testPath     = require('../lib/helpers').sampleTests,
+    path         = require('path'),
+    configHelper = require('../../lib/config');
 
 describe('lib/executor', function() {
+
+  before(function () {
+    configHelper.cwd = testHelpers.fakeCwd();
+  });
 
   it('should not be modifiable', function() {
     executor.foo = 'bar';

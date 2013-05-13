@@ -2,14 +2,15 @@
  * @author LinkedIn
  */
 var pathm = require('path'),
-    config = require('../../lib/config');
+    configHelper = require('../../lib/config');
 
 module.exports.fakeCwd = function() {
   return pathm.resolve(__dirname + '/../data/sample_fs/projects/webapp/base/');
 };
 
 module.exports.testConfig = function() {
-  return new config.Config(module.exports.fakeCwd());
+  configHelper.cwd = module.exports.fakeCwd();
+  return configHelper.getConfig();
 };
 
 module.exports.sampleTests = function(path) {
