@@ -10,6 +10,7 @@ describe('lib/constants', function () {
 
   it('should load correct interface', function () {
     var networkInterface = constants.getInterface();
+
     networkInterface.internal.should.be.false;
     networkInterface.family.should.eql('IPv4');
     networkInterface.address.split('.').length.should.eql(4);
