@@ -14,5 +14,6 @@
     browser: 'netscape',
     host: 'netscape.com',
     version: 3
-  }
+  },
+  hostname: 'barfoo.com'
 }

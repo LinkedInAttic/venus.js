@@ -186,4 +186,42 @@ describe('lib/executor', function() {
     });
 
   });
+
+  describe('specify hostname on command line', function () {
+    var conf = new config.Config(testHelper.fakeCwd()),
+        exec = new executor.Executor(conf),
+        test = testPath('parse_comments'),
+        options,
+        url;
+
+    options = {
+      hostname: 'foobar.com',
+      test: test
+    };
+
+    exec.init(options);
+    url = exec.testgroup.testArray[0].url.run;
+
+    it('should use the hostname specified on command line', function () {
+      url.indexOf('http://foobar.com').should.eql(0);
+    });
+  });
+
+  describe('specify hostname through config', function () {
+    var exec = new executor.Executor(testHelper.testConfig()),
+        test = testPath('parse_comments'),
+        options,
+        url;
+
+    options = {
+      test: test
+    };
+
+    exec.init(options);
+    url = exec.testgroup.testArray[0].url.run;
+
+    it('should use the hostname specified in config', function () {
+      url.indexOf('http://barfoo.com').should.eql(0);
+    });
+  });
 });

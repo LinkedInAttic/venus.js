@@ -91,5 +91,6 @@
 	"Server: true": "Server: true",
 	"Browser: [object Object]": "Browser: [object Object]",
 	"Browser: netscape": "Browser: netscape",
-	"Browser: foobar": "Browser: foobar"
+	"Browser: foobar": "Browser: foobar",
+	"Set hostname for test URLs, defaults to your ip address": "Set hostname for test URLs, defaults to your ip address"
 }
