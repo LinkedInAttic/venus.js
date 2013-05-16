@@ -92,5 +92,14 @@
 	"Browser: [object Object]": "Browser: [object Object]",
 	"Browser: netscape": "Browser: netscape",
 	"Browser: foobar": "Browser: foobar",
-	"Set hostname for test URLs, defaults to your ip address": "Set hostname for test URLs, defaults to your ip address"
+	"Set hostname for test URLs, defaults to your ip address": "Set hostname for test URLs, defaults to your ip address",
+	"Browser name to request from selenium webdriver": "Browser name to request from selenium webdriver",
+	"Browser version to request from selenium webdriver": "Browser version to request from selenium webdriver",
+	"[deprecated] Specify selenium server to use": "[deprecated] Specify selenium server to use",
+	"[deprecated] Specify browser to use with selenium": "[deprecated] Specify browser to use with selenium",
+	"Browser: internet explorer": "Browser: internet explorer",
+	"Browser: internet explorer|9.0": "Browser: internet explorer|9.0",
+	"Browser: chrome|21.0": "Browser: chrome|21.0",
+	"Server: undefined": "Server: undefined",
+	"Browser: chromeoid": "Browser: chromeoid"
 }
