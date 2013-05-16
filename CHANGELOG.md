@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.10
+
+-- Updated syntax for running tests with selenium webdriver. New syntax: `venus run -t spec.js --selenium grid_url --browser chrome|20.0`
+-- Changed test urls to use system IP address instead of hostname. Can manually set hostname with either `--hostname` command line flag, or `hostname: 'myhost'` property in config file
+
 ## 1.0.9
 
 -- Venus is now smarter about finding the right path for phantomjs

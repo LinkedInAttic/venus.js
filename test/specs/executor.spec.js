@@ -109,20 +109,19 @@ describe('lib/executor', function() {
 
     options = {
       selenium: 'ioi.net',
-      browser: 'chrome',
-      version: '21',
+      browser: 'chromeoid|21.0',
       test: test
     };
 
     exec.init(options);
     runner = exec.runners[0];
 
-    it('should use chrome', function () {
-      runner.client.desiredCapabilities.browserName.should.eql('chrome');
+    it('should use chromeoid', function () {
+      runner.client.desiredCapabilities.browserName.should.eql('chromeoid');
     });
 
     it('should use version 21', function () {
-      runner.client.desiredCapabilities.version.should.eql('21');
+      runner.client.desiredCapabilities.version.should.eql('21.0');
     });
 
     it('should connect to ioi.net', function () {
