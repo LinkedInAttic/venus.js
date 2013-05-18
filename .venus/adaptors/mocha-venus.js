@@ -1,40 +1,43 @@
-// @author LinkedIn    
+// @author LinkedIn
 
-// Create a Mocha adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)    
+// Create a Mocha adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)
 
-// Setup Mocha with behavior driven development (BDD)      
+// Setup Mocha with behavior driven development (BDD)
 function Adaptor() {
   mocha.setup({ ui: 'bdd', ignoreLeaks: true });
 };
 
-// Inherit from adapter template    
+// Inherit from adapter template
 Adaptor.prototype = new AdaptorTemplate();
 
 // Override Methods
 // ----------------
 
-// Override methods defined in the adapter template    
+// Override methods defined in the adapter template
 
 Adaptor.prototype.start = function() {
   var self = this,
       fixtureHelper = (typeof FixtureHelper === 'function') ? new FixtureHelper() : false;
 
-  mocha.run()
-    .globals(['__flash_getWindowLocation', '__flash_getTopLocation'])
+  var runner = mocha.run();
 
-  // A single unit test is done      
-  .on('test end', function(data) {
+  runner.globals(['__flash_getWindowLocation', '__flash_getTopLocation']);
+
+  // A single unit test is done
+  runner.on('test end', function(data) {
     if (fixtureHelper) {
       fixtureHelper.restoreState();
     }
     self.addTestResult(data);
-  })
+  });
 
-  // All unit tests are done    
-  .on('HTML_JSON end', function(data) {
+  // All unit tests are done
+  runner.on('HTML_JSON end', function(data) {
     self.processFinalResults(data);
     self.sendResults();
   });
+
+  runner.run();
 };
 
 Adaptor.prototype.getTestMessage = function(data) {
