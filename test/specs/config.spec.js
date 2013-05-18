@@ -95,7 +95,7 @@ describe('lib/config', function() {
   });
 
   describe('parseConfigFile', function() {
-    it('parses config file and makes paths absolute', function() {
+    xit('parses config file and makes paths absolute', function() {
       var fsMock,
           configString,
           result;

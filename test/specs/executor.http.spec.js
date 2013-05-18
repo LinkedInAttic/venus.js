@@ -14,8 +14,9 @@ describe('lib/executor -- HTTP requests', function() {
       conf,
       exec;
   before(function(done) {
-    conf = new config.Config(testHelper.fakeCwd());
-    exec = new executor.Executor(conf);
+    config.cwd = testHelper.fakeCwd();
+    conf = config.getConfig();
+    exec = new executor.Executor();
     exec.app = express();
     exec.init(
       {
@@ -47,7 +48,7 @@ describe('lib/executor -- HTTP requests', function() {
           res.statusCode.should.eql(200);
           res.on('data', function(chunk) { contents.push(chunk); });
           res.on('end', function() {
-            var actualFilePath = conf.get('routes').value[staticRouteKey],
+            var actualFilePath = conf.routes[staticRouteKey],
                 actualFile = fs.readFileSync(actualFilePath, 'utf8');
             contents = contents.join('');
             actualFile.should.eql(contents);
