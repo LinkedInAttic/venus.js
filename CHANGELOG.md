@@ -4,6 +4,7 @@
 
 -- Updated syntax for running tests with selenium webdriver. New syntax: `venus run -t spec.js --selenium grid_url --browser chrome|20.0`
 -- Changed test urls to use system IP address instead of hostname. Can manually set hostname with either `--hostname` command line flag, or `hostname: 'myhost'` property in config file
+-- Fixed bug which prevented mocha tests from running on IE
 
 ## 1.0.9
 
