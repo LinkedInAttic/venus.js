@@ -95,7 +95,7 @@ describe('lib/config', function() {
   });
 
   describe('parseConfigFile', function() {
-    xit('parses config file and makes paths absolute', function() {
+    it('parses config file and makes paths absolute', function() {
       var fsMock,
           configString,
           result;
@@ -112,7 +112,7 @@ describe('lib/config', function() {
           '"library":"mine"' +
         '},' +
         '"basePaths":{' +
-          '"somePath":"../somePath"' +
+          '"somePath":"some/path"' +
         '}' +
       '}';
       fsMock = sinon.mock(fs);
@@ -131,7 +131,7 @@ describe('lib/config', function() {
           'library': 'mine'
         },
         'basePaths': {
-          'somePath': '/../somePath'
+          'somePath': config.cwd + '/some/path'
         }
       };
       config.parseConfigFile('/configFile').should.eql(result);
