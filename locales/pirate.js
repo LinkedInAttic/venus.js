@@ -101,5 +101,20 @@
 	"Browser: internet explorer|9.0": "Browser: internet explorer|9.0",
 	"Browser: chrome|21.0": "Browser: chrome|21.0",
 	"Server: undefined": "Server: undefined",
-	"Browser: chromeoid": "Browser: chromeoid"
+	"Browser: chromeoid": "Browser: chromeoid",
+	"Use sauce labs client to run browser tests": "Use sauce labs client to run browser tests",
+	"Specify browser to use with sauce labs": "Specify browser to use with sauce labs",
+	"Specify version to use with sauce labs": "Specify version to use with sauce labs",
+	"Specify platform to use with sauce labs": "Specify platform to use with sauce labs",
+	"Specify server to use with sauce labs": "Specify server to use with sauce labs",
+	"Specify username to use with sauce labs": "Specify username to use with sauce labs",
+	"Specify access key to use with sauce labs": "Specify access key to use with sauce labs",
+	"Started Sauce Connect Process": "Started Sauce Connect Process",
+	"Starting Sauce Connect Process": "Starting Sauce Connect Process",
+	"Starting Sauce Connect process": "Starting Sauce Connect process",
+	"Closing Sauce Connect process": "Closing Sauce Connect process",
+	"Creating sauce labs uacs": "Creating sauce labs uacs",
+	"Server: ondemand.saucelabs.com": "Server: ondemand.saucelabs.com",
+	"Starting Sauce Connect process for %s": "Starting Sauce Connect process for %s",
+	"Closing Sauce Connect process for %s": "Closing Sauce Connect process for %s"
 }

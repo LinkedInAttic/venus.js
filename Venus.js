@@ -110,6 +110,14 @@ Venus.prototype.init = function (args) {
     .option('-r, --selenium-server [url]', i18n('[deprecated] Specify selenium server to use'))
     .option('-b, --selenium-browser [browser]', i18n('[deprecated] Specify browser to use with selenium'))
 
+    .option('--sauce-labs', i18n('Use sauce labs client to run browser tests'))
+    .option('--sauce-labs-server [url]', i18n('Specify server to use with sauce labs'))
+    .option('--sauce-labs-browser [browser]', i18n('Specify browser to use with sauce labs'))
+    .option('--sauce-labs-version [version]', i18n('Specify version to use with sauce labs'))
+    .option('--sauce-labs-platform [platform]', i18n('Specify platform to use with sauce labs'))
+    .option('--sauce-labs-username [username]', i18n('Specify username to use with sauce labs'))
+    .option('--sauce-labs-access-key [accessKey]', i18n('Specify access key to use with sauce labs'))
+
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
