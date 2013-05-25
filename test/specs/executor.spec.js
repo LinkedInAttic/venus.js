@@ -4,6 +4,7 @@
 var should       = require('../lib/sinon-chai').chai.should(),
     sinon        = require('sinon'),
     executor     = require('../../lib/executor'),
+    testcase     = require('../../lib/testcase'),
     testHelpers  = require('../lib/helpers'),
     testPath     = require('../lib/helpers').sampleTests,
     path         = require('path'),
@@ -82,19 +83,6 @@ describe('lib/executor', function() {
     result[first].annotations['venus-include-group'].should.have.length(1);
   });
 
-  // it('should emit "tests-loaded" event', function(done) {
-    // var exec   = new executor.Executor(),
-        // config = { phantom: true, test: testPath( 'foo' ) };
-
-    // exec.on('tests-loaded', function (tests, options) {
-      // tests.should.be.an.instanceOf(Array);
-      // options.phantom.should.be.true;
-      // done();
-    // });
-
-    // exec.init(config);
-  // });
-
   it('parseTestPaths should omit .venus folder', function() {
     var exec      = new executor.Executor(),
         testPaths = [testPath('.venus')],
@@ -103,5 +91,37 @@ describe('lib/executor', function() {
     result = exec.parseTestPaths(testPaths);
 
     Object.keys(result).length.should.eql(0);
+  });
+
+  describe('parseTestPaths', function() {
+    it('should create config file when called with single file', function() {
+      var exec         = new executor.Executor(),
+          mock         = sinon.mock(exec),
+          test         = testPath('foo.js'),
+          testcaseMock = sinon.mock(testcase),
+          configMock   = sinon.mock(configHelper),
+          hostname     = require('os').hostname();
+
+      // Expectations
+      mock.expects('getNextTestId').once().returns(1);
+      configMock.expects('getConfig').once().returns('configFile');
+      testcaseMock.expects('create').once().withExactArgs({
+        path: test,
+        id: 1,
+        runUrl: 'http://' + hostname + ':' + exec.port + exec.urlNamespace + '/1',
+        instrumentCodeCoverate: exec.instrumentCodeCoverage,
+        config: 'configFile'
+      });
+
+      exec.parseTestPaths([test]);
+
+      // configHelper.cwd is the dir of the file being tested
+      configHelper.cwd.should.eql(path.dirname(test));
+
+      // Verify expectations
+      mock.verify();
+      configMock.verify();
+      testcaseMock.verify();
+    });
   });
 });
