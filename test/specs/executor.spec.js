@@ -160,6 +160,67 @@ describe('lib/executor', function() {
   });
 
 
+  describe('sauce labs functionality - new API', function () {
+    var exec = new executor.Executor(),
+        test = testPath('parse_comments'),
+        options,
+        runner;
+
+    options = {
+      sauceLabs: 'ioi.net',
+      browser: 'chromeoid|21.0',
+      test: test
+    };
+
+    exec.init(options);
+    runner = exec.runners[0];
+
+      console.log(runner.client.host)
+
+    it('should use chromeoid', function () {
+      runner.client.desiredCapabilities.browserName.should.eql('chromeoid');
+    });
+
+    it('should use version 21', function () {
+      runner.client.desiredCapabilities.version.should.eql('21.0');
+    });
+
+    it('should connect to ioi.net', function () {
+      runner.options.host.should.eql('ioi.net');
+    });
+
+  });
+
+  describe('sauce labs functionality - load from config', function () {
+    var conf = new config.Config(testHelper.fakeCwd()),
+        exec = new executor.Executor(conf),
+        test = testPath('parse_comments'),
+        options,
+        runner;
+
+    options = {
+      sauceLabs: true,
+      test: test
+    };
+
+    exec.init(options);
+    runner = exec.runners[0];
+
+    it('should use firefox', function () {
+      runner.client.desiredCapabilities.browserName.should.eql('firefox');
+    });
+
+    it('should connect to ondemand.saucelabs.com', function () {
+      runner.options.host.should.eql('ondemand.saucelabs.com');
+    });
+
+    it('should use version 20', function () {
+      runner.client.desiredCapabilities.version.should.eql(20);
+    });
+
+  });
+
+
   describe('selenium functionality - legacy API', function () {
     var exec = new executor.Executor(),
         test = testPath('parse_comments'),
