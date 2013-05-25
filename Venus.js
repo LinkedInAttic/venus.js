@@ -99,7 +99,7 @@ Venus.prototype.init = function (args) {
     .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
     .option('-n, --phantom [path to binary]', i18n('Use phantomJS client to run browser tests'))
     .option('-s, --selenium [server url]', i18n('Use selenium client to run browser tests'))
-    .option('--browser [browser|version]', i18n('Browser name to request from selenium webdriver'))
+    .option('--sauce-labs [server url]', i18n('Use sauce labs client to run browser tests'))
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
@@ -107,16 +107,13 @@ Venus.prototype.init = function (args) {
     .option('--hostname', i18n('Set hostname for test URLs, defaults to your ip address'))
     .option('--require-annotations', i18n('Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)'))
 
+    .option('--browser [browser|version]', i18n('Browser name to request from selenium webdriver or sauce labs'))
+    .option('--platform [platform]', i18n('Specify platform to use with sauce labs'))
+    .option('--username [username]', i18n('Specify username to use with sauce labs'))
+    .option('--access-key [accessKey]', i18n('Specify access key to use with sauce labs'))
+
     .option('-r, --selenium-server [url]', i18n('[deprecated] Specify selenium server to use'))
     .option('-b, --selenium-browser [browser]', i18n('[deprecated] Specify browser to use with selenium'))
-
-    .option('--sauce-labs', i18n('Use sauce labs client to run browser tests'))
-    .option('--sauce-labs-server [url]', i18n('Specify server to use with sauce labs'))
-    .option('--sauce-labs-browser [browser]', i18n('Specify browser to use with sauce labs'))
-    .option('--sauce-labs-version [version]', i18n('Specify version to use with sauce labs'))
-    .option('--sauce-labs-platform [platform]', i18n('Specify platform to use with sauce labs'))
-    .option('--sauce-labs-username [username]', i18n('Specify username to use with sauce labs'))
-    .option('--sauce-labs-access-key [accessKey]', i18n('Specify access key to use with sauce labs'))
 
     .action(_.bind(this.command(this.run), this));
 
