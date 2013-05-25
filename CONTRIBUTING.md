@@ -25,6 +25,34 @@ To run the test cases, simply run:
 npm test
 ```
 
+ps: to run the test you should install those packages:
+
+```sh
+npm install mocha
+npm install chai
+npm install sinon-chai
+npm install underscore
+npm install json5
+npm install winston
+npm install i18n
+npm install express
+npm install consolidate
+npm install portscanner
+npm install socket.io
+npm install fs-tools
+npm install mkdirp
+npm install istanbul
+npm install phantomjs-please
+npm install webdriverjs
+npm install underscore.string
+npm install dustjs-linkedin
+npm install useragent-parser
+npm install socket.io-client
+npm install commander
+npm install cli-prompt
+npm install wrench
+```
+
 ## Coding Standards
 
 ### General
