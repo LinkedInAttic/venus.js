@@ -15,14 +15,17 @@
  *     governing permissions and limitations under the License.
  **/
 (function() {
-  var nativeLog;
+  var nativeLog = function () {};
 
-  if(console && console.log) {
+  if(window.console) {
     nativeLog = console.log;
-    console.log = function() {
-      nativeLog.apply( console, arguments );
-      window.parent.venus.log( [].slice.call( arguments, 0 ).join( ',' ) );
-    };
+  } else {
+    window.console = {};
   }
+
+  console.log = function() {
+    nativeLog.apply(console, arguments);
+    window.parent.venus.log.apply(window.parent.venus, arguments);
+  };
 
 }());
