@@ -51,6 +51,7 @@ VenusClientLibrary.prototype.done = function( results ){
  * Forward a console.log message to server
  * @param {String} str the log message
  */
-VenusClientLibrary.prototype.log = function( str ){
-  this.socket.emit( 'console.log', str );
+VenusClientLibrary.prototype.log = function () {
+  var str = Array.prototype.slice.call(arguments, 0).join(' ');
+  this.socket.emit( 'console.log', str);
 };
