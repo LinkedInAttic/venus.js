@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+-- You can now run tests with Sauce Labs (#207)
+-- Console.log forwarding now works correctly in IE (#209)
+-- JSHINT style comments now work correctly in test files (#212)
+
 ## 1.0.10
 
 -- Updated syntax for running tests with selenium webdriver. New syntax: `venus run -t spec.js --selenium grid_url --browser chrome|20.0`
