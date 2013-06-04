@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+* Fixed issue with serving static content (#215)
+
 ## 1.1.0
 
 * You can now run tests with Sauce Labs (#207)
