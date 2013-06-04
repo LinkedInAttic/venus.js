@@ -37,5 +37,9 @@
     '#!JS_ROOT': '../../../../foo/'
   },
 
-  hostname: 'barfoo.com'
+  hostname: 'barfoo.com',
+
+  static: {
+    'txt': '../static_content'
+  }
 }
