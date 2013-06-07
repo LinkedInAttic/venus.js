@@ -111,6 +111,7 @@ Venus.prototype.init = function (args) {
     .option('--platform [platform]', i18n('Specify platform to use with sauce labs'))
     .option('--username [username]', i18n('Specify username to use with sauce labs'))
     .option('--access-key [accessKey]', i18n('Specify access key to use with sauce labs'))
+    .option('--root-directory [directory]', i18n('Specify the root directory to search the tests'))
 
     .option('-r, --selenium-server [url]', i18n('[deprecated] Specify selenium server to use'))
     .option('-b, --selenium-browser [browser]', i18n('[deprecated] Specify browser to use with selenium'))

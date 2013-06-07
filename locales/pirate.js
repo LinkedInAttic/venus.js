@@ -144,5 +144,6 @@
 	"Platform: daf": "Platform: daf",
 	"Username: daf": "Username: daf",
 	"Access Key: adfdf": "Access Key: adfdf",
-	"Version: 21.0": "Version: 21.0"
+	"Version: 21.0": "Version: 21.0",
+	"Specify the root directory to search the tests": "Specify the root directory to search the tests"
 }
