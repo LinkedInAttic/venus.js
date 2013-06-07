@@ -287,25 +287,25 @@ describe('lib/executor', function() {
 
   describe('find test files', function() {
     var exec = new executor.Executor(testHelper.testConfig()),
-        expected_test_list,
+        expected_test_path,
         tests;
 
     it('should get all test files with current directory as root directory', function() {
-      expected_test_list = './examples/01-SimpleMochaTest/specs/Greeter.spec.js,./examples/02-SimpleQUnitTest/specs/Greeter.spec.js,./examples/03-SimpleJasmineTest/specs/Greeter.spec.js,./examples/04-AjaxControl-Mocha/specs/NusUpdate.spec.js,./examples/05-SimpleCasperTest/specs/linkedin-title-spec.js,./examples/06-SimpleCoverageTest/specs/Greeter.spec.js,./examples/07-RequireJS-Module/specs/Greeter.spec.js,./examples/08-ConsoleLog/specs/Log.spec.js,./node_modules/mocha/lib/reporters/spec.js,./node_modules/phantomjs-please/test/specs/Browser.spec.js,./node_modules/phantomjs-please/test/specs/PhantomJsPlease.spec.js,./test/specs/Binary.spec.js,./test/specs/config.spec.js,./test/specs/constants.spec.js,./test/specs/coverage.spec.js,./test/specs/executor.http.spec.js,./test/specs/executor.socketio.spec.js,./test/specs/executor.spec.js,./test/specs/testcase.spec.js,./test/specs/testrun.spec.js,./test/specs/uac/phantom.spec.js,./test/specs/util/commentsParser.spec.js,./test/specs/util/pathHelper.spec.js,./test/specs/Venus.spec.js';
+      expected_test_path = './examples/01-SimpleMochaTest/specs/Greeter.spec.js,./examples/02-SimpleQUnitTest/specs/Greeter.spec.js,./examples/03-SimpleJasmineTest/specs/Greeter.spec.js,./examples/04-AjaxControl-Mocha/specs/NusUpdate.spec.js,./examples/05-SimpleCasperTest/specs/linkedin-title-spec.js,./examples/06-SimpleCoverageTest/specs/Greeter.spec.js,./examples/07-RequireJS-Module/specs/Greeter.spec.js,./examples/08-ConsoleLog/specs/Log.spec.js,./node_modules/mocha/lib/reporters/spec.js,./node_modules/phantomjs-please/test/specs/Browser.spec.js,./node_modules/phantomjs-please/test/specs/PhantomJsPlease.spec.js,./test/specs/Binary.spec.js,./test/specs/config.spec.js,./test/specs/constants.spec.js,./test/specs/coverage.spec.js,./test/specs/executor.http.spec.js,./test/specs/executor.socketio.spec.js,./test/specs/executor.spec.js,./test/specs/testcase.spec.js,./test/specs/testrun.spec.js,./test/specs/uac/phantom.spec.js,./test/specs/util/commentsParser.spec.js,./test/specs/util/pathHelper.spec.js,./test/specs/Venus.spec.js';
       tests = exec.getTestFiles();
-      tests.should.eql(expected_test_list);
+      tests.should.eql(expected_test_path);
     });
 
     it('should get all tests files from a given directory', function() {
-      expected_test_list = 'test/specs/util//commentsParser.spec.js,test/specs/util//pathHelper.spec.js';
+      expected_test_path = 'test/specs/util//commentsParser.spec.js,test/specs/util//pathHelper.spec.js';
       tests = exec.getTestFiles("test/specs/util/");
-      tests.should.eql(expected_test_list);
+      tests.should.eql(expected_test_path);
     });
 
     it('should return empty string if cannot find any test file', function() {
-      expected_test_list = '';
+      expected_test_path = '';
       tests = exec.getTestFiles('css');
-      tests.should.eql(expected_test_list);
+      tests.should.eql(expected_test_path);
     });
   });
 });
