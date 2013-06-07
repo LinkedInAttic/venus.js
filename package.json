@@ -56,6 +56,6 @@
   "preferGlobal": true,
   "scripts": {
     "preinstall" : "node setup/preInstall.js",
-    "test": "mocha test/specs/test_suite.js"
+    "test": "mocha test/unit/test_suite.js"
   }
 }

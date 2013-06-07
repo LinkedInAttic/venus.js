@@ -1,15 +1,24 @@
 /**
  * @author LinkedIn
  */
-var should     = require('../lib/sinon-chai').chai.should(),
-    sinon      = require('sinon'),
-    executor   = require('../../lib/executor'),
-    testHelper = require('../lib/helpers'),
-    testPath   = require('../lib/helpers').sampleTests,
-    config     = require('../../lib/config'),
-    path       = require('path');
+var should      = require('../lib/sinon-chai').chai.should(),
+    sinon       = require('sinon'),
+    executor    = require('../../lib/executor'),
+    testHelper  = require('../lib/helpers'),
+    testPath    = require('../lib/helpers').sampleTests,
+    config      = require('../../lib/config'),
+    path        = require('path'),
+    executor    = require('../../lib/executor'),
+    testcase    = require('../../lib/testcase'),
+    testHelpers = require('../lib/helpers'),
+    testPath    = require('../lib/helpers').sampleTests,
+    path        = require('path');
 
 describe('lib/executor', function() {
+
+  before(function () {
+    config.cwd = testHelpers.fakeCwd();
+  });
 
   it('should not be modifiable', function() {
     executor.foo = 'bar';
@@ -78,19 +87,6 @@ describe('lib/executor', function() {
     result[first].annotations['venus-include-group'].should.have.length(1);
   });
 
-  // it('should emit "tests-loaded" event', function(done) {
-    // var exec   = new executor.Executor(),
-        // config = { phantom: true, test: testPath( 'foo' ) };
-
-    // exec.on('tests-loaded', function (tests, options) {
-      // tests.should.be.an.instanceOf(Array);
-      // options.phantom.should.be.true;
-      // done();
-    // });
-
-    // exec.init(config);
-  // });
-
   it('parseTestPaths should omit .venus folder', function() {
     var exec      = new executor.Executor(),
         testPaths = [testPath('.venus')],
@@ -131,7 +127,7 @@ describe('lib/executor', function() {
   });
 
   describe('selenium functionality - load from config', function () {
-    var conf = new config.Config(testHelper.fakeCwd()),
+    var conf = testHelper.testConfig(),
         exec = new executor.Executor(conf),
         test = testPath('parse_comments'),
         options,
@@ -175,7 +171,7 @@ describe('lib/executor', function() {
     exec.init(options);
     runner = exec.runners[0];
 
-      console.log(runner.client.host)
+    console.log(runner.client.host);
 
     it('should use chromeoid', function () {
       runner.client.desiredCapabilities.browserName.should.eql('chromeoid');
@@ -192,7 +188,7 @@ describe('lib/executor', function() {
   });
 
   describe('sauce labs functionality - load from config', function () {
-    var conf = new config.Config(testHelper.fakeCwd()),
+    var conf = testHelper.testConfig(),
         exec = new executor.Executor(conf),
         test = testPath('parse_comments'),
         options,
@@ -248,7 +244,7 @@ describe('lib/executor', function() {
   });
 
   describe('specify hostname on command line', function () {
-    var conf = new config.Config(testHelper.fakeCwd()),
+    var conf = testHelper.testConfig(),
         exec = new executor.Executor(conf),
         test = testPath('parse_comments'),
         options,
@@ -282,6 +278,38 @@ describe('lib/executor', function() {
 
     it('should use the hostname specified in config', function () {
       url.indexOf('http://barfoo.com').should.eql(0);
+    });
+  });
+
+  describe('parseTestPaths', function() {
+    it('should create config file when called with single file', function() {
+      var exec         = new executor.Executor(),
+          mock         = sinon.mock(exec),
+          test         = testPath('foo.js'),
+          testcaseMock = sinon.mock(testcase),
+          configMock   = sinon.mock(config),
+          hostname     = require('../../lib/constants').hostname;
+
+      // Expectations
+      mock.expects('getNextTestId').once().returns(1);
+      configMock.expects('getConfig').once().returns('configFile');
+      testcaseMock.expects('create').once().withExactArgs({
+        path: test,
+        id: 1,
+        runUrl: 'http://' + hostname + ':' + exec.port + exec.urlNamespace + '/1',
+        instrumentCodeCoverate: exec.instrumentCodeCoverage,
+        config: 'configFile'
+      });
+
+      exec.parseTestPaths([test]);
+
+      // config.cwd is the dir of the file being tested
+      config.cwd.should.eql(path.dirname(test));
+
+      // Verify expectations
+      mock.verify();
+      configMock.verify();
+      testcaseMock.verify();
     });
   });
 });

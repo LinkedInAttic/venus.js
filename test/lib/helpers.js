@@ -1,25 +1,34 @@
 /**
  * @author LinkedIn
  */
-var pathm = require('path'),
-    config = require('../../lib/config');
+var path         = require('path'),
+    configHelper = require('../../lib/config');
 
 module.exports.fakeCwd = function() {
-  return pathm.resolve(__dirname + '/../data/sample_fs/projects/webapp/base/');
+  return path.resolve(__dirname + '/../data/sample_fs/projects/webapp/base/');
 };
 
 module.exports.testConfig = function() {
-  return new config.Config(module.exports.fakeCwd());
+  configHelper.cwd = module.exports.fakeCwd();
+  return configHelper.getConfig();
 };
 
-module.exports.sampleTests = function(path) {
-  if (!path) {
-    return pathm.resolve(__dirname + '/../data/sample_tests');
+module.exports.sampleTests = function(testPath) {
+  if (!testPath) {
+    return path.resolve(__dirname + '/../data/sample_tests');
   } else {
-    return pathm.resolve(__dirname + '/../data/sample_tests/' + path);
+    return path.resolve(__dirname + '/../data/sample_tests/' + testPath);
   }
 };
 
 module.exports.codeCoverageData = function (name) {
-  return require(pathm.resolve(__dirname, '..', 'data', 'sample_code_coverage', name + '.json'));
+  return require(path.resolve(__dirname, '..', 'data', 'sample_code_coverage', name + '.json'));
+};
+
+module.exports.path = function () {
+  var args = Array.prototype.slice.call(arguments, 0);
+
+  args = [__dirname, '..'].concat(args);
+
+  return path.resolve.apply(path, args);
 };
