@@ -145,5 +145,6 @@
 	"Username: daf": "Username: daf",
 	"Access Key: adfdf": "Access Key: adfdf",
 	"Version: 21.0": "Version: 21.0",
-	"New Venus project created in /home/smclaugh/temp/tree/project/test": "New Venus project created in /home/smclaugh/temp/tree/project/test"
+	"New Venus project created in /home/smclaugh/temp/tree/project/test": "New Venus project created in /home/smclaugh/temp/tree/project/test",
+	"Disabling hot reload because there are more than 5 tests loaded": "Disabling hot reload because there are more than 5 tests loaded"
 }
