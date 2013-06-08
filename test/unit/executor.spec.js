@@ -281,7 +281,7 @@ describe('lib/executor', function() {
     });
   });
 
-  describe('parseTestPaths', function() {
+  describe('createTestObjects', function() {
     it('should create config file when called with single file', function() {
       var exec         = new executor.Executor(),
           mock         = sinon.mock(exec),
@@ -298,10 +298,11 @@ describe('lib/executor', function() {
         id: 1,
         runUrl: 'http://' + hostname + ':' + exec.port + exec.urlNamespace + '/1',
         instrumentCodeCoverate: exec.instrumentCodeCoverage,
-        config: 'configFile'
+        config: 'configFile',
+        hotReload: true
       });
 
-      exec.parseTestPaths([test]);
+      exec.createTestObjects([test]);
 
       // config.cwd is the dir of the file being tested
       config.cwd.should.eql(path.dirname(test));
