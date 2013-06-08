@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2
+
+* Hot reloading is now supported -- you no longer need to restart Venus when making code or test change (#219, #220)
+* Venus config file resolution now works relative to test files, rather than CWD (#218)
+
 ## 1.1.1
 
 * Fixed issue with serving static content (#215)
