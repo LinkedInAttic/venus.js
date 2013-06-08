@@ -2,7 +2,6 @@
  * @author LinkedIn
  */
 var executor = require('../../lib/executor'),
-    config = require('../../lib/config'),
     should = require('../lib/sinon-chai').chai.should(),
     testHelper = require('../lib/helpers'),
     express = require('express'),
@@ -14,9 +13,10 @@ describe('lib/executor -- HTTP requests', function() {
   var PORT = 2100,
       conf,
       exec;
+
   before(function(done) {
-    conf = new config.Config(testHelper.fakeCwd());
-    exec = new executor.Executor(conf);
+    conf = testHelper.testConfig();
+    exec = new executor.Executor();
     exec.app = express();
     exec.init(
       {
@@ -48,7 +48,7 @@ describe('lib/executor -- HTTP requests', function() {
           res.statusCode.should.eql(200);
           res.on('data', function(chunk) { contents.push(chunk); });
           res.on('end', function() {
-            var actualFilePath = conf.get('routes').value[staticRouteKey],
+            var actualFilePath = conf.routes[staticRouteKey],
                 actualFile = fs.readFileSync(actualFilePath, 'utf8');
             contents = contents.join('');
             actualFile.should.eql(contents);
