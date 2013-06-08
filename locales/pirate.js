@@ -144,5 +144,6 @@
 	"Platform: daf": "Platform: daf",
 	"Username: daf": "Username: daf",
 	"Access Key: adfdf": "Access Key: adfdf",
-	"Version: 21.0": "Version: 21.0"
+	"Version: 21.0": "Version: 21.0",
+	"New Venus project created in /home/smclaugh/temp/tree/project/test": "New Venus project created in /home/smclaugh/temp/tree/project/test"
 }
