@@ -1,7 +1,9 @@
 {
   "predef": {
     "it": false,
-    "describe": false
+    "describe": false,
+    "before": false,
+    "beforeEach": false
   },
 
   "bitwise": true,

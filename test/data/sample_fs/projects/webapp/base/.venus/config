@@ -41,5 +41,9 @@
 
   static: {
     'txt': '../static_content'
+  },
+
+  nested: {
+   'level-1': 'foo'
   }
 }

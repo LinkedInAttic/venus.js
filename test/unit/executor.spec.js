@@ -1,15 +1,24 @@
 /**
  * @author LinkedIn
  */
-var should     = require('../lib/sinon-chai').chai.should(),
-    sinon      = require('sinon'),
-    executor   = require('../../lib/executor'),
-    testHelper = require('../lib/helpers'),
-    testPath   = require('../lib/helpers').sampleTests,
-    config     = require('../../lib/config'),
-    path       = require('path');
+var should      = require('../lib/sinon-chai').chai.should(),
+    sinon       = require('sinon'),
+    executor    = require('../../lib/executor'),
+    testHelper  = require('../lib/helpers'),
+    testPath    = require('../lib/helpers').sampleTests,
+    config      = require('../../lib/config'),
+    path        = require('path'),
+    executor    = require('../../lib/executor'),
+    testcase    = require('../../lib/testcase'),
+    testHelpers = require('../lib/helpers'),
+    testPath    = require('../lib/helpers').sampleTests,
+    path        = require('path');
 
 describe('lib/executor', function() {
+
+  before(function () {
+    config.cwd = testHelpers.fakeCwd();
+  });
 
   it('should not be modifiable', function() {
     executor.foo = 'bar';
@@ -78,19 +87,6 @@ describe('lib/executor', function() {
     result[first].annotations['venus-include-group'].should.have.length(1);
   });
 
-  // it('should emit "tests-loaded" event', function(done) {
-    // var exec   = new executor.Executor(),
-        // config = { phantom: true, test: testPath( 'foo' ) };
-
-    // exec.on('tests-loaded', function (tests, options) {
-      // tests.should.be.an.instanceOf(Array);
-      // options.phantom.should.be.true;
-      // done();
-    // });
-
-    // exec.init(config);
-  // });
-
   it('parseTestPaths should omit .venus folder', function() {
     var exec      = new executor.Executor(),
         testPaths = [testPath('.venus')],
@@ -131,7 +127,7 @@ describe('lib/executor', function() {
   });
 
   describe('selenium functionality - load from config', function () {
-    var conf = new config.Config(testHelper.fakeCwd()),
+    var conf = testHelper.testConfig(),
         exec = new executor.Executor(conf),
         test = testPath('parse_comments'),
         options,
@@ -175,7 +171,7 @@ describe('lib/executor', function() {
     exec.init(options);
     runner = exec.runners[0];
 
-      console.log(runner.client.host)
+    console.log(runner.client.host);
 
     it('should use chromeoid', function () {
       runner.client.desiredCapabilities.browserName.should.eql('chromeoid');
@@ -192,7 +188,7 @@ describe('lib/executor', function() {
   });
 
   describe('sauce labs functionality - load from config', function () {
-    var conf = new config.Config(testHelper.fakeCwd()),
+    var conf = testHelper.testConfig(),
         exec = new executor.Executor(conf),
         test = testPath('parse_comments'),
         options,
@@ -248,7 +244,7 @@ describe('lib/executor', function() {
   });
 
   describe('specify hostname on command line', function () {
-    var conf = new config.Config(testHelper.fakeCwd()),
+    var conf = testHelper.testConfig(),
         exec = new executor.Executor(conf),
         test = testPath('parse_comments'),
         options,
@@ -291,14 +287,14 @@ describe('lib/executor', function() {
         tests;
 
     it('should get all test files with current directory as root directory', function() {
-      expected_test_path = './examples/01-SimpleMochaTest/specs/Greeter.spec.js,./examples/02-SimpleQUnitTest/specs/Greeter.spec.js,./examples/03-SimpleJasmineTest/specs/Greeter.spec.js,./examples/04-AjaxControl-Mocha/specs/NusUpdate.spec.js,./examples/05-SimpleCasperTest/specs/linkedin-title-spec.js,./examples/06-SimpleCoverageTest/specs/Greeter.spec.js,./examples/07-RequireJS-Module/specs/Greeter.spec.js,./examples/08-ConsoleLog/specs/Log.spec.js,./node_modules/mocha/lib/reporters/spec.js,./node_modules/phantomjs-please/test/specs/Browser.spec.js,./node_modules/phantomjs-please/test/specs/PhantomJsPlease.spec.js,./test/specs/Binary.spec.js,./test/specs/config.spec.js,./test/specs/constants.spec.js,./test/specs/coverage.spec.js,./test/specs/executor.http.spec.js,./test/specs/executor.socketio.spec.js,./test/specs/executor.spec.js,./test/specs/testcase.spec.js,./test/specs/testrun.spec.js,./test/specs/uac/phantom.spec.js,./test/specs/util/commentsParser.spec.js,./test/specs/util/pathHelper.spec.js,./test/specs/Venus.spec.js';
+      expected_test_path = './examples/01-SimpleMochaTest/specs/Greeter.spec.js,./examples/02-SimpleQUnitTest/specs/Greeter.spec.js,./examples/03-SimpleJasmineTest/specs/Greeter.spec.js,./examples/04-AjaxControl-Mocha/specs/NusUpdate.spec.js,./examples/05-SimpleCasperTest/specs/linkedin-title-spec.js,./examples/06-SimpleCoverageTest/specs/Greeter.spec.js,./examples/07-RequireJS-Module/specs/Greeter.spec.js,./examples/08-ConsoleLog/specs/Log.spec.js,./node_modules/mocha/lib/reporters/spec.js,./node_modules/phantomjs-please/test/specs/Browser.spec.js,./node_modules/phantomjs-please/test/specs/PhantomJsPlease.spec.js,./test/integration/executor.http.spec.js,./test/unit/Binary.spec.js,./test/unit/config.spec.js,./test/unit/constants.spec.js,./test/unit/coverage.spec.js,./test/unit/executor.socketio.spec.js,./test/unit/executor.spec.js,./test/unit/testcase.spec.js,./test/unit/testrun.spec.js,./test/unit/uac/phantom.spec.js,./test/unit/util/commentsParser.spec.js,./test/unit/util/pathHelper.spec.js,./test/unit/Venus.spec.js';
       tests = exec.getTestFiles();
       tests.should.eql(expected_test_path);
     });
 
     it('should get all tests files from a given directory', function() {
-      expected_test_path = 'test/specs/util//commentsParser.spec.js,test/specs/util//pathHelper.spec.js';
-      tests = exec.getTestFiles("test/specs/util/");
+      expected_test_path = 'test/unit/util/commentsParser.spec.js,test/unit/util/pathHelper.spec.js';
+      tests = exec.getTestFiles("test/unit/util");
       tests.should.eql(expected_test_path);
     });
 
@@ -306,6 +302,39 @@ describe('lib/executor', function() {
       expected_test_path = '';
       tests = exec.getTestFiles('css');
       tests.should.eql(expected_test_path);
+    });
+  });
+
+  describe('createTestObjects', function() {
+    it('should create config file when called with single file', function() {
+      var exec         = new executor.Executor(),
+          mock         = sinon.mock(exec),
+          test         = testPath('foo.js'),
+          testcaseMock = sinon.mock(testcase),
+          configMock   = sinon.mock(config),
+          hostname     = require('../../lib/constants').hostname;
+
+      // Expectations
+      mock.expects('getNextTestId').once().returns(1);
+      configMock.expects('getConfig').once().returns('configFile');
+      testcaseMock.expects('create').once().withExactArgs({
+        path: test,
+        id: 1,
+        runUrl: 'http://' + hostname + ':' + exec.port + exec.urlNamespace + '/1',
+        instrumentCodeCoverate: exec.instrumentCodeCoverage,
+        config: 'configFile',
+        hotReload: true
+      });
+
+      exec.createTestObjects([test]);
+
+      // config.cwd is the dir of the file being tested
+      config.cwd.should.eql(path.dirname(test));
+
+      // Verify expectations
+      mock.verify();
+      configMock.verify();
+      testcaseMock.verify();
     });
   });
 });
