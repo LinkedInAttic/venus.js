@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+* Fixed issue where PhantomJS path specified in config files was not being resolved properly (#221)
+
 ## 1.1.2
 
 * Hot reloading is now supported -- you no longer need to restart Venus when making code or test change (#219, #220)
