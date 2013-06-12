@@ -281,6 +281,30 @@ describe('lib/executor', function() {
     });
   });
 
+  describe('find test files', function() {
+    var exec = new executor.Executor(testHelper.testConfig()),
+        expected_test_path,
+        tests;
+
+    it('should get all test files with current directory as root directory', function() {
+      expected_test_path = './examples/01-SimpleMochaTest/specs/Greeter.spec.js,./examples/02-SimpleQUnitTest/specs/Greeter.spec.js,./examples/03-SimpleJasmineTest/specs/Greeter.spec.js,./examples/04-AjaxControl-Mocha/specs/NusUpdate.spec.js,./examples/05-SimpleCasperTest/specs/linkedin-title-spec.js,./examples/06-SimpleCoverageTest/specs/Greeter.spec.js,./examples/07-RequireJS-Module/specs/Greeter.spec.js,./examples/08-ConsoleLog/specs/Log.spec.js,./node_modules/mocha/lib/reporters/spec.js,./node_modules/phantomjs-please/test/specs/Browser.spec.js,./node_modules/phantomjs-please/test/specs/PhantomJsPlease.spec.js,./test/integration/executor.http.spec.js,./test/unit/Binary.spec.js,./test/unit/config.spec.js,./test/unit/constants.spec.js,./test/unit/coverage.spec.js,./test/unit/executor.socketio.spec.js,./test/unit/executor.spec.js,./test/unit/testcase.spec.js,./test/unit/testrun.spec.js,./test/unit/uac/phantom.spec.js,./test/unit/util/commentsParser.spec.js,./test/unit/util/pathHelper.spec.js,./test/unit/Venus.spec.js';
+      tests = exec.getTestFiles();
+      tests.should.eql(expected_test_path);
+    });
+
+    it('should get all tests files from a given directory', function() {
+      expected_test_path = 'test/unit/util/commentsParser.spec.js,test/unit/util/pathHelper.spec.js';
+      tests = exec.getTestFiles("test/unit/util");
+      tests.should.eql(expected_test_path);
+    });
+
+    it('should return empty string if cannot find any test file', function() {
+      expected_test_path = '';
+      tests = exec.getTestFiles('css');
+      tests.should.eql(expected_test_path);
+    });
+  });
+
   describe('createTestObjects', function() {
     it('should create config file when called with single file', function() {
       var exec         = new executor.Executor(),
