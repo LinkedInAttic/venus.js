@@ -2,20 +2,21 @@
  * @author LinkedIn
  */
 var executor = require('../../lib/executor'),
-    config = require('../../lib/config'),
     should = require('../lib/sinon-chai').chai.should(),
     testHelper = require('../lib/helpers'),
     express = require('express'),
     fs = require('fs'),
-    http = require('http');
+    http = require('http'),
+    expect = require('expect.js');
 
 describe('lib/executor -- HTTP requests', function() {
   var PORT = 2100,
       conf,
       exec;
+
   before(function(done) {
-    conf = new config.Config(testHelper.fakeCwd());
-    exec = new executor.Executor(conf);
+    conf = testHelper.testConfig();
+    exec = new executor.Executor();
     exec.app = express();
     exec.init(
       {
@@ -47,7 +48,7 @@ describe('lib/executor -- HTTP requests', function() {
           res.statusCode.should.eql(200);
           res.on('data', function(chunk) { contents.push(chunk); });
           res.on('end', function() {
-            var actualFilePath = conf.get('routes').value[staticRouteKey],
+            var actualFilePath = conf.routes[staticRouteKey],
                 actualFile = fs.readFileSync(actualFilePath, 'utf8');
             contents = contents.join('');
             actualFile.should.eql(contents);
@@ -70,6 +71,31 @@ describe('lib/executor -- HTTP requests', function() {
           should.exist(res.statusCode);
           res.statusCode.should.eql(404);
           done();
+        });
+    });
+  });
+
+  describe('static content', function () {
+    it('should return 200 for static content file', function (done) {
+      var options = {
+            hostname: 'localhost',
+            method: 'GET',
+            path: '/temp/static/txt/foo.txt',
+            port: PORT
+          };
+      http.get(
+        options,
+        function(res) {
+          res.setEncoding('utf8');
+          var contents = [];
+          should.exist(res.statusCode);
+          expect(res.statusCode).to.be(200);
+          res.on('data', function(chunk) { contents.push(chunk); });
+          res.on('end', function() {
+            contents = contents.join('');
+            expect('foo-bar-foo\n').to.be(contents);
+            done();
+          });
         });
     });
   });

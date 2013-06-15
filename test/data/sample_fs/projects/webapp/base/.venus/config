@@ -35,5 +35,15 @@
 
   basePaths: {
     '#!JS_ROOT': '../../../../foo/'
+  },
+
+  hostname: 'barfoo.com',
+
+  static: {
+    'txt': '../static_content'
+  },
+
+  nested: {
+   'level-1': 'foo'
   }
 }

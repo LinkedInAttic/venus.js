@@ -6,6 +6,7 @@
       includes: [
         'libraries/mocha.js',
         'libraries/expect.js',
+        'helpers/venus-fixture.js',
         'adaptors/adaptor-template.js',
         'adaptors/mocha-venus.js',
         'libraries/sinon-1.5.0.js'
@@ -14,6 +15,7 @@
     qunit: {
       includes: [
         'libraries/qunit.js',
+        'helpers/venus-fixture.js',
         'adaptors/adaptor-template.js',
         'adaptors/qunit-venus.js'
       ]
@@ -21,6 +23,7 @@
     jasmine: {
       includes: [
         'libraries/jasmine.js',
+        'helpers/venus-fixture.js',
         'adaptors/adaptor-template.js',
         'adaptors/jasmine-venus.js'
       ]
@@ -33,9 +36,9 @@
   },
 
   // Binaries
-  // binaries: {
-  //  phantomjs: '/path/to/phantomjs'
-  // }
+  binaries: {
+    phantomjs: '../bin/phantomjs'
+  }
 
   // Serve static content
   //static: {

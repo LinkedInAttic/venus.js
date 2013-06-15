@@ -71,4 +71,4 @@ In your test file, the following annotations are supported:
 
 ##Get started
 
-View the [getting started guide](http://www.venusjs.org) to ramp up.
+Visit the project page at http://www.venusjs.org for more information.

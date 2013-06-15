@@ -98,14 +98,23 @@ Venus.prototype.init = function (args) {
     .option('-t, --test [tests]', i18n('Comma separated string of tests to run'))
     .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
     .option('-n, --phantom [path to binary]', i18n('Use phantomJS client to run browser tests'))
-    .option('-s, --selenium', i18n('Use selenium client to run browser tests'))
-    .option('-r, --selenium-server [url]', i18n('Specify selenium server to use'))
-    .option('-b, --selenium-browser [browser]', i18n('Specify browser to use with selenium'))
+    .option('-s, --selenium [server url]', i18n('Use selenium client to run browser tests'))
+    .option('--sauce-labs [server url]', i18n('Use sauce labs client to run browser tests'))
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
     .option('-c, --coverage', i18n('Generate Code Coverage Report'))
+    .option('--hostname', i18n('Set hostname for test URLs, defaults to your ip address'))
     .option('--require-annotations', i18n('Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)'))
+
+    .option('--browser [browser|version]', i18n('Browser name to request from selenium webdriver or sauce labs'))
+    .option('--platform [platform]', i18n('Specify platform to use with sauce labs'))
+    .option('--username [username]', i18n('Specify username to use with sauce labs'))
+    .option('--access-key [accessKey]', i18n('Specify access key to use with sauce labs'))
+
+    .option('-r, --selenium-server [url]', i18n('[deprecated] Specify selenium server to use'))
+    .option('-b, --selenium-browser [browser]', i18n('[deprecated] Specify browser to use with selenium'))
+
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);

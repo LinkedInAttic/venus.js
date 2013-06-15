@@ -2,10 +2,11 @@
  * @author LinkedIn
  */
 var should        = require('../../lib/sinon-chai').chai.should(),
-    parser        = require('../../../lib/util/commentsParser'),
-    testHelper    = require('../../lib/helpers'),
-    fs            = require('fs'),
-    annotation    = require('../../../lib/testcase').annotation;
+    parser     = require('../../../lib/util/commentsParser'),
+    testHelper = require('../../lib/helpers'),
+    fs         = require('fs'),
+    annotation = require('../../../lib/testcase').annotation,
+    expect     = require('expect.js');
 
 describe('lib/util/commentsParser', function() {
 
@@ -157,6 +158,18 @@ describe('lib/util/commentsParser', function() {
       should.exist(annotations);
       should.exist(annotations[annotation.VENUS_FIXTURE]);
       annotations[annotation.VENUS_FIXTURE].should.equal('<div class="sandbox"></div>');
+    });
+
+    it('should handle code with jshint style comment blocks', function () {
+      var commentsJshint, annotations;
+
+      commentsJshint = [
+        '/*global describe, beforeEach*/ \n\n\n',
+        'var foo = 234; \n',
+      ].join('');
+
+      annotations = parser.parseStr(commentsJshint);
+      expect(annotations).not.to.be(undefined);
     });
   });
 
