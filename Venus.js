@@ -97,24 +97,13 @@ Venus.prototype.init = function (args) {
     .description(i18n('Run tests'))
     .option('-t, --test [tests]', i18n('Comma separated string of tests to run'))
     .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
-    .option('-n, --phantom [path to binary]', i18n('Use phantomJS client to run browser tests'))
-    .option('-s, --selenium [server url]', i18n('Use selenium client to run browser tests'))
-    .option('--sauce-labs [server url]', i18n('Use sauce labs client to run browser tests'))
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
     .option('-c, --coverage', i18n('Generate Code Coverage Report'))
     .option('--hostname', i18n('Set hostname for test URLs, defaults to your ip address'))
     .option('--require-annotations', i18n('Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)'))
-
-    .option('--browser [browser|version]', i18n('Browser name to request from selenium webdriver or sauce labs'))
-    .option('--platform [platform]', i18n('Specify platform to use with sauce labs'))
-    .option('--username [username]', i18n('Specify username to use with sauce labs'))
-    .option('--access-key [accessKey]', i18n('Specify access key to use with sauce labs'))
-
-    .option('-r, --selenium-server [url]', i18n('[deprecated] Specify selenium server to use'))
-    .option('-b, --selenium-browser [browser]', i18n('[deprecated] Specify browser to use with selenium'))
-
+    .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
@@ -164,44 +153,11 @@ Venus.prototype.applyCommandLineFlags = function (program) {
  * @method Venus#run
  */
 Venus.prototype.run = function (program) {
-  // var uac;
   logger.verbose(i18n('Starting in executor mode'));
 
   this.server = new executor.Executor();
   this.applyCommandLineFlags(program);
   program.homeFolder = __dirname;
-
-
-  // if (program.webdriver || program.selenium) {
-    // program.uac = 'webdriver';
-
-    // if (program.webdriver) {
-      // program['uac-options'] = program.webdriver;
-    // }
-  // }
-
-  // if (program.phantom) {
-    // program.uac = 'phantom';
-    // program['uac-options'] = program.phantom;
-  // }
-
-  // if (program.uac === 'phantom') {
-    // program.phantom = true;
-    // if (program['uac-options']) {
-      // program.phantom = program['uac-options'];
-    // }
-  // }
-
-  // Fix for issue gh-154. Needs some more work.
-  // if (program.uac) {
-    // uac = require('./lib/uac/' + program.uac);
-
-    // if (typeof uac.onTestsLoaded === 'function') {
-      // this.server.on('tests-loaded', uac.onTestsLoaded);
-    // } else {
-      // this.quit('error', i18n('%s UAC does not implement onTestsLoaded hook.', program.uac));
-    // }
-  // }
 
   this.server.init(program);
 };
