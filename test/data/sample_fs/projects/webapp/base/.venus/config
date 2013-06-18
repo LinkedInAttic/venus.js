@@ -45,5 +45,28 @@
 
   nested: {
    'level-1': 'foo'
+  },
+
+  biz: {
+    bar: {
+     bizPathsfoo: ['../foo.js', '../bar.js']
+    },
+    foobar: [
+      { testPath: '../bar.js' }
+    ]
+  },
+
+  // Environments
+  environments: {
+    phantomjs: {
+      uac: 'phantom',
+      binaryPath: ['../node_modules/phantomjs/']
+    },
+    ie8: {
+      uac: 'webdriver',
+      browser: 'internet explorer',
+      version: '8.0',
+      host: 'supergrid.corp'
+    }
   }
 }

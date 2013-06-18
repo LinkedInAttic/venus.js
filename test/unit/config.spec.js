@@ -7,81 +7,36 @@ var should        = require('../lib/sinon-chai').chai.should(),
     sinon         = require('sinon'),
     fsHelper      = require('../../lib/util/fsHelper'),
     fs            = require('fs'),
-    path          = require('path'),
+    path          = require('flavored-path'),
     pathHelper    = require('../../lib/util/pathHelper'),
     expect        = require('expect.js'),
     testHelper    = require('../lib/helpers.js');
 
 describe('lib/config', function() {
+  var testConfig;
+
+  before(function () {
+    config.cwd = testHelper.fakeCwd();
+    testConfig = testHelper.testConfig();
+  });
+
   describe('searchforfile', function() {
     it('should find specified file', function() {
-      var fsHelperMock,
-          fsMock,
-          pathMock,
-          mock,
-          matches;
-
-      fsHelperMock = sinon.mock(fsHelper);
-      fsMock = sinon.mock(fs);
-      pathMock = sinon.mock(path);
-      mock = sinon.mock(config);
-      fsHelperMock.expects('searchUpwardsForFile').once()
-          .returns('/upwards/path');
-      fsMock.expects('existsSync').twice().returns(true);
-      pathMock.expects('resolve').withExactArgs('~/.venus/').returns('somePath');
-      pathMock.expects('resolve').withExactArgs('/some/path/.venus/')
-          .returns('otherPath');
-      mock.expects('getBinDirectory').once().returns('/some/path');
-
-      matches = config.searchForFile('.venus/');
-
-      matches.should.eql(['/upwards/path', 'somePath', 'otherPath']);
-
-      mock.verify();
-      pathMock.verify();
-      fsMock.verify();
-      fsHelperMock.verify();
+      var matches = config.searchForFile('.venus/');
+      expect(matches.length).to.be(3);
     });
   });
 
   describe('searchPathForFile', function() {
     it('should return the matches of the file in the searchPath', function() {
-      var mock,
-          pathMock,
-          fsMock;
-
-      mock = sinon.mock(config);
-      pathMock = sinon.mock(path);
-      fsMock = sinon.mock(fs);
-      mock.expects('searchForFile').once().withExactArgs('.venus/')
-          .returns(['/fakePath']);
-      pathMock.expects('resolve').once().withExactArgs('/fakePath/fakeFile').
-          returns('/resolved');
-      fsMock.expects('existsSync').returns(true);
-
-      config.searchPathForFile('fakeFile').should.eql(['/resolved']);
-
-      mock.verify();
-      pathMock.verify();
-      fsMock.verify();
+      var matches = config.searchPathForFile('config');
+      expect(matches.length).to.be(3);
     });
   });
 
   describe('loadFile', function() {
     it('should load a file in a config directory', function () {
-      var mock,
-          fsMock;
-
-      mock = sinon.mock(config);
-      fsMock = sinon.mock(fs);
-      mock.expects('searchPathForFile').once().withExactArgs('someFile')
-          .returns(['one', 'two']);
-      fsMock.expects('readFileSync').once().withExactArgs('one').returns('abc');
-
-      config.loadFile('someFile').should.eql('abc');
-
-      mock.verify();
-      fsMock.verify();
+      expect(config.loadFile('temp')).to.be('abc\n\n');
     });
   });
 
@@ -101,7 +56,8 @@ describe('lib/config', function() {
     it('parses config file and makes paths absolute', function() {
       var defaultIncludes, expectedDefaultIncludes;
 
-      defaultIncludes = testHelper.testConfig().get('includes.default'),
+      defaultIncludes = testHelper.testConfig().get('includes.default');
+
       expectedDefaultIncludes = [
         testHelper.path(
           'data',
@@ -162,6 +118,18 @@ describe('lib/config', function() {
           value      = testConfig.get('basePaths', 'DNE');
 
       expect(value).to.be(null);
+    });
+  });
+
+  describe('convert path keys to absolute paths', function () {
+    it('should convert nested array of paths to absolute paths', function () {
+      var bizPaths = testConfig.biz.bar.bizPathsfoo;
+      expect(path.isAbsolute(bizPaths[0])).to.be(true);
+    });
+
+    it('should convert nested path key to absolute path', function () {
+      var myPath = testConfig.biz.foobar[0].testPath;
+      expect(path.isAbsolute(myPath)).to.be(true);
     });
   });
 });

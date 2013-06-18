@@ -35,13 +35,26 @@
     library: 'mocha'
   },
 
-  // Binaries
-  binaries: {
-    phantomjs: '../bin/phantomjs'
+  // Environments
+  environments: {
+    phantomjs: {
+      uac: 'phantom',
+      binaryPath: ['../node_modules/phantomjs/']
+    },
+    ie8: {
+      uac: 'webdriver',
+      browser: 'internet explorer',
+      version: '8.0',
+      host: 'supergrid.corp'
+    },
+    sauce: {
+      uac: 'saucelabs',
+      host: 'ondemand.saucelabs.com',
+      browser: 'firefox',
+      version: 20,
+      platform: 'OS X 10.6',
+      username: 'venusjs',
+      accessKey: '0b0302b9-36ed-430d-8665-e9d84c8a42cf'
+    }
   }
-
-  // Serve static content
-  //static: {
-  //  sample: '../test/data'
-  //}
 }
