@@ -1,15 +1,15 @@
 /**
  * @author LinkedIn
  */
-var should    = require('../lib/sinon-chai').chai.should(),
+var expect    = require('expect.js'),
     sinon     = require('sinon'),
     Venus     = require('../../Venus');
 
 describe('Venus main', function() {
   it('should instantiate', function() {
     var venus = new Venus();
-    should.exist(venus);
-    (venus instanceof Venus).should.be.true;
+    expect(venus).to.be.ok();
+    expect(venus).to.be.a(Venus);
   });
 
   it('should call run when run command is passed', function() {
@@ -18,7 +18,7 @@ describe('Venus main', function() {
 
     app.run = sinon.spy();
     app.start(argv);
-    app.run.should.have.been.calledOnce;
+    expect(app.run.calledOnce).to.be(true);
   });
 
   it('should initialize a new project when init command is passed', function() {
@@ -27,6 +27,6 @@ describe('Venus main', function() {
 
     app.initProjectDirectory = sinon.spy();
     app.start(argv);
-    app.initProjectDirectory.should.have.been.calledOnce;
+    expect(app.initProjectDirectory.calledOnce).to.be(true);
   });
 });

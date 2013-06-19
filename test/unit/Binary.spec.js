@@ -1,9 +1,7 @@
 /**
  * @author LinkedIn
  */
-var should    = require('../lib/sinon-chai').chai.should(),
-    sinon     = require('sinon'),
-    spawn     = require('child_process').spawn,
+var spawn     = require('child_process').spawn,
     path      = require('path');
 
 describe('Venus binary', function() {

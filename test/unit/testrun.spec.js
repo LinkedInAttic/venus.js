@@ -1,7 +1,7 @@
 /**
  * @author LinkedIn
  */
-var should     = require('../lib/sinon-chai').chai.should(),
+var expect     = require('expect.js'),
     testrun   = require('../../lib/testrun');
 
 describe('lib/testrun', function() {
@@ -10,23 +10,23 @@ describe('lib/testrun', function() {
     var run;
 
     run = testrun.create({ a: 1, b: 2 });
-    run.testCount.should.eql(2);
+    expect(run.testCount).to.be(2);
 
     run = testrun.create({});
-    run.testCount.should.eql(0);
+    expect(run.testCount).to.be(0);
 
     run = testrun.create({ a: 1 });
-    run.testCount.should.eql(1);
+    expect(run.testCount).to.be(1);
 
     run = testrun.create();
-    run.testCount.should.eql(0);
+    expect(run.testCount).to.be(0);
   });
 
   it('should return tests as an array', function() {
     var run;
 
     run = testrun.create({ a: 1, b: 2 });
-    run.testArray.should.eql([1, 2]);
+    expect(run.testArray).to.eql([1, 2]);
   });
 
   it('should return array of test urls', function() {
@@ -38,7 +38,7 @@ describe('lib/testrun', function() {
       c: { url: { run: 'http://localhost/3' } }
     });
 
-    run.urls.should.eql([
+    expect(run.urls).to.eql([
       { run: 'http://localhost/1' },
       { run: 'http://localhost/2' },
       { run: 'http://localhost/3' }]);

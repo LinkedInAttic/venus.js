@@ -1,7 +1,7 @@
 /**
  * @author LinkedIn
  */
-var should      = require('../lib/sinon-chai').chai.should(),
+var expect      = require('expect.js'),
     sinon       = require('sinon'),
     executor    = require('../../lib/executor'),
     testHelper  = require('../lib/helpers'),
@@ -22,7 +22,7 @@ describe('lib/executor', function() {
 
   it('should not be modifiable', function() {
     executor.foo = 'bar';
-    should.not.exist(executor.foo);
+    expect(executor.foo).to.be(undefined);
   });
 
   it('should parse testcases from test string correctly', function() {
@@ -31,8 +31,8 @@ describe('lib/executor', function() {
         result;
 
     result = exec.parseTests(tests);
-    should.exist(result);
-    Object.keys(result).length.should.eql(3);
+    expect(result).to.be.ok();
+    expect(Object.keys(result).length).to.be(3);
   });
 
   it('should handle parsing testcases from undefined test string', function() {
@@ -41,8 +41,8 @@ describe('lib/executor', function() {
         result;
 
     result = exec.parseTests(tests);
-    should.exist(result);
-    Object.keys(result).length.should.eql(0);
+    expect(result).to.be.ok();
+    expect(Object.keys(result).length).to.be(0);
   });
 
   it('should handle tests being specified with a .js file extension', function() {
@@ -50,7 +50,7 @@ describe('lib/executor', function() {
         tests  = testPath( 'foo.js' ),
         result = exec.parseTests(tests);
 
-    Object.keys(result).length.should.eql(1);
+    expect(Object.keys(result).length).to.be(1);
   });
 
   it('should enforce require annotations option if specified', function () {
@@ -60,7 +60,7 @@ describe('lib/executor', function() {
 
     exec.requireTestAnnotations = true;
     result = exec.parseTests(tests);
-    Object.keys(result).length.should.eql(1);
+    expect(Object.keys(result).length).to.be(1);
   });
 
   it('should not enforce require annotations option if not specified', function () {
@@ -69,7 +69,7 @@ describe('lib/executor', function() {
         result;
 
     result = exec.parseTests(tests);
-    Object.keys(result).length.should.eql(2);
+    expect(Object.keys(result).length).to.be(2);
   });
 
   it('should parse comments in test cases', function() {
@@ -80,11 +80,11 @@ describe('lib/executor', function() {
 
     first = Object.keys(result)[0];
 
-    should.exist(result);
-    should.exist(result[first]);
-    result[first].annotations['venus-library'].should.eql('mocha');
-    result[first].annotations['venus-include'].should.have.length(2);
-    result[first].annotations['venus-include-group'].should.have.length(1);
+    expect(result).to.be.ok();
+    expect(result[first]).to.be.ok();
+    expect(result[first].annotations['venus-library']).to.be('mocha');
+    expect(result[first].annotations['venus-include'].length).to.be(2);
+    expect(result[first].annotations['venus-include-group'].length).to.be(1);
   });
 
   it('parseTestPaths should omit .venus folder', function() {
@@ -94,7 +94,7 @@ describe('lib/executor', function() {
 
     result = exec.parseTestPaths(testPaths);
 
-    Object.keys(result).length.should.eql(0);
+    expect(Object.keys(result).length).to.be(0);
   });
 
   describe('specify hostname on command line', function () {
@@ -113,7 +113,7 @@ describe('lib/executor', function() {
     url = exec.testgroup.testArray[0].url.run;
 
     it('should use the hostname specified on command line', function () {
-      url.indexOf('http://foobar.com').should.eql(0);
+      expect(url.indexOf('http://foobar.com')).to.be(0);
     });
   });
 
@@ -131,7 +131,7 @@ describe('lib/executor', function() {
     url = exec.testgroup.testArray[0].url.run;
 
     it('should use the hostname specified in config', function () {
-      url.indexOf('http://barfoo.com').should.eql(0);
+      expect(url.indexOf('http://barfoo.com')).to.be(0);
     });
   });
 
@@ -159,7 +159,7 @@ describe('lib/executor', function() {
       exec.createTestObjects([test]);
 
       // config.cwd is the dir of the file being tested
-      config.cwd.should.eql(path.dirname(test));
+      expect(config.cwd).to.be(path.dirname(test));
 
       // Verify expectations
       mock.verify();
