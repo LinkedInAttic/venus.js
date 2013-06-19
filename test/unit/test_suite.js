@@ -2,6 +2,7 @@
 // can be run using `npm test`
 
 require('./config.spec');
+require('./environment.spec');
 require('./executor.spec');
 require('./executor.socketio.spec');
 require('./testcase.spec');
