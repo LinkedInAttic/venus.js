@@ -25,7 +25,7 @@ describe('lib/environment', function () {
     });
 
     it('should load the UAC properly', function () {
-      expect(envConfig.uac).to.be(phantomUac);
+      expect(env.uac).to.be(phantomUac);
     });
 
     it('should provide absolute paths', function () {
