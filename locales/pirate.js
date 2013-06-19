@@ -150,5 +150,10 @@
 	"Specify environment to run tests in": "Specify environment to run tests in",
 	"Using environment phantomjs": "Using environment phantomjs",
 	"Using environment ie8": "Using environment ie8",
-	"Using environment sauce": "Using environment sauce"
+	"Using environment sauce": "Using environment sauce",
+	"Using environment ie9": "Using environment ie9",
+	"Using environment ie10": "Using environment ie10",
+	"Using environment ff": "Using environment ff",
+	"Using environment chrome": "Using environment chrome",
+	"Using environment phantom": "Using environment phantom"
 }
