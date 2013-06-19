@@ -128,4 +128,16 @@ describe('lib/config', function() {
       expect(path.isAbsolute(myPath)).to.be(true);
     });
   });
+
+  describe('inherit property object values', function () {
+    it('should include closest config values', function () {
+      expect(testConfig.get('environments.ie8')).to.be.ok();
+    });
+
+    it('should include inherited values', function () {
+      debugger;
+      expect(testConfig.get('environments.phantom')).to.be.ok();
+    });
+
+  });
 });

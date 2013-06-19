@@ -58,10 +58,6 @@
 
   // Environments
   environments: {
-    phantomjs: {
-      uac: 'phantom',
-      binaryPath: ['../node_modules/phantomjs/']
-    },
     ie8: {
       uac: 'webdriver',
       browser: 'internet explorer',
