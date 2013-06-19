@@ -2,13 +2,9 @@
  * @author LinkedIn
  */
 'use strict';
-var should        = require('../lib/sinon-chai').chai.should(),
-    config        = require('../../lib/config'),
+var config        = require('../../lib/config'),
     sinon         = require('sinon'),
-    fsHelper      = require('../../lib/util/fsHelper'),
-    fs            = require('fs'),
     path          = require('flavored-path'),
-    pathHelper    = require('../../lib/util/pathHelper'),
     expect        = require('expect.js'),
     testHelper    = require('../lib/helpers.js');
 
@@ -46,7 +42,7 @@ describe('lib/config', function() {
       mock.expects('loadFile').once().withExactArgs('templates/test.tl')
           .returns('content');
 
-      config.loadTemplate('test').should.eql('content');
+      expect(config.loadTemplate('test')).to.be('content');
 
       mock.verify();
     });
