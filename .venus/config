@@ -41,12 +41,6 @@
       uac: 'phantom',
       binaryPath: ['../node_modules/phantomjs/']
     },
-    ie8: {
-      uac: 'webdriver',
-      browser: 'internet explorer',
-      version: '8.0',
-      host: 'supergrid.corp'
-    },
     sauce: {
       uac: 'saucelabs',
       host: 'ondemand.saucelabs.com',

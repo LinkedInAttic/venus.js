@@ -10,10 +10,12 @@
   includes: {
     parent_group: [ 'JS_ROOT/foobar.js' ],
   },
-  selenium: {
-    browser: 'netscape',
-    host: 'netscape.com',
-    version: 3
-  },
-  hostname: 'barfoo.com'
+  hostname: 'barfoo.com',
+
+  environments: {
+    phantom: {
+      uac: 'phantom',
+      binaryPath: ['../node_modules/phantomjs/']
+    }
+  }
 }
