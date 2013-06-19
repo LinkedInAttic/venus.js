@@ -1,12 +1,11 @@
 /**
  * @author LinkedIn
  */
-var should        = require('../../lib/sinon-chai').chai.should(),
+var expect     = require('expect.js'),
     parser     = require('../../../lib/util/commentsParser'),
     testHelper = require('../../lib/helpers'),
     fs         = require('fs'),
-    annotation = require('../../../lib/testcase').annotation,
-    expect     = require('expect.js');
+    annotation = require('../../../lib/testcase').annotation;
 
 describe('lib/util/commentsParser', function() {
 
@@ -88,58 +87,53 @@ describe('lib/util/commentsParser', function() {
 
     it('should handle an empty file', function() {
       var annotations = parser.parseStr(commentsD);
-      should.exist(annotations);
+      expect(annotations).to.be.ok();
     });
 
     it('should handle an annotation with no value', function() {
       var annotations = parser.parseStr(commentsE);
-      should.exist(annotations);
-      annotations.hasOwnProperty('param').should.be.true;
+      expect(annotations).to.be.ok();
+      expect(annotations.hasOwnProperty('param')).to.be(true);
     });
 
     it('should handle a file with no comments', function() {
       var annotations = parser.parseStr(commentsC);
-      should.exist(annotations);
+      expect(annotations).to.be.ok();
     });
 
     it('should parse 1 annotations object from 1 comment group', function() {
       var annotations   = parser.parseStr(commentsA);
-      should.exist(annotations);
+      expect(annotations).to.be.ok();
     });
 
     it('should parse 1 annotations object from 2 comment groups', function() {
       var annotations = parser.parseStr(commentsB);
-      should.exist(annotations);
+      expect(annotations).to.be.ok();
     });
 
     it('should parse unique annotations options correctly', function() {
       var annotations = parser.parseStr(commentsA);
 
-      should.exist(annotations['venus-framework']);
-      annotations['venus-framework'].should.equal('mocha');
+      expect(annotations['venus-framework']).to.be('mocha');
     });
 
     it('should parse duplicated annotations options correctly, spanning multiple blocks', function() {
       var annotations = parser.parseStr(commentsB);
 
-      should.exist(annotations[annotation.VENUS_INCLUDE]);
-      annotations[annotation.VENUS_INCLUDE].should.eql(['/var/www/html', '/var/www/bar']);
+      expect(annotations[annotation.VENUS_INCLUDE]).to.eql(['/var/www/html', '/var/www/bar']);
     });
 
     it('should parse include groups correctly', function() {
       var annotations = parser.parseStr(commentsB);
 
-      should.exist(annotations[annotation.VENUS_INCLUDE_GROUP]);
-      annotations[annotation.VENUS_INCLUDE_GROUP].should.eql(['my_group', 'another_group']);
+      expect(annotations[annotation.VENUS_INCLUDE_GROUP]).to.eql(['my_group', 'another_group']);
     });
 
     it('should parse file paths correctly', function() {
       var comments = buildCommentBlock('@venus-include ~/var/foo_test.js'),
           annotations = parser.parseStr(comments);
 
-      should.exist(annotations);
-      should.exist(annotations[annotation.VENUS_INCLUDE]);
-      annotations[annotation.VENUS_INCLUDE].should.eql('~/var/foo_test.js');
+      expect(annotations[annotation.VENUS_INCLUDE]).to.be('~/var/foo_test.js');
 
     });
 
@@ -147,17 +141,13 @@ describe('lib/util/commentsParser', function() {
       var comments = buildCommentBlock('@venus-include ~/var/test-file.js'),
           annotations = parser.parseStr(comments);
 
-      should.exist(annotations);
-      should.exist(annotations[annotation.VENUS_INCLUDE]);
-      annotations[annotation.VENUS_INCLUDE].should.eql('~/var/test-file.js');
+      expect(annotations[annotation.VENUS_INCLUDE]).to.be('~/var/test-file.js');
 
     });
 
     it('should parse annotation values with spaces correctly', function() {
       var annotations = parser.parseStr(commentsF);
-      should.exist(annotations);
-      should.exist(annotations[annotation.VENUS_FIXTURE]);
-      annotations[annotation.VENUS_FIXTURE].should.equal('<div class="sandbox"></div>');
+      expect(annotations[annotation.VENUS_FIXTURE]).to.be('<div class="sandbox"></div>');
     });
 
     it('should handle code with jshint style comment blocks', function () {

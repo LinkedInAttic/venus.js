@@ -1,8 +1,7 @@
 /**
  * @author LinkedIn
  */
-var should     = require('../lib/sinon-chai').chai.should(),
-    sinon      = require('sinon'),
+var expect     = require('expect.js'),
     executor   = require('../../lib/executor'),
     ioclient   = require('socket.io-client'),
     express    = require('express');
@@ -22,7 +21,7 @@ describe('lib/executor -- socket.io', function() {
 
   it('should start a socket.io server on the right port', function(done) {
     socket.emit('ping', function(data) {
-      should.exist(data.port);
+      expect(data.port).not.to.be(undefined);
       done();
     });
   });
@@ -31,7 +30,7 @@ describe('lib/executor -- socket.io', function() {
     it('should handle invalid data', function(done) {
       // invalid result data
       socket.emit('results', {}, function(response) {
-        response.status.should.eql('error');
+        expect(response.status).to.be('error');
         done();
       });
     });
@@ -39,7 +38,7 @@ describe('lib/executor -- socket.io', function() {
     it('should handle valid data', function(done) {
       // valid result data
       socket.emit('results', { tests: [], done: { failed: 0, passed: 0, runtime: 0 }, userAgent: 'foo browser' }, function(response) {
-        response.status.should.eql('ok');
+        expect(response.status).to.be('ok');
         done();
       });
     });
@@ -49,7 +48,7 @@ describe('lib/executor -- socket.io', function() {
     it('should handle invalid data', function(done) {
       // invalid result data
       socket.emit('console.log', null, function(response) {
-        response.status.should.eql('error');
+        expect(response.status).to.be('error');
         done();
       });
     });
@@ -57,7 +56,7 @@ describe('lib/executor -- socket.io', function() {
     it('should handle valid data', function(done) {
       // valid result data
       socket.emit('console.log', 'test', function(response) {
-        response.status.should.eql('ok');
+        expect(response.status).to.be('ok');
         done();
       });
     });
