@@ -52,5 +52,8 @@
       host: 'localhost',
       port: '8910'
     }
-  }
+  },
+
+  // Test Reporter
+  reporter: 'Default'
 }
