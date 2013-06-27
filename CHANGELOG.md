@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.0beta1¬
+
+* New syntax for specifying test environments (selenium, sauce labs, phantomjs)
+* To run tests with phantom, we now use GhostDriver. `venus run --test test.js --environment ghost`¬
+* Running large number of tests at once is now more stable and less resource intensive¬
+* By default, Venus tests must now include at least one @venus-* annotation. Use the `--no-annotations` flag to override this behavior.
+
 ## 1.1.3
 
 * Fixed issue where PhantomJS path specified in config files was not being resolved properly (#221)
