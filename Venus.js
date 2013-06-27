@@ -102,7 +102,7 @@ Venus.prototype.init = function (args) {
     .option('--hostname', i18n('Set hostname for test URLs, defaults to your ip address'))
     .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
     .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
-    .option('-r, --throttle [num]', i18n('Throttle concurrent test count'))
+    .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
