@@ -32,7 +32,7 @@ describe('lib/executor', function() {
 
     result = exec.parseTests(tests);
     expect(result).to.be.ok();
-    expect(Object.keys(result).length).to.be(3);
+    expect(Object.keys(result).length).to.be(2);
   });
 
   it('should handle parsing testcases from undefined test string', function() {
@@ -53,21 +53,21 @@ describe('lib/executor', function() {
     expect(Object.keys(result).length).to.be(1);
   });
 
-  it('should enforce require annotations option if specified', function () {
+  it('should enforce require annotations option by default', function () {
     var exec   = new executor.Executor(),
         tests  = testPath('require_annotations'),
         result;
 
-    exec.requireTestAnnotations = true;
     result = exec.parseTests(tests);
     expect(Object.keys(result).length).to.be(1);
   });
 
-  it('should not enforce require annotations option if not specified', function () {
+  it('should not enforce require annotations option if specified', function () {
     var exec   = new executor.Executor(),
         tests  = testPath('require_annotations'),
         result;
 
+    exec.requireTestAnnotations = false;
     result = exec.parseTests(tests);
     expect(Object.keys(result).length).to.be(2);
   });

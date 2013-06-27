@@ -9,7 +9,5 @@ require('./testcase.spec');
 require('./testrun.spec');
 require('./Venus.spec');
 
-require('./uac/phantom.spec');
-
 require('./util/commentsParser.spec');
 require('./util/pathHelper.spec');

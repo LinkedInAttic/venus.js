@@ -40,11 +40,15 @@ VenusClientLibrary.prototype.connect = function(){
  * @param {Object} results the test results
  */
 VenusClientLibrary.prototype.done = function( results ){
-  var sandbox = document.getElementById('sandbox');
+  var sandbox = document.getElementById('sandbox'),
+      doneEl  = document.createElement('div');
 
   results.userAgent = window.navigator.userAgent;
   results.codeCoverageData  = sandbox.contentWindow.__coverage__;
   this.socket.emit( 'results', results );
+
+  doneEl.id = 'test-done-marker';
+  document.body.appendChild(doneEl);
 };
 
 /**
