@@ -25,8 +25,6 @@ var _         = require('underscore'),
     i18n      = require('./lib/util/i18n'),
     locale    = require('./lib/util/locale'),
     logger    = require('./lib/util/logger'),
-    phantom   = require('./lib/uac/phantom'),
-    webdriver = require('./lib/uac/webdriver'),
     program   = require('commander'),
     prompt    = require('cli-prompt'),
     wrench    = require('wrench'),
@@ -102,8 +100,9 @@ Venus.prototype.init = function (args) {
     .option('-d, --debug', i18n('Run in debug mode'))
     .option('-c, --coverage', i18n('Generate Code Coverage Report'))
     .option('--hostname', i18n('Set hostname for test URLs, defaults to your ip address'))
-    .option('--require-annotations', i18n('Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)'))
+    .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
     .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
+    .option('-r, --throttle [num]', i18n('Throttle concurrent test count'))
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
@@ -175,7 +174,7 @@ Venus.prototype.runDemo = function (program) {
   logger.verbose(i18n('Running demo'));
 
   program.test = testFile;
-  program.phantom = true;
+  program.environment = 'phantomjs';
   program.coverage = true;
   this.run(program);
 };
