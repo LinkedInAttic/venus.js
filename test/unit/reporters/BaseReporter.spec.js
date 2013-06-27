@@ -1,11 +1,11 @@
-var Base   = require('../../../lib/reporters/base').Base,
-    sinon  = require('sinon'),
-    expect = require('expect.js'),
+var BaseReporter = require('../../../lib/reporters/BaseReporter'),
+    sinon        = require('sinon'),
+    expect       = require('expect.js'),
     instance;
 
 describe('base reporter', function() {
   beforeEach(function() {
-    instance = new Base();
+    instance = new BaseReporter();
   });
 
   describe('init', function() {

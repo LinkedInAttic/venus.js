@@ -55,5 +55,5 @@
   },
 
   // Test Reporter
-  reporter: 'Default'
+  reporter: 'DefaultReporter'
 }
