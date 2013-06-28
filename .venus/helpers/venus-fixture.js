@@ -19,7 +19,9 @@ FixtureHelper.prototype.getFixtureContents = function() {
  * Sets the innerHTML property of the "venus-fixture-sandbox"
  */
 FixtureHelper.prototype.restoreState = function() {
-  this.sandbox.innerHTML = this.sandboxContents;
+  if (window.parent.venus.fixtureReset) {
+    this.sandbox.innerHTML = this.sandboxContents;
+  }
 };
 
 /**
