@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0alpha3
+
+* Added project documentation to main repository, under /docs
+* Fixed demo mode to work correctly by pointing it at the new `ghost` environment (#234)
+* Added backwards compat fix to restore functionality of `--phantom` flag (#234)
+
 ## 2.0.0alpha2
 
 * Custom test reporters are now supported. By default, three are available: DefaultReporter, DotReporter and JUnitReporter
