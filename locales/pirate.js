@@ -164,5 +164,6 @@
 	"Include test files with no Venus annotations (@venus-*)": "Include test files with no Venus annotations (@venus-*)",
 	"Sauce Connect Complete": "Sauce Connect Complete",
 	"Test reporter to use. Default is \"DefaultReporter\"": "Test reporter to use. Default is \"DefaultReporter\"",
-	"File to record test results": "File to record test results"
+	"File to record test results": "File to record test results",
+	"Run with PhantomJS. This is a shortcut to --environment ghost": "Run with PhantomJS. This is a shortcut to --environment ghost"
 }
