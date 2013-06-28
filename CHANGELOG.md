@@ -1,6 +1,11 @@
 # Changelog
 
-## 2.0.0beta1¬
+## 2.0.0alpha2
+
+* Custom test reporters are now supported. By default, three are available: DefaultReporter, DotReporter and JUnitReporter
+* To use, specify the new `--reporter` flag. Example: `venus run --test tests --reporter DotReporter`
+
+## 2.0.0alpha1
 
 * New syntax for specifying test environments (selenium, sauce labs, phantomjs)
 * To run tests with phantom, we now use GhostDriver. `venus run --test test.js --environment ghost`¬
