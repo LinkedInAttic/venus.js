@@ -103,6 +103,7 @@ Venus.prototype.init = function (args) {
     .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
     .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
     .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
+    .option('-o, --output-file [path]', i18n('File to record test results'))
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
