@@ -104,6 +104,7 @@ Venus.prototype.init = function (args) {
     .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
     .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
     .option('-o, --output-file [path]', i18n('File to record test results'))
+    .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
@@ -155,6 +156,10 @@ Venus.prototype.applyCommandLineFlags = function (program) {
 Venus.prototype.run = function (program) {
   logger.verbose(i18n('Starting in executor mode'));
 
+  if (program.hasOwnProperty('phantom')) {
+    program.environment = 'ghost';
+  }
+
   this.server = new executor.Executor();
   this.applyCommandLineFlags(program);
   program.homeFolder = __dirname;
@@ -175,7 +180,7 @@ Venus.prototype.runDemo = function (program) {
   logger.verbose(i18n('Running demo'));
 
   program.test = testFile;
-  program.environment = 'phantomjs';
+  program.environment = 'ghost';
   program.coverage = true;
   this.run(program);
 };
