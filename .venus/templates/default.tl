@@ -10,6 +10,7 @@
   <script type="text/javascript" src="/js/runner_client/venus.js"></script>
   <script type="text/javascript">
     window.venus.postUrl = '{postTestResultsUrl}';
+    window.venus.testId  = {testId};
   </script>
   <link rel="stylesheet" type="text/css" href="/css/app.css">
 </head>

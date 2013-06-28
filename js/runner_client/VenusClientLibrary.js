@@ -45,6 +45,7 @@ VenusClientLibrary.prototype.done = function( results ){
 
   results.userAgent = window.navigator.userAgent;
   results.codeCoverageData  = sandbox.contentWindow.__coverage__;
+  results.testId = window.venus.testId;
   this.socket.emit( 'results', results );
 
   doneEl.id = 'test-done-marker';
