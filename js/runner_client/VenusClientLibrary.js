@@ -47,9 +47,9 @@ VenusClientLibrary.prototype.done = function( results ){
   results.codeCoverageData  = sandbox.contentWindow.__coverage__;
   results.testId = window.venus.testId;
   this.socket.emit( 'results', results );
-
   doneEl.id = 'test-done-marker';
   document.body.appendChild(doneEl);
+  $(document).trigger('results', results);
 };
 
 /**

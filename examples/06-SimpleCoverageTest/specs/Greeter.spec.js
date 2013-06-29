@@ -1,6 +1,7 @@
 /**
  * @venus-library mocha
  * @venus-include ../src/Greeter.js
+ * @venus-fixture Greeter.fixture.html
  */
 
 describe('Greeter', function() {
@@ -10,6 +11,10 @@ describe('Greeter', function() {
         result = greet.bye(true);
 
     expect(result).to.be('goodbye...');
+  });
+
+  it('should not work', function () {
+    expect(false).to.be(true);
   });
 
 });
