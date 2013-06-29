@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0alpha4
+
+* New Web Runner UI -- see test results directly in the browser.
+
 ## 2.0.0alpha3
 
 * Added project documentation to main repository, under /docs
