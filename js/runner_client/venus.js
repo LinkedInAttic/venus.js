@@ -22,3 +22,9 @@ window.venus = new VenusClientLibrary({
 });
 
 window.venus.connect();
+
+$(document).ready(function () {
+  window.venusui = new VenusUi({
+    nav: $('nav')
+  });
+});
