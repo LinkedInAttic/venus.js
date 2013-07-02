@@ -5,7 +5,7 @@
 
  /* global Greeter: true */
 
-describe('Greeter 2', function () {
+describe('Greeter2.js', function () {
   describe('talk() function 2', function () {
     var greet, result;
 
@@ -25,7 +25,7 @@ describe('Greeter 2', function () {
   });
 });
 
-describe('Sibling Greeter 2', function () {
+describe('SiblingGreeter2.js', function () {
 
   describe('A 2', function () {
     it('should be under A', function () {
