@@ -15,7 +15,7 @@ describe('Greeter', function () {
 
     it('.talk() should format string with one variable', function () {
       result = greet.talk('Hello %s!', 'Seth');
-      expect(result).to.be('Hello Seth!');
+      expect(result).to.be('Hello Seth, how are you doing this fine Thursday?');
     });
 
     it('.talk() should format string with two variables', function () {
@@ -24,3 +24,4 @@ describe('Greeter', function () {
     });
   });
 });
+
