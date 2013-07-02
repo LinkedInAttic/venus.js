@@ -152,5 +152,6 @@
 	"Run with PhantomJS. This is a shortcut to --environment ghost": "Run with PhantomJS. This is a shortcut to --environment ghost",
 	"Using environment ghost": "Using environment ghost",
 	"error creating symlink for static path %s to %s. exception: %s": "error creating symlink for static path %s to %s. exception: %s",
-	"created symlink for static path %s to %s": "created symlink for static path %s to %s"
+	"created symlink for static path %s to %s": "created symlink for static path %s to %s",
+	"Disabling hot reload because there are more than 5 tests loaded": "Disabling hot reload because there are more than 5 tests loaded"
 }
