@@ -13,8 +13,4 @@ describe('Greeter', function() {
     expect(result).to.be('goodbye...');
   });
 
-  it('should not work', function () {
-    expect(false).to.be(true);
-  });
-
 });

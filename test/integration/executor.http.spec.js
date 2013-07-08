@@ -2,7 +2,6 @@
  * @author LinkedIn
  */
 var executor = require('../../lib/executor'),
-    should = require('../lib/sinon-chai').chai.should(),
     testHelper = require('../lib/helpers'),
     express = require('express'),
     fs = require('fs'),
@@ -44,14 +43,13 @@ describe('lib/executor -- HTTP requests', function() {
         function(res) {
           res.setEncoding('utf8');
           var contents = [];
-          should.exist(res.statusCode);
-          res.statusCode.should.eql(200);
+          expect(res.statusCode).to.be(200);
           res.on('data', function(chunk) { contents.push(chunk); });
           res.on('end', function() {
             var actualFilePath = conf.routes[staticRouteKey],
                 actualFile = fs.readFileSync(actualFilePath, 'utf8');
             contents = contents.join('');
-            actualFile.should.eql(contents);
+            expect(actualFile).to.be(contents);
             done();
           });
         });
@@ -68,8 +66,7 @@ describe('lib/executor -- HTTP requests', function() {
       http.get(
         options,
         function(res) {
-          should.exist(res.statusCode);
-          res.statusCode.should.eql(404);
+          expect(res.statusCode).to.be(404);
           done();
         });
     });
@@ -88,7 +85,6 @@ describe('lib/executor -- HTTP requests', function() {
         function(res) {
           res.setEncoding('utf8');
           var contents = [];
-          should.exist(res.statusCode);
           expect(res.statusCode).to.be(200);
           res.on('data', function(chunk) { contents.push(chunk); });
           res.on('end', function() {
