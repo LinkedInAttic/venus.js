@@ -4,11 +4,11 @@
   libraries: {
     mocha: {
       includes: [
-        'libraries/mocha.js',
+        'libraries/mocha-1.12.0.js',
         'libraries/expect.js',
         'helpers/venus-fixture.js',
         'adaptors/adaptor-template.js',
-        'adaptors/mocha-venus.js',
+        'adaptors/venus-mocha-1.12.0.js',
         'libraries/sinon-1.5.0.js'
       ]
     },
