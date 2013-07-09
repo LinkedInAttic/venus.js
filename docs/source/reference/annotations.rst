@@ -1,7 +1,7 @@
 .. _annotations:
 
 **********************
-Annotations (@venus-*)
+Annotations
 **********************
 
 Venus allows you to use comment-based annotations to define configurations for your unit test:

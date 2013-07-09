@@ -235,13 +235,11 @@ p.admonition-title:after {
 }
 
 pre {
-    padding: 5px;
-    background-color: #eeffcc;
+    padding: 7px;
+    background-color: #ECFFF1;
     color: #333333;
     line-height: 120%;
-    border: 1px solid #ac9;
-    border-left: none;
-    border-right: none;
+    border: 1px solid #CAE2BE;
 }
 
 tt {
