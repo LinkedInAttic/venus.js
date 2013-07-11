@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.0alpha5
+
+* Upgraded Mocha to 1.12.0
+* Fixed `--hostname` flag to work correctly
+* Serving static content with the `static` config option now correctly resolves paths relative to the venus config file
+* Static content is now served through symlinks rather than copying all files to temporary folder
+* Updates to JUnitReporter to improve format of test results
+* Added initial set of integration tests
+
 ## 2.0.0alpha4
 
 * New Web Runner UI -- see test results directly in the browser.
