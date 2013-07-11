@@ -99,7 +99,7 @@ Venus.prototype.init = function (args) {
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
     .option('-c, --coverage', i18n('Generate Code Coverage Report'))
-    .option('--hostname', i18n('Set hostname for test URLs, defaults to your ip address'))
+    .option('--hostname [host]', i18n('Set hostname for test URLs, defaults to your ip address'))
     .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
     .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
     .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
