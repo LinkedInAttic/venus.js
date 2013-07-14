@@ -1,14 +1,10 @@
 /**
  * @venus-library mocha
  * @venus-include ../lib/require.js
- * @venus-include ../src/Greeter.js
+ * @venus-include ../Greeter.js
  */
 
 describe('Greeter', function() {
-
-  require.config({
-    baseUrl: '/temp/static/src'
-  });
 
   it('.bye() should say goodbye', function(done) {
 
