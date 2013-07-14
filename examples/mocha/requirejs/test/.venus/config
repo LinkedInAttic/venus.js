@@ -1,11 +1,7 @@
 // Configuration file for Venus
 // All paths can be relative (to the location of this config file) or absolute
 {
-  default: {},
-  binaries: {},
-  static: {
-    'src': '../../src/'
-  },
-  includes: {},
-  basePaths: {}
+  includes: {
+    default: ['../helpers/requirejs-mock.js']
+  }
 }
