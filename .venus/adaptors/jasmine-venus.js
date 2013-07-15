@@ -1,6 +1,6 @@
 // @author LinkedIn
 
-// Create a Jasmine adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)    
+// Create a Jasmine adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)
 
 // Instantiate adaptor
 function Adaptor() {};
@@ -14,10 +14,12 @@ Adaptor.prototype = new AdaptorTemplate();
 // Override methods defined in the adapter template
 
 Adaptor.prototype.start = function() {
-  var jasmineEnv = jasmine.getEnv();
-      jasmineEnv.updateInterval = 1000,
-      self = this,
-      fixtureHelper = (typeof FixtureHelper === 'function') ? new FixtureHelper() : false;
+  var jasmineEnv, self, fixtureHelper;
+
+  jasmineEnv = jasmine.getEnv();
+  jasmineEnv.updateInterval = 1000;
+  self = this;
+  fixtureHelper = (typeof FixtureHelper === 'function') ? new FixtureHelper() : false;
 
   jasmineEnv.addReporter({
     reportRunnerStarting: function(runner) {
