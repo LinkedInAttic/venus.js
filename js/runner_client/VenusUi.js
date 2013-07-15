@@ -26,8 +26,6 @@ function VenusUi(config) {
 
   showResults();
 
-  $sandboxView.hide();
-
   $('#results-button').click(function () {
     showResults();
   });
@@ -40,7 +38,7 @@ function VenusUi(config) {
 }
 
 function showResults() {
-  $sandboxView.hide();
+  $sandboxView.removeClass('active');
   $resultsView.show();
   $('#results-button').parent().addClass('selected');
   $('#sandbox-button').parent().removeClass('selected');
@@ -48,7 +46,7 @@ function showResults() {
 
 function showSandbox() {
   $resultsView.hide();
-  $sandboxView.show();
+  $sandboxView.addClass('active');
   $('#results-button').parent().removeClass('selected');
   $('#sandbox-button').parent().addClass('selected');
 }
