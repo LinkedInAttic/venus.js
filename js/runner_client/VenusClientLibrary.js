@@ -50,6 +50,12 @@ VenusClientLibrary.prototype.done = function( results ){
   doneEl.id = 'test-done-marker';
   document.body.appendChild(doneEl);
   $(document).trigger('results', results);
+
+  try {
+    window.parent.postTestResults(results);
+  } catch (e) {
+    // fail
+  }
 };
 
 /**
