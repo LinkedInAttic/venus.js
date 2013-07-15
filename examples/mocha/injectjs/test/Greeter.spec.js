@@ -1,6 +1,5 @@
 /**
  * @venus-library mocha
- * @venus-include ../lib/require.js
  * @venus-include ../Greeter.js
  */
 
