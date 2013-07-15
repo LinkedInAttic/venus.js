@@ -151,6 +151,7 @@ describe('lib/executor', function() {
         path: test,
         id: 1,
         runUrl: 'http://' + hostname + ':' + exec.port + exec.urlNamespace + '/1',
+        runPath: exec.urlNamespace + '/1',
         instrumentCodeCoverate: exec.instrumentCodeCoverage,
         config: 'configFile',
         hotReload: true
