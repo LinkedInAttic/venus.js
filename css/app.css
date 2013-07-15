@@ -66,6 +66,11 @@ nav a {
 #sandbox-view {
   height: 100%;
   border: 2px solid #cecece;
+  visibility: hidden;
+}
+
+#sandbox-view.active {
+  visibility: visible;
 }
 
 h1 {
