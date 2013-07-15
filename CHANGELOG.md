@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0alpha7
+
+* Critical fix for Jasmine adaptor in IE7-9.
+
+
 ## 2.0.0alpha6
 
 * Added Test Result Summary view, so you can see all test results at once in browser (#247)
