@@ -1,6 +1,6 @@
 /**
  * @venus-library jasmine
- * @venus-include ../src/Greeter.js
+ * @venus-code ../src/Greeter.js
  */
 
 describe('Greeter', function() {
