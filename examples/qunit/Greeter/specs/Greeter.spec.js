@@ -1,6 +1,6 @@
 /**
  * @venus-library qunit
- * @venus-include ../src/Greeter.js
+ * @venus-code ../src/Greeter.js
  */
 
 test('Greeter', function() {

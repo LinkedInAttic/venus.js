@@ -4,7 +4,7 @@
  *
  * @venus-library mocha
  * @venus-include ../src/jquery.js
- * @venus-include ../src/NusUpdate.js
+ * @venus-code ../src/NusUpdate.js
  * @venus-fixture NusUpdate.fixture.html
  */
 

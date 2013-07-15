@@ -1,6 +1,6 @@
 /**
  * @venus-library mocha
- * @venus-include ../Greeter.js
+ * @venus-code ../Greeter.js
  */
 
 describe('Greeter', function() {
