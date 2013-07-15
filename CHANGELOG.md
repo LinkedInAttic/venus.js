@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0alpha6
+
+* Added Test Result Summary view, so you can see all test results at once in browser (#247)
+* Fixed bug in test fixture sandbox for latest firefox
+
+
 ## 2.0.0alpha5
 
 * Upgraded Mocha to 1.12.0
