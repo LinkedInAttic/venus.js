@@ -1602,7 +1602,12 @@ Mocha.prototype.run = function(fn){
   if (options.grep) runner.grep(options.grep, options.invert);
   if (options.globals) runner.globals(options.globals);
   if (options.growl) this._growl(runner, reporter);
-  return runner.run(fn);
+
+  // Don't start runner automatically.
+  // We want to have a chance to attach listeners for events
+  // otherwise, this breaks in IE7/8
+  //return runner.run(fn);
+  return runner;
 };
 
 }); // module: mocha.js
