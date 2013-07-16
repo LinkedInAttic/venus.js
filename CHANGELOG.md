@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0
+
+* New annotation: `@venus-code` (#258). This works exactly the same as `@venus-include`, but should be used to pull in the code that is under test. This annotation will indicate to venus that the file should be instrumented for code coverage, if the `--coverage` flag is set.
+* Fixed issue where Mocha tests were being executed twice.
+
 ## 2.0.0alpha7
 
 * Critical fix for Jasmine adaptor in IE7-9.
