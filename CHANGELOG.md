@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+
+* New test reporter for TAP format (#263)
+
 ## 2.1.0
 
 * New annotation: `@venus-code` (#258). This works exactly the same as `@venus-include`, but should be used to pull in the code that is under test. This annotation will indicate to venus that the file should be instrumented for code coverage, if the `--coverage` flag is set.
