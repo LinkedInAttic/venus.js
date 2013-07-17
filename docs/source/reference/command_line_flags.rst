@@ -12,18 +12,19 @@ Run tests specified as an argument to the -t or --test option. When this command
 Options:
 ::
 
-  -h, --help                        output usage information
-  -t, --test [tests]                Comma separated string of tests to run
-  -p, --port [port]                 port to run on
-  -n, --phantom [path to binary]    Use phantomJS client to run browser tests
-  -s, --selenium                    Use selenium client to run browser tests
-  -r, --selenium-server [url]       Specify selenium server to use
-  -b, --selenium-browser [browser]  Specify browser to use with selenium
-  -l, --locale [locale]             Specify locale to use
-  -v, --verbose                     Run in verbose mode
-  -d, --debug                       Run in debug mode
-  -c, --coverage                    Generate Code Coverage Report
-  --require-annotations             Ignore test files lacking Venus annotations (@venus-*)
+   -h, --help                 output usage information
+   -t, --test [tests]         Comma separated string of tests to run
+   -p, --port [port]          port to run on
+   -l, --locale [locale]      Specify locale to use
+   -v, --verbose              Run in verbose mode
+   -d, --debug                Run in debug mode
+   -c, --coverage             Generate Code Coverage Report
+   --hostname [host]          Set hostname for test URLs, defaults to your ip address
+   --no-annotations           Include test files with no Venus annotations (@venus-*)
+   -e, --environment [env]    Specify environment to run tests in
+   -r, --reporter [reporter]  Test reporter to use. Default is "DefaultReporter"
+   -o, --output-file [path]   File to record test results
+   -n, --phantom              Run with PhantomJS. This is a shortcut to --environment ghost
 
 Basic format:
 ::
@@ -70,12 +71,6 @@ Boilerplate `.venus/config` file:
   // Configuration file for Venus
   // All paths can be relative (to the location of this config file) or absolute
   {
-    default: {},
-    libraries: {},
-    binaries: {},
-    static: {},
-    includes: {},
-    basePaths: {}
   }
 
 venus demo
