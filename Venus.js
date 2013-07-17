@@ -175,7 +175,7 @@ Venus.prototype.run = function (program) {
  * @method Venus#runDemo
  */
 Venus.prototype.runDemo = function (program) {
-  var testFile = path.resolve(__dirname, 'examples', '06-SimpleCoverageTest', 'specs', 'Greeter.spec.js');
+  var testFile = path.resolve(__dirname, 'examples', 'mocha', 'Greeter');
 
   logger.verbose(i18n('Running demo'));
 

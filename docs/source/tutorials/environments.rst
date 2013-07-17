@@ -28,47 +28,83 @@ Below is an example of running ``tests.js`` with PhantomJS:
 
   $ venus run -t tests.js -n
 
-Selenium Grid
--------------
-
-Using Selenium, you can request a VM with a given browser to execute a unit test via Venus
-
-The command line option -s or --selenium will specify the test to run with Selenium
-
-Below is an example of running ``tests.js`` on a selenium grid hosted on example.selenium.com:
+This is a shortcut to the command:
 
 ::
 
-  $ venus run -t tests.js -s example.selenium.com
+  $ venus run -t tests.js -e ghost
 
-Command line options:
+The ``-e``,  or ``--environment`` flag specifies which test environment to use. For more information, see
+configuring test environments below.
 
-- -s, --selenium [server url]          
-- --browser [browser|version]     
+Selenium Grid
+-------------
+
+Using a Selenium Grid setup, you can request a VM with a given browser to execute a unit test via Venus. You can
+configure different environments in your venus config file. Here is a sample config file setup to run tests remotely in
+several popular browsers, through selenium grid:
+
+.. code-block:: javascript
+
+  environments: {
+    ie7: {
+      uac: 'WebDriverUac',
+      browser: 'internet explorer',
+      version: '7.0',
+      host: 'selenium-0101.corp.net',
+      port: 4444 
+    },
+    ie8: {
+      uac: 'WebDriverUac',
+      browser: 'internet explorer',
+      version: '8.0',
+      host: 'selenium-0101.corp.net',
+      port: 4444 
+    },
+    ie9: {
+      uac: 'WebDriverUac',
+      browser: 'internet explorer',
+      version: '9.0',
+      host: 'selenium-0101.corp.net',
+      port: 4444 
+    }
+  }
+
+``WebDriverUac`` refers to a Venus User Agent Controller module which understands how
+to communicate with a selenium grid server. The other options in each section are passed
+along, to request a specific browser version for running tests.
+
+If I hade a selenium grid server running at ``selenium-1010.corp.net:4444``, I could run this venus command
+to execute tests on Internet Explorer 8:
+
+::
+
+  $  venus run -t tests.js -e ie8
+
 
 Sauce Labs
 -----------
 
-Venus provides Sauce Labs integration so that you can run your tests remotely on their browser farms
+`Sauce Labs <http://www.saucelabs.com>`_ is a great hosted solution for running your tests
+on a wide variety of platforms. Venus provides a special UAC for running tests with Sauce Labs. You can set this up in your venus config file
+by creating an environment like this:
 
-The command line option --sauce-labs will specify the test to run with Sauce Labs
+.. code-block:: javascript
 
-Run the following command to run your tests with Sauce Labs:
+  environments: {
+    sauce: {
+      uac: 'SauceLabsUac',
+      host: 'ondemand.saucelabs.com',
+      browser: 'firefox',
+      version: 20,
+      platform: 'OS X 10.6',
+      username: 'your_sauce_labs_username',
+      accessKey: 'your_sauce_labs_access_key'
+    }
+  }
+
+You would then run your tests through Sauce Labs with this command:
 
 ::
 
-  $ venus run -t tests.js --sauce-labs
-
-Below is an example of running ``tests.js`` on a Sauce Labs with Firefox 20:
-
-::
-
-  $ venus run -t tests.js --sauce-labs --browser "Firefox|20"
-
-Command line options:
-
-- --sauce-labs [server url]
-- --browser [browser|version]    
-- --platform [platform]    
-- --username [username]    
-- --access-key [accessKey]    
+  $  venus run -t tests.js -e sauce
