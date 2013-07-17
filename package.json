@@ -54,7 +54,6 @@
   "os": ["!win32"],
   "preferGlobal": true,
   "scripts": {
-    "preinstall" : "node setup/preInstall.js",
     "test": "mocha test/unit/test_suite.js",
     "int-test": "mocha test/integration"
   }
