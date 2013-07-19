@@ -19,7 +19,7 @@
  * The Venus application code that is called by the Venus shell script (bin/venus).
  * @file
  */
-  
+
 var _         = require('underscore'),
     executor  = require('./lib/executor'),
     i18n      = require('./lib/util/i18n'),
@@ -29,7 +29,9 @@ var _         = require('underscore'),
     prompt    = require('cli-prompt'),
     wrench    = require('wrench'),
     fs        = require('fs'),
-    path      = require('path');
+    path      = require('path'),
+    deferred  = require('deferred'),
+    ps        = require('./lib/util/ps');
 
 /**
  * The Venus application object
@@ -105,6 +107,7 @@ Venus.prototype.init = function (args) {
     .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
     .option('-o, --output-file [path]', i18n('File to record test results'))
     .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
+    .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'))
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
@@ -160,11 +163,27 @@ Venus.prototype.run = function (program) {
     program.environment = 'ghost';
   }
 
-  this.server = new executor.Executor();
   this.applyCommandLineFlags(program);
-  program.homeFolder = __dirname;
 
-  this.server.init(program);
+  if (program.hasOwnProperty('singleton')) {
+    this.killOtherVenusProcesses().then(proceed);
+  } else {
+    proceed.call(this);
+  }
+
+  function proceed() {
+    this.server = new executor.Executor();
+    program.homeFolder = __dirname;
+    this.server.init(program);
+  }
+};
+
+/**
+ * Kill all other Venus processes besides the current process.
+ */
+Venus.prototype.killOtherVenusProcesses = function () {
+  return ps.grep('venus').then(ps.kill);
+
 };
 
 /**
