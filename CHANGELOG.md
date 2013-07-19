@@ -2,6 +2,7 @@
 
 ## 2.1.2
 
+* New `--singleton` flag to ensure current all other Venus servers are killed before continuing (#271)
 * Fixed an issue where tests could fail to run due to port mismatch between venus server and generated test urls (#270)
 * Fixed `venus demo` command to work correctly (#266)
 
