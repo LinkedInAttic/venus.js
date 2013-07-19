@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.2
+
+* Fixed an issue where tests could fail to run due to port mismatch between venus server and generated test urls (#270)
+* Fixed `venus demo` command to work correctly (#266)
+
 ## 2.1.1
 
 * New test reporter for TAP format (#263)
