@@ -109,11 +109,13 @@ describe('lib/executor', function() {
       test: test
     };
 
-    exec.init(options);
-    url = exec.testgroup.testArray[0].url.run;
 
-    it('should use the hostname specified on command line', function () {
-      expect(url.indexOf('http://foobar.com')).to.be(0);
+    it('should use the hostname specified on command line', function (done) {
+      exec.init(options).then(function () {
+        url = exec.testgroup.testArray[0].url.run;
+        expect(url.indexOf('http://foobar.com')).to.be(0);
+        done();
+      });
     });
   });
 
@@ -127,11 +129,13 @@ describe('lib/executor', function() {
       test: test
     };
 
-    exec.init(options);
-    url = exec.testgroup.testArray[0].url.run;
 
-    it('should use the hostname specified in config', function () {
-      expect(url.indexOf('http://barfoo.com')).to.be(0);
+    it('should use the hostname specified in config', function (done) {
+      exec.init(options).then(function () {
+        url = exec.testgroup.testArray[0].url.run;
+        expect(url.indexOf('http://barfoo.com')).to.be(0);
+        done();
+      });
     });
   });
 
