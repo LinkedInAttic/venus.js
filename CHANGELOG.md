@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3
+
+* Updated JUnitReporter to also output results in console for debugability (#272)
+
 ## 2.1.2
 
 * New `--singleton` flag to ensure current all other Venus servers are killed before continuing (#271)
