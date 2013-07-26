@@ -1,8 +1,14 @@
 # Changelog
 
+## 2.1.4
+
+* phantomjs process output is now printed in debug mode (#273)
+
+
 ## 2.1.3
 
 * Updated JUnitReporter to also output results in console for debugability (#272)
+
 
 ## 2.1.2
 
@@ -10,14 +16,17 @@
 * Fixed an issue where tests could fail to run due to port mismatch between venus server and generated test urls (#270)
 * Fixed `venus demo` command to work correctly (#266)
 
+
 ## 2.1.1
 
 * New test reporter for TAP format (#263)
+
 
 ## 2.1.0
 
 * New annotation: `@venus-code` (#258). This works exactly the same as `@venus-include`, but should be used to pull in the code that is under test. This annotation will indicate to venus that the file should be instrumented for code coverage, if the `--coverage` flag is set.
 * Fixed issue where Mocha tests were being executed twice.
+
 
 ## 2.0.0alpha7
 
