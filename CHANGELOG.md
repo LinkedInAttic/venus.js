@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.5
+
+* Test errors (tests that can't run) are now logged (#274)
+* PhantomJS is killed before starting GhostDriverUac, to try to cut down on stray processes (#274)
+
+
 ## 2.1.4
 
 * phantomjs process output is now printed in debug mode (#273)
