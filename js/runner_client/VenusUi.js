@@ -71,49 +71,14 @@ function successNav() {
 }
 
 function printResults(results) {
-  var template = _.template($('#results-template').html());
+  var template = _.template($('#results-template').html()),
+      $resultView = $('#results-view');
 
-  $('#results-view').html(template({
-    tests: results.tests
-  }));
-  return;
-
-  if(!result.tests || !result.done) return false;
-
-  console.log( '\n--------------------------------------------------------' );
-  console.log( '\n' );
-  console.log( this.getFriendlyBrowserName( result.userAgent ).yellow );
-
-  result.tests.forEach(function(test) {
-    console.log('\n   ' + test.name);
-
-    if (test.status === 'PASSED') {
-      console.log('\r     ✓'.green + ' ' + test.message.green);
-    } else {
-      console.log('\r     x'.red + ' ' + test.message.red);
-    }
-
-    if (test.stackTrace) {
-      console.log('\r   ' + test.stackTrace);
-    };
-
-    console.log('\r');
+  _.each(results.tests, function (test) {
+    addTestResults(test, $resultView, template);
   });
+}
 
-  if (result.done.failed === 0) {
-    var content = result.done.passed === 1 ? ' test completed' : ' tests completed',
-    message = '\n✓' + ' ' + result.done.passed.toString() + content +
-      ' (' + result.done.runtime.toString()  + 'ms)';
-
-    console.log(message.green);
-  } else {
-    var content = result.done.failed === 1 ? ' test failed' : ' tests failed',
-    message = '\nx' + ' ' + result.done.failed.toString() + ' of ' + result.done.total.toString() + content +
-      ' (' + result.done.runtime.toString()  + 'ms)';
-
-    console.log(message.red);
-  }
-
-  console.log('\r');
-  return true;
+function addTestResults(test, $view, template) {
+  $view.append(template({ test: test }));
 }
