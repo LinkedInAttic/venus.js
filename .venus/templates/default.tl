@@ -39,14 +39,7 @@
   </section>
 
   <script type="text/html" id="results-template">
-
-    <h1><%= tests[0].name %></h1>
-
-    <%
-      _.each(tests, function (test) {
-    %>
-
-
+      <h1><%= test.name %></h1>
       <ul class="test-list">
         <% if (test.status === 'PASSED') { %>
         <li class="pass">
@@ -64,10 +57,6 @@
         <% } %>
       </ul>
 
-
-    <%
-      });
-    %>
   </script>
 </body>
 </html>
