@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.6
+
+* Hotfix to give phantomjs process more time to initialize with GhostDriverUac (#276)
+
 ## 2.1.5
 
 * Test errors (tests that can't run) are now logged (#274)

@@ -2,7 +2,7 @@
   "name"              : "venus",
   "main"              : "Venus.js",
   "description"       : "Execution environment for JavaScript unit testing",
-  "version"           : "2.1.5",
+  "version"           : "2.1.6",
   "keywords"          : [ "testing" ],
   "homepage"          : "https://github.com/linkedin/venus.js",
   "bugs"              : {
