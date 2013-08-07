@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.7
+
+* Fixed bugs with running Venus on IE7/8 (#277)
+
+
 ## 2.1.6
 
 * Hotfix to give phantomjs process more time to initialize with GhostDriverUac (#276)
