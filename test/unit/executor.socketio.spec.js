@@ -17,6 +17,11 @@ describe('lib/executor -- socket.io', function() {
       socket = ioclient.connect('http://localhost', { port: 2025 });
       done();
     });
+
+    exec.testgroup = {
+      addCodeCoverageResults: function () {}
+    };
+
   });
 
   it('should start a socket.io server on the right port', function(done) {
