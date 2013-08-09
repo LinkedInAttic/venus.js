@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.8
+
+* Running with code coverage `--coverage` flag will now write out coverage.csv with coverage data
+
+
 ## 2.1.7
 
 * Fixed bugs with running Venus on IE7/8 (#277)
