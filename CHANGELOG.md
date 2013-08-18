@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.9
+
+* Tweak to give phantomjs more time to initialize with GhostDriverUac
+
 ## 2.1.8
 
 * Running with code coverage `--coverage` flag will now write out coverage.csv with coverage data
