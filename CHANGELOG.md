@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.10
+
+* Changed include order of scripts on test harness page (PR #279)
+
+
 ## 2.1.9
 
 * Tweak to give phantomjs more time to initialize with GhostDriverUac
