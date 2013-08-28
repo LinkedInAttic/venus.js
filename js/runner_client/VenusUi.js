@@ -80,5 +80,15 @@ function printResults(results) {
 }
 
 function addTestResults(test, $view, template) {
+  test.message = htmlEncode(test.message);
+  test.stackTrace = htmlEncode(test.stackTrace);
   $view.append(template({ test: test }));
+}
+
+function htmlEncode(value) {
+  if (typeof value === 'undefined') {
+    return;
+  }
+
+  return $('<div/>').text(value).html();
 }
