@@ -5,7 +5,7 @@
 
 describe('Greeter', function() {
 
-  it('.talk() should format string', function() {
+  it('.talk() should <b>format</b> string', function() {
     var greet  = new Greeter(),
         result = greet.talk('Hello %s, how are you doing this fine %s?', 'Seth', 'Thursday');
 
