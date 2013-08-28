@@ -83,6 +83,8 @@ describe('lib/testcase', function () {
       expect(files).to.be.an('array');
       expect(files[4].url).to.be('/temp/test/1/includes/_.test.js');
       expect(files[4].fs).to.contain('/test/data/test.js');
+      expect(files[6].fs).to.contain('/test/data/sample_tests/bar.js');
+      expect(files[6].url).to.contain('/bar.js');
 
     });
 
