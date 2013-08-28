@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.11
+
+* Increased performance of running Venus with PhantomJS (#280)
+
+
 ## 2.1.10
 
 * Changed include order of scripts on test harness page (PR #279)
