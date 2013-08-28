@@ -71,7 +71,19 @@ Venus.prototype.init = function (args) {
 
   // Define command line options
   program
-    .version(require('./package').version);
+    .version(require('./package').version)
+    .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
+    .option('-l, --locale [locale]', i18n('Specify locale to use'))
+    .option('-v, --verbose', i18n('Run in verbose mode'))
+    .option('-d, --debug', i18n('Run in debug mode'))
+    .option('-c, --coverage', i18n('Generate Code Coverage Report'))
+    .option('--hostname [host]', i18n('Set hostname for test URLs, defaults to your ip address'))
+    .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
+    .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
+    .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
+    .option('-o, --output-file [path]', i18n('File to record test results'))
+    .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
+    .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'));
 
   // init command
   program
@@ -113,8 +125,41 @@ Venus.prototype.init = function (args) {
   program.parse(args);
 
   if (this.noCommand) {
-    program.outputHelp();
+    this.runWithDefaults();
   }
+};
+
+/**
+ * Try to auto run venus with default settings
+ */
+Venus.prototype.runWithDefaults = function () {
+  var args = this.commandLineArguments,
+      encounteredFlag = false,
+      possibleTestPaths;
+
+  if (args < 2) {
+    return false;
+  }
+
+  possibleTestPaths = args.slice(2).filter(function (testPath) {
+    if (testPath[0] === '-') {
+      encounteredFlag = true;
+    }
+
+    return !encounteredFlag;
+  });
+
+  logger.verbose(i18n('Running demo'));
+
+  if (possibleTestPaths.length === 0) {
+    possibleTestPaths = ['.'];
+  }
+
+  program.test =  possibleTestPaths.join(',');
+  // program.environment = 'ghost';
+  // program.coverage = true;
+  this.run(program);
+
 };
 
 /**
