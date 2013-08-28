@@ -29,4 +29,52 @@ describe('Venus main', function() {
     app.start(argv);
     expect(app.initProjectDirectory.calledOnce).to.be(true);
   });
+
+  describe('parse args in default mode', function () {
+    var argv, app;
+
+    beforeEach(function () {
+      app = new Venus();
+      argv = ['node', 'venus'];
+    });
+
+    it('should parse tests in default mode when comma delimited', function (done) {
+      argv.push('a.js,b.js,c.js');
+
+      app.run = function (program) {
+        expect(program.test).to.eql('a.js,b.js,c.js');
+        done();
+      };
+
+      app.start(argv);
+    });
+
+    it('should parse tests in default mode when space separated', function (done) {
+      argv.push('a.js');
+      argv.push('b.js');
+      argv.push('c.js');
+      argv.push('-e');
+      argv.push('ghost');
+
+      app.run = function (program) {
+        expect(program.test).to.eql('a.js,b.js,c.js');
+        expect(program.environment).to.eql('ghost');
+
+        done();
+      };
+
+      app.start(argv);
+    });
+
+    it('should operate on current directory when no tests are specified', function (done) {
+      argv.push('-e');
+
+      app.run = function (program) {
+        expect(program.test).to.eql('.');
+        done();
+      };
+
+      app.start(argv);
+    });
+  });
 });
