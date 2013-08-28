@@ -3,6 +3,7 @@
 ## 2.1.12
 
 * Default to `run` command to simplify running tests, e.g.: `venus test.js` will now work the same as `venus run -t test.js` (#281)
+* Default IP address changed from 0.0.0.0 to 127.0.0.1 (#282)
 
 
 ## 2.1.11
