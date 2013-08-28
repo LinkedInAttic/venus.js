@@ -43,7 +43,7 @@
     "expect.js"              : "~0.2.0",
     "chokidar"               : "0.6.2",
     "flavored-path"          : "0.0.8",
-    "selenium-webdriver"     : "2.33.0",
+    "selenium-webdriver"     : "2.35.1",
     "deferred"               : "0.6.5",
     "phantomjs"              : "1.9.1-0"
   },
