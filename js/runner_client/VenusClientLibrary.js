@@ -33,6 +33,14 @@ VenusClientLibrary.prototype.connect = function(){
     config.host,
     { port: config.port }
   );
+
+  this.socket.on('reload-test', function (testId) {
+    console.log('reload', testId);
+    if (testId === window.venus.testId) {
+      console.log('reloading me');
+      window.location.reload();
+    }
+  });
 };
 
 /**
