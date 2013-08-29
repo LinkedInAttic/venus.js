@@ -22,8 +22,10 @@
        resultClass = (passed) ? 'passed' : 'failed',
        pendingTestCount;
 
-   $el.addClass(resultClass);
    $el.removeClass('pending');
+   $el.removeClass('passed');
+   $el.removeClass('failed');
+   $el.addClass(resultClass);
 
    pendingTestCount = $('.test.pending').length;
 
