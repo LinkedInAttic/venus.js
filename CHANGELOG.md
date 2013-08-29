@@ -3,6 +3,7 @@
 ## 2.1.12
 
 * Default to `run` command to simplify running tests, e.g.: `venus test.js` will now work the same as `venus run -t test.js` (#281)
+* Tests will now automatically re-run when they, or any of their dependent files, change (#285)
 * Default IP address changed from 0.0.0.0 to 127.0.0.1 (#282)
 * Fixed minor XSS issue in browser runner UI (#260)
 * Fixed @venus-include path issue with relative `./` paths (#284)
