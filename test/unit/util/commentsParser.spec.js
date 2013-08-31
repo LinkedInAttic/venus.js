@@ -161,6 +161,29 @@ describe('lib/util/commentsParser', function() {
       annotations = parser.parseStr(commentsJshint);
       expect(annotations).not.to.be(undefined);
     });
+
+    it('should handle @ symbols in spec file', function () {
+      var commentsWithSymbol, annotations;
+
+      //  /**
+      //   * @venus-include ../www/test-file.js
+      //   */
+      //  var foo = 'ab@c.com';
+      //  var boo = 'c@ba.moc';
+      commentsWithSymbol = [
+          '/**\n',
+          ' * @venus-include ../www/test-file.js \n',
+          ' */\n',
+          'var foo = \'ab@c.com\';\n',
+          'var boo = \'c@ba.moc\';\n',
+          '/**\n',
+          ' */\n'
+        ].join('');
+
+      annotations = parser.parseStr(commentsWithSymbol);
+      expect(annotations[annotation.VENUS_INCLUDE]).to.be('../www/test-file.js');
+      expect(Object.keys(annotations).length).to.be(1);
+    });
   });
 
   /**
