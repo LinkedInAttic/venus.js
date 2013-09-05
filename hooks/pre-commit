@@ -9,23 +9,11 @@ modified = re.compile('^(?:M|A)(\s+)(?P<name>.*)')
 
 CHECKS = [
     {
-        'output': 'Checking for console.log()...',
-        'command': 'grep -n console.log %s',
-        'match_files': ['.*yipit/.*\.js$'],
-        'print_filename': True,
-    },
-    {
-        'output': 'Checking for debugger...',
-        'command': 'grep -n debugger %s',
-        'match_files': ['.*\.js$'],
-        'print_filename': True,
-    },
-    {
-       'output': 'Running Jshint...',
+       'output': 'Running eslint...',
        # By default, jshint prints 'Lint Free!' upon success. We want to filter this out.
-       'command': 'jshint %s | grep -v "Lint Free!"',
-       'match_files': ['.*yipit/.*\.js$'],
-       'print_filename': False,
+       'command': 'eslint %s -c eslint.json| grep -v "Lint Free!"',
+       'match_files': ['.*\.js$', 'lib/.*\.js$'],
+       'print_filename': True,
     }
 ]
 
