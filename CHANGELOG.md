@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.13
+
+* Fixed bug in JUnitReporter (needed to escape quotes in attribute values) (#288)
+
+
 ## 2.1.12
 
 * Default to `run` command to simplify running tests, e.g.: `venus test.js` will now work the same as `venus run -t test.js` (#281)
