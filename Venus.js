@@ -83,7 +83,8 @@ Venus.prototype.init = function (args) {
     .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
     .option('-o, --output-file [path]', i18n('File to record test results'))
     .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
-    .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'));
+    .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'))
+    .option('--secure', i18n('Use https'));
 
   // init command
   program
@@ -120,6 +121,7 @@ Venus.prototype.init = function (args) {
     .option('-o, --output-file [path]', i18n('File to record test results'))
     .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
     .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'))
+    .option('--secure', i18n('Use https'))
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
