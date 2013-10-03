@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.1.13
+## 2.2.0
+
+* Added support for external resources via `@venus-resource` (#294)
+
+## 2.1.14
 
 * Fixed bug in JUnitReporter (needed to escape quotes in attribute values) (#288)
 
