@@ -173,4 +173,30 @@ describe('lib/testcase', function () {
       expect(httpRoot).to.be(path.resolve(home, '.venus_temp', 'test', '1'));
     });
   });
+
+  describe('Usage of @venus-execute annotation', function () {
+    describe('Load script to execute', function () {
+      it('should get correct path for execute script', function () {
+        var expectedPath = 'execute/setup.js', annotations;
+
+        test.path   = testHelper.sampleTests('execute.js');
+        testData    = test.parseTestFile(test.path).annotations;
+        annotations = test.resolveAnnotations(testData);
+
+        expect(annotations['venus-execute']).to.eql([expectedPath]);
+      });
+
+      it('should require module', function () {
+        var annotations, scripts;
+
+        test.path   = testHelper.sampleTests('execute.js');
+        testData    = test.parseTestFile(test.path).annotations;
+        annotations = test.resolveAnnotations(testData);
+        scripts     = test.prepareExecuteScripts(annotations);
+
+        expect(scripts.length).to.be(1);
+        expect(scripts[0].before()).to.be('before hook');
+      });
+    });
+  });
 });
