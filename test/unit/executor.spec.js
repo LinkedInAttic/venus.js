@@ -106,7 +106,8 @@ describe('lib/executor', function() {
 
     options = {
       hostname: 'foobar.com',
-      test: test
+      test: test,
+      homeFolder: __dirname
     };
 
 
