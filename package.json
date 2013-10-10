@@ -2,12 +2,11 @@
   "name"              : "venus",
   "main"              : "Venus.js",
   "description"       : "Execution environment for JavaScript unit testing",
-  "version"           : "2.2.0",
+  "version"           : "2.3.0",
   "keywords"          : [ "testing" ],
   "homepage"          : "https://github.com/linkedin/venus.js",
   "bugs"              : {
-    "url": "https://github.com/linkedin/venus.js/issues",
-    "email": "smclaughlin@linkedin.com"
+    "url": "https://github.com/linkedin/venus.js/issues"
   },
   "engines"           : {
     "node"            : ">=0.8.0"

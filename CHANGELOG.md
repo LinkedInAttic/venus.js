@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+* Added `@venus-execute` annotation for running code on node before executing tests. See `examples/Hooks` for usage.
+
 ## 2.2.0
 
 * Added support for external resources via `@venus-resource` (#294)
