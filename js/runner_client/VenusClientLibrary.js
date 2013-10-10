@@ -35,7 +35,6 @@ VenusClientLibrary.prototype.connect = function(){
   );
 
   this.socket.on('reload-test', function (testId) {
-    console.log('reload', testId);
     if (testId === window.venus.testId) {
       console.log('reloading me');
       window.location.reload();
@@ -73,4 +72,18 @@ VenusClientLibrary.prototype.done = function( results ){
 VenusClientLibrary.prototype.log = function () {
   var str = Array.prototype.slice.call(arguments, 0).join(' ');
   this.socket.emit( 'console.log', str);
+};
+
+/**
+ * Execute server side hook
+ * @param {String} hookName hook
+ */
+VenusClientLibrary.prototype.beforeHook = function (hookName) {
+  var def = $.Deferred();
+
+  this.socket.emit('execute:before:hook', { testId: window.venus.testId }, function () {
+    def.resolve();
+  });
+
+  return def.promise();
 };
