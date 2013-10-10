@@ -13,7 +13,9 @@
   </script>
   <script src="{testcaseFile}"></script>
   <script type="text/javascript">
-    window.adaptor.start();
+    window.parent.venus.beforeHook().then(function () {
+      window.adaptor.start();
+    });
   </script>
 </body>
 </html>
