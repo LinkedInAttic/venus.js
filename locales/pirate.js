@@ -157,6 +157,5 @@
 	"Ensures all other Venus processes are killed before starting": "Ensures all other Venus processes are killed before starting",
 	"Using environment ie8": "Using environment ie8",
 	"Using environment ie7": "Using environment ie7",
-	"Use https": "Use https",
-	"New Venus project created in /Library/Webserver/Documents/zz": "New Venus project created in /Library/Webserver/Documents/zz"
+	"Use https": "Use https"
 }
