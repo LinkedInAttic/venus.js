@@ -69,22 +69,6 @@ Venus.prototype.shutdown = function () {
  */
 Venus.prototype.init = function (args) {
 
-  // Define command line options
-  program
-    .version(require('./package').version)
-    .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
-    .option('-l, --locale [locale]', i18n('Specify locale to use'))
-    .option('-v, --verbose', i18n('Run in verbose mode'))
-    .option('-d, --debug', i18n('Run in debug mode'))
-    .option('-c, --coverage', i18n('Generate Code Coverage Report'))
-    .option('--hostname [host]', i18n('Set hostname for test URLs, defaults to your ip address'))
-    .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
-    .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
-    .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
-    .option('-o, --output-file [path]', i18n('File to record test results'))
-    .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
-    .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'));
-
   // init command
   program
     .command('init')
@@ -124,7 +108,27 @@ Venus.prototype.init = function (args) {
 
   program.parse(args);
 
+  // No command (e.g., "init", "demo", "run") was provided in command line arguments, so run venus with defaults
   if (this.noCommand) {
+
+    // Define command line options
+    program
+      .version(require('./package').version)
+      .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
+      .option('-l, --locale [locale]', i18n('Specify locale to use'))
+      .option('-v, --verbose', i18n('Run in verbose mode'))
+      .option('-d, --debug', i18n('Run in debug mode'))
+      .option('-c, --coverage', i18n('Generate Code Coverage Report'))
+      .option('--hostname [host]', i18n('Set hostname for test URLs, defaults to your ip address'))
+      .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
+      .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
+      .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
+      .option('-o, --output-file [path]', i18n('File to record test results'))
+      .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
+      .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'));
+
+    program.parse(args);
+
     this.runWithDefaults();
   }
 };
