@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.1
+
+* Fixed bug with running tests with original syntax `venus run -t test.js -n` (#300)
+* Added directory support for `@venus-resource` annotation (#300)
+
+
 ## 2.3.0
 
 * Added `@venus-execute` annotation for running code on node before executing tests. See `examples/Hooks` for usage.
