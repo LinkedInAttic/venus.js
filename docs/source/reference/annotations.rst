@@ -102,7 +102,7 @@ Example:
    * @venus-library mocha
    * @venus-include ../src/Greeter.js
    * @venus-fixture ../fixtures/Greeter.html
-   * @venus-tempalte custom
+   * @venus-template custom
    */
 
 ---------------
