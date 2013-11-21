@@ -140,7 +140,7 @@ Here is an example:
    * @venus-resource ../biz/data4.txt
    */
 
-  describe('@venus-resource annotation', function() {
+  describe('should retrieve data1.txt', function() {
     it('should retrieve data1.txt', function(done) {
       $.get(location.href + '/data1.txt')
       .success(function() {
