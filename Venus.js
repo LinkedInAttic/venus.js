@@ -20,6 +20,8 @@
  * @file
  */
 
+/* Adding test comment */
+
 var _         = require('underscore'),
     executor  = require('./lib/executor'),
     i18n      = require('./lib/util/i18n'),
