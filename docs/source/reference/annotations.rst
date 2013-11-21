@@ -84,7 +84,7 @@ Example:
 @venus-fixture-reset
 --------------------
 
-Disable the behavior of resetting test HTML fixtures after each test executes (default value is true)
+Disable the behavior of resetting test HTML fixtures after each test executes (Default value is true)
 
 Example:
 
