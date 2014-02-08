@@ -16,7 +16,7 @@
  */
 
 /**
- * Create a QUnit adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)
+ * Create a QUnit adaptor which inherits methods from the adaptor template (.venus/adaptors/adaptor-template.js)
  */
 
 /**
@@ -24,7 +24,7 @@
  */
 function Adaptor() {}
 
-// Inherit from adapter template
+// Inherit from adaptor template
 Adaptor.prototype = new AdaptorTemplate();
 
 /**

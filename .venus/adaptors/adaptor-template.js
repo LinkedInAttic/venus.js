@@ -16,9 +16,15 @@
  */
 
 /**
- * The template for Venus adapters.
+ * The template for Venus adaptors.
  * Methods are defined in this class to help process and gather information about test results.
- * All adapters need to inherit this class and override methods as needed.
+ * All adaptors need to inherit this class and override methods as needed.
+ *
+ * Venus currently supports the following JavaScript testing libraries:
+ *
+ * - Mocha
+ * - Jasmine
+ * - QUnit
  */
 
 /**

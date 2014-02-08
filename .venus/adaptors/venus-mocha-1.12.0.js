@@ -16,7 +16,7 @@
  */
 
 /**
- * Create a Mocha adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)
+ * Create a Mocha adaptor which inherits methods from the adaptor template (.venus/adaptors/adaptor-template.js)
  */
 
 /**
@@ -26,7 +26,7 @@ function Adaptor() {
   mocha.setup({ ui: 'bdd', ignoreLeaks: true });
 };
 
-// Inherit from adapter template
+// Inherit from adaptor template
 Adaptor.prototype = new AdaptorTemplate();
 
 /**
