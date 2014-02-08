@@ -1,19 +1,19 @@
 // @author LinkedIn
 
-// Create a Mocha adaptor which inherits methods from the adapter template (.venus/adapters/adaptor-template.js)
+// Create a Mocha adaptor which inherits methods from the adaptor template (.venus/adaptors/adaptor-template.js)
 
 // Setup Mocha with behavior driven development (BDD)
 function Adaptor() {
   mocha.setup({ ui: 'bdd', ignoreLeaks: true });
 };
 
-// Inherit from adapter template
+// Inherit from adaptor template
 Adaptor.prototype = new AdaptorTemplate();
 
 // Override Methods
 // ----------------
 
-// Override methods defined in the adapter template
+// Override methods defined in the adaptor template
 
 Adaptor.prototype.start = function() {
   var self = this,
