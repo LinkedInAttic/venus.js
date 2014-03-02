@@ -1,0 +1,73 @@
+- Code under test
+- Dependencies
+- Test Transformation Pipeline
+  - Transforms pre served
+
+
+
+/**
+ * @venus-code $ENV_VAR/**/*.js (glob support)
+ * @venus-include $ENV_VAR/**/*.js
+ * @venus-tag
+ * @venus-transforms coffee-script
+ */
+
+module.exports = function (venus) {
+  this.code = '$ENV_VAR/**/*.js';
+  this.dependencie = 'sanothu';
+  this.tags = ['foo'];
+  this.test = function () {
+  };
+};
+
+1. Create Read Stream for spec file
+
+Test Prep Pipeline:
+
+Venus Global:
+
+{
+  configuration: {
+    plugins: ['venus-mocha', 'venus-sinon']
+  },
+  tests: {
+    'fs/path/to/spec/file': {
+      'dir': 'fs/path/to/spec',
+      'transforms': ['tr-1', 'tr-2', 'tr-3'],
+      'include': ['/fs/path/to/include']
+    }
+  },
+  transforms: {
+    'name': tranformFn
+    'name-2': transformFn
+  },
+  globals: {}
+}
+
+### Lifecycle
+
+1. Start Venus
+2. Venus watch path is set. Defaults to CWD/**/*.js
+3. Configuration is loaded (.venusrc)
+4. Plugins are loaded
+5. Test files are located
+6. Lifecycle event: emit 'test-added'
+7. Start Venus Static Server - serves test assets
+8. Start Venus WS server
+9. Lifecycle event: emit 'tests-ready' event
+
+EVENT: 
+
+### Test Harness Page
+
+<html>
+  <script src="/fs/path/to/dependency-file"></script>
+  <script src="/fs/path/to/spec/file"></script>
+  <script src="/fs/path/to/include/file"></script>
+  <script src="/fs/path/to/include/file-2"></script>
+  <body>
+    {{fixtures}}
+  </body>
+</html>
+
+venus run --chrome=boo --boo=nth

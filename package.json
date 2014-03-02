@@ -1,27 +1,33 @@
 {
-  "name"              : "venus",
-  "main"              : "Venus.js",
-  "description"       : "Execution environment for JavaScript unit testing",
-  "version"           : "3.0.0alpha-0",
-  "keywords"          : [ "testing" ],
-  "homepage"          : "https://github.com/linkedin/venus.js",
-  "bugs"              : {
+  "name": "venus",
+  "main": "Venus.js",
+  "description": "Execution environment for JavaScript unit testing",
+  "version": "3.0.0alpha-0",
+  "keywords": [
+    "testing"
+  ],
+  "homepage": "http://www.venusjs.org",
+  "bugs": {
     "url": "https://github.com/linkedin/venus.js/issues"
   },
-  "engines"           : {
-    "node"            : ">=0.10.0"
+  "engines": {
+    "node": ">=0.10.0"
   },
-  "bin"               : {
-    "venus"          : "./bin/venus"
+  "bin": {
+    "venus": "./bin/venus"
   },
-  "license"          : "Apache 2.0",
-  "dependencies"      : {
+  "license": "Apache 2.0",
+  "dependencies": {
+    "through": "~2.3.4",
+    "deepmerge": "~0.2.7"
   },
   "devDependencies": {
-    "mocha"             : "1.2.0",
-    "sinon"             : "1.3.4"
+    "mocha": "~1.17.1",
+    "sinon": "1.3.4",
+    "expect.js": "~0.3.1"
   },
   "preferGlobal": true,
   "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/unit/lib"
   }
 }

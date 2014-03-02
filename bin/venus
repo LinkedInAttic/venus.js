@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var path       = require('path'),
+    parse      = require('../lib/argParser'),
+    Venus      = require('../Venus'),
+    loadConfig = require('../lib/configLoader');
+
+var venus, args, config;
+
+args   = parse(process.argv);
+config = loadConfig(args.config);
+
+new Venus(config).start();
+

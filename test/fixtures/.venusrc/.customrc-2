@@ -1,0 +1,4 @@
+module.exports = {
+  plugins: ['./examples/plugins/SamplePlugin'],
+  samplePlugin: 'foobarred'
+};
