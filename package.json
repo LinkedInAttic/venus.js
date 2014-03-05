@@ -19,7 +19,8 @@
   "license": "Apache 2.0",
   "dependencies": {
     "through": "~2.3.4",
-    "deepmerge": "~0.2.7"
+    "deepmerge": "~0.2.7",
+    "cli-color": "~0.2.3"
   },
   "devDependencies": {
     "mocha": "~1.17.1",

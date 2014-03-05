@@ -10,7 +10,7 @@ describe('argParser', function () {
       input  = args(
         'invalid', '--lonely_key', '--config=test/foobar/.filerc-1',
         '--config_win=c:\\test\\foobar', '--browser=chrome',
-        '--name_=seth', '--default');
+        '--name_=seth', '--default', '--glob=*.js');
       output = parse(input);
     });
 
@@ -32,6 +32,10 @@ describe('argParser', function () {
 
     it ('config_win should be c:\\test\\foobar', function () {
       expect(output.config_win).to.be('c:\\test\\foobar');
+    });
+
+    it ('glob should be *.js', function () {
+      expect(output.glob).to.be('*.js');
     });
 
     it ('invalid should be ignored', function () {

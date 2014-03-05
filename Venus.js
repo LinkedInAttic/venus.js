@@ -1,5 +1,6 @@
 var EventEmitter = require('events').EventEmitter,
-    util         = require('util');
+    util         = require('util'),
+    log          = require('./lib/log');
 
 module.exports = Venus;
 
@@ -18,13 +19,20 @@ util.inherits(Venus, EventEmitter);
  * @method start
  */
 Venus.prototype.start = function () {
+  var coreLog = log('venus-core', this.config.colors);
+
   // instantiate plugins
   this.config.plugins.forEach(function (plugin) {
-    this.plugins[plugin] = new (require(plugin))(this);
+    try {
+      this.plugins[plugin] = new (require(plugin))(this, log(plugin, this.config.colors));
+      coreLog('Loaded plugin', coreLog.yellow(plugin));
+    } catch (e) {
+      coreLog('Failed to load plugin', coreLog.red(plugin));
+    }
   }, this);
 
   this.emit(this.events.VC_START);
-  this.exit(127);
+  // this.exit(127);
 };
 
 /**

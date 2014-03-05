@@ -5,12 +5,13 @@
 var path       = require('path'),
     parse      = require('../lib/argParser'),
     Venus      = require('../Venus'),
-    loadConfig = require('../lib/configLoader');
+    loadConfig = require('../lib/configLoader'),
+    merge      = require('deepmerge');
 
 var venus, args, config;
 
 args   = parse(process.argv);
 config = loadConfig(args.config);
 
-new Venus(config).start();
+new Venus(merge(config, args)).start();
 
