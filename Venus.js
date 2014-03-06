@@ -1,38 +1,33 @@
-var EventEmitter = require('events').EventEmitter,
-    util         = require('util'),
-    log          = require('./lib/log');
+var EventEmitter  = require('events').EventEmitter,
+    util          = require('util'),
+    log           = require('./lib/log'),
+    PluginManager = require('./lib/PluginManager');
 
 module.exports = Venus;
 
 function Venus(config) {
-  this.config     = config;
-  this.testFiles  = {};
-  this.transforms = {};
-  this.globals    = {};
-  this.plugins    = {};
-  this.events     = require('./lib/events');
-};
+  this.config       = config;
+  this.testFiles    = {};
+  this.transforms   = {};
+  this.globals      = {};
+  this.plugins      = new PluginManager();
+  this.events       = require('./lib/events');
+  this.eventEmitter = new EventEmitter();
 
-util.inherits(Venus, EventEmitter);
+  // Defaults
+  this.config.info = (typeof this.config.info === 'undefined' ? true : this.config.info);
+
+  this.info       = log('venus-core', this.config.colors, this.config.info);
+  this.debug      = log('venus-core', this.config.colors, this.config.debug);
+};
 
 /**
  * @method start
  */
 Venus.prototype.start = function () {
-  var coreLog = log('venus-core', this.config.colors);
 
-  // instantiate plugins
-  this.config.plugins.forEach(function (plugin) {
-    try {
-      this.plugins[plugin] = new (require(plugin))(this, log(plugin, this.config.colors));
-      coreLog('Loaded plugin', coreLog.yellow(plugin));
-    } catch (e) {
-      coreLog('Failed to load plugin', coreLog.red(plugin));
-    }
-  }, this);
-
+  this.plugins.load(this);
   this.emit(this.events.VC_START);
-  // this.exit(127);
 };
 
 /**
@@ -53,4 +48,16 @@ Venus.prototype.exit = function (code) {
   }
 };
 
+/**
+ * @method on
+ */
+Venus.prototype.on = function () {
+  this.eventEmitter.on.apply(this.eventEmitter, arguments);
+};
 
+/**
+ * @method emit
+ */
+Venus.prototype.emit = function () {
+  this.eventEmitter.emit.apply(this.eventEmitter, arguments);
+};
