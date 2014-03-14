@@ -51,7 +51,7 @@
         <li class="fail">
           <ul>
             <li class="summary">X <%= test.message %></li>
-            <li class="details"><%= test.stackTrace %></li>
+            <li class="details"><pre><%= test.stackTrace %></pre></li>
           </ul>
         </li>
         <% } %>
