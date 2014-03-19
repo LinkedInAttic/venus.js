@@ -19,6 +19,7 @@
  * Communicates with the Venus Server
  *
  * @param {Object} config - the configuration options
+ * @constructor
  */
 function VenusClientLibrary(config) {
   this.config = config;

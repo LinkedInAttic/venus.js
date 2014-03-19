@@ -17,6 +17,9 @@
 
 /**
  * Controls the Venus UI
+ *
+ * @param config - the configuration options
+ * @constructor
  */
 function VenusUi(config) {
   var self = this;
