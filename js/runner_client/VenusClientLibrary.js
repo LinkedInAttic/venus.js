@@ -33,6 +33,13 @@ VenusClientLibrary.prototype.connect = function(){
     config.host,
     { port: config.port }
   );
+
+  this.socket.on('reload-test', function (testId) {
+    if (testId === window.venus.testId) {
+      console.log('reloading me');
+      window.location.reload();
+    }
+  });
 };
 
 /**
@@ -40,11 +47,22 @@ VenusClientLibrary.prototype.connect = function(){
  * @param {Object} results the test results
  */
 VenusClientLibrary.prototype.done = function( results ){
-  var sandbox = document.getElementById('sandbox');
+  var sandbox = document.getElementById('sandbox'),
+      doneEl  = document.createElement('div');
 
   results.userAgent = window.navigator.userAgent;
   results.codeCoverageData  = sandbox.contentWindow.__coverage__;
+  results.testId = window.venus.testId;
   this.socket.emit( 'results', results );
+  doneEl.id = 'test-done-marker';
+  document.body.appendChild(doneEl);
+  $(document).trigger('results', results);
+
+  try {
+    window.parent.postTestResults(results);
+  } catch (e) {
+    // fail
+  }
 };
 
 /**
@@ -54,4 +72,18 @@ VenusClientLibrary.prototype.done = function( results ){
 VenusClientLibrary.prototype.log = function () {
   var str = Array.prototype.slice.call(arguments, 0).join(' ');
   this.socket.emit( 'console.log', str);
+};
+
+/**
+ * Execute server side hook
+ * @param {String} hookName hook
+ */
+VenusClientLibrary.prototype.beforeHook = function (hookName) {
+  var def = $.Deferred();
+
+  this.socket.emit('execute:before:hook', { testId: window.venus.testId }, function () {
+    def.resolve();
+  });
+
+  return def.promise();
 };

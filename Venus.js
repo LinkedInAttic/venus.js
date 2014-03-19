@@ -19,19 +19,19 @@
  * The Venus application code that is called by the Venus shell script (bin/venus).
  * @file
  */
-  
+
 var _         = require('underscore'),
     executor  = require('./lib/executor'),
     i18n      = require('./lib/util/i18n'),
     locale    = require('./lib/util/locale'),
     logger    = require('./lib/util/logger'),
-    phantom   = require('./lib/uac/phantom'),
-    webdriver = require('./lib/uac/webdriver'),
     program   = require('commander'),
     prompt    = require('cli-prompt'),
     wrench    = require('wrench'),
     fs        = require('fs'),
-    path      = require('path');
+    path      = require('path'),
+    deferred  = require('deferred'),
+    ps        = require('./lib/util/ps');
 
 /**
  * The Venus application object
@@ -69,10 +69,6 @@ Venus.prototype.shutdown = function () {
  */
 Venus.prototype.init = function (args) {
 
-  // Define command line options
-  program
-    .version(require('./package').version);
-
   // init command
   program
     .command('init')
@@ -97,31 +93,77 @@ Venus.prototype.init = function (args) {
     .description(i18n('Run tests'))
     .option('-t, --test [tests]', i18n('Comma separated string of tests to run'))
     .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
-    .option('-n, --phantom [path to binary]', i18n('Use phantomJS client to run browser tests'))
-    .option('-s, --selenium [server url]', i18n('Use selenium client to run browser tests'))
-    .option('--sauce-labs [server url]', i18n('Use sauce labs client to run browser tests'))
     .option('-l, --locale [locale]', i18n('Specify locale to use'))
     .option('-v, --verbose', i18n('Run in verbose mode'))
     .option('-d, --debug', i18n('Run in debug mode'))
     .option('-c, --coverage', i18n('Generate Code Coverage Report'))
-    .option('--hostname', i18n('Set hostname for test URLs, defaults to your ip address'))
-    .option('--require-annotations', i18n('Ignore JavaScript test files which do not contain a Venus annotation (@venus-*)'))
-
-    .option('--browser [browser|version]', i18n('Browser name to request from selenium webdriver or sauce labs'))
-    .option('--platform [platform]', i18n('Specify platform to use with sauce labs'))
-    .option('--username [username]', i18n('Specify username to use with sauce labs'))
-    .option('--access-key [accessKey]', i18n('Specify access key to use with sauce labs'))
-
-    .option('-r, --selenium-server [url]', i18n('[deprecated] Specify selenium server to use'))
-    .option('-b, --selenium-browser [browser]', i18n('[deprecated] Specify browser to use with selenium'))
-
+    .option('--hostname [host]', i18n('Set hostname for test URLs, defaults to your ip address'))
+    .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
+    .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
+    .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
+    .option('-o, --output-file [path]', i18n('File to record test results'))
+    .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
+    .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'))
     .action(_.bind(this.command(this.run), this));
 
   program.parse(args);
 
+  // No command (e.g., "init", "demo", "run") was provided in command line arguments, so run venus with defaults
   if (this.noCommand) {
-    program.outputHelp();
+
+    // Define command line options
+    program
+      .version(require('./package').version)
+      .option('-p, --port [port]', i18n('port to run on'), function (value) { return parseInt(value, 10); })
+      .option('-l, --locale [locale]', i18n('Specify locale to use'))
+      .option('-v, --verbose', i18n('Run in verbose mode'))
+      .option('-d, --debug', i18n('Run in debug mode'))
+      .option('-c, --coverage', i18n('Generate Code Coverage Report'))
+      .option('--hostname [host]', i18n('Set hostname for test URLs, defaults to your ip address'))
+      .option('--no-annotations', i18n('Include test files with no Venus annotations (@venus-*)'))
+      .option('-e, --environment [env]', i18n('Specify environment to run tests in'))
+      .option('-r, --reporter [reporter]', i18n('Test reporter to use. Default is "DefaultReporter"'))
+      .option('-o, --output-file [path]', i18n('File to record test results'))
+      .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
+      .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'));
+
+    program.parse(args);
+
+    this.runWithDefaults();
   }
+};
+
+/**
+ * Try to auto run venus with default settings
+ */
+Venus.prototype.runWithDefaults = function () {
+  var args = this.commandLineArguments,
+      encounteredFlag = false,
+      possibleTestPaths;
+
+  if (args < 2) {
+    return false;
+  }
+
+  possibleTestPaths = args.slice(2).filter(function (testPath) {
+    if (testPath[0] === '-') {
+      encounteredFlag = true;
+    }
+
+    return !encounteredFlag;
+  });
+
+  logger.verbose(i18n('Running demo'));
+
+  if (possibleTestPaths.length === 0) {
+    possibleTestPaths = ['.'];
+  }
+
+  program.test =  possibleTestPaths.join(',');
+  // program.environment = 'ghost';
+  // program.coverage = true;
+  this.run(program);
+
 };
 
 /**
@@ -164,46 +206,33 @@ Venus.prototype.applyCommandLineFlags = function (program) {
  * @method Venus#run
  */
 Venus.prototype.run = function (program) {
-  // var uac;
   logger.verbose(i18n('Starting in executor mode'));
 
-  this.server = new executor.Executor();
+  if (program.hasOwnProperty('phantom')) {
+    program.environment = 'ghost';
+  }
+
   this.applyCommandLineFlags(program);
-  program.homeFolder = __dirname;
 
+  if (program.hasOwnProperty('singleton')) {
+    this.killOtherVenusProcesses().then(proceed);
+  } else {
+    proceed.call(this);
+  }
 
-  // if (program.webdriver || program.selenium) {
-    // program.uac = 'webdriver';
+  function proceed() {
+    this.server = new executor.Executor();
+    program.homeFolder = __dirname;
+    this.server.init(program);
+  }
+};
 
-    // if (program.webdriver) {
-      // program['uac-options'] = program.webdriver;
-    // }
-  // }
+/**
+ * Kill all other Venus processes besides the current process.
+ */
+Venus.prototype.killOtherVenusProcesses = function () {
+  return ps.grep('venus').then(ps.kill);
 
-  // if (program.phantom) {
-    // program.uac = 'phantom';
-    // program['uac-options'] = program.phantom;
-  // }
-
-  // if (program.uac === 'phantom') {
-    // program.phantom = true;
-    // if (program['uac-options']) {
-      // program.phantom = program['uac-options'];
-    // }
-  // }
-
-  // Fix for issue gh-154. Needs some more work.
-  // if (program.uac) {
-    // uac = require('./lib/uac/' + program.uac);
-
-    // if (typeof uac.onTestsLoaded === 'function') {
-      // this.server.on('tests-loaded', uac.onTestsLoaded);
-    // } else {
-      // this.quit('error', i18n('%s UAC does not implement onTestsLoaded hook.', program.uac));
-    // }
-  // }
-
-  this.server.init(program);
 };
 
 /**
@@ -214,12 +243,12 @@ Venus.prototype.run = function (program) {
  * @method Venus#runDemo
  */
 Venus.prototype.runDemo = function (program) {
-  var testFile = path.resolve(__dirname, 'examples', '06-SimpleCoverageTest', 'specs', 'Greeter.spec.js');
+  var testFile = path.resolve(__dirname, 'examples', 'mocha', 'Greeter');
 
   logger.verbose(i18n('Running demo'));
 
   program.test = testFile;
-  program.phantom = true;
+  program.environment = 'ghost';
   program.coverage = true;
   this.run(program);
 };

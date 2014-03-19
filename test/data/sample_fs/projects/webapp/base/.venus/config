@@ -41,5 +41,28 @@
 
   static: {
     'txt': '../static_content'
+  },
+
+  nested: {
+   'level-1': 'foo'
+  },
+
+  biz: {
+    bar: {
+     bizPathsfoo: ['../foo.js', '../bar.js']
+    },
+    foobar: [
+      { testPath: '../bar.js' }
+    ]
+  },
+
+  // Environments
+  environments: {
+    ie8: {
+      uac: 'webdriver',
+      browser: 'internet explorer',
+      version: '8.0',
+      host: 'supergrid.corp'
+    }
   }
 }

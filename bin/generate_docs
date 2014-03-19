@@ -30,6 +30,6 @@ command -v pygmentize >/dev/null 2>&1 || {
 
 echo -e "Generating Venus docs...\n"
 
-cd .. & docker -o docs -x .venus/libraries,.git,css,docs,examples,locales,logs,node_modules,test,.git*,.jshint*,*.yml,*.json -n --extras fileSearch,goToLine
+cd .. & docker -o documentation -x .venus/adaptors/mocha-venus.js,.venus/libraries,.git,css,docs,examples,hooks,js/jquery,js/socketio,js/underscore,locales,logs,node_modules,test,.git*,.jshint*,*.yml,*.json --extras fileSearch
 
 echo -e "\nDone!\n"

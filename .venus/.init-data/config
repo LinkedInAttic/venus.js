@@ -1,10 +1,4 @@
 // Configuration file for Venus
 // All paths can be relative (to the location of this config file) or absolute
 {
-  default: {},
-  libraries: {},
-  binaries: {},
-  static: {},
-  includes: {},
-  basePaths: {}
 }

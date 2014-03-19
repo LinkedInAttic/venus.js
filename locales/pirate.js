@@ -144,5 +144,18 @@
 	"Platform: daf": "Platform: daf",
 	"Username: daf": "Username: daf",
 	"Access Key: adfdf": "Access Key: adfdf",
-	"Version: 21.0": "Version: 21.0"
+	"Version: 21.0": "Version: 21.0",
+	"Include test files with no Venus annotations (@venus-*)": "Include test files with no Venus annotations (@venus-*)",
+	"Specify environment to run tests in": "Specify environment to run tests in",
+	"Test reporter to use. Default is \"DefaultReporter\"": "Test reporter to use. Default is \"DefaultReporter\"",
+	"File to record test results": "File to record test results",
+	"Run with PhantomJS. This is a shortcut to --environment ghost": "Run with PhantomJS. This is a shortcut to --environment ghost",
+	"Using environment ghost": "Using environment ghost",
+	"error creating symlink for static path %s to %s. exception: %s": "error creating symlink for static path %s to %s. exception: %s",
+	"created symlink for static path %s to %s": "created symlink for static path %s to %s",
+	"Disabling hot reload because there are more than 5 tests loaded": "Disabling hot reload because there are more than 5 tests loaded",
+	"Ensures all other Venus processes are killed before starting": "Ensures all other Venus processes are killed before starting",
+	"Using environment ie8": "Using environment ie8",
+	"Using environment ie7": "Using environment ie7",
+	"Use https": "Use https"
 }
