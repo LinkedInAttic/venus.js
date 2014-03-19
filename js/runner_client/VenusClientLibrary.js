@@ -17,24 +17,26 @@
 
 /**
  * Communicates with the Venus Server
+ *
+ * @param {Object} config - the configuration options
  */
-function VenusClientLibrary( config ){
+function VenusClientLibrary(config) {
   this.config = config;
   this.socket = null;
 }
 
 /**
- * Sets up socket IO connection
+ * Sets up socket IO connection and sets up hot reload
  */
-VenusClientLibrary.prototype.connect = function(){
+VenusClientLibrary.prototype.connect = function() {
   var config = this.config;
 
-  this.socket = io.connect(
-    config.host,
-    { port: config.port }
-  );
+  // create a connection with the server
+  this.socket = io.connect(config.host, { port: config.port });
 
-  this.socket.on('reload-test', function (testId) {
+  // when a file in the current test suite changes...
+  this.socket.on('reload-test', function(testId) {
+    // if the file that changed is the test that is currently on the browser page, reload the page
     if (testId === window.venus.testId) {
       console.log('reloading me');
       window.location.reload();
@@ -43,42 +45,48 @@ VenusClientLibrary.prototype.connect = function(){
 };
 
 /**
- * Called when test is done running
- * @param {Object} results the test results
+ * Called when a test is done running
+ *
+ * @param {Object} results - the test results
  */
-VenusClientLibrary.prototype.done = function( results ){
+VenusClientLibrary.prototype.done = function(results) {
   var sandbox = document.getElementById('sandbox'),
       doneEl  = document.createElement('div');
 
+  // decorate the test results with metadata
   results.userAgent = window.navigator.userAgent;
   results.codeCoverageData  = sandbox.contentWindow.__coverage__;
   results.testId = window.venus.testId;
-  this.socket.emit( 'results', results );
+
+  this.socket.emit('results', results);
+
+  // append the test results to the document
   doneEl.id = 'test-done-marker';
   document.body.appendChild(doneEl);
+
   $(document).trigger('results', results);
 
-  try {
-    window.parent.postTestResults(results);
-  } catch (e) {
-    // fail
+  if (window.VenusTestList) {
+    VenusTestList.postTestResults(results);
   }
 };
 
 /**
- * Forward a console.log message to server
- * @param {String} str the log message
+ * Forwards a console.log message to server
  */
-VenusClientLibrary.prototype.log = function () {
+VenusClientLibrary.prototype.log = function() {
   var str = Array.prototype.slice.call(arguments, 0).join(' ');
+
+  // display on the Venus log
   this.socket.emit( 'console.log', str);
 };
 
 /**
  * Execute server side hook
- * @param {String} hookName hook
+ *
+ * @returns {Promise}
  */
-VenusClientLibrary.prototype.beforeHook = function (hookName) {
+VenusClientLibrary.prototype.beforeHook = function() {
   var def = $.Deferred();
 
   this.socket.emit('execute:before:hook', { testId: window.venus.testId }, function () {
