@@ -17,8 +17,8 @@ function Venus(config) {
   // Defaults
   this.config.info = (typeof this.config.info === 'undefined' ? true : this.config.info);
 
-  this.info       = log('venus-core', this.config.colors, this.config.info);
-  this.debug      = log('venus-core', this.config.colors, this.config.debug);
+  this.info  = log('venus-core', this.config.colors, this.config.info);
+  this.debug = log('venus-core', this.config.colors, this.config.debug);
 };
 
 /**

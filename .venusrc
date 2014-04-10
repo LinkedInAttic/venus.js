@@ -1,3 +1,6 @@
 module.exports = {
-  plugins: ['venus-unit', 'venus-http', './asoneth']
+  plugins: ['venus-unit', 'venus-http', './asoneth'],
+  'venus-http': {
+    port: 7000
+  }
 };
