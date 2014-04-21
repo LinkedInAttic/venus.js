@@ -1,5 +1,6 @@
 var EventEmitter  = require('events').EventEmitter,
     util          = require('util'),
+    q             = require('q'),
     log           = require('./lib/log'),
     PluginManager = require('./lib/PluginManager');
 
@@ -17,17 +18,23 @@ function Venus(config) {
   // Defaults
   this.config.info = (typeof this.config.info === 'undefined' ? true : this.config.info);
 
-  this.info  = log('venus-core', this.config.colors, this.config.info);
-  this.debug = log('venus-core', this.config.colors, this.config.debug);
+  this.info       = log('venus-core', this.config.colors, this.config.info);
+  this.debug      = log('venus-core', this.config.colors, this.config.debug);
 };
 
 /**
  * @method start
  */
 Venus.prototype.start = function () {
+  var plugins = this.plugins;
 
-  this.plugins.load(this);
-  this.emit(this.events.VC_START);
+  q.all(plugins.load(this))
+    .then(function () {
+      return q.all(plugins.init());
+    })
+    .then(function () {
+      plugins.run();
+   });
 };
 
 /**

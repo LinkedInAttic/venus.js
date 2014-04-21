@@ -17,7 +17,8 @@ describe('ctx', function () {
   });
 
   it('should be an exact copy', function () {
-    expect(newCtx).to.eql(originalCtx);
+    expect(newCtx.name).to.eql(originalCtx.name);
+    expect(newCtx.age).to.eql(originalCtx.age);
   });
 
   it('should support reassignment', function () {
