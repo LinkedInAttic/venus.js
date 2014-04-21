@@ -17,78 +17,122 @@
 
 /**
  * Controls the Venus UI
+ *
+ * @param config - the configuration options
+ * @constructor
  */
-var conf, $resultsView, $sandboxView;
 function VenusUi(config) {
-  conf = config;
-  $resultsView = $('#results-view');
-  $sandboxView = $('#sandbox-view');
+  var self = this;
 
-  showResults();
+  this.config = config;
+  this.$resultsView = $('#results-view');
+  this.$resultsButton = $('#results-button');
+  this.$sandboxView = $('#sandbox-view');
+  this.$sandboxButton = $('#sandbox-button');
+  this.$resultsTemplate = $('#results-template');
+  this.ACTIVE_CLASS = 'active';
+  this.SELECTED_CLASS = 'selected';
 
-  $('#results-button').click(function () {
-    showResults();
+  // show the test results if any and attach the event handlers
+  this.showResults();
+
+  this.$resultsButton.click(function () {
+    self.showResults();
   });
 
-  $('#sandbox-button').click(function () {
-    showSandbox();
+  this.$sandboxButton.click(function () {
+    self.showSandbox();
   });
 
-  $(document).on('results', onResults);
+  $(document).on('results', self.onResults);
 }
 
-function showResults() {
-  $sandboxView.removeClass('active');
-  $resultsView.show();
-  $('#results-button').parent().addClass('selected');
-  $('#sandbox-button').parent().removeClass('selected');
-}
+/**
+ * Shows the test results
+ */
+VenusUi.prototype.showResults = function() {
+  this.$resultsView.addClass(this.ACTIVE_CLASS);
+  this.$sandboxView.removeClass(this.ACTIVE_CLASS);
+  this.$resultsButton.parent().addClass(this.SELECTED_CLASS);
+  this.$sandboxButton.parent().removeClass(this.SELECTED_CLASS);
+};
 
-function showSandbox() {
-  $resultsView.hide();
-  $sandboxView.addClass('active');
-  $('#results-button').parent().removeClass('selected');
-  $('#sandbox-button').parent().addClass('selected');
-}
+/**
+ * Shows the sandbox fixture
+ */
+VenusUi.prototype.showSandbox = function() {
+  this.$resultsView.removeClass(this.ACTIVE_CLASS);
+  this.$sandboxView.addClass(this.ACTIVE_CLASS);
+  this.$resultsButton.parent().removeClass(this.SELECTED_CLASS);
+  this.$sandboxButton.parent().addClass(this.SELECTED_CLASS);
+};
 
-
-function onResults (e, results) {
-  if (results.done.failed === 0) {
-    successNav();
+/**
+ * Helper function to handle what happens once the test results are available
+ *
+ * @param {jQuery} e - not used
+ * @param {Object} results - the test results
+ */
+VenusUi.prototype.onResults = function(e, results) {
+  if (!results.done.failed) {
+    this.successNav();
   } else {
-    failNav();
+    this.failNav();
   }
 
-  printResults(results);
-}
+  this.printResults(results);
+};
 
-function failNav () {
-  conf.nav.addClass('error');
-}
+/**
+ * Shows that at least one test failed
+ */
+VenusUi.prototype.failNav = function() {
+  this.config.nav.addClass('error');
+};
 
-function successNav() {
-  conf.nav.addClass('success');
-}
+/**
+ * Shows that no error was encountered
+ */
+VenusUi.prototype.successNav = function() {
+  this.config.nav.addClass('success');
+};
 
-function printResults(results) {
-  var template = _.template($('#results-template').html()),
-      $resultView = $('#results-view');
+/**
+ * Prints the results the page
+ *
+ * @param {Object} results - the test results
+ */
+VenusUi.prototype.printResults = function(results) {
+  var self = this,
+      template = _.template(self.$resultsTemplate.html()),
+      $resultView = self.$resultsView;
 
-  _.each(results.tests, function (test) {
-    addTestResults(test, $resultView, template);
+  _.each(results.tests, function(test) {
+    self.addTestResults(test, $resultView, template);
   });
-}
+};
 
-function addTestResults(test, $view, template) {
-  test.message = htmlEncode(test.message);
-  test.stackTrace = htmlEncode(test.stackTrace);
+/**
+ * Helper function to actually append the test results to the view
+ *
+ * @param {Object} test - the test result to display
+ * @param {jQuery} $view - the view to which the test result should be appended
+ * @param {Function} template - the template used to render the test result
+ */
+VenusUi.prototype.addTestResults = function(test, $view, template) {
+  // html-ize the test message and its stacktrace and append these to the $view using the template
+  test.message = this.htmlEncode(test.message);
+  test.stackTrace = this.htmlEncode(test.stackTrace);
+
   $view.append(template({ test: test }));
-}
+};
 
-function htmlEncode(value) {
-  if (typeof value === 'undefined') {
-    return;
-  }
-
-  return $('<div/>').text(value).html();
-}
+/**
+ * Helper function to html-ize some given text
+ *
+ * @param value - the value to html-ize
+ * @returns {String} - html-encoded version of 'value'
+ */
+VenusUi.prototype.htmlEncode = function(value) {
+  return (value) ? $('<div/>').text(value).html() : '';
+};
