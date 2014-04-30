@@ -184,50 +184,6 @@ describe('lib/util/commentsParser', function() {
       expect(annotations[annotation.VENUS_INCLUDE]).to.be('../www/test-file.js');
       expect(Object.keys(annotations).length).to.be(1);
     });
-
-    it('shouldn\'t fail on JSDoc comments', function() {
-      var commentsWithJSDoc, annotations;
-
-      //  /**
-      //   * @type String
-      //   */
-      //  var a = 'my string';
-      commentsWithJSDoc = [
-        '/**\n',
-        ' * @type String\n',
-        ' */\n',
-        'var a = \'my string\'',
-      ].join('');
-
-      annotations = parser.parseStr(commentsWithJSDoc);
-      expect(annotations).not.to.be(undefined);
-
-      //  /**
-      //   * @param {Array} p
-      //   * @private
-      //   */
-      //  function _myFirstPrivate(p) {}
-      //  /**
-      //   * @param {String} p
-      //   * @private
-      //   */
-      //  function _mySecPrivate(p) {}
-      commentsWithJSDoc = [
-          '/**\n',
-          ' * @param Array\n',
-          ' * @private\n',
-          ' */\n',
-          'function _myFirstPrivate(p) {}\n',
-          '/**\n',
-          ' * @param String\n',
-          ' * @private\n',
-          ' */\n',
-          'function _mySecPrivate(p) {}\n'
-      ].join('');
-
-      annotations = parser.parseStr(commentsWithJSDoc);
-      expect(annotations).not.to.be(undefined);
-    });
   });
 
   /**
