@@ -17,10 +17,10 @@
 
 /**
  * Create the Venus JavaScript object. This object will be accessible to all adaptors via window.venus
-*
+ *
  * The `host` and `port` options are used to create the socket.io connection with the Venus server
  */
-(function(window) {
+(function (window) {
   // instantiate the Venus Client with a specific host and port
   window.venus = new VenusClientLibrary({
     host: 'http://' + window.location.hostname,

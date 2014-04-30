@@ -41,7 +41,7 @@ function Venus() {}
 
 /**
  * Starts the application
- * @param {Object[]} args Command line arguments.  See {@link http://nodejs.org/api/process.html#process_process_argv}
+ * @param {Object[]} args Command line arguments. See {@link http://nodejs.org/api/process.html#process_process_argv}
  *   for the order of arguments.
  * @method Venus#start
  */
@@ -167,8 +167,8 @@ Venus.prototype.runWithDefaults = function () {
 };
 
 /**
- * Marks function as a Venus command, by setting its execution context to the
- * Venus instance.
+ * Marks function as a Venus command, by setting its execution context to the Venus instance.
+ *
  * @param {Function} fn The function to wrap
  * @method Venus#command
  */
@@ -181,6 +181,7 @@ Venus.prototype.command = function (fn) {
 
 /**
  * Applies logging and L10N options based on options passed in.
+ *
  * @param {Object} program Options to set
  * @param {Boolean} [program.debug] Specify true to enable debug-level messages.
  * @param {String} [program.locale] ISO2 code of the desired language to support.
@@ -200,6 +201,7 @@ Venus.prototype.applyCommandLineFlags = function (program) {
 
 /**
  * Starts the Venus server (runs/serves tests), with specified options.
+ *
  * @param {Object} program Options to set.
  * @param {Boolean} [program.debug] Specify true to enable debug-level messages.
  * @param {String} [program.locale] ISO2 code of the desired language to support.
@@ -232,7 +234,6 @@ Venus.prototype.run = function (program) {
  */
 Venus.prototype.killOtherVenusProcesses = function () {
   return ps.grep('venus').then(ps.kill);
-
 };
 
 /**
