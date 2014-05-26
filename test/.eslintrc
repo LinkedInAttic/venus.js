@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "quotes": [2, 'single'],
+    "curly": 2,
+    "no-use-before-define": 0,
+    "no-underscore-dangle": 1,
+    "strict": 0
+  },
+
+  "env": {
+    "node": true,
+    "mocha": true
+  }
+}

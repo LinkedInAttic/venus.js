@@ -1,1 +1,4 @@
 node_modules/
+doc/
+coverage/
+.DS_Store
