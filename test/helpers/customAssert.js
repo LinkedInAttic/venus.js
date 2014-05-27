@@ -9,4 +9,12 @@ assert.endsWith = function (actual, expected) {
   return assert.equal(slice, expected);
 };
 
+assert.true = function (actual) {
+  return assert.equal(actual, true);
+};
+
+assert.false = function (actual) {
+  return assert.equal(actual, false);
+};
+
 module.exports = assert;

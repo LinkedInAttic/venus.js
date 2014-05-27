@@ -29,6 +29,20 @@ module.exports = {
   },
 
   /**
+   * Sample spec file path
+   * @param {string} p - The relative path to the spec file, under /test/fixtures/specs
+   * @return {string} absolute path to spec
+   */
+  specPath: function () {
+    var args = Array.prototype.slice.call(arguments, 0);
+
+    args.unshift('fixtures', 'specs');
+
+    return this.path.apply(this, args);
+  },
+
+
+  /**
    * Assert module
    */
   assert: require('./customAssert')
