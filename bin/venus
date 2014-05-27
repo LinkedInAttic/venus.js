@@ -2,16 +2,8 @@
 
 'use strict';
 
-var path       = require('path'),
-    parse      = require('../lib/argParser'),
-    Venus      = require('../Venus'),
-    loadConfig = require('../lib/configLoader'),
-    merge      = require('deepmerge');
+var minimist = require('minimist');
+var venus    = require('../');
 
-var venus, args, config;
-
-args   = parse(process.argv);
-config = loadConfig(args.config);
-
-new Venus(merge(config, args)).start();
+new venus.Kernel(minimist(process.argv.slice(2))).run();
 

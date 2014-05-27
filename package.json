@@ -1,7 +1,7 @@
 {
   "name": "venus",
-  "main": "Venus.js",
-  "description": "Execution environment for JavaScript unit testing",
+  "main": "index.js",
+  "description": "Execution environment for JavaScript testing",
   "version": "3.0.0alpha-0",
   "keywords": [
     "testing"
