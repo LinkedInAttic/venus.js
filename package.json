@@ -45,7 +45,7 @@
     "selenium-webdriver"     : "2.35.1",
     "deferred"               : "0.6.5",
     "when"                   : "2.5.1",
-    "phantomjs"              : "1.9.1-0"
+    "phantomjs"              : "1.9.7-8"
   },
   "devDependencies": {
     "mocha"             : "1.2.0",
