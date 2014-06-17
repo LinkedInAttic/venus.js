@@ -4,6 +4,7 @@
 var expect      = require('expect.js'),
     sinon       = require('sinon'),
     executor    = require('../../lib/executor'),
+    coverage    = require('../../lib/coverage'),
     testHelper  = require('../lib/helpers'),
     testPath    = require('../lib/helpers').sampleTests,
     config      = require('../../lib/config'),
@@ -172,6 +173,31 @@ describe('lib/executor', function() {
       mock.verify();
       configMock.verify();
       testcaseMock.verify();
+    });
+  });
+
+  describe('shutdown', function() {
+    beforeEach(function() {
+      sinon.stub(coverage, 'writeSummary');
+      sinon.stub(process, 'exit');
+    });
+
+    afterEach(function() {
+      coverage.writeSummary.restore();
+      process.exit.restore();
+    });
+
+    it('should exit with status 1 if there are errors', function() {
+      var exec = new executor.Executor();
+      exec.testgroup = {};
+      exec.reporter = {
+        errored: true,
+        emit: sinon.spy()
+      };
+
+      exec.shutdown();
+
+      expect(process.exit.args[0][0]).to.be(1);
     });
   });
 });
