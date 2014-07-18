@@ -1,4 +1,5 @@
 * Venus.js Mailing List: https://groups.google.com/forum/#!forum/venusjs
+* irc: #venusjs on freenode
 * Project site: http://www.venusjs.org
 * master: [![View Summary](https://secure.travis-ci.org/linkedin/venus.js.png?branch=master)](http://travis-ci.org/#!/linkedin/venus.js/branch_summary)
 
