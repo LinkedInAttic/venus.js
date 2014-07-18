@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "quotes": [2, 'single'],
+    "curly": 2,
+    "no-use-before-define": 0,
+    "no-underscore-dangle": 1,
+    "no-unused-vars": [2, {"vars": "all", "args": "none"}],
+    "strict": 0,
+    "eol-last": 0,
+    "valid-jsdoc": 1,
+    "space-after-keywords": 2,
+    "max-len": [2, 120]
+  },
+
+  "env": {
+    "node": true
+  }
+}
