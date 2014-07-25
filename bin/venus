@@ -1,5 +1,0 @@
-#!/usr/bin/env node
-var Venus = require('../Venus'),
-    app   = new Venus();
-
-app.start(process.argv);
