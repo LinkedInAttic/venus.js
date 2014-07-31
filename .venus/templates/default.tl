@@ -39,21 +39,23 @@
   </section>
 
   <script type="text/html" id="results-template">
-      <h1><%= test.name %></h1>
+      <h1><%= group.name %></h1>
       <ul class="test-list">
-        <% if (test.status === 'PASSED') { %>
-        <li class="pass">
-          <ul>
-            <li class="summary">✓ <%= test.message %></li>
-          </ul>
-        </li>
-        <% } else { %>
-        <li class="fail">
-          <ul>
-            <li class="summary">X <%= test.message %></li>
-            <li class="details"><pre><%= test.stackTrace %></pre></li>
-          </ul>
-        </li>
+        <% for (var i = 0, len = group.tests.length; i < len; ++i) { %>
+          <% if (group.tests[i].status === 'PASSED') { %>
+            <li class="pass">
+              <ul>
+                <li class="summary">✓ <%= group.tests[i].message %></li>
+              </ul>
+            </li>
+          <% } else { %>
+            <li class="fail">
+              <ul>
+                <li class="summary">X <%= group.tests[i].message %></li>
+                <li class="details"><pre><%= group.tests[i].stackTrace %></pre></li>
+              </ul>
+            </li>
+          <% } %>
         <% } %>
       </ul>
 

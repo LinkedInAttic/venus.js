@@ -105,9 +105,23 @@ VenusUi.prototype.successNav = function() {
 VenusUi.prototype.printResults = function(results) {
   var self = this,
       template = _.template(self.$resultsTemplate.html()),
-      $resultView = self.$resultsView;
+      $resultView = self.$resultsView,
+      groupNames = _.uniq(_.pluck(results.tests, 'name')),
+      resultsViewModel;
 
-  _.each(results.tests, function(test) {
+  // Merge together tests for result groups.
+  resultsViewModel = _.map(groupNames, function(group) {
+    var groupedTests = _.filter(results.tests, function(test) {
+      return test.name === group;
+    });
+
+    return {
+      name: group,
+      tests: groupedTests
+    };
+  });
+
+  _.each(resultsViewModel, function(test) {
     self.addTestResults(test, $resultView, template);
   });
 };
@@ -115,16 +129,18 @@ VenusUi.prototype.printResults = function(results) {
 /**
  * Helper function to actually append the test results to the view
  *
- * @param {Object} test - the test result to display
+ * @param {Object} group - the test result group to display
  * @param {jQuery} $view - the view to which the test result should be appended
  * @param {Function} template - the template used to render the test result
  */
-VenusUi.prototype.addTestResults = function(test, $view, template) {
-  // html-ize the test message and its stacktrace and append these to the $view using the template
-  test.message = this.htmlEncode(test.message);
-  test.stackTrace = this.htmlEncode(test.stackTrace);
+VenusUi.prototype.addTestResults = function(group, $view, template) {
+  // html-ize each test message and its stacktrace and append these to the $view using the template
+  _.each(group.tests, _.bind(function(test) {
+    test.message = this.htmlEncode(test.message);
+    test.stackTrace = this.htmlEncode(test.stackTrace);
+  }, this));
 
-  $view.append(template({ test: test }));
+  $view.append(template({ group: group }));
 };
 
 /**
