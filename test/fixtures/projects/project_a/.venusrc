@@ -1,4 +1,5 @@
 module.exports = {
-  plugins: ['venus-plugin'],
-  watch: true
+  "name": "projecta",
+  "includeGroup": "normal",
+  "foo": "bar"
 };

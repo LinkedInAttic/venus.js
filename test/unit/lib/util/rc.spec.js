@@ -16,6 +16,7 @@ describe('.venusrc helper', function () {
 
       expected = [
         v.path('..', '.venusrc'),
+        v.path('fixtures', '.venusrc'),
         v.path('fixtures', 'projects', 'project_a', '.venusrc')
       ];
 

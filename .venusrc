@@ -1,7 +1,15 @@
 module.exports = {
-  plugins: {
-    'venus-unit': {},
-    'venus-http': {},
-    './asoneth': {}
+  'defaultPlugins': {
+    'venus-unit': {
+      tests: '*.js'
+    },
+
+    'venus-http': {
+      port: 6090
+    },
+
+    'venus-browserify': {
+
+    }
   }
 };
