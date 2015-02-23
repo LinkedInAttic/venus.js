@@ -35,7 +35,6 @@ describe('lib/testcase', function () {
     it('should fail when a file specified in an include annotation cannot be found', function() {
       var exit = sinon.stub(process, 'exit');
       test.path = testHelper.sampleTests('missing_includes.js');
-      // testData = test.parseTestFile(test.path).annotations;
 
       expect(function () {
         test.load();

@@ -60,14 +60,6 @@ describe('lib/executor', function() {
         exit = sinon.stub(process, 'exit'),
         nonexistentPath = 'bad_non_existent_file_path';
 
-
-    if(fs.existsSync(nonexistentPath)) {
-      if(fs.existSync(nonexistentPath + '.js')) {
-        throw new Error('Test expected ' + nonexistentPath + ' to be nonexistent, but found a file or folder.');
-        process.exit(1);
-      }
-    }
-
     expect(function() {
       exec.parseTests(nonexistentPath);
     }).to.throwException();
