@@ -3,6 +3,8 @@
  */
 var testHelper = require('../lib/helpers'),
     testcase   = require('../../lib/testcase'),
+    logger       = require('../../lib/util/logger'),
+    sinon       = require('sinon'),
     annotation = testcase.annotation,
     path       = require('path'),
     expect     = require('expect.js');
@@ -27,6 +29,27 @@ describe('lib/testcase', function () {
       harness = test.loadHarnessTemplate(testData);
 
       expect(harness).to.be('ship ahoy!\n');
+    });
+  });
+
+  describe('Asserts loading of @venus-include values', function() {
+    it('should fail when a file specified in an include annotation cannot be found', function() {
+      var exit = sinon.stub(process, 'exit'),
+          errorMessage = sinon.stub(logger, 'error');
+
+      //load test containing missing includes
+      test.path = testHelper.sampleTests('missing_includes.js');
+
+      //evaluate expectations
+      expect(function () {
+        test.load();
+      }).to.throwException();
+      expect(errorMessage.called).to.be(true);
+      expect(exit.called).to.be(true);
+
+      //restore stubs
+      errorMessage.restore();
+      exit.restore();
     });
   });
 

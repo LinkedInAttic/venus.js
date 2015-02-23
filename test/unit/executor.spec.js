@@ -13,7 +13,8 @@ var expect      = require('expect.js'),
     testcase    = require('../../lib/testcase'),
     testHelpers = require('../lib/helpers'),
     testPath    = require('../lib/helpers').sampleTests,
-    path        = require('path');
+    path        = require('path'),
+    fs          = require('fs');
 
 describe('lib/executor', function() {
 
@@ -52,6 +53,23 @@ describe('lib/executor', function() {
         result = exec.parseTests(tests);
 
     expect(Object.keys(result).length).to.be(1);
+  });
+
+  it('should fail when a specified test file or folder does not exist', function (){
+    var exec = new executor.Executor(),
+        logger = sinon.stub(exec.logger,'error'),
+        exit = sinon.stub(process, 'exit'),
+        tests = testPath('bad_non_existent_file_path');
+
+    //Expect an exception and a call to process.exit
+    expect(function() {
+      exec.parseTests(tests);
+    }).to.throwException();
+    expect(exit.calledOnce).to.be(true);
+
+    //Restore stubs
+    exit.restore();
+    logger.restore();
   });
 
   it('should enforce require annotations option by default', function () {
