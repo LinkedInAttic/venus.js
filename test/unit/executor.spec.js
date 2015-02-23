@@ -13,7 +13,8 @@ var expect      = require('expect.js'),
     testcase    = require('../../lib/testcase'),
     testHelpers = require('../lib/helpers'),
     testPath    = require('../lib/helpers').sampleTests,
-    path        = require('path');
+    path        = require('path'),
+    fs          = require('fs');
 
 describe('lib/executor', function() {
 
@@ -52,6 +53,26 @@ describe('lib/executor', function() {
         result = exec.parseTests(tests);
 
     expect(Object.keys(result).length).to.be(1);
+  });
+
+  it('should fail when a specified test file or folder does not exist', function (){
+    var exec = new executor.Executor(),
+        exit = sinon.stub(process, 'exit'),
+        nonexistentPath = 'bad_non_existent_file_path';
+
+
+    if(fs.existsSync(nonexistentPath)) {
+      if(fs.existSync(nonexistentPath + '.js')) {
+        throw new Error('Test expected ' + nonexistentPath + ' to be nonexistent, but found a file or folder.');
+        process.exit(1);
+      }
+    }
+
+    expect(function() {
+      exec.parseTests(nonexistentPath);
+    }).to.throwException();
+    expect(exit.calledOnce).to.be(true);
+    exit.restore();
   });
 
   it('should enforce require annotations option by default', function () {
