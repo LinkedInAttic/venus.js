@@ -57,14 +57,19 @@ describe('lib/executor', function() {
 
   it('should fail when a specified test file or folder does not exist', function (){
     var exec = new executor.Executor(),
+        logger = sinon.stub(exec.logger,'error'),
         exit = sinon.stub(process, 'exit'),
-        nonexistentPath = 'bad_non_existent_file_path';
+        tests = testPath('bad_non_existent_file_path');
 
+    //Expect an exception and a call to process.exit
     expect(function() {
-      exec.parseTests(nonexistentPath);
+      exec.parseTests(tests);
     }).to.throwException();
     expect(exit.calledOnce).to.be(true);
+
+    //Restore stubs
     exit.restore();
+    logger.restore();
   });
 
   it('should enforce require annotations option by default', function () {
