@@ -11,7 +11,10 @@ var expect      = require('expect.js'),
     executor    = require('../../../lib/executor'),
     testcase    = require('../../../lib/testcase'),
     path        = require('path'),
-    fs          = require('fs');
+    fs          = require('fs'),
+    fstools     = require('fs-tools'),
+    deferred    = require('deferred'),
+    logger      = require('../../../lib/util/logger');
 
 describe('lib/executor', function() {
 
@@ -164,7 +167,12 @@ describe('lib/executor', function() {
           test         = testPath('foo.js'),
           testcaseMock = sinon.mock(testcase),
           configMock   = sinon.mock(config),
+          fakeGuid    = 'abc123',
           hostname     = require('../../../lib/constants').hostname;
+
+      // brute force set the guid to make sure what is accepted in the testcase
+      // will match
+      exec.guid = fakeGuid;
 
       // Expectations
       mock.expects('getNextTestId').once().returns(1);
@@ -176,7 +184,8 @@ describe('lib/executor', function() {
         runPath: exec.urlNamespace + '/1',
         instrumentCodeCoverate: exec.instrumentCodeCoverage,
         config: 'configFile',
-        hotReload: true
+        hotReload: true,
+        guid: fakeGuid
       });
 
       exec.createTestObjects([test]);
@@ -213,6 +222,137 @@ describe('lib/executor', function() {
       exec.shutdown();
 
       expect(process.exit.args[0][0]).to.be(1);
+    });
+  });
+
+  describe('sendGenericError', function() {
+    beforeEach(function() {
+      sinon.stub(logger, 'error');
+      sinon.stub(process, 'exit');
+    });
+
+    afterEach(function() {
+      logger.error.restore();
+      process.exit.restore();
+    });
+
+    it('should send an error and kill the process', function() {
+      var exec = new executor.Executor();
+      exec.sendGenericError('someMethod', new Error('way to go dummy'));
+      sinon.assert.calledTwice(logger.error);
+      sinon.assert.calledWith(logger.error, 'Error occurred at someMethod.');
+      sinon.assert.calledWith(logger.error, 'Error: way to go dummy');
+      sinon.assert.calledWith(process.exit, 1);
+    });
+  });
+
+  describe('setPort', function() {
+    var exec;
+
+    beforeEach(function() {
+      exec = new executor.Executor();
+    });
+
+    it('should accept a valid port number', function(done) {
+      var port = 1234;
+
+      exec.setPort(port).then(function() {
+        expect(exec.port).to.be(port);
+        done();
+      });
+    });
+
+    it('should reject the promise when an invalid port is passed in', function(done) {
+      exec.setPort('I am a bad port').catch(function(e) {
+        expect(e.message).to.contain('no port');
+        done();
+      });
+    });
+
+    it('should reject the promise when no port is passed in', function(done) {
+      exec.setPort().catch(function(e) {
+        expect(e.message).to.contain('no port');
+        done();
+      });
+    });
+  });
+
+  describe('removeExistingTests', function() {
+    var exec, dirOps;
+
+    beforeEach(function(done) {
+      var testDir;
+
+      exec = new executor.Executor();
+      exec.port = 1234;
+      exec.setupVenusTemp();
+      testDir = exec.venusTemp('test');
+
+      dirOps = testHelper.dirOps(testDir);
+
+      dirOps.exists()
+        .then(dirOps.remove, done)
+        .then(done);
+    });
+
+    afterEach(function(done) {
+      dirOps.exists()
+        .then(dirOps.remove, done)
+        .then(done);
+    });
+
+    it('should remove the directory if it already existed', function(done) {
+      dirOps.make()
+        .then(dirOps.exists)
+        .then(function(exists) {
+          expect(exists).to.be.ok();
+        })
+        .then(function() {
+          exec
+            .removeExistingTests()
+            .then(dirOps.exists)
+            .then(function(exists) {
+              expect(exists).to.not.be.ok();
+              done();
+            });
+        });
+    });
+
+    it('should attempt to remove the directory even if it does not exist', function(done) {
+      dirOps.remove()
+        .then(dirOps.exists)
+        .then(function(exists) {
+          expect(exists).to.not.be.ok();
+        })
+        .then(function() {
+          exec
+            .removeExistingTests()
+            .then(dirOps.exists)
+            .then(function(exists) {
+              expect(exists).to.not.be.ok();
+              done();
+            });
+        });
+    });
+  });
+
+  describe('passing a guid', function() {
+    it('should contain a guid on a test level', function (done) {
+      var conf = testHelper.testConfig(),
+          exec = new executor.Executor(conf),
+          fakeGuid = 'abc123',
+          options = {
+            test: testPath('parse_comments'),
+            guid: fakeGuid,
+            homeFolder: path.resolve(__dirname, '..', '..')
+          };
+
+      exec.init(options).then(function () {
+        var guid = exec.testgroup.testArray[0].guid;
+        expect(exec.guid).to.be(fakeGuid);
+        expect(guid).to.be(fakeGuid);
+        done();
+      });
     });
   });
 });
