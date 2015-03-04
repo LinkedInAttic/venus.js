@@ -1,5 +1,13 @@
 {
   basePaths: {
     'runnerClient': '../../../../js/runner_client'
+  },
+
+  includes: {
+    default: [
+      '../../../../js/jquery/jquery-1.10.0.min.js',
+      'mocks/venusTestList.js',
+      'mocks/venus.js'
+    ]
   }
 }
