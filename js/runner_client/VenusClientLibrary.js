@@ -67,8 +67,8 @@ VenusClientLibrary.prototype.done = function(results) {
 
   $(document).trigger('results', results);
 
-  if (window.VenusTestList) {
-    VenusTestList.postTestResults(results);
+  if (window.parent && window.parent.VenusTestList) {
+    window.parent.VenusTestList.postTestResults(results);
   }
 };
 
