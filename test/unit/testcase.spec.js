@@ -17,6 +17,7 @@ describe('lib/testcase', function () {
     test.config = testHelper.testConfig();
     test.directory = testHelper.sampleTests();
     test.id = 1;
+    test.port = 1234;
   });
 
 
@@ -104,7 +105,7 @@ describe('lib/testcase', function () {
 
       expect(files).to.be.ok();
       expect(files).to.be.an('array');
-      expect(files[4].url).to.be('/temp/test/1/includes/_.test.js');
+      expect(files[4].url).to.be('/temp-1234/test/1/includes/_.test.js');
       expect(files[4].fs).to.contain('/test/data/test.js');
       expect(files[6].fs).to.contain('/test/data/sample_tests/bar.js');
       expect(files[6].url).to.contain('/bar.js');
@@ -121,7 +122,7 @@ describe('lib/testcase', function () {
 
       expect(files).to.be.ok();
       expect(files).to.be.an('array');
-      expect(files[4].url).to.be('/temp/test/1/includes/_.test-file.js');
+      expect(files[4].url).to.be('/temp-1234/test/1/includes/_.test-file.js');
       expect(files[4].fs).to.contain('/test/data/test-file.js');
     });
 
@@ -135,8 +136,8 @@ describe('lib/testcase', function () {
 
       expect(files).to.be.ok();
       expect(files).to.be.an('array');
-      expect(files[2].url).to.be('/temp/test/1/lib/file1.js');
-      expect(files[3].url).to.be('/temp/test/1/lib/file2.js');
+      expect(files[2].url).to.be('/temp-1234/test/1/lib/file1.js');
+      expect(files[3].url).to.be('/temp-1234/test/1/lib/file2.js');
     });
 
     it('should load group includes', function() {
@@ -149,7 +150,7 @@ describe('lib/testcase', function () {
 
       expect(files).to.be.ok();
       expect(files).to.be.an('array');
-      expect(files[4].url).to.be('/temp/test/1/lib/file3.js');
+      expect(files[4].url).to.be('/temp-1234/test/1/lib/file3.js');
     });
 
     it('should handle different paths with same filename', function() {
@@ -162,9 +163,9 @@ describe('lib/testcase', function () {
 
       expect(files).to.be.ok();
       expect(files).to.be.an('array');
-      expect(files[4].url).to.be('/temp/test/1/includes/fileA.js');
-      expect(files[5].url).to.be('/temp/test/1/includes/_.fileA.js');
-      expect(files[6].url).to.be('/temp/test/1/includes/_.prod.fileA.js');
+      expect(files[4].url).to.be('/temp-1234/test/1/includes/fileA.js');
+      expect(files[5].url).to.be('/temp-1234/test/1/includes/_.fileA.js');
+      expect(files[6].url).to.be('/temp-1234/test/1/includes/_.prod.fileA.js');
     });
 
     it('should handle base paths', function () {
@@ -193,7 +194,7 @@ describe('lib/testcase', function () {
         home = process.env['HOME'];
       }
 
-      expect(httpRoot).to.be(path.resolve(home, '.venus_temp', 'test', '1'));
+      expect(httpRoot).to.be(path.resolve(home, '.venus_temp-1234', 'test', '1'));
     });
   });
 

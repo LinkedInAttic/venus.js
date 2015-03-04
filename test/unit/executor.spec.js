@@ -179,7 +179,8 @@ describe('lib/executor', function() {
         runPath: exec.urlNamespace + '/1',
         instrumentCodeCoverate: exec.instrumentCodeCoverage,
         config: 'configFile',
-        hotReload: true
+        hotReload: true,
+        port: exec.port
       });
 
       exec.createTestObjects([test]);
