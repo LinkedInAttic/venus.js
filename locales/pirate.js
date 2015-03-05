@@ -157,5 +157,7 @@
 	"Ensures all other Venus processes are killed before starting": "Ensures all other Venus processes are killed before starting",
 	"Using environment ie8": "Using environment ie8",
 	"Using environment ie7": "Using environment ie7",
-	"Use https": "Use https"
+	"Use https": "Use https",
+	"The test file \"/home/gberger/workspace/venus.js/test/data/sample_tests/bad_non_existent_file_path\" could not be found": "The test file \"/home/gberger/workspace/venus.js/test/data/sample_tests/bad_non_existent_file_path\" could not be found",
+	"missing_includes.js: Includes specified in your annotations could not be found\n - nonexistent_file.js\n - ../nonexistent_file.js\n - ../prod/nonexistent_file.js\n": "missing_includes.js: Includes specified in your annotations could not be found\n - nonexistent_file.js\n - ../nonexistent_file.js\n - ../prod/nonexistent_file.js\n"
 }
