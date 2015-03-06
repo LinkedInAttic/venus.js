@@ -157,5 +157,6 @@
 	"Ensures all other Venus processes are killed before starting": "Ensures all other Venus processes are killed before starting",
 	"Using environment ie8": "Using environment ie8",
 	"Using environment ie7": "Using environment ie7",
-	"Use https": "Use https"
+	"Use https": "Use https",
+	"Error occurred at %s": "Error occurred at %s"
 }
