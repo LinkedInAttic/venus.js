@@ -6,16 +6,16 @@ Config files
 
 Overview:
 ===================
-When venus is run, it looks for a file named `.venus/config` in the current directory, then proceeds to walk up the directory tree looking for any other `.venus/config` files.
+When venus is run it looks for a file folder ".venus/" containing a file called "config" in the current directory, then proceeds to walk up the directory tree looking for any other `.venus/config` files.
 
-When multiple configs are encountered, the config files will extend one another from the order of the furthest config to the closest (closest config takes precedence).
+When multiple configs are encountered, the config files will extend one another from the order of the furthest config to the closest (closest config to cwd takes precedence).
 
 What can be specified in `.venus/config`?
 ===================
 
 libraries:
 ----------------
-The libraries config object gives you a way to create a grouping of files, that can be passed as an argument to @venus-library annotation.
+The libraries config object gives you a way to create a grouping of files, that can be passed as an argument to @venus-library annotation for inclusion on the test harness.
 
 Given the following directory structure:
 
@@ -30,7 +30,7 @@ Given the following directory structure:
       |-expect.js
       |-sinon.js
 
-Define a library in .venus/config within the object val of libraries, the library should include an array of filepaths:
+We can define a library (in this case we'll call it "mocha") in .venus/config libraries object like so:
 
 ::
 
@@ -54,7 +54,7 @@ Define a library in .venus/config within the object val of libraries, the librar
     binaries: {}
   }
 
-To Use the library we created above (mocha), we simply use the @venus-library annotation like so in one of our spec files:
+Notice that the library will be referenced by the key name (mocha) and anything specified within the "includes" array will be injected into the test harness page (see "@venus-library mocha" below):
 
 ::
 
@@ -73,7 +73,7 @@ To Use the library we created above (mocha), we simply use the @venus-library an
 
 default:
 ----------------
-This option allows you to specify one of your libraries as the default library to be included, which frees you from using the @venus-include annotation as in the previous example.
+The "default" option allows you to specify one of your libraries as the default library to be included, which frees you from using the @venus-library annotation as in the previous example.  It's useful if you are using the same test libraries across all of your suites/specs, or want to run a default environment.
 
 ::
 
@@ -81,16 +81,27 @@ This option allows you to specify one of your libraries as the default library t
 
   {
     default: {
-      library: 'mocha'
+      library: 'mocha',
+      environment: 'ghost'
+    }
+    libraries: {
+      mocha: {
+        includes: [
+          ...
+        ]
+      }
     },
-    libraries: {},
-    environments: {},
+    environments: {
+      ghost: {
+        ...
+      }
+    },
     basePaths: {},
     includes: {},
     binaries: {}
   }
 
-Now the above example where we used @venus-include to import our mocha files could look like this (excludes `@venus-include mocha`):
+In the above example, all of the test using this config would assume that you wanted to include the "mocha" library includes, and "ghost" as your default environment.
 
 ::
 
@@ -106,7 +117,7 @@ Now the above example where we used @venus-include to import our mocha files cou
 
 includes:
 ----------------
-Similar to libraries, includes allow us to specify groups of files that can included on the test harness page, by using the @venus-include annotation.
+Similar to libraries, includes allow us to specify groups of files that can be included on the test harness page, by using the @venus-include annotation.
 
 Specifying an include group can be done like so:
 
