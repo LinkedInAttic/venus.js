@@ -54,7 +54,6 @@ module.exports.path = function () {
 };
 
 module.exports.dirOps = function(directory) {
-  console.log(directory);
   return {
     remove: function() {
       var def = deferred();
