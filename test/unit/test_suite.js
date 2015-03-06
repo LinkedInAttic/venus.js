@@ -11,3 +11,4 @@ require('./Venus.spec');
 
 require('./util/commentsParser.spec');
 require('./util/pathHelper.spec');
+require('./util/fsHelper.spec');
