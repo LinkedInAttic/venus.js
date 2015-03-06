@@ -275,67 +275,39 @@ describe('lib/executor', function() {
   });
 
   describe('removeExistingTests', function() {
-    var exec, testDir;
-
-    function removeTestDir() {
-      var def = deferred();
-
-      fstools.remove(testDir, function() {
-        def.resolve();
-      });
-
-      return def.promise;
-    }
-
-    function makeTestDir() {
-      var def = deferred();
-
-      fstools.mkdir(testDir, '0755', function() {
-        def.resolve();
-      });
-
-      return def.promise;
-    }
-
-    function testDirExists() {
-      var def = deferred();
-
-      fs.exists(testDir, function(exists) {
-        def.resolve(exists);
-      });
-
-      return def.promise;
-    }
+    var exec, dirOps;
 
     beforeEach(function(done) {
-      var def = deferred();
+      var def = deferred(), testDir;
 
       exec = new executor.Executor();
       exec.port = 1234;
       exec.setupVenusTemp();
       testDir = exec.venusTemp('test');
 
-      testDirExists()
-        .then(removeTestDir, done)
+      dirOps = testHelper.dirOps(testDir);
+
+      dirOps.exists()
+        .then(dirOps.remove, done)
         .then(done);
     });
 
     afterEach(function(done) {
-      testDirExists()
-        .then(removeTestDir, done)
+      dirOps.exists()
+        .then(dirOps.remove, done)
         .then(done);
     });
 
     it('should remove the directory if it already existed', function(done) {
-      makeTestDir()
-        .then(testDirExists)
+      dirOps.make()
+        .then(dirOps.exists)
         .then(function(exists) {
           expect(exists).to.be.ok();
         })
         .then(function() {
           exec
             .removeExistingTests()
-            .then(testDirExists)
+            .then(dirOps.exists)
             .then(function(exists) {
               expect(exists).to.not.be.ok();
               done();
@@ -344,15 +316,15 @@ describe('lib/executor', function() {
     });
 
     it('should attempt to remove the directory even if it does not exist', function(done) {
-      removeTestDir()
-        .then(testDirExists)
+      dirOps.remove()
+        .then(dirOps.exists)
         .then(function(exists) {
           expect(exists).to.not.be.ok();
         })
         .then(function() {
           exec
             .removeExistingTests()
-            .then(testDirExists)
+            .then(dirOps.exists)
             .then(function(exists) {
               expect(exists).to.not.be.ok();
               done();
