@@ -2,10 +2,10 @@
  * @author LinkedIn
  */
 var expect     = require('expect.js'),
-    parser     = require('../../../lib/util/commentsParser'),
-    testHelper = require('../../lib/helpers'),
+    parser     = require('../../../../lib/util/commentsParser'),
+    testHelper = require('../../../lib/helpers'),
     fs         = require('fs'),
-    annotation = require('../../../lib/testcase').annotation;
+    annotation = require('../../../../lib/testcase').annotation;
 
 describe('lib/util/commentsParser', function() {
 
