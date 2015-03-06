@@ -3,10 +3,11 @@
  */
 var testHelper = require('../lib/helpers'),
     testcase   = require('../../lib/testcase'),
-    logger       = require('../../lib/util/logger'),
-    sinon       = require('sinon'),
+    logger     = require('../../lib/util/logger'),
+    sinon      = require('sinon'),
     annotation = testcase.annotation,
     path       = require('path'),
+    constants  = require('../../lib/constants'),
     expect     = require('expect.js');
 
 describe('lib/testcase', function () {
@@ -222,6 +223,15 @@ describe('lib/testcase', function () {
         expect(scripts[0].before()).to.be('before hook');
         expect(scripts[0].transform()).to.be('transform hook');
       });
+    });
+  });
+
+  describe('getHttpRoot', function() {
+    it('should get the full http root of a given test', function() {
+      var httpRoot = test.getHttpRoot(1),
+          expectedHttpRoot = constants.userHome + '/' + constants.tempDir + '1234/test/1'
+
+      expect(httpRoot).to.be(expectedHttpRoot);
     });
   });
 });
