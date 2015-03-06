@@ -1,9 +1,9 @@
 /**
  * @author LinkedIn
  */
-var testHelper = require('../lib/helpers'),
-    testcase   = require('../../lib/testcase'),
-    logger       = require('../../lib/util/logger'),
+var testHelper = require('../../lib/helpers'),
+    testcase   = require('../../../lib/testcase'),
+    logger       = require('../../../lib/util/logger'),
     sinon       = require('sinon'),
     annotation = testcase.annotation,
     path       = require('path'),

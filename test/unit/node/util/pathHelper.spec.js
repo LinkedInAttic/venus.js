@@ -2,7 +2,7 @@
  * @author LinkedIn
  */
 var expect        = require('expect.js'),
-    pathHelper    = require('../../../lib/util/pathHelper');
+    pathHelper    = require('../../../../lib/util/pathHelper');
 
 describe('lib/util/pathHelper', function() {
 

@@ -2,7 +2,7 @@
  * @author LinkedIn
  */
 var expect     = require('expect.js'),
-    executor   = require('../../lib/executor'),
+    executor   = require('../../../lib/executor'),
     ioclient   = require('socket.io-client'),
     express    = require('express');
 
