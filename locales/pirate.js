@@ -158,5 +158,13 @@
 	"Using environment ie8": "Using environment ie8",
 	"Using environment ie7": "Using environment ie7",
 	"Use https": "Use https",
-	"Error occurred at %s": "Error occurred at %s"
+	"Error occurred at %s": "Error occurred at %s",
+	"Setting port of %d": "Setting port of %d",
+	"Removing directory found at %d": "Removing directory found at %d",
+	"Could not remove temp directory at %s": "Could not remove temp directory at %s",
+	"Could not remove %s when preparing static content": "Could not remove %s when preparing static content",
+	"Removing existing static content at %s": "Removing existing static content at %s",
+	"Could not create directory %s when preparing static content": "Could not create directory %s when preparing static content",
+	"Creating static content directory at %s": "Creating static content directory at %s",
+	"Removing directory found at %s": "Removing directory found at %s"
 }
