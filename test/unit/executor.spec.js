@@ -14,7 +14,10 @@ var expect      = require('expect.js'),
     testHelpers = require('../lib/helpers'),
     testPath    = require('../lib/helpers').sampleTests,
     path        = require('path'),
-    fs          = require('fs');
+    fs          = require('fs'),
+    fstools     = require('fs-tools'),
+    deferred    = require('deferred'),
+    logger      = require('../../lib/util/logger');
 
 describe('lib/executor', function() {
 
@@ -217,6 +220,144 @@ describe('lib/executor', function() {
       exec.shutdown();
 
       expect(process.exit.args[0][0]).to.be(1);
+    });
+  });
+
+  describe('sendGenericError', function() {
+    beforeEach(function() {
+      sinon.stub(logger, 'error');
+      sinon.stub(process, 'exit');
+    });
+
+    afterEach(function() {
+      logger.error.restore();
+      process.exit.restore();
+    });
+
+    it('should send an error and kill the process', function() {
+      var exec = new executor.Executor();
+      exec.sendGenericError('someMethod', new Error('way to go dummy'));
+      sinon.assert.calledTwice(logger.error);
+      sinon.assert.calledWith(logger.error, 'Error occurred at someMethod.');
+      sinon.assert.calledWith(logger.error, 'Error: way to go dummy');
+      sinon.assert.calledWith(process.exit, 1);
+    });
+  });
+
+  describe('setPort', function() {
+    it('should accept a valid port number', function(done) {
+      var exec = new executor.Executor(),
+          port = 1234;
+
+      exec.setPort(port).then(function() {
+        expect(exec.port).to.be(port);
+        done();
+      });
+    });
+
+    it('should reject the promise when an invalid port is passed in', function(done) {
+      var exec = new executor.Executor();
+
+      exec.setPort('I am a bad port').catch(function(e) {
+        expect(e.message).to.contain('no port');
+        done();
+      });
+    });
+
+    it('should reject the promise when no port is passed in', function(done) {
+      var exec = new executor.Executor();
+
+      exec.setPort().catch(function(e) {
+        expect(e.message).to.contain('no port');
+        done();
+      });
+    });
+  });
+
+  describe('removeExistingTests', function() {
+    var exec, testDir;
+
+    function removeTestDir() {
+      var def = deferred();
+
+      fstools.remove(testDir, function() {
+        def.resolve();
+      });
+
+      return def.promise;
+    }
+
+    function makeTestDir() {
+      var def = deferred();
+
+      fstools.mkdir(testDir, '0755', function() {
+        def.resolve();
+      });
+
+      return def.promise;
+    }
+
+    function testDirExists() {
+      var def = deferred();
+
+      fs.exists(testDir, function(exists) {
+        def.resolve(exists);
+      });
+
+      return def.promise;
+    }
+
+    beforeEach(function(done) {
+      var def = deferred();
+
+      exec = new executor.Executor();
+      exec.port = 1234;
+      exec.setupVenusTemp();
+      testDir = exec.venusTemp('test');
+
+      testDirExists()
+        .then(removeTestDir, done)
+        .then(done);
+    });
+
+    afterEach(function(done) {
+      testDirExists()
+        .then(removeTestDir, done)
+        .then(done);
+    });
+
+    it('should remove the directory if it already existed', function(done) {
+      makeTestDir()
+        .then(testDirExists)
+        .then(function(exists) {
+          expect(exists).to.be.ok();
+        })
+        .then(function() {
+          exec
+            .removeExistingTests()
+            .then(testDirExists)
+            .then(function(exists) {
+              expect(exists).to.not.be.ok();
+              done();
+            });
+        });
+    });
+
+    it('should attempt to remove the directory even if it does not exist', function(done) {
+      removeTestDir()
+        .then(testDirExists)
+        .then(function(exists) {
+          expect(exists).to.not.be.ok();
+        })
+        .then(function() {
+          exec
+            .removeExistingTests()
+            .then(testDirExists)
+            .then(function(exists) {
+              expect(exists).to.not.be.ok();
+              done();
+            });
+        });
     });
   });
 });
