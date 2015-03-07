@@ -2,8 +2,8 @@
  * @author LinkedIn
  */
 var expect = require('expect.js'),
-    constants = require('../../../lib/constants'),
-    fsHelper = require('../../../lib/util/fsHelper');
+    constants = require('../../../../lib/constants'),
+    fsHelper = require('../../../../lib/util/fsHelper');
 
 describe('lib/util/fsHelper', function() {
   describe('getTempDir()', function() {

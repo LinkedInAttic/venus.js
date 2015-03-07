@@ -2,7 +2,7 @@
  * @author LinkedIn
  */
 var expect     = require('expect.js'),
-    testrun   = require('../../lib/testrun');
+    testrun   = require('../../../lib/testrun');
 
 describe('lib/testrun', function() {
 

@@ -3,7 +3,7 @@
  */
 var expect    = require('expect.js'),
     sinon     = require('sinon'),
-    Venus     = require('../../Venus');
+    Venus     = require('../../../Venus');
 
 describe('Venus main', function() {
   it('should instantiate', function() {

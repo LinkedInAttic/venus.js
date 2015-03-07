@@ -3,26 +3,23 @@
  */
 var expect      = require('expect.js'),
     sinon       = require('sinon'),
-    executor    = require('../../lib/executor'),
-    coverage    = require('../../lib/coverage'),
-    testHelper  = require('../lib/helpers'),
-    testPath    = require('../lib/helpers').sampleTests,
-    config      = require('../../lib/config'),
+    coverage    = require('../../../lib/coverage'),
+    testHelper  = require('../../lib/helpers'),
+    testPath    = require('../../lib/helpers').sampleTests,
+    config      = require('../../../lib/config'),
     path        = require('path'),
-    executor    = require('../../lib/executor'),
-    testcase    = require('../../lib/testcase'),
-    testHelpers = require('../lib/helpers'),
-    testPath    = require('../lib/helpers').sampleTests,
+    executor    = require('../../../lib/executor'),
+    testcase    = require('../../../lib/testcase'),
     path        = require('path'),
     fs          = require('fs'),
     fstools     = require('fs-tools'),
     deferred    = require('deferred'),
-    logger      = require('../../lib/util/logger');
+    logger      = require('../../../lib/util/logger');
 
 describe('lib/executor', function() {
 
   before(function () {
-    config.cwd = testHelpers.fakeCwd();
+    config.cwd = testHelper.fakeCwd();
   });
 
   it('should not be modifiable', function() {
@@ -170,7 +167,7 @@ describe('lib/executor', function() {
           test         = testPath('foo.js'),
           testcaseMock = sinon.mock(testcase),
           configMock   = sinon.mock(config),
-          hostname     = require('../../lib/constants').hostname;
+          hostname     = require('../../../lib/constants').hostname;
 
       // Expectations
       mock.expects('getNextTestId').once().returns(1);

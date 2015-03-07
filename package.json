@@ -62,7 +62,7 @@
   ],
   "preferGlobal": true,
   "scripts": {
-    "test": "mocha test/unit/test_suite.js",
+    "test": "mocha test/unit/node/test_suite.js && ./bin/venus run -t test/unit/client -n",
     "int-test": "mocha test/integration"
   }
 }

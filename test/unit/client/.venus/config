@@ -1,0 +1,5 @@
+{
+  basePaths: {
+    'runnerClient': '../../../../js/runner_client'
+  }
+}

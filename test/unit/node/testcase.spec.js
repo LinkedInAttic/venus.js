@@ -1,13 +1,13 @@
 /**
  * @author LinkedIn
  */
-var testHelper = require('../lib/helpers'),
-    testcase   = require('../../lib/testcase'),
-    logger     = require('../../lib/util/logger'),
-    sinon      = require('sinon'),
+var testHelper = require('../../lib/helpers'),
+    testcase   = require('../../../lib/testcase'),
+    logger       = require('../../../lib/util/logger'),
+    sinon       = require('sinon'),
     annotation = testcase.annotation,
     path       = require('path'),
-    constants  = require('../../lib/constants'),
+    constants  = require('../../../lib/constants'),
     expect     = require('expect.js');
 
 describe('lib/testcase', function () {
