@@ -6,7 +6,7 @@ Config files
 
 Overview:
 ===================
-When venus is run it looks for a file folder ".venus/" containing a file called "config" in the current directory, then proceeds to walk up the directory tree looking for any other `.venus/config` files.
+Venus searches for a file named 'config' in the '.venus' directory then proceeds to walk up the directory tree looking for other '.venus/config' files.
 
 When multiple configs are encountered, the config files will extend one another from the order of the furthest config to the closest (closest config to cwd takes precedence).
 
@@ -15,7 +15,7 @@ What can be specified in `.venus/config`?
 
 libraries:
 ----------------
-The libraries config object gives you a way to create a grouping of files, that can be passed as an argument to @venus-library annotation for inclusion on the test harness.
+The libraries config object gives you a way to create a grouping of files that can be passed as an argument to @venus-library annotation for inclusion on the test harness.
 
 Given the following directory structure:
 
@@ -30,7 +30,7 @@ Given the following directory structure:
       |-expect.js
       |-sinon.js
 
-We can define a library (in this case we'll call it "mocha") in .venus/config libraries object like so:
+Define a library inside the libraries object. The library should include an array called `includes` that contains an array of filepaths.
 
 ::
 
@@ -168,7 +168,8 @@ In this config object, you can define custom environments (e.g. browsers) for us
         browser: 'internet explorer',
         version: '7.0',
         host: 'selenium.your-server.com',
-        port: 4444      },
+        port: 4444
+      },
 
       // Run chrome version 42 in sauce labs
       sauce_chrome_42: {
@@ -198,7 +199,7 @@ In this config object, you can define custom environments (e.g. browsers) for us
 
 basePaths:
 ----------------
-In the basePaths object, you define aliases that you can use within your venus annotations for brevity/convenience:
+The `basePaths` object defines aliases that can be used within venus annotations for brevity/convenience:
 
 ::
 
@@ -219,7 +220,7 @@ The definition we created above "appJs" will be substituted with "../../js/" whe
 
 ::
 
-  // The venus-include argument below path below would resolve to "../../js/" before becoming an absolute path
+  // The venus-include path below would resolve to "../../js/" before becoming an absolute path
   /**
    * @venus-include appJs/someScript.js
    */
