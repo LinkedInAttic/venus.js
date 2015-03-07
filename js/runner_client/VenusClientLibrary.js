@@ -56,10 +56,12 @@ VenusClientLibrary.prototype.done = function(results) {
 
   // decorate the test results with metadata
   results.userAgent = window.navigator.userAgent;
-  results.codeCoverageData  = sandbox.contentWindow.__coverage__;
+  results.codeCoverageData  = sandbox.contentWindow && sandbox.contentWindow.__coverage__;
   results.testId = window.venus.testId;
 
-  this.socket.emit('results', results);
+  if (this.socket) {
+    this.socket.emit('results', results);
+  }
 
   // append the test results to the document
   doneEl.id = 'test-done-marker';
@@ -67,7 +69,7 @@ VenusClientLibrary.prototype.done = function(results) {
 
   $(document).trigger('results', results);
 
-  if (window.parent && window.parent.VenusTestList) {
+  if (window.parent && window.parent.VenusTestList && window.parent.VenusTestList.postTestResults) {
     window.parent.VenusTestList.postTestResults(results);
   }
 };
