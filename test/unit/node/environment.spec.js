@@ -2,13 +2,13 @@
  * @author LinkedIn
  */
 'use strict';
-var environment    = require('../../lib/environment'),
+var environment    = require('../../../lib/environment'),
     sinon          = require('sinon'),
     path           = require('flavored-path'),
     expect         = require('expect.js'),
-    GhostDriverUac = require('../../lib/uac/GhostDriverUac'),
+    GhostDriverUac = require('../../../lib/uac/GhostDriverUac'),
     _s             = require('underscore.string'),
-    helpers        = require('../lib/helpers.js');
+    helpers        = require('../../lib/helpers.js');
 
 describe('lib/environment', function () {
   var env;

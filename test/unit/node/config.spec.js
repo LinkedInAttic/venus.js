@@ -2,11 +2,11 @@
  * @author LinkedIn
  */
 'use strict';
-var config        = require('../../lib/config'),
+var config        = require('../../../lib/config'),
     sinon         = require('sinon'),
     path          = require('flavored-path'),
     expect        = require('expect.js'),
-    testHelper    = require('../lib/helpers.js');
+    testHelper    = require('../../lib/helpers.js');
 
 describe('lib/config', function() {
   var testConfig;
