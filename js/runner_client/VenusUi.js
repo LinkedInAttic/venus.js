@@ -1,6 +1,6 @@
 /*
  * Venus
- * Copyright 2013 LinkedIn
+ * Copyright 2015 LinkedIn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,28 @@
 function VenusUi(config) {
   var self = this;
 
-  this.config = config;
-  this.$resultsView = $('#results-view');
-  this.$resultsButton = $('#results-button');
-  this.$sandboxView = $('#sandbox-view');
-  this.$sandboxButton = $('#sandbox-button');
-  this.$resultsTemplate = $('#results-template');
-  this.ACTIVE_CLASS = 'active';
-  this.SELECTED_CLASS = 'selected';
+  this._selectors = {
+    RESULTS_VIEW: '#results-view',
+    RESULTS_BUTTON: '#results-button',
+    RESULTS_TEMPLATE: '#results-template',
+    SANDBOX_VIEW: '#sandbox-view',
+    SANDBOX_BUTTON: '#sandbox-button',
+    SUCCESS: 'success',
+    FAILURE:  'error',
+    ACTIVE: 'active',
+    SELECTED: 'selected'
+  };
+
+  this._events = {
+    RESULTS: 'results'
+  }
+
+  this.config           = config;
+  this.$resultsView     = $(this._selectors.RESULTS_VIEW);
+  this.$resultsButton   = $(this._selectors.RESULTS_BUTTON);
+  this.$resultsTemplate = $(this._selectors.RESULTS_TEMPLATE);
+  this.$sandboxView     = $(this._selectors.SANDBOX_VIEW);
+  this.$sandboxButton   = $(this._selectors.SANDBOX_BUTTON);
 
   // show the test results if any and attach the event handlers
   this.showResults();
@@ -44,27 +58,27 @@ function VenusUi(config) {
     self.showSandbox();
   });
 
-  $(document).on('results', self.onResults.bind(this));
+  $(document).on(self._events.RESULTS, self.onResults.bind(this));
 }
 
 /**
  * Shows the test results
  */
 VenusUi.prototype.showResults = function() {
-  this.$resultsView.addClass(this.ACTIVE_CLASS);
-  this.$sandboxView.removeClass(this.ACTIVE_CLASS);
-  this.$resultsButton.parent().addClass(this.SELECTED_CLASS);
-  this.$sandboxButton.parent().removeClass(this.SELECTED_CLASS);
+  this.$resultsView.addClass(this._selectors.ACTIVE);
+  this.$sandboxView.removeClass(this._selectors.ACTIVE);
+  this.$resultsButton.parent().addClass(this._selectors.SELECTED);
+  this.$sandboxButton.parent().removeClass(this._selectors.SELECTED);
 };
 
 /**
  * Shows the sandbox fixture
  */
 VenusUi.prototype.showSandbox = function() {
-  this.$resultsView.removeClass(this.ACTIVE_CLASS);
-  this.$sandboxView.addClass(this.ACTIVE_CLASS);
-  this.$resultsButton.parent().removeClass(this.SELECTED_CLASS);
-  this.$sandboxButton.parent().addClass(this.SELECTED_CLASS);
+  this.$resultsView.removeClass(this._selectors.ACTIVE);
+  this.$sandboxView.addClass(this._selectors.ACTIVE);
+  this.$resultsButton.parent().removeClass(this._selectors.SELECTED);
+  this.$sandboxButton.parent().addClass(this._selectors.SELECTED);
 };
 
 /**
@@ -87,14 +101,14 @@ VenusUi.prototype.onResults = function(e, results) {
  * Shows that at least one test failed
  */
 VenusUi.prototype.failNav = function() {
-  this.config.nav.addClass('error');
+  this.config.nav.addClass(this._selectors.FAILURE);
 };
 
 /**
  * Shows that no error was encountered
  */
 VenusUi.prototype.successNav = function() {
-  this.config.nav.addClass('success');
+  this.config.nav.addClass(this._selectors.SUCCESS);
 };
 
 /**

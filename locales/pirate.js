@@ -157,5 +157,8 @@
 	"Ensures all other Venus processes are killed before starting": "Ensures all other Venus processes are killed before starting",
 	"Using environment ie8": "Using environment ie8",
 	"Using environment ie7": "Using environment ie7",
-	"Use https": "Use https"
+	"Use https": "Use https",
+	"The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client/\" could not be found": "The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client/\" could not be found",
+	"The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client\" could not be found": "The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client\" could not be found",
+	"VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n": "VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n"
 }
