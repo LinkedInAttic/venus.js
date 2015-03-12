@@ -34,7 +34,7 @@ describe('lib/util/fsHelper', function() {
   });
 
   describe('resolveTempDir()', function() {
-    var basePath = constants.userHome + '/' + constants.tempDir;
+    var basePath = constants.tempDir;
 
     it('should exist as resolveTempDir', function() {
       expect(fsHelper.resolveTempDir).to.be.ok();

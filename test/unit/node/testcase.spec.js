@@ -195,7 +195,7 @@ describe('lib/testcase', function () {
         home = process.env['HOME'];
       }
 
-      expect(httpRoot).to.be(path.resolve(home, '.venus_temp-1234', 'test', '1'));
+      expect(httpRoot).to.be(path.resolve(constants.tempDir + '1234', 'test', '1'));
     });
   });
 
@@ -229,7 +229,7 @@ describe('lib/testcase', function () {
   describe('getHttpRoot', function() {
     it('should get the full http root of a given test', function() {
       var httpRoot = test.getHttpRoot(1),
-          expectedHttpRoot = constants.userHome + '/' + constants.tempDir + '1234/test/1'
+          expectedHttpRoot = constants.tempDir + '1234/test/1'
 
       expect(httpRoot).to.be(expectedHttpRoot);
     });
