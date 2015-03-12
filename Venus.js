@@ -29,9 +29,11 @@ var _         = require('underscore'),
     prompt    = require('cli-prompt'),
     wrench    = require('wrench'),
     fs        = require('fs'),
+    fstools   = require('fs-tools'),
     path      = require('path'),
     deferred  = require('deferred'),
-    ps        = require('./lib/util/ps');
+    ps        = require('./lib/util/ps'),
+    constants = require('./lib/constants');
 
 /**
  * The Venus application object
@@ -105,6 +107,11 @@ Venus.prototype.init = function (args) {
     .option('-n, --phantom', i18n('Run with PhantomJS. This is a shortcut to --environment ghost'))
     .option('--singleton', i18n('Ensures all other Venus processes are killed before starting'))
     .action(_.bind(this.command(this.run), this));
+
+  program
+    .command('clean')
+    .description(i18n('Removes all tempoary directories'))
+    .action(_.bind(this.command(this.clean), this));
 
   program.parse(args);
 
@@ -287,6 +294,22 @@ Venus.prototype.initProjectDirectory = function (program) {
     createDir();
   }
 
+};
+
+/**
+ * Removes all temporary directories from the proper location and send a
+ * message to the logger.
+ */
+Venus.prototype.clean = function () {
+  var dir = constants.baseTempDir || constants.tempDir;
+
+  fstools.remove(dir, function(err) {
+    if (_.isNull) {
+      logger.warn(i18n('Temp directory at %s does not exist so it could not be removed', dir));
+    } else {
+      logger.info(i18n('Temp directory at %s was removed', dir));
+    }
+  });
 };
 
 module.exports = Venus;

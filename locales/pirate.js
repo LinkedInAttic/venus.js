@@ -170,5 +170,8 @@
 	"The test file \"/home/gberger/workspace/venus.js/test/data/sample_tests/bad_non_existent_file_path\" could not be found": "The test file \"/home/gberger/workspace/venus.js/test/data/sample_tests/bad_non_existent_file_path\" could not be found",
 	"Error occurred at %s.": "Error occurred at %s.",
 	"Gots no port - I go bye now": "Gots no port - I go bye now",
-	"missing_includes.js: Includes specified in your annotations could not be found\n - nonexistent_file.js\n - ../nonexistent_file.js\n - ../prod/nonexistent_file.js\n": "missing_includes.js: Includes specified in your annotations could not be found\n - nonexistent_file.js\n - ../nonexistent_file.js\n - ../prod/nonexistent_file.js\n"
+	"Removes all tempoary directories": "Removes all tempoary directories",
+	"Temp directory at %s was removed": "Temp directory at %s was removed",
+	"Temp directory at %s did not exist so it could not be removed": "Temp directory at %s did not exist so it could not be removed",
+	"Temp directory at %s does not exist so it could not be removed": "Temp directory at %s does not exist so it could not be removed"
 }
