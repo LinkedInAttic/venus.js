@@ -301,15 +301,20 @@ Venus.prototype.initProjectDirectory = function (program) {
  * message to the logger.
  */
 Venus.prototype.clean = function () {
-  var dir = constants.baseTempDir || constants.tempDir;
+  var dir = constants.baseTempDir || constants.tempDir,
+      def = deferred();
 
   fstools.remove(dir, function(err) {
     if (_.isNull(err)) {
       logger.warn(i18n('Temp directory at %s does not exist so it could not be removed', dir));
+      def.reject(new Error('No temp directory was found'));
     } else {
       logger.info(i18n('Temp directory at %s was removed', dir));
+      def.resolve(dir);
     }
   });
+
+  return def.promise;
 };
 
 module.exports = Venus;
