@@ -167,7 +167,12 @@ describe('lib/executor', function() {
           test         = testPath('foo.js'),
           testcaseMock = sinon.mock(testcase),
           configMock   = sinon.mock(config),
+          fakeGuid    = 'abc123',
           hostname     = require('../../../lib/constants').hostname;
+
+      // brute force set the guid to make sure what is accepted in the testcase
+      // will match
+      exec.guid = fakeGuid;
 
       // Expectations
       mock.expects('getNextTestId').once().returns(1);
@@ -180,7 +185,7 @@ describe('lib/executor', function() {
         instrumentCodeCoverate: exec.instrumentCodeCoverage,
         config: 'configFile',
         hotReload: true,
-        port: exec.port
+        guid: fakeGuid
       });
 
       exec.createTestObjects([test]);
