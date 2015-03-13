@@ -304,7 +304,7 @@ Venus.prototype.clean = function () {
   var dir = constants.baseTempDir || constants.tempDir;
 
   fstools.remove(dir, function(err) {
-    if (_.isNull) {
+    if (_.isNull(err)) {
       logger.warn(i18n('Temp directory at %s does not exist so it could not be removed', dir));
     } else {
       logger.info(i18n('Temp directory at %s was removed', dir));
