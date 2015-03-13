@@ -157,5 +157,21 @@
 	"Ensures all other Venus processes are killed before starting": "Ensures all other Venus processes are killed before starting",
 	"Using environment ie8": "Using environment ie8",
 	"Using environment ie7": "Using environment ie7",
-	"Use https": "Use https"
+	"Use https": "Use https",
+	"Error occurred at %s": "Error occurred at %s",
+	"Setting port of %d": "Setting port of %d",
+	"Removing directory found at %d": "Removing directory found at %d",
+	"Could not remove temp directory at %s": "Could not remove temp directory at %s",
+	"Could not remove %s when preparing static content": "Could not remove %s when preparing static content",
+	"Removing existing static content at %s": "Removing existing static content at %s",
+	"Could not create directory %s when preparing static content": "Could not create directory %s when preparing static content",
+	"Creating static content directory at %s": "Creating static content directory at %s",
+	"Removing directory found at %s": "Removing directory found at %s",
+	"The test file \"/home/gberger/workspace/venus.js/test/data/sample_tests/bad_non_existent_file_path\" could not be found": "The test file \"/home/gberger/workspace/venus.js/test/data/sample_tests/bad_non_existent_file_path\" could not be found",
+	"Error occurred at %s.": "Error occurred at %s.",
+	"Gots no port - I go bye now": "Gots no port - I go bye now",
+	"Removes all tempoary directories": "Removes all tempoary directories",
+	"Temp directory at %s was removed": "Temp directory at %s was removed",
+	"Temp directory at %s did not exist so it could not be removed": "Temp directory at %s did not exist so it could not be removed",
+	"Temp directory at %s does not exist so it could not be removed": "Temp directory at %s does not exist so it could not be removed"
 }
