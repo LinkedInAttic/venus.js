@@ -16,6 +16,8 @@ var expect      = require('expect.js'),
     deferred    = require('deferred'),
     logger      = require('../../../lib/util/logger');
 
+process.stdin.setMaxListeners(0);
+
 describe('lib/executor', function() {
 
   before(function () {
@@ -332,6 +334,26 @@ describe('lib/executor', function() {
               done();
             });
         });
+    });
+  });
+
+  describe('passing a guid', function() {
+    it('should contain a guid on a test level', function (done) {
+      var conf = testHelper.testConfig(),
+          exec = new executor.Executor(conf),
+          fakeGuid = 'abc123',
+          options = {
+            test: testPath('parse_comments'),
+            guid: fakeGuid,
+            homeFolder: path.resolve(__dirname, '..', '..')
+          };
+
+      exec.init(options).then(function () {
+        var guid = exec.testgroup.testArray[0].guid;
+        expect(exec.guid).to.be(fakeGuid);
+        expect(guid).to.be(fakeGuid);
+        done();
+      });
     });
   });
 });
