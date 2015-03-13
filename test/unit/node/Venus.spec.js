@@ -3,7 +3,10 @@
  */
 var expect    = require('expect.js'),
     sinon     = require('sinon'),
-    Venus     = require('../../../Venus');
+    Venus     = require('../../../Venus'),
+    constants = require('../../../lib/constants'),
+    logger    = require('../../../lib/util/logger'),
+    helpers   = require('../../lib/helpers');
 
 describe('Venus main', function() {
   it('should instantiate', function() {
@@ -75,6 +78,55 @@ describe('Venus main', function() {
       };
 
       app.start(argv);
+    });
+  });
+
+  describe('cleaning temporary direction', function() {
+    var dirOps,
+        sandbox,
+        app,
+        dir = constants.baseTempDir;
+
+    beforeEach(function(done) {
+      app = new Venus();
+      sandbox = sinon.sandbox.create();
+      sandbox.stub(logger, 'info');
+      sandbox.stub(logger, 'warn');
+
+      dirOps = helpers.dirOps(dir);
+      dirOps.remove()
+        .then(function() {
+          done();
+        });
+    });
+
+    afterEach(function() {
+      sandbox.restore();
+    });
+
+    it('should send a clean command', function() {
+      var argv = ['node', 'venus', 'clean'];
+      sandbox.spy(app, 'clean');
+      app.start(argv);
+      sinon.assert.calledOnce(app.clean);
+    });
+
+    it('should remove the top level temp directory when being called', function(done) {
+      dirOps.make()
+        .then(app.clean)
+        .done(function(tempDir) {
+          expect(tempDir).to.be(dir);
+          done();
+        })
+    });
+
+    it('should attempt to remove a directory when it does not exist', function(done) {
+      dirOps.remove()
+        .then(app.clean)
+        .then(function() {}, function(e) {
+          expect(e).to.be.an(Error);
+          done();
+        });
     });
   });
 });
