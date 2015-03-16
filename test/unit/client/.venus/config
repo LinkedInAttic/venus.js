@@ -4,8 +4,12 @@
   },
   includes: {
     dom: [
-      '../../../../js/jquery/jquery-1.10.0.min.js',
       '../../../../js/underscore/underscore-min.js'
+    ],
+    default: [
+      '../../../../js/jquery/jquery-1.10.0.min.js',
+      'mocks/venusTestList.js',
+      'mocks/venus.js'
     ]
   }
 }
