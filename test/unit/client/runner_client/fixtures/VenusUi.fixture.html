@@ -1,0 +1,36 @@
+<nav>
+  <ul>
+    <li class="selected"><a href="#" id="results-button">Test Results</a></li>
+    <li><a href="#" id="sandbox-button">Fixtures</a></li>
+  </ul>
+</nav>
+
+<section id="content">
+  <section id="results-view">
+  </section>
+
+  <section id="sandbox-view">
+    <iframe src="{testSandboxUrl}" id="sandbox"></iframe>
+  </section>
+</section>
+
+  <script type="text/html" id="results-template">
+      <h1><%= test.name %></h1>
+      <ul class="test-list">
+        <% if (test.status === 'PASSED') { %>
+          <li class="pass">
+            <ul>
+              <li class="summary">✓ <%= test.message %></li>
+            </ul>
+          </li>
+        <% } else { %>
+          <li class="fail">
+            <ul>
+              <li class="summary">X <%= test.message %></li>
+              <li class="details"><pre><%= test.stackTrace %></pre></li>
+            </ul>
+          </li>
+        <% } %>
+      </ul>
+
+  </script>

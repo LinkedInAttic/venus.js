@@ -16,27 +16,38 @@
  **/
 
 var VenusTestList = {
+
+  constants: {
+    PASSED : 'passed',
+    FAILED : 'failed',
+    PENDING : 'pending',
+  },
+
+  selectors: {
+    TEST_CLASS: '.test',
+    TEST_ID: '#test-',
+    LOADER: '#loading'
+  },
   /**
    * Shows the test result status ('failed', 'pending', 'passed')
    *
    * @param {Object} result
    */
   postTestResults: function(result) {
-    var PASSED = 'passed',
-      FAILED = 'failed',
-      PENDING = 'pending',
 
-      testId = result.testId,
-      $el = $('#test-' + testId),
-      resultClass = (!result.done.failed) ? PASSED : FAILED;
+    var testId = result.testId,
+        $el = $(this.selectors["TEST_ID"] + testId),
+        resultClass = (!result.done.failed) ? this.constants["PASSED"] : this.constants["FAILED"];
 
-    // reset the status of the results
-    $el.removeClass([PASSED, FAILED, PENDING].join(' '));
+    // reset the status of the result
+    $el.removeClass([this.constants["PASSED"], this.constants["FAILED"], this.constants["PENDING"]].join(' '));
+
+    // update the status of the result
     $el.addClass(resultClass);
 
     // hide the loading indicator if there are no pending tests
-    if (!$('.test.' + PENDING).length) {
-      $('#loading').hide();
+    if (!$(this.selectors["TEST"] + '.' + this.constants.PENDING).length) {
+      $(this.selectors["LOADER"]).hide();
     }
   }
 };

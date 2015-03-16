@@ -42,18 +42,18 @@
       <h1><%= test.name %></h1>
       <ul class="test-list">
         <% if (test.status === 'PASSED') { %>
-        <li class="pass">
-          <ul>
-            <li class="summary">✓ <%= test.message %></li>
-          </ul>
-        </li>
+          <li class="pass">
+            <ul>
+              <li class="summary">✓ <%= test.message %></li>
+            </ul>
+          </li>
         <% } else { %>
-        <li class="fail">
-          <ul>
-            <li class="summary">X <%= test.message %></li>
-            <li class="details"><pre><%= test.stackTrace %></pre></li>
-          </ul>
-        </li>
+          <li class="fail">
+            <ul>
+              <li class="summary">X <%= test.message %></li>
+              <li class="details"><pre><%= test.stackTrace %></pre></li>
+            </ul>
+          </li>
         <% } %>
       </ul>
 
