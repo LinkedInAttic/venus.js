@@ -25,7 +25,7 @@
     "commander": "1.1.1",
     "consolidate": "0.3.0",
     "deferred": "0.6.5",
-    "dnode": "1.0.0",
+    "dnode": "1.2.0",
     "dustjs-linkedin": "0.6.0",
     "expect.js": "~0.2.0",
     "express": "3.6.0",
@@ -54,7 +54,7 @@
     "grunt": "0.4.5",
     "grunt-release": "0.7.0",
     "load-grunt-tasks": "0.6.0",
-    "mocha": "1.2.0",
+    "mocha": "2.2.1",
     "sinon": "1.3.4"
   },
   "os": [
@@ -62,7 +62,7 @@
   ],
   "preferGlobal": true,
   "scripts": {
-    "test": "mocha test/unit/node/test_suite.js && ./bin/venus run -t test/unit/client -n",
-    "int-test": "mocha test/integration"
+    "test": "./node_modules/.bin/mocha test/unit/node/test_suite.js && ./bin/venus run -t test/unit/client -n",
+    "int-test": "./node_modules/.bin/mocha test/integration"
   }
 }
