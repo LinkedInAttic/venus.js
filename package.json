@@ -29,7 +29,6 @@
     "commander": "1.1.1",
     "consolidate": "0.3.0",
     "deferred": "0.6.5",
-    "dnode": "1.2.0",
     "dustjs-linkedin": "0.6.0",
     "expect.js": "~0.2.0",
     "express": "3.6.0",
