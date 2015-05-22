@@ -160,5 +160,6 @@
 	"Use https": "Use https",
 	"The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client/\" could not be found": "The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client/\" could not be found",
 	"The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client\" could not be found": "The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client\" could not be found",
-	"VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n": "VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n"
+	"VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n": "VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n",
+	"dust-log-spec.js: Includes specified in your annotations could not be found\n - ../codegen/intl.js\n - ../codegen/dust-full.js\n - ../codegen/dust-utils.js\n": "dust-log-spec.js: Includes specified in your annotations could not be found\n - ../codegen/intl.js\n - ../codegen/dust-full.js\n - ../codegen/dust-utils.js\n"
 }
