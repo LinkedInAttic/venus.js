@@ -158,7 +158,8 @@
 	"Using environment ie8": "Using environment ie8",
 	"Using environment ie7": "Using environment ie7",
 	"Use https": "Use https",
-	"The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client/\" could not be found": "The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client/\" could not be found",
-	"The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client\" could not be found": "The test file \"/Users/jasonbelmonti/Documents/Workspace/Development/Open_Source/venus.js/runner_client\" could not be found",
-	"VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n": "VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n"
-}
+	"VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n": "VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n",
+	"No Test Ran": "No Tests Ran. Check the console output for more information.",
+	"Issue Processing Test": "There was an issue processing your tests. This is commonly due to improperly loading an external module in your test.",
+	"There was an issue running your test.": "There was an issue running your test.",
+	}

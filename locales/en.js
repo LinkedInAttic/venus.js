@@ -24,5 +24,8 @@
 	"Using environment ghost": "Using environment ghost",
 	"skipping invalid test file %s": "skipping invalid test file %s",
 	"Disabling hot reload because there are more than 5 tests loaded": "Disabling hot reload because there are more than 5 tests loaded",
-	"Error copying test file %s to %s. Exception: %s": "Error copying test file %s to %s. Exception: %s"
+	"Error copying test file %s to %s. Exception: %s": "Error copying test file %s to %s. Exception: %s",
+	"No Test Ran": "No Tests Ran. Check the console output for more information.",
+	"Ensures all other Venus processes are killed before starting": "Ensures all other Venus processes are killed before starting",
+	"Running demo": "Running demo"
 }
