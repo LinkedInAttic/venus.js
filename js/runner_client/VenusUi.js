@@ -58,7 +58,9 @@ function VenusUi(config) {
     self.showSandbox();
   });
 
-  $(document).on(self._events.RESULTS, self.onResults.bind(this));
+  $(document).on(self._events.RESULTS, function() {
+    self.onResults.apply(self, arguments);
+  });
 }
 
 /**
