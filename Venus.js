@@ -19,45 +19,19 @@
  * The Venus application code that is called by the Venus shell script (bin/venus).
  * @file
  */
-var Module        = require('module'),
-    actualRequire = Module.prototype.require;
 
-/*
- * The following call to graceful-fs is needed so that require('fs') inside it
- * will refer to the original fs module.
- */
-require('graceful-fs');
-
-/*
- * Overriding module.require to make sure require('fs') returns graceful-fs.
- * Require of a module other than fs will return the same module.
- *
- * TODO: remove this either by removing fs-tools or by making sure fs-tools make use of graceful-fs
- */
-Module.prototype.require = function(id) {
-  var module;
-
-  if (id === 'fs') {
-    module = actualRequire.call(this, 'graceful-fs');
-  } else {
-    module = actualRequire.apply(this, arguments);
-  }
-
-  return module;
-};
-
-var _             = require('underscore'),
-    fs            = require('fs'),
-    executor      = require('./lib/executor'),
-    i18n          = require('./lib/util/i18n'),
-    locale        = require('./lib/util/locale'),
-    logger        = require('./lib/util/logger'),
-    program       = require('commander'),
-    prompt        = require('cli-prompt'),
-    wrench        = require('wrench'),
-    path          = require('path'),
-    deferred      = require('deferred'),
-    ps            = require('./lib/util/ps');
+var _         = require('underscore'),
+    executor  = require('./lib/executor'),
+    i18n      = require('./lib/util/i18n'),
+    locale    = require('./lib/util/locale'),
+    logger    = require('./lib/util/logger'),
+    program   = require('commander'),
+    prompt    = require('cli-prompt'),
+    wrench    = require('wrench'),
+    fs        = require('fs'),
+    path      = require('path'),
+    deferred  = require('deferred'),
+    ps        = require('./lib/util/ps');
 
 /**
  * The Venus application object
