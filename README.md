@@ -1,6 +1,6 @@
 * Venus.js Mailing List: https://groups.google.com/forum/#!forum/venusjs
 * irc: #venusjs on freenode
-* Project site: http://www.venusjs.org
+* Documentation: http://venusjs.readthedocs.io/en/latest/
 * 2.x: [![View Summary](https://secure.travis-ci.org/linkedin/venus.js.png?branch=2.x)](http://travis-ci.org/#!/linkedin/venus.js/branch_summary)
 
 ##Dependencies
@@ -73,4 +73,4 @@ In your test file, the following annotations are supported:
 
 ##Get started
 
-Visit the project page at http://www.venusjs.org for more information.
+Visit the project page at http://venusjs.readthedocs.io/en/latest/ for more information.
