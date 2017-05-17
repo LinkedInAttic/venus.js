@@ -161,5 +161,5 @@
 	"VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n": "VenusUi.spec.js: Includes specified in your annotations could not be found\n - ../polyfill/bind-polyfill.js\n",
 	"No Test Ran": "No Tests Ran. Check the console output for more information.",
 	"Issue Processing Test": "There was an issue processing your tests. This is commonly due to improperly loading an external module in your test.",
-	"There was an issue running your test.": "There was an issue running your test.",
+	"There was an issue running your test.": "There was an issue running your test."
 	}
