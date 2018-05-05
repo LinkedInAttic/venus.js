@@ -65,7 +65,7 @@ a tool to make it easier for you to work with an existing library. Here are the 
 
 In your test file, the following annotations are supported:
 
-* @venus-library - Indicates the testing library/framework you wish to use.  [QUnit](http://www.qunitjs.com), [Mocha](http://visionmedia.github.com/mocha/), and [Jasmine](http://pivotal.github.com/jasmine/) are supported out of the box.
+* @venus-library - Indicates the testing library/framework you wish to use.  [QUnit](http://www.qunitjs.com), [Mocha](http://mochajs.org/), and [Jasmine](http://pivotal.github.com/jasmine/) are supported out of the box.
 * @venus-code - JavaScript source code under test.
 * @venus-include - Other JavaScript file dependency to include with your test suite.  Use an annotation for every file you wish to include.
 * @venus-fixture - Specify either an HTML string or the name of a template under `.venus/templates/...`.  You can also specify a path relative to where the test file resides. The contents will get included into the template specified by @venus-template.
