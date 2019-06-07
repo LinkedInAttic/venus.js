@@ -3,7 +3,7 @@
 * Documentation: http://venusjs.readthedocs.io/en/latest/
 * 2.x: [![View Summary](https://secure.travis-ci.org/linkedin/venus.js.png?branch=2.x)](http://travis-ci.org/#!/linkedin/venus.js/branch_summary)
 
-##Dependencies
+## Dependencies
 
 * [Node.js v0.8.8](http://nodejs.org/dist/v0.8.8/)
 * [PhantomJS](http://www.phantomjs.org)
@@ -51,7 +51,7 @@ then to run the test, you simply load this page in any web browser. This works, 
   2. Running the test is a manual process of launching a browser, and visually inspecting the page for results
   3. There is often no easy way to integrate running tests from an IDE, since there is no command line output from running the test
 
-##Venus to the rescue
+## Venus to the rescue
 Venus strives to solve these problems without re-inventing the wheel. Rather than create an entirely new testing library, we set out to create
 a tool to make it easier for you to work with an existing library. Here are the main benefits of Venus:
 
@@ -61,7 +61,7 @@ a tool to make it easier for you to work with an existing library. Here are the 
   * Run your tests from the command line in multiple browsers (running locally or remotely) at the same time
   * Integration with Continuous Integration tools (Selenium Grid + Travis CI)
 
-###Annotations
+### Annotations
 
 In your test file, the following annotations are supported:
 
@@ -71,6 +71,6 @@ In your test file, the following annotations are supported:
 * @venus-fixture - Specify either an HTML string or the name of a template under `.venus/templates/...`.  You can also specify a path relative to where the test file resides. The contents will get included into the template specified by @venus-template.
 * @venus-template - Specify the name of the test harness template (under `.venus/templates`, no file extension) you want to include for your test suite.
 
-##Get started
+## Get started
 
 Visit the project page at http://venusjs.readthedocs.io/en/latest/ for more information.
