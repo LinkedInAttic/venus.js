@@ -31,7 +31,7 @@
     "deferred": "0.6.5",
     "dustjs-linkedin": "0.6.0",
     "expect.js": "~0.2.0",
-    "express": "3.6.0",
+    "express": "4.19.2",
     "flavored-path": "0.0.8",
     "fs-tools": "0.2.2",
     "i18n": "0.3.5",
